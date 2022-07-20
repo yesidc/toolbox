@@ -26,7 +26,8 @@ class OnlineIdea (models.Model):
 
 
 class CategoryOnlineIdea (models.Model):
-    category = models.ManyToManyField(Category)
+    #todo if category is deleted this object 'CategoryOnlineIdea' should be delted as well
+    category = models.ManyToManyField(Category) #todo here you need something like on_delete
     online_idea = models.ForeignKey(OnlineIdea, on_delete = models.CASCADE)
     display = models.BooleanField()
 
