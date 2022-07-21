@@ -28,11 +28,18 @@
 <!-- username logout navbar  -->
 <nav class="navbar bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar1</a>
+    <a class="navbar-brand" href="{% url 'start-page' %}">ToolBox
+    <!-- TODO add logo here https://getbootstrap.com/docs/5.2/components/navbar/ -->
+    </a>
+
   </div>
 </nav>
 
   {% block content %} {% endblock %}
+
+<!-- JavaScript  -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
 
 </body>
 
