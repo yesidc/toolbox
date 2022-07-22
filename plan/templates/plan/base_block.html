@@ -9,29 +9,45 @@
 {% block content %}
 
 <!-- building blocks navbar-->
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg bg-light navbar-light">
   <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarBuildingBlock">
+      <span class="navbar-toggler-icon h-color"></span>
     </button>
-    <a class="navbar-brand" href="#">Navbar</a>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <div class="collapse navbar-collapse" id="navbarBuildingBlock">
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active"  href="#">Hallway Chatter & Human Touch</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#">Organization</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
+          <a class="nav-link">Assignments</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link">Discussion/Interaction</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link">Student Engagement</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link">Assessment</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link">Rules & Regulations</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link">Teaching Material</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+
     </div>
   </div>
 </nav>
+
+
+
+    
 {% endblock %}
