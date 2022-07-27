@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 def plan (request):
 
-    return render(request, 'plan/base_block.html')
+    return render(request, 'plan/block_content.html')

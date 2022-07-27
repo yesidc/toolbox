@@ -1,5 +1,5 @@
 {% extends 'tbcore/base_core.html' %}
-{% load bootstrap5 %}
+
 
 {% block specific_css %}
     {% load static %}
@@ -9,46 +9,8 @@
 {% block content %}
 
 
-<!-- building blocks navbar-->
-<nav class="navbar navbar-expand-lg bg-light navbar-light border-bottom border-3">
-  <div class="container-fluid">
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarBuildingBlock">
-      <span class="navbar-toggler-icon h-color"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarBuildingBlock">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active"  href="#">Hallway Chatter & Human Touch</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Organization</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">Assignments</a>
-        </li>
-          <li class="nav-item">
-          <a class="nav-link">Discussion/Interaction</a>
-        </li>
-          <li class="nav-item">
-          <a class="nav-link">Student Engagement</a>
-        </li>
-          <li class="nav-item">
-          <a class="nav-link">Assessment</a>
-        </li>
-          <li class="nav-item">
-          <a class="nav-link">Rules & Regulations</a>
-        </li>
-          <li class="nav-item">
-          <a class="nav-link">Teaching Material</a>
-        </li>
-      </ul>
-
-    </div>
-  </div>
-</nav>
-
-   <!-- Showcase-->
+       <!-- Showcase-->
 
     <section class="bg-light text-dark p-2">
     <div class="container">
@@ -70,5 +32,58 @@
 
     </section>
 
+   <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">My courses</div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+                </div>
+            </div>
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Show/hide</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item active"><a class="nav-link" href="#!">Hallway Chatter & Human Touch</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#!">Organization</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#!">Assignments</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#!">Discussion/Interaction</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#!">Student Engagement</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#!">Assessment</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#!">Rules & Regulations</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#!">Teaching Material</a></li>
 
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Page content-->
+ <!-- Contains all the information about each block-->
+
+              {% block building_block %}
+
+              {% endblock %}
+
+
+
+
+            </div>
+
+        </div>
+
+
+<script src="{% static 'plan/js/toggler.js' %}"></script>
 {% endblock %}
+

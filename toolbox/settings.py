@@ -70,7 +70,8 @@ ROOT_URLCONF = 'toolbox.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'tbcore/templates',
+                 BASE_DIR / 'plan/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
