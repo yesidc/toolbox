@@ -10,31 +10,11 @@
 
 
 
-       <!-- Showcase-->
 
-    <section class="bg-light text-dark p-2">
-    <div class="container">
-        <div class="d-flex flex-column ">
-            <div class="text-center">
-            <h4>Online Ideas</h4>
-             <h4>Online Teaching Toolbox</h4>
-            </div>
-            <div >
-                <h5>Course Revision Mode</h5>
-                <p class="lead">You have selected: Teaching methods and tools for a lecture with students presentations</p>
-                 <a class="btn btn-primary button-touch">Switch to Exploration Mode</a>
-            </div>
-
-
-        </div>
-
-    </div>
-
-    </section>
 
    <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
-            <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="border-end bg-white border-1" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">My courses</div>
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
@@ -48,9 +28,9 @@
             <!-- Page content wrapper-->
             <div id="page-content-wrapper">
                 <!-- Top navigation-->
-                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom fixed-top">
                     <div class="container-fluid">
-                        <button class="btn btn-primary" id="sidebarToggle">Show/hide</button>
+                        <button class="btn" id="sidebarToggle"><<</button>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
@@ -71,6 +51,27 @@
                 </nav>
                 <!-- Page content-->
  <!-- Contains all the information about each block-->
+                 <!-- Showcase-->
+
+    <section class="bg-light text-dark p-2">
+    <div class="container">
+        <div class="d-flex flex-column ">
+            <div class="text-center">
+            <h4>Online Ideas</h4>
+             <h4>Online Teaching Toolbox</h4>
+            </div>
+            <div >
+                <h5>Course Revision Mode</h5>
+                <p class="lead">You have selected: Teaching methods and tools for a lecture with students presentations</p>
+                 <a class="btn btn-primary button-touch">Switch to Exploration Mode</a>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    </section>
 
               {% block building_block %}
 
