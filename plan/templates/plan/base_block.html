@@ -9,7 +9,8 @@
 {% block content %}
 
 <nav class="navbar bg-light navbar-light navbar-expand-lg fixed-top">
-    <div class="container-fluid"><a class="navbar-brand" href="#">Brand</a><button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+<!-- Brand -->
+    <div class="container-fluid"><a class="navbar-brand" href="{% url 'start-page' %}">ToolBox</a><button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div id="navcol-1" class="collapse navbar-collapse">
             <div class="row ms-auto">
                 <div class="col-12">
@@ -70,57 +71,51 @@
             </section>
 
 
-   <!-- Sidebar-->
+    <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+                </div>
+            </div>
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+
+                        <!-- Icon sidebar -->
+                        <button class="btn btn-primary" id="sidebarToggle"><i class="bi bi-list"></i></button>
+
+                    </div>
+                </nav>
+                <!-- Page content-->
+                <div class="container-fluid">
 
 
- <!-- Side-Nav -->
-    <div
-      class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column"
-      id="sidebar"
-    >
-      <ul class="nav flex-column text-white w-100">
-        <a href="#" class="nav-link h3 text-white my-2">
-          Responsive </br>SideBar Nav
-        </a>
-        <li href="#" class="nav-link">
-          <i class="bx bxs-dashboard"></i>
-          <span class="mx-2">Home</span>
-        </li>
-        <li href="#" class="nav-link">
-          <i class="bx bx-user-check"></i>
-          <span class="mx-2">Profile</span>
-        </li>
-        <li href="#" class="nav-link">
-          <i class="bx bx-conversation"></i>
-          <span class="mx-2">Contact</span>
-        </li>
-      </ul>
+                    {% block building_block %}
 
-      <span href="#" class="nav-link h4 w-100 mb-5">
-        <a href=""><i class="bx bxl-instagram-alt text-white"></i></a>
-        <a href=""><i class="bx bxl-twitter px-2 text-white"></i></a>
-        <a href=""><i class="bx bxl-facebook text-white"></i></a>
-      </span>
-    </div>
+                    {% endblock %}
 
-  <!-- Main Wrapper -->
-    <div class="p-1 my-container active-cont">
-      <!-- Top Nav -->
-      <nav class="navbar top-navbar navbar-light bg-light px-5">
-        <a class="btn border-0" id="menu-btn"><i class="bx bx-menu"></i></a>
-      </nav>
-      <!--End Top Nav -->
-      <h3 class="text-dark p-3">RESPONSIVE SIDEBAR NAV 💻 📱
-      </h3>
-      <p class="px-3">Responsive navigation sidebar built using <a class="text-dark" href="https://getbootstrap.com/">Bootstrap 5</a>.</p>
-    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
 
 
 
     <script src="{% static 'plan/js/toggler.js' %}"></script>
 {% endblock %}
 
-{##}
-{#{% block building_block %}#}
-{##}
-{#            {% endblock %}#}
+
