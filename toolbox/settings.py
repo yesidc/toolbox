@@ -31,13 +31,29 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
+    # toolbox apps
+    'tbcore',
+    'plan',
+    'crispy_forms',
+    'django.forms',
+    'django_filters',
+    'django_extensions',
+    'crispy_bootstrap5',
+    'django_feather',
+    'imagekit',
+    'bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles'
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +70,8 @@ ROOT_URLCONF = 'toolbox.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'tbcore/templates',
+                 BASE_DIR / 'plan/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
