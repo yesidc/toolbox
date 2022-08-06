@@ -26,15 +26,14 @@
                     <div class="col-12">
                         <ul class="navbar-nav float-none float-md-end">
 
-                            <li class="nav-item active"><a class="nav-link" href="#!">Hallway Chatter & Human
-                                Touch</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Organization</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Assignments</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Discussion/Interaction</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Student Engagement</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Assessment</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Rules & Regulations</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Teaching Material</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="{% url 'human_touch' %}">Human Touch</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'teaching_material' %}">Teaching Material</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'organization' %}">Organization</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'assignment' %}">Assignments</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'discussion' %}">Discussion</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'student_engagement' %}">Student Engagement</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'assessment' %}">Assessment</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'rules_regulations' %}">Rules & Regulations</a></li>
 
 
                         </ul>

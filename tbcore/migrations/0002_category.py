@@ -27,7 +27,7 @@ def create_category(apps, schema_editor):
 
     )
     organization = Category.objects.create(
-        category_name='Organization ',
+        category_name='Organization',
         short_description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
         reasons=' Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
 
