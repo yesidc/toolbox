@@ -8,14 +8,78 @@
 
 {% block content %}
 
+    <nav class="navbar bg-light navbar-light navbar-expand-lg sticky-top border border-bottom-4 mb-3">
+
+        <div class="container-fluid">
+
+            {#todo change brand Icon here#}
+
+            <!-- Brand -->
+            <a class="navbar-brand" href="{% url 'start-page' %}">
+                <i class="bi bi-pencil-square"></i>
+                ToolBox
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span
+                    class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div id="navcol-1" class="collapse navbar-collapse">
+                <div class="row ms-auto">
+                    <div class="col-12">
+                        <ul class="navbar-nav float-none float-md-end">
+
+                            <li class="nav-item active"><a class="nav-link" href="#!">Hallway Chatter & Human
+                                Touch</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#!">Organization</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#!">Assignments</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#!">Discussion/Interaction</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#!">Student Engagement</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#!">Assessment</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#!">Rules & Regulations</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#!">Teaching Material</a></li>
+
+
+                        </ul>
+                    </div>
+                    <!-- username and logout navbar  -->
+                    <div class="col-12 order-md-first">
+                        <ul class="navbar-nav float-none float-md-end">
+                            <li class="nav-item"><a class="nav-link active" href="#">Username</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Log out</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
 
 
 
-   <div class="d-flex" id="wrapper">
-            <!-- Sidebar-->
-            <div class="border-end bg-white border-1" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">My courses</div>
+
+
+    <!-- Sidebar-->
+
+    <!-- Page content wrapper-->
+    <div id="page-content-wrapper">
+        <!-- Top navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <!-- Icon sidebar -->
+                <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i></button>
+
+
+
+
+
+            </div>
+        </nav>
+
+
+        <div class="d-flex" id="wrapper">
+
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom m-0">My Courses</div>
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
@@ -25,66 +89,27 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
                 </div>
             </div>
-            <!-- Page content wrapper-->
-            <div id="page-content-wrapper">
-                <!-- Top navigation-->
-                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom fixed-top">
-                    <div class="container-fluid">
-                        <button class="btn" id="sidebarToggle"><<</button>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                                <li class="nav-item active"><a class="nav-link" href="#!">Hallway Chatter & Human Touch</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#!">Organization</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#!">Assignments</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#!">Discussion/Interaction</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#!">Student Engagement</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#!">Assessment</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#!">Rules & Regulations</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#!">Teaching Material</a></li>
+            <!-- Page content-->
+            <div class="container-fluid">
 
 
+                {% block building_block %}
 
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                <!-- Page content-->
- <!-- Contains all the information about each block-->
-                 <!-- Showcase-->
+                {% endblock %}
 
-    <section class="bg-light text-dark p-2">
-    <div class="container">
-        <div class="d-flex flex-column ">
-            <div class="text-center">
-            <h4>Online Ideas</h4>
-             <h4>Online Teaching Toolbox</h4>
+
             </div>
-            <div >
-                <h5>Course Revision Mode</h5>
-                <p class="lead">You have selected: Teaching methods and tools for a lecture with students presentations</p>
-                 <a class="btn btn-primary button-touch">Switch to Exploration Mode</a>
-            </div>
-
-
         </div>
 
     </div>
 
-    </section>
-
-              {% block building_block %}
-
-              {% endblock %}
 
 
 
 
-            </div>
-
-        </div>
 
 
-<script src="{% static 'plan/js/toggler.js' %}"></script>
+    <script src="{% static 'plan/js/toggler.js' %}"></script>
 {% endblock %}
+
 
