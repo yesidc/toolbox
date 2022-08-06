@@ -24,8 +24,15 @@ class Category (models.Model):
 class OnlineIdea (models.Model):
     idea_name = models.CharField (max_length= 200)
     description = models.TextField()
-    short_description = models.CharField(max_length= 200) # used for checklist on the building block page
-#todo add all fields from spreadsheet,also add references field
+    short_description = models.TextField() # used for checklist on the building block page
+    implementation_steps = models.TextField()
+    teacher_effort = models.TextField()
+    recommendations = models.TextField()
+    supplementary_material = models.TextField()
+    examples_application = models.TextField()
+    testimony = models.TextField()
+    references = models.TextField()
+
     def __str__(self):
         return self.idea_name
 
