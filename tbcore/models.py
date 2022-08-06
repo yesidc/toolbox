@@ -13,6 +13,7 @@ class Plan (models.Model):
 class Category (models.Model):
     category_name = models.CharField(max_length=100) # there are a total of 8 categories: hallway chatter, organization etc.
     description = models.TextField()
+    #todo add references field, add requirements field
     def __str__(self):
         return self.category_name
 
@@ -20,7 +21,7 @@ class OnlineIdea (models.Model):
     idea_name = models.CharField (max_length= 200)
     description = models.TextField()
     short_description = models.CharField(max_length= 200) # used for checklist
-
+#todo add all fields from spreadsheet,also add references field
     def __str__(self):
         return self.idea_name
 
