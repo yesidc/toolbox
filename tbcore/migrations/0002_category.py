@@ -28,7 +28,25 @@ def create_category(apps, schema_editor):
     )
     organization = Category.objects.create(
         category_name='Organization',
-        short_description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
+        short_description="<h5>Give complete, exact information (incl. teaching mode) available at the start of the semester:<h5>"
+        "<br>"
+        "<h6>Course information:</h6>"
+        "<ul>"
+                
+                "<li>Meeting days and time for courses with synchronous meetings</li>"
+                "<li>Instructional modality, as a way to help students understand how the course is designed </li>"
+                "<li>ECTS</li>"
+                "<li>Please list the prerequisites concisely, i.e. in a way that students can check if they need to brush up the prerequisites (i.e. „linear algebra“ is too vague). You can list UOS or external courses that cover the prerequisites.</li>"
+                "<li>Teaching staff contact information</li>"
+                "<li>Course description</li>"
+                "<li>Learning resources, technology and texts</li>"
+                "<li>Learning outcome (i.e. after taking the course, you can...) / course goals or scope of the course</li>"
+                "<li>Assignments</li>"
+                "<li>Grading scale</li>"
+        "</ul>",
+
+
+
         reasons=' Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
 
     )

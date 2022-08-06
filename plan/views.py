@@ -8,43 +8,57 @@ from tbcore.models import *
 def human_touch (request):
     category_human_touch = Category.objects.get(category_name='Human Touch')
 
-    context ={'category':category_human_touch}
+    context ={'category':category_human_touch,
+              'next_page':'teaching_material',
+              'name_next_page': 'Teaching Material'}
     return render(request,'plan/block_content.html', context=context)
 
 def teaching_material (request):
     category_teaching_material = Category.objects.get(category_name='Teaching Material')
 
-    context = {'category': category_teaching_material}
+    context = {'category': category_teaching_material,
+               'next_page': 'organization',
+               'name_next_page': 'Organization'}
     return render(request,'plan/block_content.html', context=context)
 
 def organization (request):
     category_organization = Category.objects.get(category_name='Organization')
 
-    context = {'category': category_organization}
+    context = {'category': category_organization,
+               'next_page':'assignment',
+               'name_next_page': 'Assignment'}
     return render(request,'plan/block_content.html', context=context)
 
 def assignment (request):
     category_assignmet = Category.objects.get(category_name='Assignments')
 
-    context = {'category': category_assignmet}
+    context = {'category': category_assignmet,
+               'next_page':'discussion',
+               'name_next_page': 'Discussion'}
     return render(request,'plan/block_content.html', context=context)
 
 def discussion (request):
     category_discussion = Category.objects.get(category_name='Discussion')
 
-    context = {'category': category_discussion}
+    context = {'category': category_discussion,
+               'next_page': 'student_engagement',
+               'name_next_page':'Student Engagement'}
     return render(request,'plan/block_content.html', context=context)
 
 def student_engagement (request):
     category_student_engagement = Category.objects.get(category_name='Student Engagement')
 
-    context = {'category': category_student_engagement}
+    context = {'category': category_student_engagement,
+               'next_page': 'assessment',
+               'name_next_page':'Assessment'}
     return render(request,'plan/block_content.html', context=context)
 
 def assessment (request):
     category_assessment = Category.objects.get(category_name='Assessment')
 
-    context = {'category': category_assessment}
+    context = {'category': category_assessment,
+               'next_page':'rules_regulations',
+               'name_next_page': 'Rules & Regulations'}
     return render(request,'plan/block_content.html', context=context)
 
 def rules_regulations (request):
