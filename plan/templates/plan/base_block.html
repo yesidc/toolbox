@@ -23,10 +23,10 @@
                     class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div id="navcol-1" class="collapse navbar-collapse">
                 <div class="row ms-auto">
-                    <div class="col-12">
+                    <div class="col-12 top-nav">
                         <ul class="navbar-nav float-none float-md-end">
 
-                            <li class="nav-item active"><a class="nav-link" href="{% url 'human_touch' %}">Human Touch</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'human_touch' %}">Human Touch</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'teaching_material' %}">Teaching Material</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'organization' %}">Organization</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'assignment' %}">Assignments</a></li>
@@ -105,10 +105,7 @@
 
 
 
-
-
-
-    <script src="{% static 'plan/js/toggler.js' %}"></script>
+    <script src="{% static 'plan/js/utils.js' %}"></script>
 {% endblock %}
 
 
