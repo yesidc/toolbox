@@ -27,8 +27,20 @@ Toolbox
 }
 /*Underline top-nav bar*/
 .active-top-bar {
-  border-bottom: 3px solid red;
+  border-bottom: 3px solid deepskyblue;
 }
+
+/*moves brand to the right*/
+.navbar-brand{
+     margin-left:10px !important;
+}
+
+@media (min-width: 576px) {
+  .navbar-brand{
+     margin-left:80px !important;
+}
+}
+
 
 
 :root {
