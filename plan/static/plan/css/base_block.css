@@ -40,8 +40,11 @@ Toolbox
      margin-left:80px !important;
 }
 }
-
-
+/*border color of ideas property table idea_overview page*/
+.ideas-b-property{
+  border-bottom-color: white;
+  border-bottom-style: solid;
+}
 
 :root {
   --bs-blue: #0d6efd;

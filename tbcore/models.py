@@ -32,6 +32,7 @@ class OnlineIdea (models.Model):
     examples_application = models.TextField()
     testimony = models.TextField()
     references = models.TextField()
+    #todo add how I plan to implement this idea. This field is not mandatory
 
     def __str__(self):
         return self.idea_name

@@ -67,5 +67,8 @@ def rules_regulations (request):
     context = {'category': category_rules_regulations}
     return render(request,'plan/block_content.html', context=context)
 
+def idea_overview (request):
+    return render (request,'plan/idea_overview.html')
+
 
 
