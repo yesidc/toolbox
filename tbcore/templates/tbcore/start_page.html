@@ -1,4 +1,5 @@
-{% extends 'tbcore/base_core.html' %}
+{% extends "plan/base_block.html" %}
+
 {% load bootstrap5 %}
 
 {% block specific_css %}
@@ -6,11 +7,11 @@
     <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
 {% endblock %}
 
-{% block content %}
-<h1>Start  </h1>
-    <div class="container-fluid">
-    {{ description |safe }}
-    </div>
+
+{% block building_block_idea %}
 
 
-{% endblock content %}
+
+    {% endblock %}
+
+

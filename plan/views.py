@@ -70,5 +70,8 @@ def rules_regulations (request):
 def idea_overview (request):
     return render (request,'plan/idea_overview.html')
 
+def idea_detail (request):
+    return render (request,'plan/idea_detail.html')
+
 
 
