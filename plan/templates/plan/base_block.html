@@ -8,52 +8,6 @@
 
 {% block content %}
 
-    <nav class="navbar bg-light navbar-light navbar-expand-lg sticky-top border border-bottom-4 mb-3">
-
-        <div class="container-fluid">
-
-            {#todo change brand Icon here#}
-
-            <!-- Brand -->
-            <a class="navbar-brand " href="{% url 'start-page' %}">
-                <i class="bi bi-pencil-square"></i>
-                ToolBox
-            </a>
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span
-                    class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div id="navcol-1" class="collapse navbar-collapse">
-                <div class="row ms-auto ">
-                    <div class="col-12 top-nav">
-                        <ul class="navbar-nav float-none float-md-end mt-lg-5">
-
-                            <li class="nav-item"><a class="nav-link" href="{% url 'human_touch' %}">Human Touch</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'teaching_material' %}">Teaching Material</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'organization' %}">Organization</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'assignment' %}">Assignments</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'discussion' %}">Discussion</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'student_engagement' %}">Student Engagement</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'assessment' %}">Assessment</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'rules_regulations' %}">Rules & Regulations</a></li>
-
-
-                        </ul>
-                    </div>
-                    <!-- username and logout navbar  -->
-                    <div class="col-12 order-md-first">
-                        <ul class="navbar-nav float-none float-md-end">
-                            <li class="nav-item"><a class="nav-link" href="#">Username</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Log out</a></li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-
-
-
 
 
     <!-- Sidebar-->
