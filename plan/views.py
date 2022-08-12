@@ -73,5 +73,8 @@ def idea_overview (request):
 def idea_detail (request):
     return render (request,'plan/idea_detail.html')
 
+def summary (request):
+    return render (request,'plan/summary.html')
+
 
 
