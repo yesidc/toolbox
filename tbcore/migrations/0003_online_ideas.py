@@ -101,7 +101,7 @@ def create_online_ideas(apps, schema_editor):
     )
 
     instructor_introduction_video = OnlineIdea.objects.create(
-        idea_name='Share stories and experiences with students ',
+        idea_name='Share stories and experiences with students',
         brief_description='Share professional and relevant personal anecdotes and be humorous if appropriate. Invite students to share their own experiences.'
                           'Students come to your class for the story. The content is already in the books.',
         examples_application='Someone who uses a self-written program to organize files on their brand new Mac',

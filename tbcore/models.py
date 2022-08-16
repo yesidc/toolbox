@@ -39,11 +39,11 @@ class OnlineIdea (models.Model):
         return self.idea_name
 
 
-class CategoryOnlineIdea1 (models.Model):
-    #todo if category is deleted this object 'CategoryOnlineIdea' should be delted as well
-    category = models.ManyToManyField(Category) #todo here you need something like on_delete
-    online_idea = models.ForeignKey(OnlineIdea, on_delete = models.CASCADE)  #todo implement related name
-    # display = models.BooleanField()
+# class CategoryOnlineIdea1 (models.Model):
+#     #todo if category is deleted this object 'CategoryOnlineIdea' should be delted as well
+#     category = models.ManyToManyField(Category) #todo here you need something like on_delete
+#     online_idea = models.ForeignKey(OnlineIdea, on_delete = models.CASCADE)  #todo implement related name
+#     display = models.BooleanField()
 
 
 class CategoryOnlineIdea (models.Model):
