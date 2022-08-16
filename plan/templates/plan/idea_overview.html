@@ -5,7 +5,7 @@
 
     <section class="p-5 mt-1">
         <div class="container">
-            <h2 class="text-center"> Online idea name</h2>
+            <h2 class="text-center"> {{ idea.idea_name }}</h2>
 
         </div>
 
@@ -15,14 +15,12 @@
         <div class="container">
            <div class="row">
                <div class="col">
-                   <p class="lead"><strong>A brief description of the online idea <br> </strong>obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-                        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-                        tenetur</p>
+{#                   Brief description#}
+                   <p class="lead">{% if idea.brief_description %}{{ idea.brief_description|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
                </div>
                <div class="col">
-                   <p class="lead"><strong>Example goes here </strong><br>obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-                        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-                        tenetur</p>
+                   <h5>Example</h5>
+                   <p class="lead">{% if idea.examples_application %}{{ idea.examples_application|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
                </div>
            </div>
 
@@ -39,12 +37,10 @@
         <div class="container">
             <div class="row ideas-b-property">
                 <div class="col">
-                    <h4>Idea's property</h4>
+                    <h4>Tool</h4>
                 </div>
                 <div class="col">
-                    <p>obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-                        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-                        tenetur error</p>
+                    <p>{% if idea.tool %}{{ idea.tool|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
                 </div>
             </div>
         </div>
@@ -53,12 +49,10 @@
         <div class="container mt-3">
             <div class="row ideas-b-property">
                 <div class="col">
-                    <h4>Idea's property</h4>
+                    <h4>Teacher Effort</h4>
                 </div>
                 <div class="col">
-                    <p>obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-                        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-                        tenetur error</p>
+                    <p>{% if idea.teacher_effort %}{{ idea.teacher_effort|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
                 </div>
             </div>
         </div>
@@ -67,12 +61,10 @@
         <div class="container mt-3">
             <div class="row ideas-b-property">
                 <div class="col">
-                    <h4>Idea's property</h4>
+                    <h4>Implementation steps</h4>
                 </div>
                 <div class="col">
-                    <p>obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-                        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-                        tenetur error</p>
+                    <p>{% if idea.implementation_steps %}{{ idea.implementation_steps|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
                 </div>
             </div>
         </div>
@@ -81,12 +73,10 @@
         <div class="container mt-3 ideas-b-property">
             <div class="row">
                 <div class="col">
-                    <h4>Idea's property</h4>
+                    <h4>Recomendations</h4>
                 </div>
                 <div class="col">
-                    <p>obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-                        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-                        tenetur error</p>
+                    <p>{% if idea.recommendations %}{{ idea.recommendations|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
                 </div>
             </div>
         </div>
@@ -105,7 +95,7 @@
 <section class="bg-dark text-light">
         <div class="container">
             <div class="row mt-0 p-3">
-                <div class="col"><a href="{% url 'idea_detail' %}" class="btn btn-primary">Show me more</a></div>
+                <div class="col"><a href="{% url 'idea_overview_detail' idea.id 'detailed_view' %}" class="btn btn-primary">Show me more</a></div>
             </div>
         </div>
 
