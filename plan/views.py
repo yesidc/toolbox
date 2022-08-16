@@ -6,7 +6,7 @@ from tbcore.models import *
 #todo use get_object_or_404() function
 
 def human_touch (request):
-    category_human_touch = Category.objects.get(category_name='Human Touch')
+    category_human_touch = CategoryOnlineIdea.objects.get (category__category_name='Human Touch')
 
     context ={'category':category_human_touch,
               'next_page':'teaching_material',
