@@ -10,7 +10,7 @@
 
                     <div class="container mt-0 pt-4 pb-5">
                         <div class="row">
-                            <h1 class="text-center">Idea name</h1>
+                            <h1 class="text-center">{{ idea.idea_name }}</h1>
                         </div>
                     </div>
 
@@ -18,13 +18,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <h3>Idea property</h3>
+                                <h3>Description</h3>
                             </div>
                             <div class="col">
-                                <p class="lead">Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
-                                    sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-                                    recusandae alias error harum maxime adipisci amet laborum. Perspiciatis
-                                    minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit </p>
+                                <p>{% if idea.brief_description %}{{ idea.brief_description|safe }}{% else %}{{ 'No data' }}{% endif %} </p>
                             </div>
                         </div>
                     </div>
@@ -44,13 +41,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <h3>Idea property</h3>
+                                <h3>Example</h3>
                             </div>
                             <div class="col">
-                                <p class="lead">Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
-                                    sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-                                    recusandae alias error harum maxime adipisci amet laborum. Perspiciatis
-                                    minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit </p>
+                                <p>{% if idea.examples_application %}{{ idea.examples_application|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
                             </div>
                         </div>
                     </div>
@@ -69,13 +63,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <h3>Idea property</h3>
+                                <h3>Tool</h3>
                             </div>
                             <div class="col">
-                                <p class="lead">Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
-                                    sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-                                    recusandae alias error harum maxime adipisci amet laborum. Perspiciatis
-                                    minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit </p>
+                                <p>{% if idea.tool %}{{ idea.tool|safe }}{% else %}{{ 'No data' }}{% endif %} </p>
                             </div>
                         </div>
                     </div>
@@ -94,13 +85,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <h3>Idea property</h3>
+                                <h3>Teacher Effort</h3>
                             </div>
                             <div class="col">
-                                <p class="lead">Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
-                                    sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-                                    recusandae alias error harum maxime adipisci amet laborum. Perspiciatis
-                                    minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit </p>
+                                <p>{% if idea.teacher_effort %}{{ idea.teacher_effort|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
                             </div>
                         </div>
                     </div>
@@ -119,13 +107,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <h3>Idea property</h3>
+                                <h3>Implementation Steps</h3>
                             </div>
                             <div class="col">
-                                <p class="lead">Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
-                                    sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-                                    recusandae alias error harum maxime adipisci amet laborum. Perspiciatis
-                                    minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit </p>
+                                <p>{% if idea.implementation_steps %}{{ idea.implementation_steps|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
                             </div>
                         </div>
                     </div>
@@ -144,13 +129,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <h3>Idea property</h3>
+                                <h3>Recommendations</h3>
                             </div>
                             <div class="col">
-                                <p class="lead">Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
-                                    sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-                                    recusandae alias error harum maxime adipisci amet laborum. Perspiciatis
-                                    minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit </p>
+                                <p> {% if idea.recommendations %}{{ idea.recommendations|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
                             </div>
                         </div>
                     </div>
@@ -169,13 +151,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <h3>Idea property</h3>
+                                <h3>Supplementary Material</h3>
                             </div>
                             <div class="col">
-                                <p class="lead">Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
-                                    sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-                                    recusandae alias error harum maxime adipisci amet laborum. Perspiciatis
-                                    minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit </p>
+                                <p>{% if idea.supplementary_material %}{{ idea.supplementary_material|safe }}{% else %}{{ 'No data' }}{% endif %} </p>
                             </div>
                         </div>
                     </div>
@@ -194,13 +173,34 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <h3>Idea property</h3>
+                                <h3>Reusable</h3>
                             </div>
                             <div class="col">
-                                <p class="lead">Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
-                                    sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-                                    recusandae alias error harum maxime adipisci amet laborum. Perspiciatis
-                                    minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit </p>
+                                <p>{% if idea.reusable %}{{ idea.reusable|safe }}{% else %}{{ 'No data' }}{% endif %} </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+              {#    Idea's Property#}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-sm-12">
+
+                    {#Ideas' property#}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <h3>References</h3>
+                            </div>
+                            <div class="col">
+                                <p>{% if idea.references %}{{ idea.references|safe }}{% else %}{{ 'No data' }}{% endif %} </p>
                             </div>
                         </div>
                     </div>

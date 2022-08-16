@@ -10,7 +10,7 @@ IDEA_PROPERTIES = ('idea_name', 'brief_description', 'examples_application',
                    'testimony', 'references')
 
 
-# todo use get_object_or_404() function
+# todo use get_object_or_404() function with all the category_block_name variable
 
 def human_touch(request):
     category_human_touch = CategoryOnlineIdea.objects.get(category__category_name='Human Touch')
@@ -22,7 +22,7 @@ def human_touch(request):
 
 
 def teaching_material(request):
-    category_teaching_material = Category.objects.get(category_name='Teaching Material')
+    category_teaching_material = CategoryOnlineIdea.objects.get(category__category_name='Teaching Material')
 
     context = {'category': category_teaching_material,
                'next_page': 'organization',
@@ -31,7 +31,7 @@ def teaching_material(request):
 
 
 def organization(request):
-    category_organization = Category.objects.get(category_name='Organization')
+    category_organization = CategoryOnlineIdea.objects.get(category__category_name='Organization')
 
     context = {'category': category_organization,
                'next_page': 'assignment',
@@ -40,7 +40,7 @@ def organization(request):
 
 
 def assignment(request):
-    category_assignmet = Category.objects.get(category_name='Assignments')
+    category_assignmet = CategoryOnlineIdea.objects.get(category__category_name='Assignments')
 
     context = {'category': category_assignmet,
                'next_page': 'discussion',
@@ -49,7 +49,7 @@ def assignment(request):
 
 
 def discussion(request):
-    category_discussion = Category.objects.get(category_name='Discussion')
+    category_discussion = CategoryOnlineIdea.objects.get(category__category_name='Discussion')
 
     context = {'category': category_discussion,
                'next_page': 'student_engagement',
@@ -58,7 +58,7 @@ def discussion(request):
 
 
 def student_engagement(request):
-    category_student_engagement = Category.objects.get(category_name='Student Engagement')
+    category_student_engagement = CategoryOnlineIdea.objects.get(category__category_name='Student Engagement')
 
     context = {'category': category_student_engagement,
                'next_page': 'assessment',
@@ -67,7 +67,7 @@ def student_engagement(request):
 
 
 def assessment(request):
-    category_assessment = Category.objects.get(category_name='Assessment')
+    category_assessment = CategoryOnlineIdea.objects.get(category__category_name='Assessment')
 
     context = {'category': category_assessment,
                'next_page': 'rules_regulations',
@@ -76,7 +76,7 @@ def assessment(request):
 
 
 def rules_regulations(request):
-    category_rules_regulations = Category.objects.get(category_name='Rules & Regulations')
+    category_rules_regulations = CategoryOnlineIdea.objects.get(category__category_name='Rules & Regulations')
 
     context = {'category': category_rules_regulations}
     return render(request, 'plan/block_content.html', context=context)

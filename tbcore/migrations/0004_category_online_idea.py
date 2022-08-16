@@ -21,6 +21,30 @@ def create_category_online_idea (apps,schema_editor ):
         OnlineIdea.objects.get(idea_name='Reflection portfolio'),
         OnlineIdea.objects.get(idea_name='Peer Review'))
 
+    CategoryOnlineIdea.objects.create(category=Category.objects.get(category_name='Teaching Material')).online_idea.add(
+        OnlineIdea.objects.get(idea_name='Micro Lectures'),
+        )
+
+
+    CategoryOnlineIdea.objects.create(category=Category.objects.get(category_name='Discussion')).online_idea.add(
+        OnlineIdea.objects.get(idea_name='Make yourself available')
+       )
+
+    CategoryOnlineIdea.objects.create(category=Category.objects.get(category_name='Student Engagement')).online_idea.add(
+        OnlineIdea.objects.get(idea_name='Make yourself available') #todo this does not belong here
+       )
+
+    CategoryOnlineIdea.objects.create(category=Category.objects.get(category_name='Assessment')).online_idea.add(
+        OnlineIdea.objects.get(idea_name='Oral exam')
+    )
+
+    CategoryOnlineIdea.objects.create(category=Category.objects.get(category_name='Rules & Regulations')).online_idea.add(
+        OnlineIdea.objects.get(idea_name='Matches module description')
+    )
+
+
+
+
 
 def undo_create_category_online_idea(apps, schema_editor):
     CategoryOnlineIdea = apps.get_model('tbcore', 'CategoryOnlineIdea')

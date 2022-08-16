@@ -382,6 +382,55 @@ Code (Git irgendwas)</li>
 
     )
 
+# Teaching Material
+
+    micro_lectures = OnlineIdea.objects.create(
+       idea_name= 'Micro Lectures',
+       brief_description='to be completed',
+       examples_application='to be completed',
+       tool='to be completed',
+       implementation_steps='to be completed',
+       teacher_effort='to be completed',
+       recommendations='to be completed',
+       supplementary_material='to be completed',
+       reusable='to be completed',
+       testimony='to be completed',
+       references='to be completed',
+
+)
+
+# Discussion
+
+    make_yourself_available = OnlineIdea.objects.create(
+       idea_name='Make yourself available',
+       brief_description='to be completed',
+       examples_application='to be completed',
+       tool='to be completed',
+       implementation_steps='to be completed',
+       teacher_effort='to be completed',
+       recommendations='to be completed',
+       supplementary_material='to be completed',
+       reusable='to be completed',
+       testimony='to be completed',
+       references='to be completed',
+
+)
+#    peer_review = OnlineIdea.objects.create(
+#        idea_name=,
+#        brief_description=,
+#        examples_application=,
+#        tool=,
+#        implementation_steps=,
+#        teacher_effort=,
+#        recommendations=,
+#        supplementary_material=,
+#        reusable=,
+#        testimony=,
+#        references=,
+#
+# )
+
+# Student engagement
 
 #    peer_review = OnlineIdea.objects.create(
 #        idea_name=,
@@ -397,76 +446,44 @@ Code (Git irgendwas)</li>
 #        references=,
 #
 # )
-#    peer_review = OnlineIdea.objects.create(
-#        idea_name=,
-#        brief_description=,
-#        examples_application=,
-#        tool=,
-#        implementation_steps=,
-#        teacher_effort=,
-#        recommendations=,
-#        supplementary_material=,
-#        reusable=,
-#        testimony=,
-#        references=,
-#
-# )
-#    peer_review = OnlineIdea.objects.create(
-#        idea_name=,
-#        brief_description=,
-#        examples_application=,
-#        tool=,
-#        implementation_steps=,
-#        teacher_effort=,
-#        recommendations=,
-#        supplementary_material=,
-#        reusable=,
-#        testimony=,
-#        references=,
-#
-# )
-#    peer_review = OnlineIdea.objects.create(
-#        idea_name=,
-#        brief_description=,
-#        examples_application=,
-#        tool=,
-#        implementation_steps=,
-#        teacher_effort=,
-#        recommendations=,
-#        supplementary_material=,
-#        reusable=,
-#        testimony=,
-#        references=,
-#
-# )
-#    peer_review = OnlineIdea.objects.create(
-#        idea_name=,
-#        brief_description=,
-#        examples_application=,
-#        tool=,
-#        implementation_steps=,
-#        teacher_effort=,
-#        recommendations=,
-#        supplementary_material=,
-#        reusable=,
-#        testimony=,
-#        references=,
-#
-# )
-#    peer_review = OnlineIdea.objects.create(
-#        idea_name=,
-#        brief_description=,
-#        examples_application=,
-#        tool=,
-#        implementation_steps=,
-#        teacher_effort=,
-#        recommendations=,
-#        supplementary_material=,
-#        reusable=,
-#        testimony=,
-#        references=,
-#
-# )
+
+
+# Assessment
+
+
+
+    oral_exam = OnlineIdea.objects.create(
+       idea_name='Oral exam',
+       brief_description='to be completed',
+       examples_application='to be completed',
+       tool='to be completed',
+       implementation_steps='to be completed',
+       teacher_effort='to be completed',
+       recommendations='to be completed',
+       supplementary_material='to be completed',
+       reusable='to be completed',
+       testimony='to be completed',
+       references='to be completed',
+
+)
+
+# Rules and Regulations
+
+
+    matches_module_description = OnlineIdea.objects.create(
+       idea_name= 'Matches module description',
+       brief_description='to be completed',
+       examples_application='to be completed',
+       tool='to be completed',
+       implementation_steps='to be completed',
+       teacher_effort='to be completed',
+       recommendations='to be completed',
+       supplementary_material='to be completed',
+       reusable='to be completed',
+       testimony='to be completed',
+       references='to be completed',
+
+)
 #    peer_review = OnlineIdea.objects.create(
 #        idea_name=,
 #        brief_description=,
