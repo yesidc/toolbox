@@ -3,7 +3,7 @@ from tbcore.models import *
 # Create your views here.
 
 
-
+#todo use get_object_or_404() function
 
 def human_touch (request):
     category_human_touch = Category.objects.get(category_name='Human Touch')

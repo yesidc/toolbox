@@ -83,4 +83,26 @@
     </div>
     </section>
 
+{#    todo delete this block#}
+{#    test block#}
+
+    <section class="bg-dark text-light">
+    <div class="container">
+        {{ description.brief_description |safe }}
+    </div>
+        <div class="container my-4">
+        {{ description.tool |safe }}
+    </div>
+        <div class="container my-4">
+        {{ description.implementation_steps |safe }}
+    </div>
+        <div class="container my-4">
+        {{ description.teacher_effort |safe }}
+    </div>
+        <div class="container my-4">
+        {{ description.recommendations |safe }}
+    </div>
+
+
+    </section>
 {% endblock content %}

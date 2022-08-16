@@ -23,29 +23,37 @@ class Category (models.Model):
 
 class OnlineIdea (models.Model):
     idea_name = models.CharField (max_length= 200)
-    description = models.TextField()
-    short_description = models.TextField() # used for checklist on the building block page
-    implementation_steps = models.TextField()
+    brief_description = models.TextField() # used for checklist on the building block page
+    examples_application = models.TextField(null=True)
+    tool = models.TextField(null=True)
+    implementation_steps = models.TextField(null=True)
     teacher_effort = models.TextField()
     recommendations = models.TextField()
     supplementary_material = models.TextField()
-    examples_application = models.TextField()
-    testimony = models.TextField()
-    references = models.TextField()
+    reusable = models.TextField(null=True)
+    testimony = models.TextField(null=True)
+    references = models.TextField( null=True)
     #todo add how I plan to implement this idea. This field is not mandatory
 
     def __str__(self):
         return self.idea_name
 
 
-class CategoryOnlineIdea (models.Model):
+class CategoryOnlineIdea1 (models.Model):
     #todo if category is deleted this object 'CategoryOnlineIdea' should be delted as well
     category = models.ManyToManyField(Category) #todo here you need something like on_delete
-    online_idea = models.ForeignKey(OnlineIdea, on_delete = models.CASCADE)
-    display = models.BooleanField()
+    online_idea = models.ForeignKey(OnlineIdea, on_delete = models.CASCADE)  #todo implement related name
+    # display = models.BooleanField()
 
 
+class CategoryOnlineIdea (models.Model):
+    #todo if category is deleted this object 'CategoryOnlineIdea' should be delted as well
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    online_idea = models.ManyToManyField(OnlineIdea) #todo implement related name
+    # display = models.BooleanField()
 
+
+#todo instad of having two fields, have one categoryOnlineIdea
 class PlanCategoryOnlineIdea (models.Model):
     plan = models.ForeignKey(Plan, on_delete= models.CASCADE,  related_name = 'plan_category_onlide_idea_plan')
     category = models.ForeignKey(Category, on_delete= models.CASCADE, related_name= 'plan_category_onlide_idea_category')

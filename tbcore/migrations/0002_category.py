@@ -32,7 +32,7 @@ def create_category(apps, schema_editor):
         "<br>"
         "<h6>Course information:</h6>"
         "<ul>"
-                
+
                 "<li>Meeting days and time for courses with synchronous meetings</li>"
                 "<li>Instructional modality, as a way to help students understand how the course is designed </li>"
                 "<li>ECTS</li>"
