@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from tbcore.models import *
-
+from .forms import NotesForm
+import pdb
 # Create your views here.
 
 
@@ -83,12 +84,32 @@ def rules_regulations(request):
 
 
 def idea_overview_detail(request, idea_id, detailed_view):
+
+    update = False
     idea = get_object_or_404(OnlineIdea, id=idea_id)
     context = {
         'idea': idea,
 
     }
     if detailed_view == 'detailed_view':
+        try:
+            instance_note = idea.note_online_idea.all()[0]
+            form = NotesForm(instance= instance_note) #todo needs generalize to the case where there are many notes for an online idea
+            update = True
+        except IndexError:
+            form = NotesForm()
+
+        context['form']= form
+        if request.method == 'POST':
+            form = NotesForm(request.POST, instance=instance_note) if update else NotesForm(request.POST)
+            if form.is_valid():
+                new_note = form.save(commit=False)
+                new_note.online_idea = idea
+                new_note.save()
+
+        # updates the form with the new note
+            context['form'] =NotesForm(instance= idea.note_online_idea.all()[0])
+            #pdb.set_trace()
         return render(request, 'plan/idea_detail.html', context=context)
     else:
         return render(request, 'plan/idea_overview.html', context=context)

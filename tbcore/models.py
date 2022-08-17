@@ -52,9 +52,21 @@ class CategoryOnlineIdea (models.Model):
     online_idea = models.ManyToManyField(OnlineIdea) #todo implement related name
     # display = models.BooleanField()
 
+#todo needs a user field as a note also belongs to a single user, although a Plan object already belongs to a User, so maybe this is not needed.
+# todo retrieve all the notes that belong a user and then all the notes that belong to a particular idea.
+class Notes (models.Model):
+    idea_note = models.TextField(null=True) #todo delete null. we do not wat user to submit empy object
+    online_idea = models.ForeignKey(OnlineIdea, on_delete=models.CASCADE, related_name='note_online_idea')
 
-#todo instad of having two fields, have one categoryOnlineIdea
+
+
+#todo do we want to delete this object if for example a category is deleted?
+
 class PlanCategoryOnlineIdea (models.Model):
     plan = models.ForeignKey(Plan, on_delete= models.CASCADE,  related_name = 'plan_category_onlide_idea_plan')
     category = models.ForeignKey(Category, on_delete= models.CASCADE, related_name= 'plan_category_onlide_idea_category')
     idea = models.ForeignKey (OnlineIdea, on_delete= models.CASCADE, null= True,related_name= 'plan_category_onlide_idea_i')
+    notes = models.ForeignKey(Notes, on_delete=models.CASCADE, related_name='note_plan',
+                             null=True)  # todo delete the null this is mandatory
+
+
