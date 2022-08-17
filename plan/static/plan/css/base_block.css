@@ -1,12 +1,5 @@
 @charset "UTF-8";
 
-/*!
-Toolbox
-*/
-
-
-
-
 
 /*!
 * Start Bootstrap - Simple Sidebar v6.0.5 (https://startbootstrap.com/template/simple-sidebar)
@@ -19,6 +12,40 @@ Toolbox
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+/*!
+Toolbox
+.underline-menu {
+  text-decoration-line: underline !important;
+  text-decoration-thickness: 4px !important;
+  color: rgb(20, 19, 19);
+}
+*/
+/*Underline top-nav bar*/
+.top-nav a:hover {
+  border-bottom: 3px solid red;
+}
+/*Underline top-nav bar*/
+.active-top-bar {
+  border-bottom: 3px solid deepskyblue;
+}
+
+/*moves brand to the right*/
+.navbar-brand{
+     margin-left:10px !important;
+}
+
+@media (min-width: 576px) {
+  .navbar-brand{
+     margin-left:80px !important;
+}
+}
+/*border color of ideas property table idea_overview page*/
+.ideas-b-property{
+  border-bottom-color: white;
+  border-bottom-style: solid;
+}
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;

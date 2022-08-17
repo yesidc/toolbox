@@ -38,3 +38,17 @@ window.addEventListener('DOMContentLoaded', event => {
 
 
 });
+
+// underlines active menus on top nav bar.
+   $(document).ready(function () {
+
+        jQuery(function ($) {
+          var path_top_nav = window.location.href;
+          $('.nav-link').each(function () {
+            if (this.href === path_top_nav) {
+              $(this).addClass('active-top-bar');
+            }
+          });
+        });
+      });
+

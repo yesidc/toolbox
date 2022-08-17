@@ -6,7 +6,7 @@ from .models import OnlineIdea
 def start_page (request):
 
     context ={
-        'description': OnlineIdea.objects.filter(idea_name='Short Student Introduction/ 2 Truths one lie')[0].short_description
+        'description': OnlineIdea.objects.filter(idea_name='Instructor introduction video')[0]
     }
 
 
