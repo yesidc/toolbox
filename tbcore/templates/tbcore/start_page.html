@@ -36,15 +36,12 @@
             {% block create_course%}<div class="d-flex">
 
                 <div>
-                    <a href="" class="btn btn-primary mx-5">Sign in to Stud.Ip</a>
+                    <a href="{% url 'login' %}" class="btn btn-primary mx-5">Sign in to Stud.Ip</a>
                 </div>
                 <div>
                     <a href="" class="btn btn-primary mx-5">Start without log-in</a>
                 </div>
-{#                TODO This button is only visible if user is logged in#}
-                <div>
-                    <a href="{% url 'create_course' %}" class="btn btn-primary mx-5">Create a Course Plan</a>
-                </div>
+
             </div>{% endblock %}
 
 

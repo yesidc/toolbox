@@ -1,13 +1,15 @@
 from django.shortcuts import render
-from .models import OnlineIdea
+from django.contrib.auth.models import User
 # Create your views here.
-
+# todo delete pdb, it is only for debugging
+import pdb
 
 def start_page (request):
 
     context ={
-        'description': OnlineIdea.objects.filter(idea_name='Instructor introduction video')[0]
+        'username': request.user.username
     }
-
+    print(f'this is the username: {context["username"]}')
+    #pdb.set_trace()
 
     return render(request, 'tbcore/start_page.html', context= context)

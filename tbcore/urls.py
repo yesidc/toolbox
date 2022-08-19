@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path ('', views.start_page, name = 'start-page'),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]

@@ -63,8 +63,12 @@
                     <!-- username and logout navbar  -->
                     <div class="col-12 order-md-first">
                         <ul class="navbar-nav float-none float-md-end">
-                            <li class="nav-item"><a class="nav-link" href="#">Username</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Log out</a></li>
+                            {% if username != '' %}
+                                <li class="nav-item"><a class="nav-link" href="#">{{ username }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Log out</a></li>
+                            {% else %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Log in</a></li>
+                            {% endif %}
 
                         </ul>
                     </div>

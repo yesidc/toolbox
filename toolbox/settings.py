@@ -140,6 +140,10 @@ STATIC_URL = '/static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
+#Login and logout rederict
+LOGIN_REDIRECT_URL = "/create_course/"
+LOGOUT_REDIRECT_URL = "/"
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
