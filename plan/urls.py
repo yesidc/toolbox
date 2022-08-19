@@ -12,6 +12,7 @@ urlpatterns = [
     path('assessment/', views.assessment, name='assessment'),
     path('rules_regulations/', views.rules_regulations, name='rules_regulations'),
    path('idea_overview/<int:idea_id>/<str:detailed_view>/', views.idea_overview_detail, name='idea_overview_detail'),
+    path('create_course/', views.create_course, name='create_course'),
 
    path('summary/', views.summary, name='summary'),
 

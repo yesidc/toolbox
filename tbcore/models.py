@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 # Create your models here
 
 
+
+
+
+
 class Plan (models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     plan_name = models.CharField(max_length=100)  #usually something like course title

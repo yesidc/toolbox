@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect
 from tbcore.models import *
-from .forms import NotesForm
+from .forms import NotesForm, PlanForm
 import pdb
 # Create your views here.
 
@@ -112,6 +113,7 @@ def idea_overview_detail(request, idea_id, detailed_view):
             #pdb.set_trace()
         return render(request, 'plan/idea_detail.html', context=context)
     else:
+        #todo this is where get request are handled, here is it where saved notes are displayed.
         return render(request, 'plan/idea_overview.html', context=context)
 
 
@@ -121,3 +123,21 @@ def idea_overview_detail(request, idea_id, detailed_view):
 
 def summary(request):
     return render(request, 'plan/summary.html')
+
+#todo user needs to be logged in
+def create_course (request):
+    form = PlanForm()
+    context = {
+        'form':form
+    }
+    if request.method == "POST":
+        form = PlanForm(request.POST)
+        if form.is_valid():
+            new_plan = form.save(commit=False)
+            #todo request current user user =request.user
+            new_plan.user = User.objects.get(username='john3')
+            new_plan.save()
+        return redirect ('human_touch')
+
+
+    return render(request, 'plan/course_name.html', context=context)
