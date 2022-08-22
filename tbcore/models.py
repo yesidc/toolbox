@@ -20,6 +20,7 @@ class Category (models.Model):
     further_information = models.TextField(null=True)
     reasons = models.TextField()
     references = models.TextField(null=True)
+    category_url= models.CharField(max_length=50)
 
 
     def __str__(self):

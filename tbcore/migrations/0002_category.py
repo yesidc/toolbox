@@ -17,13 +17,15 @@ def create_category(apps, schema_editor):
         reasons='The social dimension and social interaction can be seen as predecessors for understanding. Knowing '
                 'the people of the course greatly helps to manage uncertainty about participation and comprehension '
                 'questions. Especially the CogSci student body is very active and engaged to give everyone the same '
-                'opportunity and this should apply to all students, on-site and online. '
+                'opportunity and this should apply to all students, on-site and online. ',
+        category_url= 'human_touch',
 
     )
     teaching_material = Category.objects.create(
         category_name='Teaching Material',
         short_description='The teaching material constitutes the basis of the study material. It covers all necessary sources for meeting the learning goals, which also includes additional explanations that make topics more tangible or comprehendable. If synchronous discussions comprise an essential part of the learning material, then they must be accessible to online students as well. Therefore, for online courses ',
         reasons='Since the COSMOS-program opened the Cognitive Science Master for online students students from any time zone, any single and synchronous time slot for lecture meetings on-site or online would exclude one of the students. ',
+        category_url = 'teaching_material',
 
     )
     organization = Category.objects.create(
@@ -48,36 +50,42 @@ def create_category(apps, schema_editor):
 
 
         reasons=' Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
+        category_url= 'organization',
 
     )
     assignment = Category.objects.create(
         category_name='Assignments',
         short_description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
         reasons='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
+        category_url = 'assignment',
 
     )
     discussion = Category.objects.create(
         category_name='Discussion',
         short_description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
         reasons='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia ',
+        category_url = 'discussion',
 
     )
     student_engagement = Category.objects.create(
         category_name='Student Engagement',
         short_description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
         reasons='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
+        category_url = 'student_engagement',
 
     )
     assessment = Category.objects.create(
         category_name='Assessment',
         short_description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
         reasons='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia ',
+        category_url = 'assessment',
 
     )
     rules_regulations = Category.objects.create(
         category_name='Rules & Regulations',
         short_description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
         reasons=' Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
+        category_url = 'rules_regulations',
 
     )
 
