@@ -139,15 +139,17 @@ def summary(request):
 
 
 # todo user needs to be logged in
-def create_plan(request):
+def create_plan(request, start_add):
     """
     Triggered when user creates a new Plan
+    Args:
+        start_add: the template to be rendered depends on whether the user has just logged in or adds a new plan/course
     """
     form = PlanForm()
     context = {
         'form': form
     }
-    if request.method == "POST":
+    def plan_to_database():
         form = PlanForm(request.POST)
         if form.is_valid():
             new_plan = form.save(commit=False)
@@ -156,16 +158,24 @@ def create_plan(request):
 
             new_plan.save()
 
+    if start_add == 'get_started':
+        if request.method == "POST":
+            plan_to_database()
 
 
-        return redirect('human_touch')
 
-    return render(request, 'plan/course_name.html', context=context)
+            return redirect('human_touch')
+
+        return render(request, 'plan/course_name.html', context=context)
+    elif start_add ==  'add_new_plan':
+        if request.method == "POST":
+            plan_to_database()
+        return render (request, 'plan/base_block.html', context=context)
 
 
 def use_idea(request):
 
-
+#todo this should be into a try method, or return and 404 error. IF the server is reloaed the GLOBAL_CONTEXT IS LOST AND the OBJECT below cannot be created
     PlanCategoryOnlineIdea.objects.create(
         plan= GLOBAL_CONTEXT['new_plan'],
         category= Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
@@ -173,6 +183,6 @@ def use_idea(request):
 
     )
 
-    pdb.set_trace()
+
     return redirect(GLOBAL_CONTEXT['current_category'])
 

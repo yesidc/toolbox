@@ -34,8 +34,15 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom m-0">My Courses</div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'create_plan' 'add_new_plan' %}">Add</a>
+                    <div class="list-group-item list-group-item-action list-group-item-light p-3">
+                            <form action="" method="POST" class="mx-3">
+           {% csrf_token %}
+        {{ form.plan_name }}
+     <input type="submit" name="Submit" value="Save" class="btn-primary mx-4 px-5">
+    </form>
+
+                    </div>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
