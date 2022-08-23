@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
+from django.contrib.auth.decorators import login_required
 import pdb
 
 # Create your views here.
@@ -13,7 +14,7 @@ IDEA_PROPERTIES = ('idea_name', 'brief_description', 'examples_application',
                    'testimony', 'references')
 
 GLOBAL_CONTEXT ={
-    'new_plan':None
+    'plan':Plan.objects.all().last() or None
 }
 
 
@@ -149,7 +150,7 @@ def summary(request):
     return render(request, 'plan/summary.html')
 
 
-# todo user needs to be logged in
+@login_required
 def create_plan(request, start_add):
     """
     Triggered when user creates a new Plan
@@ -165,7 +166,7 @@ def create_plan(request, start_add):
         if form.is_valid():
             new_plan = form.save(commit=False)
             new_plan.user = User.objects.get(username=request.user)
-            GLOBAL_CONTEXT['new_plan'] = new_plan
+            GLOBAL_CONTEXT['plan'] = new_plan
 
             new_plan.save()
 
@@ -183,14 +184,14 @@ def create_plan(request, start_add):
             plan_to_database()
         return render (request, 'plan/base_block.html', context=context)
 
-
+@login_required
 def use_idea(request, category_name, idea_id):
 
 #todo this should be into a try method, or return and 404 error. IF the server is reloaed the GLOBAL_CONTEXT IS LOST AND the OBJECT below cannot be created
     #pdb.set_trace()
     #if user has not chosen any plan/course the idea is saved to the latest plan user created
     PlanCategoryOnlineIdea.objects.create(
-        plan= GLOBAL_CONTEXT['new_plan'] or Plan.objects.all().last(),
+        plan= GLOBAL_CONTEXT['plan'],
         category= Category.objects.get(category_url=category_name),
         idea = OnlineIdea.objects.get(pk=idea_id),
 

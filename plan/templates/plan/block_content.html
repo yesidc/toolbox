@@ -10,18 +10,19 @@
 {% block building_block_idea %}
     <!-- Showcase-->
 
-    <section class="bg-light text-dark p-3 mt-1">
+
+    {% if  user.is_authenticated %}
+        <section class="bg-light text-dark p-3 mt-1">
         <div class="container">
             <div class="d-flex flex-column ">
                 {#                <div class="text-center">#}
                 {#                    <h4>Online Ideas</h4>#}
                 {#                #}
                 {#                </div>#}
-                <div>
-                    <h5>Course Revision Mode</h5>
-                    <p class="lead">You have selected: Teaching methods and tools for a lecture with students
-                        presentations</p>
-                    <a class="btn btn-primary button-touch">Switch to Exploration Mode</a>
+                <div class="text-center">
+                    <h5>Current course plan</h5>
+                    <p class="lead">{{ plan.plan_name }}</p>
+
                 </div>
 
 
@@ -30,6 +31,31 @@
         </div>
 
     </section>
+        {% else %}
+
+                <section class="bg-light text-dark p-3 mt-1">
+        <div class="container">
+            <div class="d-flex flex-column ">
+                {#                <div class="text-center">#}
+                {#                    <h4>Online Ideas</h4>#}
+                {#                #}
+                {#                </div>#}
+                <div>
+                    <h5>Course Exploration Mode</h5>
+                    <p class="lead">If you want to save changes as well as the online ideas, please log in and crate a course to get started!</p>
+                    <a class="btn btn-primary button-touch" href="{% url 'login' %}">Switch to Revision Mode</a>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+    {% endif %}
+
+
     {##}
     {#    <section class="p-5">#}
     {#        <div class="container">#}
