@@ -130,7 +130,7 @@
 
 {#todo use dynamic urls to pass the corresponding idea object to the idea_overview page, passing the primary#}
 {#                    the primary key would allow me to get the idea object from the dataset#}
-                    <a href="{% url 'idea_overview_detail' idea.id 'overview' %}" class="btn">
+                    <a href="{% url 'idea_overview_detail' current_category idea.id 'overview' %}" class="btn">
                         <div class="card bg-body text-black">
                             <div class="card-body text-center">
                                 <div class="h1 mb-3">

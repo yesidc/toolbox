@@ -12,7 +12,9 @@ IDEA_PROPERTIES = ('idea_name', 'brief_description', 'examples_application',
                    'recommendations', 'supplementary_material', 'reusable',
                    'testimony', 'references')
 
-GLOBAL_CONTEXT ={}
+GLOBAL_CONTEXT ={
+    'new_plan':None
+}
 
 
 def get_category(category_url):
@@ -32,6 +34,7 @@ def human_touch(request):
     context = {'category': get_category('human_touch'),
                'next_page': 'teaching_material',
                'name_next_page': 'Teaching Material'}
+    context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -41,6 +44,7 @@ def teaching_material(request):
     context = {'category': get_category('teaching_material'),
                'next_page': 'organization',
                'name_next_page': 'Organization'}
+    context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -50,6 +54,7 @@ def organization(request):
     context = {'category': get_category('organization'),
                'next_page': 'assignment',
                'name_next_page': 'Assignment'}
+    context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -59,6 +64,7 @@ def assignment(request):
     context = {'category':get_category('assignment'),
                'next_page': 'discussion',
                'name_next_page': 'Discussion'}
+    context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -68,6 +74,7 @@ def discussion(request):
     context = {'category': get_category('discussion'),
                'next_page': 'student_engagement',
                'name_next_page': 'Student Engagement'}
+    context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -77,6 +84,7 @@ def student_engagement(request):
     context = {'category': get_category('student_engagement'),
                'next_page': 'assessment',
                'name_next_page': 'Assessment'}
+    context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -86,6 +94,7 @@ def assessment(request):
     context = {'category': get_category('assessment'),
                'next_page': 'rules_regulations',
                'name_next_page': 'Rules & Regulations'}
+    context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -93,10 +102,11 @@ def rules_regulations(request):
     #category_rules_regulations = CategoryOnlineIdea.objects.get(category__category_name='Rules & Regulations')
     #GLOBAL_CONTEXT['current_category'] = 'rules_regulations'
     context = {'category': get_category('rules_regulations')}
+    context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
 
-def idea_overview_detail(request, idea_id, detailed_view):
+def idea_overview_detail(request,category_name, idea_id, detailed_view):
     update = False
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
     GLOBAL_CONTEXT['current_idea']= current_idea
@@ -104,6 +114,7 @@ def idea_overview_detail(request, idea_id, detailed_view):
         'idea': current_idea,
 
     }
+    context.update(GLOBAL_CONTEXT)
     if detailed_view == 'detailed_view':
         try:
             instance_note = current_idea.note_online_idea.all()[0]
@@ -173,16 +184,18 @@ def create_plan(request, start_add):
         return render (request, 'plan/base_block.html', context=context)
 
 
-def use_idea(request):
+def use_idea(request, category_name, idea_id):
 
 #todo this should be into a try method, or return and 404 error. IF the server is reloaed the GLOBAL_CONTEXT IS LOST AND the OBJECT below cannot be created
+    #pdb.set_trace()
+    #if user has not chosen any plan/course the idea is saved to the latest plan user created
     PlanCategoryOnlineIdea.objects.create(
-        plan= GLOBAL_CONTEXT['new_plan'],
-        category= Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
-        idea = GLOBAL_CONTEXT['current_idea'],
+        plan= GLOBAL_CONTEXT['new_plan'] or Plan.objects.all().last(),
+        category= Category.objects.get(category_url=category_name),
+        idea = OnlineIdea.objects.get(pk=idea_id),
 
     )
 
 
-    return redirect(GLOBAL_CONTEXT['current_category'])
+    return redirect(category_name)
 

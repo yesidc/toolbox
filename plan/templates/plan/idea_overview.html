@@ -21,6 +21,12 @@
                <div class="col">
                    <h5>Example</h5>
                    <p class="lead">{% if idea.examples_application %}{{ idea.examples_application|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
+
+                   <p>{{request.path}}</p>
+                    <p>{{request.get_full_path}}</p>
+               <p>{{ request.path_info }}</p>
+
+
                </div>
            </div>
 
@@ -95,7 +101,7 @@
 <section class="bg-dark text-light">
         <div class="container">
             <div class="row mt-0 p-3">
-                <div class="col"><a href="{% url 'idea_overview_detail' idea.id 'detailed_view' %}" class="btn btn-primary">Show me more</a></div>
+                <div class="col"><a href="{% url 'idea_overview_detail' current_category idea.id 'detailed_view' %}" class="btn btn-primary">Show me more</a></div>
             </div>
         </div>
 
@@ -106,7 +112,7 @@
         <div class="d-flex justify-content-end">
             <div>
 
-                <a href="{% url 'use_idea' %}" class="btn btn-primary active m-4 pb-3" aria-current="page">Use this online recommendation in my
+                <a href="{% url 'use_idea' current_category idea.id %}" class="btn btn-primary active m-4 pb-3" aria-current="page">Use this online recommendation in my
                     course</a>
 
             </div>
