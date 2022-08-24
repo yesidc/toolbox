@@ -13,8 +13,9 @@ IDEA_PROPERTIES = ('idea_name', 'brief_description', 'examples_application',
                    'recommendations', 'supplementary_material', 'reusable',
                    'testimony', 'references')
 
-GLOBAL_CONTEXT ={
-    'plan':Plan.objects.all().last() or None
+GLOBAL_CONTEXT = {
+    'plan': Plan.objects.all().last() or None,
+    'form': PlanForm()
 }
 
 
@@ -25,12 +26,11 @@ def get_category(category_url):
     return CategoryOnlineIdea.objects.get(category__category_url=category_url)
 
 
-
 # todo use get_object_or_404() function with all the category_block_name variable
 
 def human_touch(request):
-    #category_human_touch = get_category('Human Touch')
-    #GLOBAL_CONTEXT['current_category']= 'human_touch'
+    # category_human_touch = get_category('Human Touch')
+    # GLOBAL_CONTEXT['current_category']= 'human_touch'
 
     context = {'category': get_category('human_touch'),
                'next_page': 'teaching_material',
@@ -40,8 +40,8 @@ def human_touch(request):
 
 
 def teaching_material(request):
-    #category_teaching_material = CategoryOnlineIdea.objects.get(category__category_name='Teaching Material')
-    #GLOBAL_CONTEXT['current_category'] = 'teaching_material'
+    # category_teaching_material = CategoryOnlineIdea.objects.get(category__category_name='Teaching Material')
+    # GLOBAL_CONTEXT['current_category'] = 'teaching_material'
     context = {'category': get_category('teaching_material'),
                'next_page': 'organization',
                'name_next_page': 'Organization'}
@@ -50,8 +50,8 @@ def teaching_material(request):
 
 
 def organization(request):
-    #category_organization = CategoryOnlineIdea.objects.get(category__category_name='Organization')
-    #GLOBAL_CONTEXT['current_category'] = 'organization'
+    # category_organization = CategoryOnlineIdea.objects.get(category__category_name='Organization')
+    # GLOBAL_CONTEXT['current_category'] = 'organization'
     context = {'category': get_category('organization'),
                'next_page': 'assignment',
                'name_next_page': 'Assignment'}
@@ -60,9 +60,9 @@ def organization(request):
 
 
 def assignment(request):
-    #category_assignmet = CategoryOnlineIdea.objects.get(category__category_name='Assignments')
-    #GLOBAL_CONTEXT['current_category'] = 'assignment'
-    context = {'category':get_category('assignment'),
+    # category_assignmet = CategoryOnlineIdea.objects.get(category__category_name='Assignments')
+    # GLOBAL_CONTEXT['current_category'] = 'assignment'
+    context = {'category': get_category('assignment'),
                'next_page': 'discussion',
                'name_next_page': 'Discussion'}
     context.update(GLOBAL_CONTEXT)
@@ -70,8 +70,8 @@ def assignment(request):
 
 
 def discussion(request):
-    #category_discussion = CategoryOnlineIdea.objects.get(category__category_name='Discussion')
-    #GLOBAL_CONTEXT['current_category'] = 'discussion'
+    # category_discussion = CategoryOnlineIdea.objects.get(category__category_name='Discussion')
+    # GLOBAL_CONTEXT['current_category'] = 'discussion'
     context = {'category': get_category('discussion'),
                'next_page': 'student_engagement',
                'name_next_page': 'Student Engagement'}
@@ -80,8 +80,8 @@ def discussion(request):
 
 
 def student_engagement(request):
-    #category_student_engagement = CategoryOnlineIdea.objects.get(category__category_name='Student Engagement')
-    #GLOBAL_CONTEXT['current_category'] = 'student_engagement'
+    # category_student_engagement = CategoryOnlineIdea.objects.get(category__category_name='Student Engagement')
+    # GLOBAL_CONTEXT['current_category'] = 'student_engagement'
     context = {'category': get_category('student_engagement'),
                'next_page': 'assessment',
                'name_next_page': 'Assessment'}
@@ -90,8 +90,8 @@ def student_engagement(request):
 
 
 def assessment(request):
-    #category_assessment = CategoryOnlineIdea.objects.get(category__category_name='Assessment')
-    #GLOBAL_CONTEXT['current_category'] = 'assessment'
+    # category_assessment = CategoryOnlineIdea.objects.get(category__category_name='Assessment')
+    # GLOBAL_CONTEXT['current_category'] = 'assessment'
     context = {'category': get_category('assessment'),
                'next_page': 'rules_regulations',
                'name_next_page': 'Rules & Regulations'}
@@ -100,17 +100,17 @@ def assessment(request):
 
 
 def rules_regulations(request):
-    #category_rules_regulations = CategoryOnlineIdea.objects.get(category__category_name='Rules & Regulations')
-    #GLOBAL_CONTEXT['current_category'] = 'rules_regulations'
+    # category_rules_regulations = CategoryOnlineIdea.objects.get(category__category_name='Rules & Regulations')
+    # GLOBAL_CONTEXT['current_category'] = 'rules_regulations'
     context = {'category': get_category('rules_regulations')}
     context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
 
-def idea_overview_detail(request,category_name, idea_id, detailed_view):
+def idea_overview_detail(request, category_name, idea_id, detailed_view):
     update = False
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
-    GLOBAL_CONTEXT['current_idea']= current_idea
+    GLOBAL_CONTEXT['current_idea'] = current_idea
     context = {
         'idea': current_idea,
 
@@ -161,7 +161,11 @@ def create_plan(request, start_add):
     context = {
         'form': form
     }
+
     def plan_to_database():
+        """
+        Validates form data and saves them to the database.
+        """
         form = PlanForm(request.POST)
         if form.is_valid():
             new_plan = form.save(commit=False)
@@ -174,29 +178,26 @@ def create_plan(request, start_add):
         if request.method == "POST":
             plan_to_database()
 
-
-
             return redirect('human_touch')
 
         return render(request, 'plan/course_name.html', context=context)
-    elif start_add ==  'add_new_plan':
+    elif start_add == 'add_new_plan':
         if request.method == "POST":
             plan_to_database()
-        return render (request, 'plan/base_block.html', context=context)
+            # user redirected to previous page
+            return redirect(request.META.get('HTTP_REFERER'))
+
 
 @login_required
 def use_idea(request, category_name, idea_id):
-
-#todo this should be into a try method, or return and 404 error. IF the server is reloaed the GLOBAL_CONTEXT IS LOST AND the OBJECT below cannot be created
-    #pdb.set_trace()
-    #if user has not chosen any plan/course the idea is saved to the latest plan user created
+    # todo this should be into a try method, or return and 404 error. IF the server is reloaed the GLOBAL_CONTEXT IS LOST AND the OBJECT below cannot be created
+    # pdb.set_trace()
+    # if user has not chosen any plan/course the idea is saved to the latest plan user created
     PlanCategoryOnlineIdea.objects.create(
-        plan= GLOBAL_CONTEXT['plan'],
-        category= Category.objects.get(category_url=category_name),
-        idea = OnlineIdea.objects.get(pk=idea_id),
+        plan=GLOBAL_CONTEXT['plan'],
+        category=Category.objects.get(category_url=category_name),
+        idea=OnlineIdea.objects.get(pk=idea_id),
 
     )
 
-
     return redirect(category_name)
-
