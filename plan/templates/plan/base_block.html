@@ -14,6 +14,8 @@
 
     <!-- Page content wrapper-->
     <div id="page-content-wrapper">
+    {% if user.is_authenticated%}
+
         <!-- Top navigation-->
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
@@ -24,21 +26,35 @@
 
             </div>
         </nav>
-
+{% endif %}
 
         <div class="d-flex" id="wrapper">
-
+{% if user.is_authenticated%}
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom m-0">My Courses</div>
                 <div class="list-group list-group-flush">
-                    {% block side_bar_content%}
+
+
+                    {#              <a class="list-group-item list-group-item-action list-group-item-light p-3"#}
+                    {#                                  href="{% url 'create_plan' 'add_new_plan' %}">Add</a>#}
+                    <div class="list-group-item list-group-item-action list-group-item-light p-3">
+                        <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-3">
+                            {% csrf_token %}
+                            {{ form.plan_name }}
+                            <input type="submit" name="Submit" value="Add new course" class="btn-primary my-3 px-3">
+                        </form>
+
+                    </div>
+
+                    {% for p in user_filter_plans reversed  %}
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'select_plan' p.pk %}">{{ p.plan_name }}</a>
+                    {% endfor %}
 
 
 
-
-                    {% endblock %}
                 </div>
             </div>
+    {% endif %}
             <!-- Page content-->
             <div class="container-fluid">
 
@@ -57,6 +73,10 @@
 
 
     <script src="{% static 'plan/js/utils.js' %}"></script>
+
+
+
+
 {% endblock %}
 
 

@@ -14,6 +14,7 @@ urlpatterns = [
    path('<str:category_name>/<int:idea_id>/<str:detailed_view>/', views.idea_overview_detail, name='idea_overview_detail'),
     path('<str:category_name>/<int:idea_id>/save_idea', views.use_idea, name='use_idea'),
     path('create_plan/<str:start_add>/', views.create_plan, name='create_plan'),
+    path('select_plan/<int:plan_id>/', views.select_plan, name='select_plan'),
 
    path('summary/', views.summary, name='summary'),
 

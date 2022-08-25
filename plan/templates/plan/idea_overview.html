@@ -22,9 +22,6 @@
                    <h5>Example</h5>
                    <p class="lead">{% if idea.examples_application %}{{ idea.examples_application|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
 
-                   <p>{{request.path}}</p>
-                    <p>{{request.get_full_path}}</p>
-               <p>{{ request.path_info }}</p>
 
 
                </div>
@@ -134,6 +131,3 @@
 
 {% endblock %}
 
-{% block side_bar_content %}
-
-{% endblock %}

@@ -21,7 +21,7 @@
                 {#                </div>#}
                 <div class="text-center">
                     <h5>Current course plan</h5>
-                    <p class="lead">{{ plan.plan_name }}</p>
+                    <p class="lead">{{ current_user_plan.plan_name }}</p>
 
                 </div>
 
@@ -207,29 +207,4 @@
 
 {% endblock %}
 
-         {% block side_bar_content%}
-
-
-{#              <a class="list-group-item list-group-item-action list-group-item-light p-3"#}
-{#                                  href="{% url 'create_plan' 'add_new_plan' %}">Add</a>#}
-                    <div class="list-group-item list-group-item-action list-group-item-light p-3">
-                        <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-3">
-                            {% csrf_token %}
-                            {{ form.plan_name }}
-                            <input type="submit" name="Submit" value="Add" class="btn-primary mx-4 px-5">
-                        </form>
-
-                    </div>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
-
-
-
-
-
-
-
-{% endblock %}
 

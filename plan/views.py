@@ -14,7 +14,7 @@ IDEA_PROPERTIES = ('idea_name', 'brief_description', 'examples_application',
                    'testimony', 'references')
 
 GLOBAL_CONTEXT = {
-    'plan': Plan.objects.all().last() or None,
+    'current_user_plan': Plan.objects.all().last() or None,  # the plan users works on
     'form': PlanForm()
 }
 
@@ -36,6 +36,7 @@ def human_touch(request):
                'next_page': 'teaching_material',
                'name_next_page': 'Teaching Material'}
     context.update(GLOBAL_CONTEXT)
+
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -170,7 +171,7 @@ def create_plan(request, start_add):
         if form.is_valid():
             new_plan = form.save(commit=False)
             new_plan.user = User.objects.get(username=request.user)
-            GLOBAL_CONTEXT['plan'] = new_plan
+            GLOBAL_CONTEXT['current_user_plan'] = new_plan
 
             new_plan.save()
 
@@ -194,10 +195,18 @@ def use_idea(request, category_name, idea_id):
     # pdb.set_trace()
     # if user has not chosen any plan/course the idea is saved to the latest plan user created
     PlanCategoryOnlineIdea.objects.create(
-        plan=GLOBAL_CONTEXT['plan'],
+        plan=GLOBAL_CONTEXT['current_user_plan'],
         category=Category.objects.get(category_url=category_name),
         idea=OnlineIdea.objects.get(pk=idea_id),
 
     )
 
     return redirect(category_name)
+
+def select_plan (request, plan_id):
+    """
+    Triggered when user chooses to work on a different plan. User can switch to a
+    different plan using the navigation bar on the left.
+    """
+    GLOBAL_CONTEXT['current_user_plan'] = Plan.objects.get(pk=plan_id)
+    return redirect(request.META.get('HTTP_REFERER'))
