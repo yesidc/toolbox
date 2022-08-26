@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 
 class Plan (models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #todo should be unique, there should not be more than one plan with the same name.
     plan_name = models.CharField(max_length=100)  #usually something like course title
 
     def __str__(self):

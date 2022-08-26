@@ -3,10 +3,11 @@ from django.shortcuts import redirect
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 import pdb
 
 # Create your views here.
-
+#todo optimize database queries,ex. create 500 users and evaluate performance
 
 IDEA_PROPERTIES = ('idea_name', 'brief_description', 'examples_application',
                    'tool', 'implementation_steps', 'teacher_effort',
@@ -18,7 +19,15 @@ GLOBAL_CONTEXT = {
     'form': PlanForm()
 }
 
+def get_ideas(user,category_url):
+    """
+    Fetches all ideas from PlanCategoryOnlineIdea object.
+    """
 
+    idea_list = [i.idea.id for i in PlanCategoryOnlineIdea.objects.filter(Q(plan__user=user)&  Q(plan__plan_name=GLOBAL_CONTEXT['current_user_plan']) & Q(category__category_url = category_url))]
+    return idea_list
+
+#todo move to a helpers.py module. There should only be views definitions here
 def get_category(category_url):
     # todo you can also cache this information
     # holds the name of the current building block or category
@@ -34,7 +43,8 @@ def human_touch(request):
 
     context = {'category': get_category('human_touch'),
                'next_page': 'teaching_material',
-               'name_next_page': 'Teaching Material'}
+               'name_next_page': 'Teaching Material',
+               'ideas_list': get_ideas(request.user,'human_touch')}
     context.update(GLOBAL_CONTEXT)
 
     return render(request, 'plan/block_content.html', context=context)
@@ -190,18 +200,22 @@ def create_plan(request, start_add):
 
 
 @login_required
-def use_idea(request, category_name, idea_id):
+def use_idea(request):
     # todo this should be into a try method, or return and 404 error. IF the server is reloaed the GLOBAL_CONTEXT IS LOST AND the OBJECT below cannot be created
+    # todo there should not be repeated objects, use Unique.
     # pdb.set_trace()
     # if user has not chosen any plan/course the idea is saved to the latest plan user created
+    idea_id = request.GET.get('idea_id')
+    print('use idea was called')
     PlanCategoryOnlineIdea.objects.create(
         plan=GLOBAL_CONTEXT['current_user_plan'],
-        category=Category.objects.get(category_url=category_name),
+        category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
         idea=OnlineIdea.objects.get(pk=idea_id),
+
 
     )
 
-    return redirect(category_name)
+    return redirect(GLOBAL_CONTEXT['current_category'])
 
 def select_plan (request, plan_id):
     """
