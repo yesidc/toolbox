@@ -25,8 +25,12 @@ def get_ideas(user,category_url):
     Fetches all ideas from PlanCategoryOnlineIdea object.
     """
 
-    idea_list = [i.idea.id for i in PlanCategoryOnlineIdea.objects.filter(Q(plan__user=user)&  Q(plan__plan_name=GLOBAL_CONTEXT['current_user_plan']) & Q(category__category_url = category_url))]
-    return idea_list
+    if user.is_anonymous:
+        return None
+    else:
+        idea_list = [i.idea.id for i in PlanCategoryOnlineIdea.objects.filter(Q(plan__user=user)&  Q(plan__plan_name=GLOBAL_CONTEXT['current_user_plan']) & Q(category__category_url = category_url))]
+        return idea_list
+
 
 #todo move to a helpers.py module. There should only be views definitions here
 def get_category(category_url):

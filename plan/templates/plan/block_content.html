@@ -156,7 +156,7 @@
 
 {#todo use dynamic urls to pass the corresponding idea object to the idea_overview page, passing the primary#}
 
-
+{% if user.is_authenticated%}
 {# Checkbox#}
                    <div class="row">
 
@@ -169,7 +169,7 @@
                  >
                    </div>
 
-
+{% endif %}
 
                     <div class="row">
                         <a href="{% url 'idea_overview_detail' current_category idea.id 'overview' %}" class="btn">
