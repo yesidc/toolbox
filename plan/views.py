@@ -4,6 +4,7 @@ from tbcore.models import *
 from .forms import NotesForm, PlanForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.http import JsonResponse
 import pdb
 
 # Create your views here.
@@ -55,7 +56,8 @@ def teaching_material(request):
     # GLOBAL_CONTEXT['current_category'] = 'teaching_material'
     context = {'category': get_category('teaching_material'),
                'next_page': 'organization',
-               'name_next_page': 'Organization'}
+               'name_next_page': 'Organization',
+               'ideas_list': get_ideas(request.user,'teaching_material')}
     context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
@@ -65,7 +67,8 @@ def organization(request):
     # GLOBAL_CONTEXT['current_category'] = 'organization'
     context = {'category': get_category('organization'),
                'next_page': 'assignment',
-               'name_next_page': 'Assignment'}
+               'name_next_page': 'Assignment',
+               'ideas_list': get_ideas(request.user,'organization')}
     context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
@@ -75,7 +78,8 @@ def assignment(request):
     # GLOBAL_CONTEXT['current_category'] = 'assignment'
     context = {'category': get_category('assignment'),
                'next_page': 'discussion',
-               'name_next_page': 'Discussion'}
+               'name_next_page': 'Discussion',
+               'ideas_list': get_ideas(request.user,'assignment')}
     context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
@@ -85,7 +89,8 @@ def discussion(request):
     # GLOBAL_CONTEXT['current_category'] = 'discussion'
     context = {'category': get_category('discussion'),
                'next_page': 'student_engagement',
-               'name_next_page': 'Student Engagement'}
+               'name_next_page': 'Student Engagement',
+               'ideas_list': get_ideas(request.user,'assignment')}
     context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
@@ -95,7 +100,8 @@ def student_engagement(request):
     # GLOBAL_CONTEXT['current_category'] = 'student_engagement'
     context = {'category': get_category('student_engagement'),
                'next_page': 'assessment',
-               'name_next_page': 'Assessment'}
+               'name_next_page': 'Assessment',
+               'ideas_list': get_ideas(request.user,'student_engagement')}
     context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
@@ -105,7 +111,8 @@ def assessment(request):
     # GLOBAL_CONTEXT['current_category'] = 'assessment'
     context = {'category': get_category('assessment'),
                'next_page': 'rules_regulations',
-               'name_next_page': 'Rules & Regulations'}
+               'name_next_page': 'Rules & Regulations',
+               'ideas_list': get_ideas(request.user,'assessment')}
     context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
@@ -113,7 +120,8 @@ def assessment(request):
 def rules_regulations(request):
     # category_rules_regulations = CategoryOnlineIdea.objects.get(category__category_name='Rules & Regulations')
     # GLOBAL_CONTEXT['current_category'] = 'rules_regulations'
-    context = {'category': get_category('rules_regulations')}
+    context = {'category': get_category('rules_regulations'),
+               'ideas_list': get_ideas(request.user,'rules_regulations')}
     context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/block_content.html', context=context)
 
@@ -205,15 +213,23 @@ def use_idea(request):
     # todo there should not be repeated objects, use Unique.
     # pdb.set_trace()
     # if user has not chosen any plan/course the idea is saved to the latest plan user created
-    idea_id = request.GET.get('idea_id')
-    print('use idea was called')
-    PlanCategoryOnlineIdea.objects.create(
-        plan=GLOBAL_CONTEXT['current_user_plan'],
-        category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
-        idea=OnlineIdea.objects.get(pk=idea_id),
+    idea_name = request.GET.get('idea_name') or GLOBAL_CONTEXT['current_idea']
+
+    if request.GET.get('delete_idea'):
+        # Delete object
+        PlanCategoryOnlineIdea.objects.filter(
+            Q(plan__user=request.user) & Q(plan__plan_name=GLOBAL_CONTEXT['current_user_plan']) &
+            Q(category__category_url=GLOBAL_CONTEXT['current_category']) & Q(
+                idea__idea_name=idea_name)).delete()
+    else:
+
+        PlanCategoryOnlineIdea.objects.create(
+            plan=GLOBAL_CONTEXT['current_user_plan'],
+            category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
+            idea=OnlineIdea.objects.get(idea_name=idea_name),
 
 
-    )
+        )
 
     return redirect(GLOBAL_CONTEXT['current_category'])
 

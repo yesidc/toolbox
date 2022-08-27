@@ -1,4 +1,4 @@
-// user can delete/add an idea to her plan by ticking off the checkbox
+// user can delete/add an idea to her plan by ticking off the checkbox found on the idea overview page.
 const idea_checkbox = document.getElementsByClassName('idea-checkbox')
 
 
@@ -7,8 +7,8 @@ for (i of idea_checkbox) {
     i.addEventListener('change', (event) => {
 
         if (event.currentTarget.checked) {
-            alert('checked');
-            // request managed by use_idea view.
+            alert('Online Idea Added to your course plan');
+            // request managed by use_idea view, that subsequently adds idea to the course plan.
 
 
             $.ajax(
@@ -17,13 +17,24 @@ for (i of idea_checkbox) {
                     //url: i.id + '/save_idea/'
                     url: '/save_idea/',
                     data: {
-                        idea_id: event.target.id //Online Idea id.
+                        idea_name: event.target.id //Online Idea id.
                     }
                 }
             )
 
         } else {
             alert('not checked');
+            // Delete idea from the course plan (PlanCategoryOnlineIdea Object)
+            $.ajax(
+                {
+                    type: 'GET',
+                    url: '/save_idea/',
+                      data: {
+                        idea_name: event.target.id,     //Online Idea id.
+                        delete_idea: true
+                    }
+                }
+            )
         }
 
 
