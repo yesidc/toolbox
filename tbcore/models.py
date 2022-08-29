@@ -12,6 +12,11 @@ class Plan (models.Model):
     #todo should be unique, there should not be more than one plan with the same name.
     plan_name = models.CharField(max_length=100)  #usually something like course title
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['plan_name', 'user'], name='plan_constraint')
+        ]
+
     def __str__(self):
         return self.plan_name
 
@@ -72,7 +77,11 @@ class PlanCategoryOnlineIdea (models.Model):
     plan = models.ForeignKey(Plan, on_delete= models.CASCADE,  related_name = 'plan_category_onlide_idea_plan')
     category = models.ForeignKey(Category, on_delete= models.CASCADE, related_name= 'plan_category_onlide_idea_category')
     idea = models.ForeignKey (OnlineIdea, on_delete= models.CASCADE, null= True,related_name= 'plan_category_onlide_idea_i')
-    notes = models.ForeignKey(Notes, on_delete=models.CASCADE, related_name='note_plan',
-                             null=True)  # todo delete the null this is mandatory
+    notes = models.ForeignKey(Notes, related_name='note_plan',on_delete= models.CASCADE,
+                              null=True)  # todo delete the null this is mandatory
+    class Meta:
+        constraints=[
+            models.UniqueConstraint(fields=['plan','category','idea'], name='plancategoryonlineidea_constraint')
+        ]
 
 

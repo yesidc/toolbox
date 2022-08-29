@@ -41,3 +41,6 @@ for (i of idea_checkbox) {
     })
 
 }
+
+// closes the messages
+$('.alert').alert()

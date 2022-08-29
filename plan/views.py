@@ -1,9 +1,13 @@
+import sqlite3
+
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.db import IntegrityError
+from django.contrib import messages
 from django.http import JsonResponse
 import pdb
 
@@ -22,7 +26,7 @@ GLOBAL_CONTEXT = {
 
 def get_ideas(user,category_url):
     """
-    Fetches all ideas from PlanCategoryOnlineIdea object.
+    Fetches all ideas that belong to a particular user, plan and category from PlanCategoryOnlineIdea object.
     """
 
     if user.is_anonymous:
@@ -189,13 +193,19 @@ def create_plan(request, start_add):
         """
         Validates form data and saves them to the database.
         """
-        form = PlanForm(request.POST)
-        if form.is_valid():
-            new_plan = form.save(commit=False)
-            new_plan.user = User.objects.get(username=request.user)
-            GLOBAL_CONTEXT['current_user_plan'] = new_plan
 
-            new_plan.save()
+        try:
+            form = PlanForm(request.POST)
+            if form.is_valid():
+                new_plan = form.save(commit=False)
+                new_plan.user = User.objects.get(username=request.user)
+                GLOBAL_CONTEXT['current_user_plan'] = new_plan
+
+                new_plan.save()
+        except IntegrityError:
+            #todo implment django messages
+
+            messages.add_message(request, messages.INFO, 'This plan already exists')
 
     if start_add == 'get_started':
         if request.method == "POST":
@@ -226,15 +236,19 @@ def use_idea(request):
             Q(category__category_url=GLOBAL_CONTEXT['current_category']) & Q(
                 idea__idea_name=idea_name)).delete()
     else:
+        # prevents user from saving the same ideas twice for the same course plan.
+        try:
+            PlanCategoryOnlineIdea.objects.create(
+                plan=GLOBAL_CONTEXT['current_user_plan'],
+                category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
+                idea=OnlineIdea.objects.get(idea_name=idea_name),
 
-        PlanCategoryOnlineIdea.objects.create(
-            plan=GLOBAL_CONTEXT['current_user_plan'],
-            category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
-            idea=OnlineIdea.objects.get(idea_name=idea_name),
 
-
-        )
-
+            )
+        except IntegrityError:
+            #todo implment django messages
+            messages.add_message(request, messages.INFO, 'This idea has been already added to you course plan')
+            return redirect(request.META.get('HTTP_REFERER'))
     return redirect(GLOBAL_CONTEXT['current_category'])
 
 def select_plan (request, plan_id):
