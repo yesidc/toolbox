@@ -20,7 +20,15 @@ Toolbox
   text-decoration-thickness: 4px !important;
   color: rgb(20, 19, 19);
 }
+
+
 */
+.line-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
 /*Underline top-nav bar*/
 .top-nav a:hover {
   border-bottom: 3px solid red;
@@ -34,6 +42,8 @@ Toolbox
 .navbar-brand{
      margin-left:10px !important;
 }
+
+
 
 @media (min-width: 576px) {
   .navbar-brand{
