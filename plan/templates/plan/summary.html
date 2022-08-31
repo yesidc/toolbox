@@ -1,5 +1,9 @@
 {% extends "plan/base_block.html" %}
 
+{% block specific_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
+{% endblock %}
 
 {% block building_block_idea %}
 
@@ -69,58 +73,210 @@
 
 {#Summary Table#}
 
-<table class="table table-hover align-middle">
+<table class="table table-hover align-middle table-responsive">
   <thead>
     <tr>
-      <th scope="col" class="text-center">In progress</th>
-      <th scope="col" class="text-center">Completed</th>
-      <th scope="col" class="text-center">Building Block</th>
-      <th scope="col" class="text-center">Idea</th>
-        <th scope="col" class="text-center">Note</th>
-        <th scope="col" class="text-center">Delete</th>
+
+      <th scope="col" >Completed</th>
+      <th scope="col" >Building Block</th>
+      <th scope="col" >Idea</th>
+        <th scope="col" >Note</th>
+        <th scope="col" >Delete</th>
 
     </tr>
   </thead>
-  <tbody>
 
 
-  
+
     <tr>
-      <th scope="row"><input type="checkbox"></th>
+
       <td><input type="checkbox"></td>
       <td>Human Touch</td>
-      <td><ul>
-          <li>Instructor Introduction video</li>
-          <li>Share Stories and experiences with students</li>
-      </ul></td>
-        <td><ul>
-            <li>I need to ask tutors if they also want to introduce themselves to the class</li>
-            <li>It would be a good idea to tell students about a seminar I taught at MIT, and how much fun I had</li>
-        </ul></td>
-      <td><i class="bi bi-trash"></i></td>
+
+{#     ideas #}
+
+        <td >
+      <table class="nested-table-checklist">
+
+          <tr>
+
+
+
+                      <td>Short student introduction/2 truths one lie</td>
+
+
+
+          </tr>
+          <tr>
+              <td>Instructor Introduction video</td>
+          </tr>
+
+      </table>
+
+
+
+
+      </td>
+
+
+{#        notes#}
+  <td>
+      <table class="nested-table-checklist">
+    <tr >
+        <td>{% lorem 50 w %}</td>
     </tr>
+    <tr>
+        <td>{% lorem 50 w %}</td>
+    </tr>
+    </table>
+  </td>
+
+{#        delete#}
+
+  <td >
+      <table class=" nested-table-checklist">
+          <tr>
+              <td > <i class="bi bi-trash"> </td>
+          </tr>
+          <tr>
+
+                  <td><i class="bi bi-trash"></td>
+
+          </tr>
+      </table>
+  </td>
+    </tr>
+
+
+
+
+
 
 
     <tr>
-      <th scope="row"><input type="checkbox"></th>
+
       <td><input type="checkbox"></td>
-      <td>Teaching Material</td>
-      <td><ul>
-          <li>Learning Objectives checklist</li>
-          <li>Micro Lectures</li>
-      </ul></td>
-        <td><ul>
-            <li>I could use videos from previous semester and ask tutors to cut them into shorter videos</li>
-            <li>{% lorem 1 p %}</li>
-        </ul></td>
-      <td><i class="bi bi-trash"></i></td>
+      <td>Discussion</td>
+
+{#     ideas #}
+
+        <td >
+      <table class="nested-table-checklist">
+
+          <tr>
+
+
+
+                      <td>Short student introduction</td>
+
+
+
+          </tr>
+          <tr>
+              <td>Instructor</td>
+          </tr>
+
+      </table>
+
+
+
+
+      </td>
+
+
+{#        notes#}
+  <td>
+      <table class="nested-table-checklist">
+    <tr >
+        <td>{% lorem 10 w %}</td>
+    </tr>
+    <tr>
+        <td>{% lorem 10 w %}</td>
+    </tr>
+    </table>
+  </td>
+
+{#        delete#}
+
+  <td >
+      <table class=" nested-table-checklist">
+          <tr>
+              <td > <i class="bi bi-trash"> </td>
+          </tr>
+          <tr>
+
+                  <td><i class="bi bi-trash"></td>
+
+          </tr>
+      </table>
+  </td>
     </tr>
 
 
 
-  </tbody>
+
+
+
+
+
 </table>
 
+
+{#  <div class="row">#}
+{##}
+{#      <div class="col-3">#}
+{#          <table class="table">#}
+{#  <thead>#}
+{#    <tr>#}
+{#      <th scope="col">Completed</th>#}
+{#      <th scope="col">Building Blokc</th>#}
+{##}
+{#    </tr>#}
+{#  </thead>#}
+{#  <tbody>#}
+{#    <tr>#}
+{#      <td >1</td>#}
+{#      <td rowspan="3">Human Touch</td>#}
+{##}
+{#    </tr>#}
+{#  <tr>#}
+{##}
+{#  </tr>#}
+{##}
+{#  </tbody>#}
+{#</table>#}
+{#      </div>#}
+{##}
+{#      <div class="col-9">#}
+{#          <table class="table">#}
+{#  <thead>#}
+{#    <tr>#}
+{#      <th scope="col">Idea</th>#}
+{#      <th scope="col">Notes</th>#}
+{#      <th scope="col">Delete</th>#}
+{##}
+{#    </tr>#}
+{#  </thead>#}
+{#  <tbody>#}
+{#    <tr>#}
+{#      <td scope="row">Short Intro</td>#}
+{#      <td>{% lorem 30 w %}</td>#}
+{#      <td>Delete</td>#}
+{##}
+{#    </tr>#}
+{##}
+{#    <tr>#}
+{#      <td scope="row">Short Intro</td>#}
+{#      <td>{% lorem 30 w %}</td>#}
+{#      <td>Delete</td>#}
+{##}
+{#    </tr>#}
+{##}
+{#  </tbody>#}
+{#</table>#}
+{#      </div>#}
+{##}
+{#  </div>#}
 
 
     </section>
@@ -142,3 +298,5 @@
 
 
 {% endblock %}
+{#<i class="bi bi-trash">#}
+{#{% lorem 1 p %}#}

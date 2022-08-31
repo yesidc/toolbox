@@ -23,12 +23,11 @@ Toolbox
 
 
 */
-.line-clamp {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-}
+
+/*.table > tbody > tr > td {*/
+/*     vertical-align: middle;*/
+/*}*/
+
 /*Underline top-nav bar*/
 .top-nav a:hover {
   border-bottom: 3px solid red;
@@ -43,6 +42,13 @@ Toolbox
      margin-left:10px !important;
 }
 
+/*todo the height should be dynamic. the height of the nested table should be the same as that of
+   the td tag that contains it. Consider only the height of the notes cell as this is expected
+    to be largest field*/
+.nested-table-checklist{
+
+  height: 300px;
+}
 
 
 @media (min-width: 576px) {
