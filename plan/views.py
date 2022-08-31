@@ -19,6 +19,8 @@ IDEA_PROPERTIES = ('idea_name', 'brief_description', 'examples_application',
                    'recommendations', 'supplementary_material', 'reusable',
                    'testimony', 'references')
 
+#todo having a global context causes the migrations error Operational error. Since these lines of
+# todo are run before the migration operation is executed.
 GLOBAL_CONTEXT = {
     'current_user_plan': Plan.objects.all().last() or None,  # the plan users works on
     'form': PlanForm()
@@ -173,8 +175,8 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
 #     return render(request, 'plan/idea_detail.html')
 
 
-def summary(request):
-    return render(request, 'plan/summary.html')
+def checklist(request):
+    return render(request, 'plan/checklist.html')
 
 
 @login_required
