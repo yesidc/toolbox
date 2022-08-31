@@ -7,4 +7,4 @@ def create_random_data (n):
     """
     for i in range(n):
         # create random users
-        User.objects.create_user('john'+str(i), f'email{str(i)}@uni.com', 'johnpassword'+str(i))
+        User.objects.create_user('john'+str(i), f'email{str(i)}@uni.com', '123'+str(i))

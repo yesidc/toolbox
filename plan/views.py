@@ -22,9 +22,19 @@ IDEA_PROPERTIES = ('idea_name', 'brief_description', 'examples_application',
 #todo having a global context causes the migrations error Operational error. Since these lines of
 # todo are run before the migration operation is executed.
 GLOBAL_CONTEXT = {
-    'current_user_plan': Plan.objects.all().last() or None,  # the plan users works on
+    'current_user_plan': None ,  # the plan users works on
     'form': PlanForm()
 }
+
+# def get_latest_plan(user, current_user_plan):
+#     """
+#     If user does not select any plan; it defaults to the last plan the user created.
+#     """
+#     if current_user_plan == None:
+#
+#         return Plan.objects.select_related('user').filter(user=user).last()
+#     else:
+#         return current_user_plan
 
 def get_ideas(user,category_url):
     """
@@ -57,6 +67,7 @@ def human_touch(request):
                'name_next_page': 'Teaching Material',
                'ideas_list': get_ideas(request.user,'human_touch')}
     context.update(GLOBAL_CONTEXT)
+    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
 
     return render(request, 'plan/block_content.html', context=context)
 
@@ -69,6 +80,7 @@ def teaching_material(request):
                'name_next_page': 'Organization',
                'ideas_list': get_ideas(request.user,'teaching_material')}
     context.update(GLOBAL_CONTEXT)
+    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -80,6 +92,7 @@ def organization(request):
                'name_next_page': 'Assignment',
                'ideas_list': get_ideas(request.user,'organization')}
     context.update(GLOBAL_CONTEXT)
+    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -91,6 +104,7 @@ def assignment(request):
                'name_next_page': 'Discussion',
                'ideas_list': get_ideas(request.user,'assignment')}
     context.update(GLOBAL_CONTEXT)
+    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -102,6 +116,7 @@ def discussion(request):
                'name_next_page': 'Student Engagement',
                'ideas_list': get_ideas(request.user,'assignment')}
     context.update(GLOBAL_CONTEXT)
+    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -113,6 +128,7 @@ def student_engagement(request):
                'name_next_page': 'Assessment',
                'ideas_list': get_ideas(request.user,'student_engagement')}
     context.update(GLOBAL_CONTEXT)
+    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -124,6 +140,7 @@ def assessment(request):
                'name_next_page': 'Rules & Regulations',
                'ideas_list': get_ideas(request.user,'assessment')}
     context.update(GLOBAL_CONTEXT)
+    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -133,6 +150,7 @@ def rules_regulations(request):
     context = {'category': get_category('rules_regulations'),
                'ideas_list': get_ideas(request.user,'rules_regulations')}
     context.update(GLOBAL_CONTEXT)
+    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -241,7 +259,7 @@ def use_idea(request):
         # prevents user from saving the same ideas twice for the same course plan.
         try:
             PlanCategoryOnlineIdea.objects.create(
-                plan=GLOBAL_CONTEXT['current_user_plan'],
+                plan=GLOBAL_CONTEXT['current_user_plan'] or Plan.objects.select_related('user').filter(user=request.user).last(),
                 category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
                 idea=OnlineIdea.objects.get(idea_name=idea_name),
 

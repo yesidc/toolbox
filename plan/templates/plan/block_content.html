@@ -23,7 +23,14 @@
                 {#                </div>#}
                 <div class="text-center">
                     <h5>Current course plan</h5>
-                    <p class="lead">{{ current_user_plan.plan_name }}</p>
+                    <p class="lead">
+{#                    if user has not chosen a plan, it defaults to the last plan created#}
+                        {% if current_user_plan.plan_name %}
+                            {{  current_user_plan.plan_name}}
+                            {% else %}
+                        {{ user_filter_plans.last}}
+                            {% endif %}
+                    </p>
 
                 </div>
 
