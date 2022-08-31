@@ -175,8 +175,8 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
 #     return render(request, 'plan/idea_detail.html')
 
 
-def summary(request):
-    return render(request, 'plan/summary.html')
+def checklist(request):
+    return render(request, 'plan/checklist.html')
 
 
 @login_required

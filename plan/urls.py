@@ -16,6 +16,6 @@ urlpatterns = [
     path('create_plan/<str:start_add>/', views.create_plan, name='create_plan'),
     path('select_plan/<int:plan_id>/', views.select_plan, name='select_plan'),
 
-   path('summary/', views.summary, name='summary'),
+   path('checklist/', views.checklist, name='checklist'),
 
 ]
