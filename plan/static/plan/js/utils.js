@@ -19,6 +19,7 @@ for (i of idea_checkbox) {
                     data: {
                         idea_name: event.target.id, //Online Idea id.
                         plan_name_dom: document.getElementById('plan_name_dom').innerText
+
                     }
                 }
             )

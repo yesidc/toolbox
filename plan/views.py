@@ -226,13 +226,16 @@ def create_plan(request, start_add):
             #todo implment django messages
 
             messages.add_message(request, messages.INFO, 'This plan already exists')
-
+    # When user logs in, is prompted to create a course/plan by being redirected to a form, thi if statement handles it.
     if start_add == 'get_started':
         if request.method == "POST":
             plan_to_database()
 
             return redirect('human_touch')
 
+        # if user does not fill out the form to create a new course/plan, the current plan/course
+        # is default to the last course the user created.
+        GLOBAL_CONTEXT['current_user_plan'] = plans = Plan.objects.select_related('user').filter(user=request.user).last()
         return render(request, 'plan/course_name.html', context=context)
     elif start_add == 'add_new_plan':
         if request.method == "POST":
@@ -248,6 +251,8 @@ def use_idea(request):
     # pdb.set_trace()
     # if user has not chosen any plan/course the idea is saved to the latest plan user created
     idea_name = request.GET.get('idea_name') or GLOBAL_CONTEXT['current_idea']
+    #If there's no plan in the GLOBAL_CONTEXT dictionary; grab the plan name from the DOM
+    GLOBAL_CONTEXT['current_user_plan']= GLOBAL_CONTEXT['current_user_plan'] or request.GET.get('plan_name_dom')
 
     if request.GET.get('delete_idea'):
         # Delete object
@@ -259,7 +264,7 @@ def use_idea(request):
         # prevents user from saving the same ideas twice for the same course plan.
         try:
             PlanCategoryOnlineIdea.objects.create(
-                plan=GLOBAL_CONTEXT['current_user_plan'] or Plan.objects.select_related('user').filter(user=request.user).last(),
+                plan=Plan.objects.get(plan_name=GLOBAL_CONTEXT['current_user_plan']),
                 category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
                 idea=OnlineIdea.objects.get(idea_name=idea_name),
 
