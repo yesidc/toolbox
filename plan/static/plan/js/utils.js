@@ -17,7 +17,8 @@ for (i of idea_checkbox) {
                     //url: i.id + '/save_idea/'
                     url: '/save_idea/',
                     data: {
-                        idea_name: event.target.id //Online Idea id.
+                        idea_name: event.target.id, //Online Idea id.
+                        plan_name_dom: document.getElementById('plan_name_dom').innerText
                     }
                 }
             )
@@ -31,7 +32,8 @@ for (i of idea_checkbox) {
                     url: '/save_idea/',
                       data: {
                         idea_name: event.target.id,     //Online Idea id.
-                        delete_idea: true
+                        delete_idea: true,
+                          plan_name_dom: document.getElementById('plan_name_dom').innerText
                     }
                 }
             )

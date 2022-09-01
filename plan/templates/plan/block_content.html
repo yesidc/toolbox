@@ -13,36 +13,10 @@
 
 
     <!-- Showcase-->
-    {% if  user.is_authenticated %}
+
+
+    {% if not user.is_authenticated  %}
         <section class="bg-light text-dark p-3 mt-1">
-        <div class="container">
-            <div class="d-flex flex-column ">
-                {#                <div class="text-center">#}
-                {#                    <h4>Online Ideas</h4>#}
-                {#                #}
-                {#                </div>#}
-                <div class="text-center">
-                    <h5>Current course plan</h5>
-                    <p class="lead">
-{#                    if user has not chosen a plan, it defaults to the last plan created#}
-                        {% if current_user_plan.plan_name %}
-                            {{  current_user_plan.plan_name}}
-                            {% else %}
-                        {{ user_filter_plans.last}}
-                            {% endif %}
-                    </p>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-    </section>
-        {% else %}
-
-                <section class="bg-light text-dark p-3 mt-1">
         <div class="container">
             <div class="d-flex flex-column ">
                 {#                <div class="text-center">#}
@@ -61,8 +35,9 @@
         </div>
 
     </section>
-
     {% endif %}
+
+
 
 
     {##}
@@ -113,7 +88,7 @@
 
     <!-- Block introductory text -->
 
-    <section class="p-5 mt-5">
+    <section class="p-2 mt-2">
         <div class="container">
             <h3 class="text-center mb-5">{{ category.category.category_name }}</h3>
             <p class="text-start">{{ category.category.short_description |safe }}</p>

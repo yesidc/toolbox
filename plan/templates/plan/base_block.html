@@ -17,12 +17,23 @@
     {% if user.is_authenticated%}
 
         <!-- Top navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-lg navbar-light p-0 m-0">
             <div class="container-fluid">
 
                 <!-- Icon sidebar -->
                 <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i></button>
-
+                <div class="d-flex">
+                    <p> <span class="lead">Current Course:</span>
+                    <span id="plan_name_dom">
+                        {#                    if user has not chosen a plan, it defaults to the last plan created#}
+                        {% if current_user_plan.plan_name %}
+                            {{ current_user_plan.plan_name }}
+                        {% else %}
+                            {{ user_filter_plans.last }}
+                        {% endif %}
+                    </span>
+                    </p>
+                </div>
 
             </div>
         </nav>
