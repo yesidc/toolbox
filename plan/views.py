@@ -9,34 +9,23 @@ from django.db.models import Q
 from django.db import IntegrityError
 from django.contrib import messages
 from django.http import JsonResponse
-import pdb
+
 
 # Create your views here.
-#todo optimize database queries,ex. create 500 users and evaluate performance
+# todo optimize database queries,ex. create 500 users and evaluate performance
 
-IDEA_PROPERTIES = ('idea_name', 'brief_description', 'examples_application',
-                   'tool', 'implementation_steps', 'teacher_effort',
-                   'recommendations', 'supplementary_material', 'reusable',
-                   'testimony', 'references')
 
-#todo having a global context causes the migrations error Operational error. Since these lines of
+# todo having a global context causes the migrations error Operational error. Since these lines of
 # todo are run before the migration operation is executed.
 GLOBAL_CONTEXT = {
-    'current_user_plan': None ,  # the plan users works on
-    'form': PlanForm()
+    'current_user_plan': None,  # the plan users works on
+    'form': PlanForm(),
+    'current_category': None,
+    'current_idea': None
 }
 
-# def get_latest_plan(user, current_user_plan):
-#     """
-#     If user does not select any plan; it defaults to the last plan the user created.
-#     """
-#     if current_user_plan == None:
-#
-#         return Plan.objects.select_related('user').filter(user=user).last()
-#     else:
-#         return current_user_plan
 
-def get_ideas(user,category_url):
+def get_ideas(user, category_url):
     """
     Fetches all ideas that belong to a particular user, plan and category from PlanCategoryOnlineIdea object.
     """
@@ -44,11 +33,13 @@ def get_ideas(user,category_url):
     if user.is_anonymous:
         return None
     else:
-        idea_list = [i.idea.id for i in PlanCategoryOnlineIdea.objects.filter(Q(plan__user=user)&  Q(plan__plan_name=GLOBAL_CONTEXT['current_user_plan']) & Q(category__category_url = category_url))]
+        idea_list = [i.idea.id for i in PlanCategoryOnlineIdea.objects.filter(
+            Q(plan__user=user) & Q(plan__plan_name=GLOBAL_CONTEXT['current_user_plan']) & Q(
+                category__category_url=category_url))]
         return idea_list
 
 
-#todo move to a helpers.py module. There should only be views definitions here
+# todo move to a helpers.py module. There should only be views definitions here
 def get_category(category_url):
     # todo you can also cache this information
     # holds the name of the current building block or category
@@ -59,15 +50,11 @@ def get_category(category_url):
 # todo use get_object_or_404() function with all the category_block_name variable
 
 def human_touch(request):
-    # category_human_touch = get_category('Human Touch')
-    # GLOBAL_CONTEXT['current_category']= 'human_touch'
-
     context = {'category': get_category('human_touch'),
                'next_page': 'teaching_material',
                'name_next_page': 'Teaching Material',
-               'ideas_list': get_ideas(request.user,'human_touch')}
+               'ideas_list': get_ideas(request.user, 'human_touch')}
     context.update(GLOBAL_CONTEXT)
-    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
 
     return render(request, 'plan/block_content.html', context=context)
 
@@ -78,9 +65,9 @@ def teaching_material(request):
     context = {'category': get_category('teaching_material'),
                'next_page': 'organization',
                'name_next_page': 'Organization',
-               'ideas_list': get_ideas(request.user,'teaching_material')}
+               'ideas_list': get_ideas(request.user, 'teaching_material')}
     context.update(GLOBAL_CONTEXT)
-    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
+    # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -90,9 +77,9 @@ def organization(request):
     context = {'category': get_category('organization'),
                'next_page': 'assignment',
                'name_next_page': 'Assignment',
-               'ideas_list': get_ideas(request.user,'organization')}
+               'ideas_list': get_ideas(request.user, 'organization')}
     context.update(GLOBAL_CONTEXT)
-    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
+    # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -102,9 +89,9 @@ def assignment(request):
     context = {'category': get_category('assignment'),
                'next_page': 'discussion',
                'name_next_page': 'Discussion',
-               'ideas_list': get_ideas(request.user,'assignment')}
+               'ideas_list': get_ideas(request.user, 'assignment')}
     context.update(GLOBAL_CONTEXT)
-    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
+    # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -114,9 +101,9 @@ def discussion(request):
     context = {'category': get_category('discussion'),
                'next_page': 'student_engagement',
                'name_next_page': 'Student Engagement',
-               'ideas_list': get_ideas(request.user,'assignment')}
+               'ideas_list': get_ideas(request.user, 'assignment')}
     context.update(GLOBAL_CONTEXT)
-    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
+    # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -126,9 +113,9 @@ def student_engagement(request):
     context = {'category': get_category('student_engagement'),
                'next_page': 'assessment',
                'name_next_page': 'Assessment',
-               'ideas_list': get_ideas(request.user,'student_engagement')}
+               'ideas_list': get_ideas(request.user, 'student_engagement')}
     context.update(GLOBAL_CONTEXT)
-    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
+    # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -138,9 +125,9 @@ def assessment(request):
     context = {'category': get_category('assessment'),
                'next_page': 'rules_regulations',
                'name_next_page': 'Rules & Regulations',
-               'ideas_list': get_ideas(request.user,'assessment')}
+               'ideas_list': get_ideas(request.user, 'assessment')}
     context.update(GLOBAL_CONTEXT)
-    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
+    # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
 
 
@@ -148,16 +135,17 @@ def rules_regulations(request):
     # category_rules_regulations = CategoryOnlineIdea.objects.get(category__category_name='Rules & Regulations')
     # GLOBAL_CONTEXT['current_category'] = 'rules_regulations'
     context = {'category': get_category('rules_regulations'),
-               'ideas_list': get_ideas(request.user,'rules_regulations')}
+               'ideas_list': get_ideas(request.user, 'rules_regulations')}
     context.update(GLOBAL_CONTEXT)
-    #context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
+    # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
 
 
 def idea_overview_detail(request, category_name, idea_id, detailed_view):
     update = False
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
-    GLOBAL_CONTEXT['current_idea'] = current_idea
+    # This idea id is used when saving the idea to a PlanCategoryOnlineIdea Object
+    GLOBAL_CONTEXT['current_idea'] = current_idea.pk
     context = {
         'idea': current_idea,
 
@@ -223,9 +211,10 @@ def create_plan(request, start_add):
 
                 new_plan.save()
         except IntegrityError:
-            #todo implment django messages
+            # todo implment django messages
 
             messages.add_message(request, messages.INFO, 'This plan already exists')
+
     # When user logs in, is prompted to create a course/plan by being redirected to a form, thi if statement handles it.
     if start_add == 'get_started':
         if request.method == "POST":
@@ -235,7 +224,8 @@ def create_plan(request, start_add):
 
         # if user does not fill out the form to create a new course/plan, the current plan/course
         # is default to the last course the user created.
-        GLOBAL_CONTEXT['current_user_plan'] = plans = Plan.objects.select_related('user').filter(user=request.user).last()
+        GLOBAL_CONTEXT['current_user_plan'] = plans = Plan.objects.select_related('user').filter(
+            user=request.user).last()
         return render(request, 'plan/course_name.html', context=context)
     elif start_add == 'add_new_plan':
         if request.method == "POST":
@@ -248,38 +238,47 @@ def create_plan(request, start_add):
 def use_idea(request):
     # todo this should be into a try method, or return and 404 error. IF the server is reloaed the GLOBAL_CONTEXT IS LOST AND the OBJECT below cannot be created
     # todo there should not be repeated objects, use Unique.
-    # pdb.set_trace()
-    # if user has not chosen any plan/course the idea is saved to the latest plan user created
-    idea_name = request.GET.get('idea_name') or GLOBAL_CONTEXT['current_idea']
-    #If there's no plan in the GLOBAL_CONTEXT dictionary; grab the plan name from the DOM
-    GLOBAL_CONTEXT['current_user_plan']= GLOBAL_CONTEXT['current_user_plan'] or request.GET.get('plan_name_dom')
+
+    GLOBAL_CONTEXT['current_idea'] = request.GET.get('idea_id') or GLOBAL_CONTEXT['current_idea']
+    # If there's no plan in the GLOBAL_CONTEXT dictionary; grab the plan name from the DOM
+    GLOBAL_CONTEXT['current_user_plan'] = GLOBAL_CONTEXT['current_user_plan'] or request.GET.get('plan_name_dom')
+
+    # If the system lost track of the current idea or category e.g., the server crashed; these are extracted from the
+    # current URL
+    if GLOBAL_CONTEXT['current_idea'] is None:
+        GLOBAL_CONTEXT['current_idea'] = request.META.get('HTTP_REFERER').split('/')[4]
+    elif GLOBAL_CONTEXT['current_category'] is None:
+        GLOBAL_CONTEXT['current_category'] = request.META.get('HTTP_REFERER').split('/')[3]
 
     if request.GET.get('delete_idea'):
         # Delete object
         PlanCategoryOnlineIdea.objects.filter(
             Q(plan__user=request.user) & Q(plan__plan_name=GLOBAL_CONTEXT['current_user_plan']) &
             Q(category__category_url=GLOBAL_CONTEXT['current_category']) & Q(
-                idea__idea_name=idea_name)).delete()
+                idea__pk=GLOBAL_CONTEXT['current_idea'])).delete()
     else:
         # prevents user from saving the same ideas twice for the same course plan.
         try:
             PlanCategoryOnlineIdea.objects.create(
                 plan=Plan.objects.get(plan_name=GLOBAL_CONTEXT['current_user_plan']),
                 category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
-                idea=OnlineIdea.objects.get(idea_name=idea_name),
-
+                idea=OnlineIdea.objects.get(pk=GLOBAL_CONTEXT['current_idea']),
 
             )
         except IntegrityError:
-            #todo implment django messages
+
             messages.add_message(request, messages.INFO, 'This idea has been already added to you course plan')
             return redirect(request.META.get('HTTP_REFERER'))
     return redirect(GLOBAL_CONTEXT['current_category'])
 
-def select_plan (request, plan_id):
+
+def select_plan(request):
     """
     Triggered when user chooses to work on a different plan. User can switch to a
     different plan using the navigation bar on the left.
     """
-    GLOBAL_CONTEXT['current_user_plan'] = Plan.objects.get(pk=plan_id)
-    return redirect(request.META.get('HTTP_REFERER'))
+    GLOBAL_CONTEXT['current_user_plan'] = Plan.objects.get(plan_name=request.GET.get('plan_name').replace('-',' '))
+
+    plan_name_ajax = GLOBAL_CONTEXT['current_user_plan'].plan_name
+    return JsonResponse({'plan_name_ajax':plan_name_ajax}, status=200)
+
