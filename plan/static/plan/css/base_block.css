@@ -50,6 +50,12 @@ Toolbox
   height: 300px;
 }
 
+/*Disables checkboxes on the sidebar*/
+.disabled-checkbox, .checkbox-sidebar {
+  opacity:1;
+  pointer-events: none;
+}
+
 
 @media (min-width: 576px) {
   .navbar-brand{

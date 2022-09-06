@@ -78,14 +78,19 @@
 
                             </button>
                             <div class=" container collapse plan-collapse" id="{{p.plan_name |add_hyphen }}">
-                                <p> <span class="badge text-dark"><input type="checkbox"></span> Human Touch</p>
-                                <p><span class="badge text-dark"><input type="checkbox"></span>Teaching Material</p>
-                                <p><span class="badge text-dark"><input type="checkbox"></span>Organization</p>
-                                <p><span class="badge text-dark"><input type="checkbox"></span>Assignments</p>
-                                <p><span class="badge text-dark"><input type="checkbox"></span>Discussion</p>
-                                <p><span class="badge text-dark"><input type="checkbox"></span>Student Engagement</p>
-                                <p><span class="badge text-dark"><input type="checkbox"></span>Student Assessment</p>
-                                <p><span class="badge text-dark"><input type="checkbox"></span>Rules & Regulations</p>
+                                <p> <span class="badge text-dark"><input type="checkbox" class="checkbox-sidebar"></span> Human Touch</p>
+                                <p><span class="badge text-dark"><input type="checkbox" class="checkbox-sidebar"></span>Teaching Material</p>
+                                <p><span class="badge text-dark"><input type="checkbox" class="checkbox-sidebar"></span>Organization</p>
+                                <p><span class="badge text-dark"><input type="checkbox" class="checkbox-sidebar"></span>Assignments</p>
+                                <p><span class="badge text-dark"><input type="checkbox" class="checkbox-sidebar"></span>Discussion</p>
+                                <p><span class="badge text-dark"><input type="checkbox" class="checkbox-sidebar"></span>Student Engagement</p>
+                                <p><span class="badge text-dark"><input type="checkbox" class="checkbox-sidebar"></span>Student Assessment</p>
+                                <p><span class="badge text-dark"><input type="checkbox" class="checkbox-sidebar"></span>Rules & Regulations</p>
+                                 <div class="d-flex justify-content-end my-md-3">
+                                     <div>
+                                         <a href="{% url 'checklist' %}" class="btn btn-primary">View checklist</a>
+                                     </div>
+                                 </div>
 
                             </div>
 
