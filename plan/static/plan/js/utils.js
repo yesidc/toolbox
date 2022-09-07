@@ -77,9 +77,9 @@ for (i of plan_collapse) {
                     // location.reload()
                     $('#plan_name_dom').text(response.plan_name_ajax)
 
-                    // for (const c_done of response.category_ready){
-                    //     console.log(c_done)
-                    // }
+                    for (const c_done of response.category_ready){
+                        console.log(c_done)
+                    }
                     // $.ajax(
                     //     {type: 'GET',
                     //         url: '/' + response.current_category_url + '/'

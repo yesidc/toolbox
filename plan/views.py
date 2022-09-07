@@ -100,7 +100,7 @@ def discussion(request):
     context = {'category': get_category('discussion'),
                'next_page': 'student_engagement',
                'name_next_page': 'Student Engagement',
-               'ideas_list': get_ideas(request.user, 'assignment')}
+               'ideas_list': get_ideas(request.user, 'discussion')}
     context.update(GLOBAL_CONTEXT)
     # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
@@ -284,19 +284,16 @@ def select_plan(request):
 
     GLOBAL_CONTEXT['current_user_plan'] = plans.get(plan_name=request.GET.get('plan_name').replace('-',' '))
 
-    plan_name_ajax = GLOBAL_CONTEXT['current_user_plan'].plan_name
+
     # categories for which user has already selected at least one idea
     category_ready = category_done(GLOBAL_CONTEXT['current_user_plan'])
-    #category_ready = json.dumps(category_ready)
 
-
-
-    # response_dict={
-    #     'current_category_url': GLOBAL_CONTEXT['current_category'],
-    #     'rendered_block_content': render(request, 'plan/block_content.html', context=context)
-    # }
+    response_dict={
+        'category_ready': list(category_ready),
+        'plan_name_ajax': GLOBAL_CONTEXT['current_user_plan'].plan_name
+    }
     # return JsonResponse(response_dict, safe=False)
-    return JsonResponse({'plan_name_ajax':plan_name_ajax},  status=200)
+    return JsonResponse(response_dict)
     #return render(request, 'plan/block_content.html', context=context)
 
 
