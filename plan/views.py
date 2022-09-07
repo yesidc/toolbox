@@ -288,10 +288,20 @@ def select_plan(request):
     # categories for which user has already selected at least one idea
     category_ready = category_done(GLOBAL_CONTEXT['current_user_plan'])
     #category_ready = json.dumps(category_ready)
-    reponse_dict={
-        'plan_name_ajax':plan_name_ajax,
-        'category_ready':list(category_ready)
-    }
-    return JsonResponse(reponse_dict)
-    #return JsonResponse({'plan_name_ajax':plan_name_ajax, 'category_ready':category_ready},  status=200)
 
+
+
+    # response_dict={
+    #     'current_category_url': GLOBAL_CONTEXT['current_category'],
+    #     'rendered_block_content': render(request, 'plan/block_content.html', context=context)
+    # }
+    # return JsonResponse(response_dict, safe=False)
+    return JsonResponse({'plan_name_ajax':plan_name_ajax},  status=200)
+    #return render(request, 'plan/block_content.html', context=context)
+
+
+def update_selected_idea(request):
+    context = {'category': get_category(GLOBAL_CONTEXT['current_category']),
+               'ideas_list': get_ideas(request.user, GLOBAL_CONTEXT['current_category'])}
+    context.update(GLOBAL_CONTEXT)
+    return render(request, 'plan/update_ideas.html', context=context)
