@@ -1,15 +1,14 @@
-import sqlite3
-
-from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
+from django.db.models import Q
+from django.http import JsonResponse
 from django.shortcuts import redirect
+from django.shortcuts import render, get_object_or_404
+from .helpers import category_done
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
-from django.contrib.auth.decorators import login_required
-from django.db.models import Q
-from django.db import IntegrityError
-from django.contrib import messages
-from django.http import JsonResponse
-
+import json
 
 # Create your views here.
 # todo optimize database queries,ex. create 500 users and evaluate performance
@@ -271,14 +270,28 @@ def use_idea(request):
             return redirect(request.META.get('HTTP_REFERER'))
     return redirect(GLOBAL_CONTEXT['current_category'])
 
-
 def select_plan(request):
     """
     Triggered when user chooses to work on a different plan. User can switch to a
     different plan using the navigation bar on the left.
     """
-    GLOBAL_CONTEXT['current_user_plan'] = Plan.objects.get(plan_name=request.GET.get('plan_name').replace('-',' '))
+
+    #todo what if two user have the same plan name??? this is not filtered out by user!!!
+    # todo here Im querying the Plan table, that contains all plans for all users
+
+    # fetch all user related plans
+    plans = Plan.objects.select_related('user').filter(user=request.user)
+
+    GLOBAL_CONTEXT['current_user_plan'] = plans.get(plan_name=request.GET.get('plan_name').replace('-',' '))
 
     plan_name_ajax = GLOBAL_CONTEXT['current_user_plan'].plan_name
-    return JsonResponse({'plan_name_ajax':plan_name_ajax}, status=200)
+    # categories for which user has already selected at least one idea
+    category_ready = category_done(GLOBAL_CONTEXT['current_user_plan'])
+    #category_ready = json.dumps(category_ready)
+    reponse_dict={
+        'plan_name_ajax':plan_name_ajax,
+        'category_ready':list(category_ready)
+    }
+    return JsonResponse(reponse_dict)
+    #return JsonResponse({'plan_name_ajax':plan_name_ajax, 'category_ready':category_ready},  status=200)
 

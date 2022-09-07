@@ -75,6 +75,11 @@ for (i of plan_collapse){
             },
             success: function (response){
                 $('#plan_name_dom').text(response.plan_name_ajax)
+
+                for (const c_done of response.category_ready){
+                    console.log(c_done)
+                }
+
             }
 
         }
