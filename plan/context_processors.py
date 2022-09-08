@@ -1,4 +1,4 @@
-from tbcore.models import Plan
+from tbcore.models import Plan, Category
 
 def user_plans (request):
     """
@@ -7,10 +7,15 @@ def user_plans (request):
     if request.user.is_authenticated:
 
 
-        #plans = Plan.objects.filter(user=request.user
+
         plans = Plan.objects.select_related('user').filter(user=request.user)
         return {'user_filter_plans':plans}
     else:
         return {}
 
 
+def category_obj (request):
+    """
+    Returns all categories or building blocks
+    """
+    return {'category_objects': Category.objects.all()}

@@ -40,9 +40,10 @@ def get_ideas(user, category_url):
 
 # todo move to a helpers.py module. There should only be views definitions here
 def get_category(category_url):
-    # todo you can also cache this information
+    # todo cache this information, as the output is always the same
     # holds the name of the current building block or category
     GLOBAL_CONTEXT['current_category'] = category_url
+    # There are a total of eight building blocks hence 8 CategoryOnlineIdea objects.
     return CategoryOnlineIdea.objects.get(category__category_url=category_url)
 
 

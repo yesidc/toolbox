@@ -9,5 +9,5 @@ def category_done(curret_user_plan):
     # iterates over the PlanCategoryOnlineIdea instances
     for p in curret_user_plan.plan_category_onlide_idea_plan.all():
         # category name
-        plan_category.add(p.category.category_name)
+        plan_category.add(p.category.category_url)
     return plan_category
