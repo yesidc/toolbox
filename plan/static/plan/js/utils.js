@@ -66,19 +66,24 @@ for (i of plan_collapse) {
     // triggered when the user clicks on the course/plan's name and categories/blocks are shown (human touch, teaching material etc. )
     i.addEventListener('show.bs.collapse', event => {
         // subsequently handled by django select_plan view
+        console.log('first child')
+        console.log(event.target.children[0].id)
         $.ajax(
             {
                 type: 'GET',
                 url: '/select_plan/',
                 data: {
-                    plan_name: event.target.id// this id refers to id assigned to the html element, which is the plan's pk
+                    plan_id: event.target.children[0].id// this id refers to id assigned to the FIRST child node of the  html element that triggers this event, which is the plan's pk
                 },
                 success: function (response) {
                     // location.reload()
                     $('#plan_name_dom').text(response.plan_name_ajax)
 
+
                     for (const c_done of response.category_ready){
                         console.log(c_done)
+                        console.log(response.plan_id_response)
+                        document.getElementById(c_done+response.plan_id_response ).checked = true
                     }
                     // $.ajax(
                     //     {type: 'GET',

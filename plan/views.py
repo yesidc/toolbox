@@ -276,14 +276,7 @@ def select_plan(request):
     Triggered when user chooses to work on a different plan. User can switch to a
     different plan using the navigation bar on the left.
     """
-
-    #todo what if two user have the same plan name??? this is not filtered out by user!!!
-    # todo here Im querying the Plan table, that contains all plans for all users
-
-    # fetch all user related plans
-    plans = Plan.objects.select_related('user').filter(user=request.user)
-
-    GLOBAL_CONTEXT['current_user_plan'] = plans.get(plan_name=request.GET.get('plan_name').replace('-',' '))
+    GLOBAL_CONTEXT['current_user_plan'] = Plan.objects.get(pk=request.GET.get('plan_id'))
 
 
     # categories for which user has already selected at least one idea
@@ -291,7 +284,10 @@ def select_plan(request):
 
     response_dict={
         'category_ready': list(category_ready),
-        'plan_name_ajax': GLOBAL_CONTEXT['current_user_plan'].plan_name
+        # this is the name that is shown on the top right (Name is changed dynamically through the DOM)
+        'plan_name_ajax': GLOBAL_CONTEXT['current_user_plan'].plan_name,
+        # this is the id assigned to the div element that contains all blocks/categories on the sidebar
+        'plan_id_response': request.GET.get('plan_id')
     }
     # return JsonResponse(response_dict, safe=False)
     return JsonResponse(response_dict)
