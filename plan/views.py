@@ -252,10 +252,8 @@ def use_idea(request):
 
     if request.GET.get('delete_idea'):
         # Delete object
-        PlanCategoryOnlineIdea.objects.filter(
-            Q(plan__user=request.user) & Q(plan__plan_name=GLOBAL_CONTEXT['current_user_plan']) &
-            Q(category__category_url=GLOBAL_CONTEXT['current_category']) & Q(
-                idea__pk=GLOBAL_CONTEXT['current_idea'])).delete()
+        PlanCategoryOnlineIdea.objects.filter(Q(plan__user=request.user) & Q(plan__plan_name=GLOBAL_CONTEXT['current_user_plan']) & Q(category__category_url=GLOBAL_CONTEXT['current_category']) & Q(idea__pk=GLOBAL_CONTEXT['current_idea']))[0].delete()
+
     else:
         # prevents user from saving the same ideas twice for the same course plan.
         try:
@@ -295,6 +293,10 @@ def select_plan(request):
 
 
 def update_selected_idea(request):
+    """
+    Updates the content of the block_content page such that when the user switches to a different course/plan using
+    the side navigation bar, the ticked-off ideas reflect that of the current chosen plan/course
+    """
     context = {'category': get_category(GLOBAL_CONTEXT['current_category']),
                'ideas_list': get_ideas(request.user, GLOBAL_CONTEXT['current_category'])}
     context.update(GLOBAL_CONTEXT)

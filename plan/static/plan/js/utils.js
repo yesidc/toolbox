@@ -4,7 +4,7 @@ const idea_checkbox = document.getElementsByClassName('idea-checkbox')
 
 // get requests sent are handle by use_idea view
 for (i of idea_checkbox) {
-    i.addEventListener('change', (event) => {
+    i.addEventListener('click', (event) => {
 
         if (event.currentTarget.checked) {
             alert('Online Idea Added to your course plan');
@@ -17,7 +17,7 @@ for (i of idea_checkbox) {
                     //url: i.id + '/save_idea/'
                     url: '/use_idea/',
                     data: {
-                        idea_id: event.target.id, //Online Idea id.
+                        idea_id: (event.target.id ).split('-')[0], //Online Idea id.
                         plan_name_dom: document.getElementById('plan_name_dom').innerText
 
                     }
@@ -32,8 +32,8 @@ for (i of idea_checkbox) {
                     type: 'GET',
                     url: '/use_idea/',
                     data: {
-                        idea_id: event.target.id,     //Online Idea id.
-                        delete_id: true,
+                        idea_id: (event.target.id ).split('-')[0],     //Online Idea id.
+                        delete_idea: true,
                         plan_name_dom: document.getElementById('plan_name_dom').innerText
                     }
                 }
