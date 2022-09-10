@@ -252,8 +252,13 @@ def use_idea(request):
 
     if request.GET.get('delete_idea'):
         # Delete object
-        PlanCategoryOnlineIdea.objects.filter(Q(plan__user=request.user) & Q(plan__plan_name=GLOBAL_CONTEXT['current_user_plan']) & Q(category__category_url=GLOBAL_CONTEXT['current_category']) & Q(idea__pk=GLOBAL_CONTEXT['current_idea']))[0].delete()
+        PlanCategoryOnlineIdea.objects.filter(
+            Q(plan__user=request.user) & Q(plan__plan_name=GLOBAL_CONTEXT['current_user_plan']) & Q(
+                category__category_url=GLOBAL_CONTEXT['current_category']) & Q(
+                idea__pk=GLOBAL_CONTEXT['current_idea']))[0].delete()
 
+        messages.info(request, 'Idea successfully deleted from your plan')
+        print()
     else:
         # prevents user from saving the same ideas twice for the same course plan.
         try:
@@ -263,11 +268,14 @@ def use_idea(request):
                 idea=OnlineIdea.objects.get(pk=GLOBAL_CONTEXT['current_idea']),
 
             )
+
+            messages.add_message(request, messages.INFO, 'Idea successfully added to your plan')
         except IntegrityError:
 
             messages.add_message(request, messages.INFO, 'This idea has been already added to you course plan')
             return redirect(request.META.get('HTTP_REFERER'))
     return redirect(GLOBAL_CONTEXT['current_category'])
+
 
 def select_plan(request):
     """
@@ -276,11 +284,10 @@ def select_plan(request):
     """
     GLOBAL_CONTEXT['current_user_plan'] = Plan.objects.get(pk=request.GET.get('plan_id'))
 
-
     # categories for which user has already selected at least one idea
     category_ready = category_done(GLOBAL_CONTEXT['current_user_plan'])
 
-    response_dict={
+    response_dict = {
         'category_ready': list(category_ready),
         # this is the name that is shown on the top right (Name is changed dynamically through the DOM)
         'plan_name_ajax': GLOBAL_CONTEXT['current_user_plan'].plan_name,
@@ -289,7 +296,7 @@ def select_plan(request):
     }
     # return JsonResponse(response_dict, safe=False)
     return JsonResponse(response_dict)
-    #return render(request, 'plan/block_content.html', context=context)
+    # return render(request, 'plan/block_content.html', context=context)
 
 
 def update_selected_idea(request):

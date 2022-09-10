@@ -60,7 +60,7 @@ for (i of plan_collapse) {
                     };
                     request_new_template.send();
 
-console.log(something)
+
 
                 }
 

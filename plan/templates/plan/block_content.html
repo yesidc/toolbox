@@ -11,6 +11,22 @@
 
 
 
+                <!-- Messages-->
+
+                <section>
+
+                    {% if messages %}
+                        {% for msg in messages %}
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">&times;
+                                </button>
+                                {{ msg.message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                </section>
+
 
     <!-- Showcase-->
 
@@ -104,7 +120,7 @@
                                 <div class="row">
 
 
-                                    <input type="checkbox" class="idea-checkbox" id="{{ idea.id }}-idea"
+                                    <input type="checkbox" class="idea-checkbox" id="{{ idea.id }}-idea" onclick="add_delete_idea()"
                                             {#                        The ideas that have been already chosen by users are ticked off by default#}
                                             {% if idea.id in ideas_list %}
                                            checked
