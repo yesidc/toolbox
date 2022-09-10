@@ -11,6 +11,22 @@
 
 
 
+                <!-- Messages-->
+
+                <section>
+
+                    {% if messages %}
+                        {% for msg in messages %}
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">&times;
+                                </button>
+                                {{ msg.message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                </section>
+
 
     <!-- Showcase-->
 

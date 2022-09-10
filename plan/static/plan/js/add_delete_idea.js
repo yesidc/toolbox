@@ -49,13 +49,9 @@
 
 function add_delete_idea() {
 
-    const idea_checkbox = document.getElementsByClassName('idea-checkbox')
-
-    for (i of idea_checkbox) {
-    i.addEventListener('click', (event) => {
 
         if (event.currentTarget.checked) {
-            alert('Online Idea Added to your course plan');
+           alert('Online Idea Added to your course plan');
             // request managed by use_idea view, that subsequently adds idea to the course plan.
 
 
@@ -73,7 +69,7 @@ function add_delete_idea() {
             )
 
         } else {
-            alert('not checked');
+            alert('Idea deleted');
             // Delete idea from the course plan (PlanCategoryOnlineIdea Object)
             $.ajax(
                 {
@@ -89,7 +85,7 @@ function add_delete_idea() {
         }
 
 
-    })
 
-}
+
+
 }
