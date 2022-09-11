@@ -18,8 +18,7 @@ for (i of plan_collapse) {
 
 
                     for (const c_done of response.category_ready){
-                        console.log(c_done)
-                        console.log(response.plan_id_response)
+                 
                         document.getElementById(c_done+response.plan_id_response ).checked = true
                     }
 

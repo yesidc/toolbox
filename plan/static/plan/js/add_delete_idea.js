@@ -16,6 +16,11 @@ function add_delete_idea() {
                         idea_id: (event.target.id ).split('-')[0], //Online Idea id.
                         plan_name_dom: document.getElementById('plan_name_dom').innerText
 
+                    },
+                    success: function (response){
+                        id_ = response.category_id + response.plan_id
+                        document.getElementById(id_).checked = true;
+
                     }
                 }
             )

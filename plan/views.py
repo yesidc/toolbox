@@ -277,7 +277,13 @@ def use_idea(request):
 
             messages.add_message(request, messages.INFO, 'This idea has been already added to you course plan')
             return redirect(request.META.get('HTTP_REFERER'))
-    return redirect( GLOBAL_CONTEXT['current_category'])
+    #return redirect( GLOBAL_CONTEXT['current_category'])
+
+    json_dic ={
+        "category_id": GLOBAL_CONTEXT['current_category'],
+        'plan_id': GLOBAL_CONTEXT['current_user_plan'].pk
+    }
+    return JsonResponse(json_dic)
 
 
 def select_plan(request):
