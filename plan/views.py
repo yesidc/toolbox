@@ -5,6 +5,8 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
+from django.template import RequestContext
+
 from .helpers import category_done
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
@@ -56,7 +58,7 @@ def human_touch(request):
                'ideas_list': get_ideas(request.user, 'human_touch')}
     context.update(GLOBAL_CONTEXT)
 
-    return render(request, 'plan/block_content.html', context=context)
+    return render(request, 'plan/block_content.html', context=context, )
 
 
 def teaching_material(request):
@@ -258,7 +260,7 @@ def use_idea(request):
                 idea__pk=GLOBAL_CONTEXT['current_idea']))[0].delete()
 
         messages.info(request, 'Idea successfully deleted from your plan')
-        print()
+
     else:
         # prevents user from saving the same ideas twice for the same course plan.
         try:
@@ -269,12 +271,13 @@ def use_idea(request):
 
             )
 
-            messages.add_message(request, messages.INFO, 'Idea successfully added to your plan')
+            messages.add_message(request, messages.ERROR, 'Idea successfully added to your plan')
+
         except IntegrityError:
 
             messages.add_message(request, messages.INFO, 'This idea has been already added to you course plan')
             return redirect(request.META.get('HTTP_REFERER'))
-    return redirect(GLOBAL_CONTEXT['current_category'])
+    return redirect( GLOBAL_CONTEXT['current_category'])
 
 
 def select_plan(request):
