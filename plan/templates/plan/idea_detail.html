@@ -1,5 +1,5 @@
 {% extends "plan/base_block.html" %}
-
+ {% load static %}
 {% block building_block_idea %}
     <section class="bg-light text-dark">
 
@@ -238,7 +238,7 @@
         <div class="d-flex justify-content-end">
             <div>
 
-                <a href="#" class="btn btn-primary active m-4 pb-3" aria-current="page">Use this online recommendation in my
+                <a href="{% url 'use_idea' %}" class="btn btn-primary active m-4 pb-3" aria-current="page">Use this online recommendation in my
                     course</a>
 
             </div>
@@ -246,6 +246,7 @@
         </div>
 </section>
 
-
+  <script src="{% static 'plan/js/utils.js' %}"></script>
+    <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
 
 {% endblock %}

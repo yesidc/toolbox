@@ -1,133 +1,138 @@
 {% extends "plan/base_block.html" %}
-
+  {% load static %}
 {% block building_block_idea %}
-<div class=" container">
-
-    <section class="p-5 mt-1">
-        <div class="container">
-            <h2 class="text-center"> {{ idea.idea_name }}</h2>
-
-        </div>
-
-    </section>
+    <div class=" container">
 
         <section class="p-5 mt-1">
+            <div class="container">
+                <h2 class="text-center"> {{ idea.idea_name }}</h2>
+
+            </div>
+
+        </section>
+
+        <section class="p-5 mt-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        {#                   Brief description#}
+                        <p class="lead">{% if idea.brief_description %}{{ idea.brief_description|safe }}{% else %}
+                            {{ 'No data' }}{% endif %}</p>
+                    </div>
+                    <div class="col">
+                        <h5>Example</h5>
+                        <p class="lead">{% if idea.examples_application %}{{ idea.examples_application|safe }}{% else %}
+                            {{ 'No data' }}{% endif %}</p>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        {#Contains ideas' properties shown on the idea_overview page#}
         <div class="container">
-           <div class="row">
-               <div class="col">
-{#                   Brief description#}
-                   <p class="lead">{% if idea.brief_description %}{{ idea.brief_description|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
-               </div>
-               <div class="col">
-                   <h5>Example</h5>
-                   <p class="lead">{% if idea.examples_application %}{{ idea.examples_application|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
+            <div class="row bg-dark">
+                <div class="col-md-9 col-sm-12">
+                    <section class=" text-light p-3 mt-md-3 mt-sm-1">
+                        <div class="container">
+                            <div class="row ideas-b-property">
+                                <div class="col">
+                                    <h4>Tool</h4>
+                                </div>
+                                <div class="col">
+                                    <p>{% if idea.tool %}{{ idea.tool|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
+                                </div>
+                            </div>
+                        </div>
 
 
-
-               </div>
-           </div>
-
-        </div>
-
-    </section>
-
-
-    {#Contains ideas' properties shown on the idea_overview page#}
-<div class="container">
-    <div class="row bg-dark">
-        <div class="col-md-9 col-sm-12">
-    <section class=" text-light p-3 mt-md-3 mt-sm-1">
-        <div class="container">
-            <div class="row ideas-b-property">
-                <div class="col">
-                    <h4>Tool</h4>
-                </div>
-                <div class="col">
-                    <p>{% if idea.tool %}{{ idea.tool|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
-                </div>
-            </div>
-        </div>
+                        <div class="container mt-3">
+                            <div class="row ideas-b-property">
+                                <div class="col">
+                                    <h4>Teacher Effort</h4>
+                                </div>
+                                <div class="col">
+                                    <p>{% if idea.teacher_effort %}{{ idea.teacher_effort|safe }}{% else %}
+                                        {{ 'No data' }}{% endif %}</p>
+                                </div>
+                            </div>
+                        </div>
 
 
-        <div class="container mt-3">
-            <div class="row ideas-b-property">
-                <div class="col">
-                    <h4>Teacher Effort</h4>
-                </div>
-                <div class="col">
-                    <p>{% if idea.teacher_effort %}{{ idea.teacher_effort|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
-                </div>
-            </div>
-        </div>
+                        <div class="container mt-3">
+                            <div class="row ideas-b-property">
+                                <div class="col">
+                                    <h4>Implementation steps</h4>
+                                </div>
+                                <div class="col">
+                                    <p>{% if idea.implementation_steps %}{{ idea.implementation_steps|safe }}{% else %}
+                                        {{ 'No data' }}{% endif %}</p>
+                                </div>
+                            </div>
+                        </div>
 
 
-        <div class="container mt-3">
-            <div class="row ideas-b-property">
-                <div class="col">
-                    <h4>Implementation steps</h4>
-                </div>
-                <div class="col">
-                    <p>{% if idea.implementation_steps %}{{ idea.implementation_steps|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
-                </div>
-            </div>
-        </div>
+                        <div class="container mt-3 ideas-b-property">
+                            <div class="row">
+                                <div class="col">
+                                    <h4>Recomendations</h4>
+                                </div>
+                                <div class="col">
+                                    <p>{% if idea.recommendations %}{{ idea.recommendations|safe }}{% else %}
+                                        {{ 'No data' }}{% endif %}</p>
+                                </div>
+                            </div>
+                        </div>
 
 
-        <div class="container mt-3 ideas-b-property">
-            <div class="row">
-                <div class="col">
-                    <h4>Recomendations</h4>
-                </div>
-                <div class="col">
-                    <p>{% if idea.recommendations %}{{ idea.recommendations|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
+                    </section>
                 </div>
             </div>
         </div>
 
 
-
-
-
-
-    </section>
-            </div>
-        </div>
-</div>
-
-
-<section class="bg-dark text-light">
-        <div class="container">
-            <div class="row mt-0 p-3">
-                <div class="col"><a href="{% url 'idea_overview_detail' current_category idea.id 'detailed_view' %}" class="btn btn-primary">Show me more</a></div>
-            </div>
-        </div>
-
-</section>
-
-<section class="bg-dark text-light">
-
-        <div class="d-flex justify-content-end">
-            <div>
-
-                <a href="{% url 'use_idea'%}" class="btn btn-primary active m-4 pb-3" aria-current="page">Use this online recommendation in my
-                    course</a>
-
+        <section class="bg-dark text-light">
+            <div class="container">
+                <div class="row mt-0 p-3">
+                    <div class="col"><a href="{% url 'idea_overview_detail' current_category idea.id 'detailed_view' %}"
+                                        class="btn btn-primary">Show me more</a></div>
+                </div>
             </div>
 
-        </div>
-</section>
+        </section>
+
+        <section class="bg-dark text-light">
+
+            <div class="d-flex justify-content-end">
+                <div>
+
+                    <a href="{% url 'use_idea' %}" class="btn btn-primary active m-4 pb-3" aria-current="page"
+                       id="save_idea_overview">Use this online recommendation in my
+                        course</a>
+
+                </div>
+
+            </div>
+        </section>
 
 
+        <section class="bg-light mt-4 p-5 mb-4">
+            <div class="container">
 
-    <section class="bg-light mt-4 p-5 mb-4">
-        <div class="container">
+                <h3 class="text-center">here goes the testimony</h3>
 
-          <h3 class="text-center">here goes the testimony</h3>
 
-        </div>
-    </section>
-</div>
+            </div>
+        </section>
+    </div>
 
+
+  <script src="{% static 'plan/js/utils.js' %}"></script>
+    <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
 
 {% endblock %}
 

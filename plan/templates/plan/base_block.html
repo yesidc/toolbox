@@ -1,5 +1,5 @@
 {% extends 'tbcore/base_core.html' %}
-
+{% load toolbox_custom_tags %}
 
 {% block specific_css %}
     {% load static %}
@@ -14,64 +14,123 @@
 
     <!-- Page content wrapper-->
     <div id="page-content-wrapper">
-    {% if user.is_authenticated%}
+        {% if user.is_authenticated %}
 
-        <!-- Top navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container-fluid">
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light p-0 m-0">
+                <div class="container-fluid">
 
-                <!-- Icon sidebar -->
-                <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i></button>
-
-
-            </div>
-        </nav>
-{% endif %}
-
-        <div class="d-flex" id="wrapper">
-{% if user.is_authenticated%}
-            <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom m-0">My Courses</div>
-                <div class="list-group list-group-flush">
-
-
-                    {#              <a class="list-group-item list-group-item-action list-group-item-light p-3"#}
-                    {#                                  href="{% url 'create_plan' 'add_new_plan' %}">Add</a>#}
-                    <div class="list-group-item list-group-item-action list-group-item-light p-3">
-                        <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-3">
-                            {% csrf_token %}
-                            {{ form.plan_name }}
-                            <input type="submit" name="Submit" value="Add new course" class="btn-primary my-3 px-3">
-                        </form>
-
+                    <!-- Icon sidebar -->
+                    <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i></button>
+                    <div class="d-flex">
+                        <p><span class="lead">Current Course:</span>
+                            <span id="plan_name_dom">
+                        {#                    if user has not chosen a plan, it defaults to the last plan created#}
+                                {% if current_user_plan.plan_name %}
+                                    {{ current_user_plan.plan_name }}
+                                {% else %}
+                                    {{ user_filter_plans.last }}
+                                {% endif %}
+                    </span>
+                        </p>
                     </div>
 
-                    {% for p in user_filter_plans reversed  %}
-                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'select_plan' p.pk %}">{{ p.plan_name }}</a>
-                    {% endfor %}
-
-
-
                 </div>
-            </div>
-    {% endif %}
+            </nav>
+        {% endif %}
+
+        <div class="d-flex" id="wrapper">
+
+            {#left navigation bar#}
+
+            {% if user.is_authenticated %}
+                <div class="border-end bg-white" id="sidebar-wrapper">
+                    <div class="sidebar-heading border-bottom m-0">My Courses</div>
+                    <div class="list-group list-group-flush">
+
+
+                        {#              <a class="list-group-item list-group-item-action list-group-item-light p-3"#}
+                        {#                                  href="{% url 'create_plan' 'add_new_plan' %}">Add</a>#}
+                        <div class="list-group-item list-group-item-action list-group-item-light p-3">
+                            <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-3">
+                                {% csrf_token %}
+                                {{ form.plan_name }}
+                                <input type="submit" name="Submit" value="Add new course" class="btn-primary my-3 px-3">
+                            </form>
+
+                        </div>
+
+
+                        <!--        Nav bar items -->
+
+{# user_filter_plans return from context manager#}
+                        {% for p in user_filter_plans reversed %}
+{#                            when user clicks on the button the associated node is shown#}
+                            <button class="list-group-item list-group-item-action list-group-item-light p-3 {{ p }}"
+                                    data-bs-target="#{{ p.plan_name |add_hyphen }}"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    aria-expanded="false"
+                                    aria-controls="{{p.plan_name |add_hyphen }}"
+                            >
+                                {{ p.plan_name }}
+
+
+                            </button>
+                            <div class=" container collapse plan-collapse" id="{{p.plan_name |add_hyphen }}">
+
+                               {#The idea on this p html element is subsequently passed to the select_view for it to load the current plan and thus have it ready to save ideas to it#}
+{#                                    The first element in this div container must have as an id the plan's primary key#}
+
+                                <div id="{{ p.pk }}"> </div>
+
+                                {% for c in category_objects%}
+                         <p>
+                                        <span class="badge text-dark">
+                                            <input type="checkbox" class="checkbox-sidebar {{ p.pk }}block" id="{{ c.category_url }}{{p.pk }}">
+                                        </span>
+
+                                        {{ c.category_name }}
+                                    </p>
+
+                                {% endfor %}
+
+                                 <div class="d-flex justify-content-end my-md-3">
+                                     <div>
+                                         <a href="{% url 'checklist' %}" class="btn btn-primary">View checklist</a>
+                                     </div>
+                                 </div>
+
+                            </div>
+
+
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+            {% endif %}
             <!-- Page content-->
             <div class="container-fluid">
 
                 <!-- Messages-->
 
-                <section>
+                <section class="messages-js">
 
-{% if messages %}
-  {% for msg in messages %}
-    <div class="alert alert-info alert-dismissible fade show" role= "alert">
-      <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">&times;</button>
-      {{msg.message}}
-    </div>
-  {% endfor %}
-{% endif %}
+                    {% if messages %}
+                        {% for msg in messages %}
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">&times;
+                                </button>
+                                {{ msg }}
 
-</section>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+
+
+                </section>
 
                 {% block building_block_idea %}
 
