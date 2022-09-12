@@ -13,12 +13,12 @@ for (i of plan_collapse) {
                     plan_id: event.target.children[0].id// this id refers to id assigned to the FIRST child node of the  html element that triggers this event, which is the plan's pk
                 },
                 success: function (response) {
-                    // location.reload()
+
                     $('#plan_name_dom').text(response.plan_name_ajax)
 
 
                     for (const c_done of response.category_ready){
-                 
+                        //ticks off the (sidebar)checkbox if user has already selected at least one idea for any given category
                         document.getElementById(c_done+response.plan_id_response ).checked = true
                     }
 

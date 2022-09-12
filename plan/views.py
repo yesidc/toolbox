@@ -258,8 +258,16 @@ def use_idea(request):
             Q(plan__user=request.user) & Q(plan__plan_name=GLOBAL_CONTEXT['current_user_plan']) & Q(
                 category__category_url=GLOBAL_CONTEXT['current_category']) & Q(
                 idea__pk=GLOBAL_CONTEXT['current_idea']))[0].delete()
-
+        # todo add to sessions as this is also computed in select_plan view
+        # categories for which user has already selected at least one idea
+        category_ready = category_done(GLOBAL_CONTEXT['current_user_plan'])
         messages.info(request, 'Idea successfully deleted from your plan')
+        json_dic = {
+            'category_ready': list(category_ready),
+            "category_id": GLOBAL_CONTEXT['current_category'],
+            'plan_id': GLOBAL_CONTEXT['current_user_plan'].pk
+        }
+        return JsonResponse(json_dic)
 
     else:
         # prevents user from saving the same ideas twice for the same course plan.
