@@ -5,6 +5,15 @@ from django.contrib.auth.models import User
 
 
 
+class PlanCategoryOnlineIdeaManager (models.Manager):
+    def get_pcoi(self, current_user, current_plan):
+        """
+        Returns all PlanCategoryOnlineIdea (pcoi) objects related to current user and current plan
+        Args:
+            current_user: current logged-in user
+            current_plan: current active plan/course
+        """
+        return self.get_queryset().select_related('plan').filter(plan__user=current_user).filter(plan=current_plan)
 
 
 class Plan (models.Model):
@@ -79,6 +88,8 @@ class PlanCategoryOnlineIdea (models.Model):
     idea = models.ForeignKey (OnlineIdea, on_delete= models.CASCADE, null= True,related_name= 'plan_category_onlide_idea_i')
     notes = models.ForeignKey(Notes, related_name='note_plan',on_delete= models.CASCADE,
                               null=True)  # todo delete the null this is mandatory
+    objects=PlanCategoryOnlineIdeaManager()
+
     class Meta:
         constraints=[
             models.UniqueConstraint(fields=['plan','category','idea'], name='plancategoryonlineidea_constraint')

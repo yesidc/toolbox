@@ -184,6 +184,7 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
 
 
 def checklist(request):
+    p = PlanCategoryOnlineIdea.objects.get_pcoi(request.user, GLOBAL_CONTEXT['current_user_plan'])
     return render(request, 'plan/checklist.html')
 
 
