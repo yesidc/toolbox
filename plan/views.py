@@ -261,7 +261,7 @@ def use_idea(request):
         # todo add to sessions as this is also computed in select_plan view
         # categories for which user has already selected at least one idea
         category_ready = category_done(GLOBAL_CONTEXT['current_user_plan'])
-        messages.info(request, 'Idea successfully deleted from your plan')
+        #messages.info(request, 'Idea successfully deleted from your plan')
         json_dic = {
             'category_ready': list(category_ready),
             "category_id": GLOBAL_CONTEXT['current_category'],
@@ -279,7 +279,7 @@ def use_idea(request):
 
             )
 
-            messages.add_message(request, messages.ERROR, 'Idea successfully added to your plan')
+            #messages.add_message(request, messages.ERROR, 'Idea successfully added to your plan')
 
         except IntegrityError:
 

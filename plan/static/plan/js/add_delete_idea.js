@@ -2,7 +2,13 @@ function add_delete_idea() {
 
 
     if (event.currentTarget.checked) {
-        alert('Online Idea Added to your course plan');
+           var message_idea_added = '     <div class="alert alert-info alert-dismissible fade show" role="alert">\n' +
+            '                                <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">&times;\n' +
+            '                                </button>\n' +
+            '                                Idea succesfully added to your plan\n' +
+            '\n' +
+            '                            </div>'
+        $('.messages-js').append(message_idea_added)
         // request managed by use_idea view, that subsequently adds idea to the course plan.
 
 
@@ -25,7 +31,15 @@ function add_delete_idea() {
         )
 
     } else {
-        alert('Idea deleted');
+
+        var message_delete = '     <div class="alert alert-info alert-dismissible fade show" role="alert">\n' +
+            '                                <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">&times;\n' +
+            '                                </button>\n' +
+            '                                Idea succesfully deleted\n' +
+            '\n' +
+            '                            </div>'
+        $('.messages-js').append(message_delete)
+        //alert('Idea deleted');
         // Delete idea from the course plan (PlanCategoryOnlineIdea Object)
         $.ajax(
             {
@@ -37,25 +51,18 @@ function add_delete_idea() {
                     plan_name_dom: document.getElementById('plan_name_dom').innerText
                 },
                 success: function (response) {
-                    //iterate through all checkboxes in a (sidebar )building block
-                    // const checkbox = document.getElementsByClassName( response.plan_id+'block')
-                    //  for (i of checkbox){
-                    //      // you are not accesing the right element. this is not the chekcbox this is the p tag.
-                    //      i.checked=false;
-                    //  }
+
 
                     let category_ready = []
+                    // creates an array that contains the id for each of the (sidebar) category checkboxes that belong to plan
                     response.category_ready.forEach(function (c){
                         category_ready.push(c+response.plan_id)
                     })
+                    // if the checkbox' id is in the category_ready array; the checkbox is checked (it means the user has chosen at least one idea for that specific category).
+                    // otherwise, checkbox is unchecked
                     $('.'+ response.plan_id+'block').each(function (i, obj) {
 
-                        if (category_ready.includes(obj.id)){
-                              obj.checked=true
-                        }
-                        else {
-                            obj.checked=false
-                        }
+                        obj.checked = category_ready.includes(obj.id);
 
                     });
 
