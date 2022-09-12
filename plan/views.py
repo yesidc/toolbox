@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 
-from .helpers import category_done
+from .helpers import category_done, is_ajax
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
 import json
@@ -291,7 +291,12 @@ def use_idea(request):
         "category_id": GLOBAL_CONTEXT['current_category'],
         'plan_id': GLOBAL_CONTEXT['current_user_plan'].pk
     }
-    return JsonResponse(json_dic)
+    # if user has either deleted or added an idea using the checkboxes on the blocks/category page
+    if is_ajax(request):
+        return JsonResponse(json_dic)
+    else:
+        # if user has selected and idea using the buttons provided by both the overview or detail idea page.
+        return redirect(GLOBAL_CONTEXT['current_category'])
 
 
 def select_plan(request):

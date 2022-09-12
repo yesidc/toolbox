@@ -11,3 +11,10 @@ def category_done(curret_user_plan):
         # category name
         plan_category.add(p.category.category_url)
     return plan_category
+
+
+def is_ajax(request):
+    """
+    Checks if request == ajax request.
+    """
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
