@@ -1,4 +1,6 @@
 {% extends "plan/base_block.html" %}
+{% load toolbox_custom_tags %}
+
 
 {% block specific_css %}
     {% load static %}
@@ -86,30 +88,31 @@
     </tr>
   </thead>
 
+{#Todo add conditional, if user has not added any ideas this loop should not be executed#}
 
-
-    <tr>
-
+    {% for c_done in category_done %}<tr>
+    {% pcoi_group c_done as  pcoi_grouped%}
       <td><input type="checkbox"></td>
-      <td>Human Touch</td>
+{#        category name#}
+      <td>{{ pcoi_grouped.category_name }}</td>
+
 
 {#     ideas #}
 
         <td >
       <table class="nested-table-checklist">
+{# todo there needs to be another loop here, as there may be several pcoi per block/category#}
+          {% for pcoi in pcoi_grouped.group_by_category %}<tr>
 
-          <tr>
 
 
-
-                      <td>Short student introduction/2 truths one lie</td>
+                      <td>{{ pcoi.idea }}</td>
 
 
 
           </tr>
-          <tr>
-              <td>Instructor Introduction video</td>
-          </tr>
+          {% endfor %}
+
 
       </table>
 
@@ -147,70 +150,80 @@
   </td>
     </tr>
 
+    {% endfor %}
 
 
 
 
 
 
-    <tr>
 
-      <td><input type="checkbox"></td>
-      <td>Discussion</td>
 
+
+
+
+
+
+
+{##}
+{#    <tr>#}
+{##}
+{#      <td><input type="checkbox"></td>#}
+{#      <td>Discussion</td>#}
+{##}
 {#     ideas #}
-
-        <td >
-      <table class="nested-table-checklist">
-
-          <tr>
-
-
-
-                      <td>Short student introduction</td>
-
-
-
-          </tr>
-          <tr>
-              <td>Instructor</td>
-          </tr>
-
-      </table>
-
-
-
-
-      </td>
-
-
+{##}
+{#        <td >#}
+{#      <table class="nested-table-checklist">#}
+{##}
+{#          <tr>#}
+{##}
+{##}
+{##}
+{#                      <td>Short student introduction</td>#}
+{##}
+{##}
+{##}
+{#          </tr>#}
+{#          <tr>#}
+{#              <td>Instructor</td>#}
+{#          </tr>#}
+{##}
+{#      </table>#}
+{##}
+{##}
+{##}
+{##}
+{#      </td>#}
+{##}
+{##}
 {#        notes#}
-  <td>
-      <table class="nested-table-checklist">
-    <tr >
-        <td>{% lorem 10 w %}</td>
-    </tr>
-    <tr>
-        <td>{% lorem 10 w %}</td>
-    </tr>
-    </table>
-  </td>
-
+{#  <td>#}
+{#      <table class="nested-table-checklist">#}
+{#    <tr >#}
+{#        <td>{% lorem 10 w %}</td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#        <td>{% lorem 10 w %}</td>#}
+{#    </tr>#}
+{#    </table>#}
+{#  </td>#}
+{##}
 {#        delete#}
-
-  <td >
-      <table class=" nested-table-checklist">
-          <tr>
-              <td > <i class="bi bi-trash"> </td>
-          </tr>
-          <tr>
-
-                  <td><i class="bi bi-trash"></td>
-
-          </tr>
-      </table>
-  </td>
-    </tr>
+{##}
+{#  <td >#}
+{#      <table class=" nested-table-checklist">#}
+{#          <tr>#}
+{#              <td > <i class="bi bi-trash"> </td>#}
+{#          </tr>#}
+{#          <tr>#}
+{##}
+{#                  <td><i class="bi bi-trash"></td>#}
+{##}
+{#          </tr>#}
+{#      </table>#}
+{#  </td>#}
+{#    </tr>#}
 
 
 

@@ -1,3 +1,4 @@
+# todo DELETE FUNCTION, function implemented as class method. take a look at the Plan's model
 def category_done(curret_user_plan):
     """
     Returns the categories for which a user has already selected an idea.

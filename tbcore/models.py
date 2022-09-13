@@ -29,6 +29,21 @@ class Plan (models.Model):
     def __str__(self):
         return self.plan_name
 
+    def category_done(self):
+        """
+        Returns a set of categories for which a user has already selected at least one idea.
+
+        """
+        # categories/blocks for which the user has already selected an idea
+        plan_category = set()
+        # iterates over the PlanCategoryOnlineIdea instances
+        for p in self.plan_category_onlide_idea_plan.all():
+            # category url (as specified in the database)
+            plan_category.add(p.category.category_url)
+        return plan_category
+
+
+
 class Category (models.Model):
     category_name = models.CharField(max_length=100) # there are a total of 8 categories: hallway chatter, organization etc.
     short_description = models.TextField()

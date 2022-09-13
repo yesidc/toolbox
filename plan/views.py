@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
@@ -184,8 +184,11 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
 
 
 def checklist(request):
-    p = PlanCategoryOnlineIdea.objects.get_pcoi(request.user, GLOBAL_CONTEXT['current_user_plan'])
-    return render(request, 'plan/checklist.html')
+    context={
+        'pcoi': PlanCategoryOnlineIdea.objects.get_pcoi(request.user, GLOBAL_CONTEXT['current_user_plan']),
+        'category_done': list(GLOBAL_CONTEXT['current_user_plan'].category_done())
+    }
+    return render(request, 'plan/checklist.html', context= context)
 
 
 @login_required
