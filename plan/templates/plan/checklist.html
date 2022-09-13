@@ -125,12 +125,12 @@
 {#        notes#}
   <td>
       <table class="nested-table-checklist">
-    <tr >
-        <td>{% lorem 50 w %}</td>
+          {% for n in  pcoi_grouped.group_by_category%}
+              <tr >
+        <td>{% lorem 30 w %}</td>
     </tr>
-    <tr>
-        <td>{% lorem 50 w %}</td>
-    </tr>
+          {% endfor %}
+
     </table>
   </td>
 
@@ -138,14 +138,10 @@
 
   <td >
       <table class=" nested-table-checklist">
-          <tr>
+          {% for n in pcoi_grouped.group_by_category%}<tr>
               <td > <i class="bi bi-trash"> </td>
-          </tr>
-          <tr>
+          </tr>{% endfor %}
 
-                  <td><i class="bi bi-trash"></td>
-
-          </tr>
       </table>
   </td>
     </tr>
