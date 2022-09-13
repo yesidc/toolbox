@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 
-from .helpers import category_done, is_ajax
+from .helpers import category_done, is_ajax, context_summary
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
 import json
@@ -184,9 +184,13 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
 
 
 def checklist(request):
+    # context={
+    #     'pcoi': PlanCategoryOnlineIdea.objects.get_pcoi(request.user, GLOBAL_CONTEXT['current_user_plan']),
+    #     'category_done': list(GLOBAL_CONTEXT['current_user_plan'].category_done())
+    # }
+
     context={
-        'pcoi': PlanCategoryOnlineIdea.objects.get_pcoi(request.user, GLOBAL_CONTEXT['current_user_plan']),
-        'category_done': list(GLOBAL_CONTEXT['current_user_plan'].category_done())
+        'context_summary':context_summary(request.user, GLOBAL_CONTEXT['current_user_plan'])
     }
     return render(request, 'plan/checklist.html', context= context)
 

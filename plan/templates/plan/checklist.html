@@ -90,11 +90,11 @@
 
 {#Todo add conditional, if user has not added any ideas this loop should not be executed#}
 
-    {% for c_done in category_done %}<tr>
-    {% pcoi_group c_done as  pcoi_grouped%}
+    {% for c_done, idea_ins in context_summary %}<tr>
+{#    {% pcoi_group c_done as  pcoi_grouped%}#}
       <td><input type="checkbox"></td>
 {#        category name#}
-      <td>{{ pcoi_grouped.category_name }}</td>
+      <td>{{ c_done }}</td>
 
 
 {#     ideas #}
@@ -102,11 +102,11 @@
         <td >
       <table class="nested-table-checklist">
 {# todo there needs to be another loop here, as there may be several pcoi per block/category#}
-          {% for pcoi in pcoi_grouped.group_by_category %}<tr>
+          {% for idea_name, idea_id in idea_ins %}<tr>
 
 
 
-                      <td>{{ pcoi.idea }}</td>
+                      <td>{{ idea_name }}</td>
 
 
 
@@ -125,7 +125,7 @@
 {#        notes#}
   <td>
       <table class="nested-table-checklist">
-          {% for n in  pcoi_grouped.group_by_category%}
+         {% for idea_name, idea_id in idea_ins %}
               <tr >
         <td>{% lorem 30 w %}</td>
     </tr>
@@ -138,7 +138,7 @@
 
   <td >
       <table class=" nested-table-checklist">
-          {% for n in pcoi_grouped.group_by_category%}<tr>
+          {% for idea_name, idea_id in idea_ins %}<tr>
               <td > <i class="bi bi-trash"> </td>
           </tr>{% endfor %}
 

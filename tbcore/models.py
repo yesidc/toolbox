@@ -13,7 +13,7 @@ class PlanCategoryOnlineIdeaManager (models.Manager):
             current_user: current logged-in user
             current_plan: current active plan/course
         """
-        return self.get_queryset().select_related('plan').filter(plan__user=current_user).filter(plan=current_plan)
+        return self.get_queryset().select_related('plan').filter(plan__user=current_user,plan=current_plan)
 
 
 class Plan (models.Model):
@@ -29,17 +29,23 @@ class Plan (models.Model):
     def __str__(self):
         return self.plan_name
 
-    def category_done(self):
+    def category_done(self, mode='url'):
         """
-        Returns a set of categories for which a user has already selected at least one idea.
-
+        Returns a set of categories (urls, as specified in the database) for which a user has already selected at least one idea.
+        Args:
+            mode: if it is url, returns set of category urls, otherwise; returns the name of the category
         """
         # categories/blocks for which the user has already selected an idea
         plan_category = set()
-        # iterates over the PlanCategoryOnlineIdea instances
-        for p in self.plan_category_onlide_idea_plan.all():
-            # category url (as specified in the database)
-            plan_category.add(p.category.category_url)
+        if mode=='url':
+            # iterates over the PlanCategoryOnlineIdea instances
+            for p in self.plan_category_onlide_idea_plan.all():
+                # category url (as specified in the database)
+                plan_category.add(p.category.category_url)
+        else:
+            for p in self.plan_category_onlide_idea_plan.all():
+                # category url (as specified in the database)
+                plan_category.add(p.category.category_name)
         return plan_category
 
 
