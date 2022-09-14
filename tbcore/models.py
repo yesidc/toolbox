@@ -13,7 +13,7 @@ class PlanCategoryOnlineIdeaManager (models.Manager):
             current_user: current logged-in user
             current_plan: current active plan/course
         """
-        return self.get_queryset().select_related('plan').filter(plan__user=current_user,plan=current_plan)
+        return self.get_queryset().select_related('plan','idea').filter(plan__user=current_user,plan=current_plan)
 
 
 class Plan (models.Model):

@@ -41,7 +41,7 @@ def context_summary(user, current_plan):
 
     for c in category_done_summary:
         # all these pcoi objects are related to a single category for which user already chose at least one idea
-        # todo optimize this query
+      
         query_category= pcoi.filter(category__category_name=c)
         for pcoi_instance in query_category:
             idea_name = pcoi_instance.idea.idea_name

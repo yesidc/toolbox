@@ -91,9 +91,9 @@
 {#Todo add conditional, if user has not added any ideas this loop should not be executed#}
 
     {% for c_done, idea_ins in context_summary %}<tr>
-{#    {% pcoi_group c_done as  pcoi_grouped%}#}
+
       <td><input type="checkbox"></td>
-{#        category name#}
+
       <td>{{ c_done }}</td>
 
 
@@ -307,6 +307,9 @@
     </div>
     </section>
 
+
+      <script src="{% static 'plan/js/utils.js' %}"></script>
+    <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
 
 {% endblock %}
 {#<i class="bi bi-trash">#}
