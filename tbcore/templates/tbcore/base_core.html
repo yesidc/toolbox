@@ -49,8 +49,8 @@
                     <div class="col-12 top-nav">
                         <ul class="navbar-nav float-none float-md-end mt-lg-5">
 
-                            {% for c in category_objects%}
-                                <li class="nav-item"><a class="nav-link" href="{% url c.category_url  %}">{{ c.category_name }}</a></li>
+                            {% for c_name, c_url in category_objects%}
+                                <li class="nav-item"><a class="nav-link" href="{% url c_url  %}">{{ c_name }}</a></li>
                             {% endfor %}
 
 

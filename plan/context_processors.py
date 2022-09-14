@@ -16,6 +16,6 @@ def user_plans (request):
 
 def category_obj (request):
     """
-    Returns all categories or building blocks
+    Returns list of tuples (category_name, category_url)
     """
-    return {'category_objects': Category.objects.all()}
+    return {'category_objects': Category.objects.values_list('category_name','category_url')}

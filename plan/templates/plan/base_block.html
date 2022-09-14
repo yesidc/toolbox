@@ -84,13 +84,13 @@
 
                                 <div id="{{ p.pk }}"> </div>
 
-                                {% for c in category_objects%}
+                                {% for c_name, c_url in category_objects%}
                          <p>
                                         <span class="badge text-dark">
-                                            <input type="checkbox" class="checkbox-sidebar {{ p.pk }}block" id="{{ c.category_url }}{{p.pk }}">
+                                            <input type="checkbox" class="checkbox-sidebar {{ p.pk }}block" id="{{ c_url }}{{p.pk }}">
                                         </span>
 
-                                        {{ c.category_name }}
+                                        {{ c_name }}
                                     </p>
 
                                 {% endfor %}

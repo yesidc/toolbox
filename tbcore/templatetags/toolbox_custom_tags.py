@@ -28,7 +28,10 @@ def add_hyphen(value):
 
 @register.simple_tag(takes_context=True)
 def remaining_categories(context, all_categories):
+    """
+    Computes the (set) difference between all categories/building blocks and the categories for which user has chosen at least one idea.
+    """
     #Set that contains the names of the categories for which user has chosen at least one idea
     c_done = context['category_done_summary']
-    remaining_c = set([c.category_name for c in all_categories]) - c_done
+    remaining_c = set([c_name for c_name, _ in all_categories]) - c_done
     return remaining_c
