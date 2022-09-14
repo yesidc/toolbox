@@ -37,13 +37,14 @@ class Plan (models.Model):
         """
         # categories/blocks for which the user has already selected an idea
         plan_category = set()
+        c=self.plan_category_onlide_idea_plan.select_related('category')
         if mode=='url':
             # iterates over the PlanCategoryOnlineIdea instances
-            for p in self.plan_category_onlide_idea_plan.all():
+            for p in c:
                 # category url (as specified in the database)
                 plan_category.add(p.category.category_url)
         else:
-            for p in self.plan_category_onlide_idea_plan.all():
+            for p in c:
                 # category url (as specified in the database)
                 plan_category.add(p.category.category_name)
         return plan_category
