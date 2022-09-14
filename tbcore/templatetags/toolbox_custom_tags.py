@@ -25,3 +25,10 @@ def add_hyphen(value):
 #     category_name = group_by_category[0].category
 #     #return group_by_category,category_name
 #     return {'group_by_category':group_by_category, 'category_name':category_name }
+
+@register.simple_tag(takes_context=True)
+def remaining_categories(context, all_categories):
+    #Set that contains the names of the categories for which user has chosen at least one idea
+    c_done = context['category_done_summary']
+    remaining_c = set([c.category_name for c in all_categories]) - c_done
+    return remaining_c

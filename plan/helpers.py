@@ -31,7 +31,8 @@ def context_summary(user, current_plan):
         user: current log-in user
         current_plan: plan user is currently working on.
     Returns:
-        list whose elements are tuples with the following structure: (category_name, [idea_name,idea_id])
+        category_idea_checklist: List whose elements are tuples with the following structure: (category_name, [idea_name,idea_id])
+        category_done_summary: Set containing categories for which the user has selected at least one idea.
     """
     pcoi = PlanCategoryOnlineIdea.objects.get_pcoi(user, current_plan)
     category_idea_checklist = []
@@ -49,4 +50,4 @@ def context_summary(user, current_plan):
 
         category_idea_checklist.append((c, info_idea))
         info_idea=[]
-    return category_idea_checklist
+    return category_idea_checklist, category_done_summary

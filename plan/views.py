@@ -188,9 +188,10 @@ def checklist(request):
     #     'pcoi': PlanCategoryOnlineIdea.objects.get_pcoi(request.user, GLOBAL_CONTEXT['current_user_plan']),
     #     'category_done': list(GLOBAL_CONTEXT['current_user_plan'].category_done())
     # }
-
+    c_s, c_d =context_summary(request.user, GLOBAL_CONTEXT['current_user_plan'])
     context={
-        'context_summary':context_summary(request.user, GLOBAL_CONTEXT['current_user_plan'])
+        'context_summary':c_s,
+        'category_done_summary': c_d
     }
     return render(request, 'plan/checklist.html', context= context)
 
