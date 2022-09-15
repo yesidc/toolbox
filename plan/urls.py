@@ -11,12 +11,14 @@ urlpatterns = [
     path('discussion/', views.discussion, name='discussion'),
     path('assessment/', views.assessment, name='assessment'),
     path('rules_regulations/', views.rules_regulations, name='rules_regulations'),
-   path('<str:category_name>/<int:idea_id>/<str:detailed_view>/', views.idea_overview_detail, name='idea_overview_detail'),
+    path('<str:category_name>/<int:idea_id>/<str:detailed_view>/', views.idea_overview_detail,
+         name='idea_overview_detail'),
     path('use_idea/', views.use_idea, name='use_idea'),
     path('create_plan/<str:start_add>/', views.create_plan, name='create_plan'),
     path('select_plan/', views.select_plan, name='select_plan'),
- path('update_selected_idea/', views.update_selected_idea, name='update_selected_idea'),
+    path('update_selected_idea/', views.update_selected_idea, name='update_selected_idea'),
+    path('delete_pcoi_checklist/', views.delete_pcoi_checklist, name='delete_pcoi_checklist'),
 
-   path('checklist/', views.checklist, name='checklist'),
+    path('checklist/', views.checklist, name='checklist'),
 
 ]

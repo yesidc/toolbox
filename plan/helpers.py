@@ -46,7 +46,7 @@ def context_summary(user, current_plan):
         for pcoi_instance in query_category:
             idea_name = pcoi_instance.idea.idea_name
             # this id used to delete the pcoi object from checklist page
-            pcoi_instance_id = pcoi_instance.idea.pk
+            pcoi_instance_id = pcoi_instance.pk
             info_idea.append((idea_name, pcoi_instance_id))
 
         category_idea_checklist.append((c, info_idea))
