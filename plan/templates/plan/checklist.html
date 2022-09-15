@@ -10,216 +10,153 @@
 {% block building_block_idea %}
 
     <section>
-    <h1 class="text-center mb-md-4 mb-sm-2">Checklist</h1>
+        <h1 class="text-center mb-md-4 mb-sm-2">Checklist</h1>
 
-{#      <div class="row border-bottom border-danger">#}
-{#          <div class="col border border-0">In progress</div>#}
-{#          <div class="col align-middle">Completed</div>#}
-{#            <div class="col">Building Block</div>#}
-{#            <div class="col">Idea</div>#}
-{#            <div class="col">Notes</div>#}
-{#            <div class="col">Delete</div>#}
-{##}
-{##}
-{#      </div>#}
-{##}
-{#      <div class="row border-bottom border-danger">#}
-{#          <div class="col border border-0 align-self-center">In progress</div>#}
-{#          <div class="col align-self-center">Completed</div>#}
-{#            <div class="col align-self-center">Human Touch</div>#}
-{#            <div class="col">#}
-{#                <div class="row align-self-center">- Short Instructor video</div>#}
-{#                <div class="row align-self-center">- Share stores and experiences with your students</div>#}
-{#            </div>#}
-{#            <div class="col align-self-center">#}
-{#                <div class="row align-self-center">- I need to talk to my instructors first to see if they have a computer</div>#}
-{#                <div class="row align-self-center">- This note I took is about how to implement 'share experiences with your students</div>#}
-{#            </div>#}
-{#            <div class="col align-self-center">Delete</div>#}
-{##}
-{##}
-{#      </div>#}
-{#      <div class="row border-bottom border-danger">#}
-{#          <div class="col border border-0 align-self-center">In progress</div>#}
-{#          <div class="col align-self-center">Completed</div>#}
-{#            <div class="col align-self-center">Human Touch</div>#}
-{#            <div class="col">#}
-{#                <div class="row align-self-center">- Short Instructor video</div>#}
-{#                <div class="row align-self-center">- Share stores and experiences with your students</div>#}
-{#            </div>#}
-{#            <div class="col align-self-center">#}
-{#                <div class="row align-self-center">- I need to talk to my instructors first to see if they have a computer</div>#}
-{#                <div class="row align-self-center">- This note I took is about how to implement 'share experiences with your students</div>#}
-{#            </div>#}
-{#            <div class="col align-self-center">Delete</div>#}
-{##}
-{##}
-{#      </div>#}
-
-
-
-{#<div class="row">#}
-{##}
-{#    <div class="col">In progress</div>#}
-{#          <div class="col">Completed</div>#}
-{#            <div class="col">Building Block</div>#}
-{#            <div class="col">Idea</div>#}
-{#            <div class="col">Notes</div>#}
-{#            <div class="col">Delete</div>#}
-{##}
-{##}
-{##}
-{#</div>#}
-{##}
+        {#      <div class="row border-bottom border-danger">#}
+        {#          <div class="col border border-0">In progress</div>#}
+        {#          <div class="col align-middle">Completed</div>#}
+        {#            <div class="col">Building Block</div>#}
+        {#            <div class="col">Idea</div>#}
+        {#            <div class="col">Notes</div>#}
+        {#            <div class="col">Delete</div>#}
+        {##}
+        {##}
+        {#      </div>#}
+        {##}
+        {#      <div class="row border-bottom border-danger">#}
+        {#          <div class="col border border-0 align-self-center">In progress</div>#}
+        {#          <div class="col align-self-center">Completed</div>#}
+        {#            <div class="col align-self-center">Human Touch</div>#}
+        {#            <div class="col">#}
+        {#                <div class="row align-self-center">- Short Instructor video</div>#}
+        {#                <div class="row align-self-center">- Share stores and experiences with your students</div>#}
+        {#            </div>#}
+        {#            <div class="col align-self-center">#}
+        {#                <div class="row align-self-center">- I need to talk to my instructors first to see if they have a computer</div>#}
+        {#                <div class="row align-self-center">- This note I took is about how to implement 'share experiences with your students</div>#}
+        {#            </div>#}
+        {#            <div class="col align-self-center">Delete</div>#}
+        {##}
+        {##}
+        {#      </div>#}
+        {#      <div class="row border-bottom border-danger">#}
+        {#          <div class="col border border-0 align-self-center">In progress</div>#}
+        {#          <div class="col align-self-center">Completed</div>#}
+        {#            <div class="col align-self-center">Human Touch</div>#}
+        {#            <div class="col">#}
+        {#                <div class="row align-self-center">- Short Instructor video</div>#}
+        {#                <div class="row align-self-center">- Share stores and experiences with your students</div>#}
+        {#            </div>#}
+        {#            <div class="col align-self-center">#}
+        {#                <div class="row align-self-center">- I need to talk to my instructors first to see if they have a computer</div>#}
+        {#                <div class="row align-self-center">- This note I took is about how to implement 'share experiences with your students</div>#}
+        {#            </div>#}
+        {#            <div class="col align-self-center">Delete</div>#}
+        {##}
+        {##}
+        {#      </div>#}
 
 
-{#Summary Table#}
-
-<table class="table table-hover align-middle table-responsive">
-  <thead>
-    <tr>
-
-      <th scope="col" >Completed</th>
-      <th scope="col" >Building Block</th>
-      <th scope="col" >Idea</th>
-        <th scope="col" >Note</th>
-        <th scope="col" >Delete</th>
-
-    </tr>
-  </thead>
-
-{#Todo add conditional, if user has not added any ideas this loop should not be executed#}
-
-    {% for c_done, idea_ins in context_summary %}<tr>
-
-      <td><input type="checkbox"></td>
-
-      <td>{{ c_done }}</td>
+        {#<div class="row">#}
+        {##}
+        {#    <div class="col">In progress</div>#}
+        {#          <div class="col">Completed</div>#}
+        {#            <div class="col">Building Block</div>#}
+        {#            <div class="col">Idea</div>#}
+        {#            <div class="col">Notes</div>#}
+        {#            <div class="col">Delete</div>#}
+        {##}
+        {##}
+        {##}
+        {#</div>#}
+        {##}
 
 
-{#     ideas #}
+        {#Summary Table#}
 
-        <td >
-      <table class="nested-table-checklist">
-{# todo there needs to be another loop here, as there may be several pcoi per block/category#}
-          {% for idea_name, idea_id in idea_ins %}<tr>
+        <table class="table table-hover align-middle table-responsive">
+            <thead>
+            <tr>
 
+                <th scope="col">Completed</th>
+                <th scope="col">Building Block</th>
+                <th scope="col">Idea</th>
+                <th scope="col">Note</th>
+                <th scope="col">Delete</th>
 
+            </tr>
+            </thead>
 
-                      <td>{{ idea_name }}</td>
+            {#Todo add conditional, if user has not added any ideas this loop should not be executed#}
 
+            {% for c_done, idea_ins in context_summary %}
+                <tr>
 
+                    <td><input type="checkbox"></td>
 
-          </tr>
-          {% endfor %}
-
-
-      </table>
+                    <td>{{ c_done }}</td>
 
 
 
 
-      </td>
+
+                    {#     ideas #}
+
+                    <td>
+                        <table class="nested-table-checklist">
+                            {# todo there needs to be another loop here, as there may be several pcoi per block/category#}
+                            {% for idea_name, pcoi_instance_id in idea_ins %}
+                                <tr class="pcoi-instance-{{ pcoi_instance_id }}">
 
 
-{#        notes#}
-  <td>
-      <table class="nested-table-checklist">
-         {% for idea_name, idea_id in idea_ins %}
-              <tr >
-        <td>{% lorem 30 w %}</td>
-    </tr>
-          {% endfor %}
+                                    <td>{{ idea_name }}</td>
 
-    </table>
-  </td>
 
-{#        delete#}
+                                </tr>
+                            {% endfor %}
 
-  <td >
-      <table class=" nested-table-checklist">
-          {% for idea_name, idea_id in idea_ins %}<tr>
-              <td > <i class="bi bi-trash"> </td>
-          </tr>{% endfor %}
 
-      </table>
-  </td>
-    </tr>
+                        </table>
 
-    {% endfor %}
+
+                    </td>
 
 
 
 
 
 
+                    {#        notes#}
+
+                    <td>
+                        <table class="nested-table-checklist">
+                            {% for idea_name, pcoi_instance_id in idea_ins %}
+                                <tr class="pcoi-instance-{{ pcoi_instance_id }}">
+                                    <td>{% lorem 30 w %}</td>
+                                </tr>
+                            {% endfor %}
+
+                        </table>
+                    </td>
 
 
 
 
+                    {#        delete#}
 
+                    <td>
+                        <table class=" nested-table-checklist">
+                            {% for idea_name, pcoi_instance_id in idea_ins %}
+                                <tr class="pcoi-instance-{{ pcoi_instance_id }}">
+                                    <td><button onclick="add_delete_idea_checklist(this.id)" id="pcoi-instance-{{ pcoi_instance_id }}"><i class="bi bi-trash"></button></td>
+                                </tr>
+                            {% endfor %}
 
+                        </table>
+                    </td>
+                </tr>
 
-
-{##}
-{#    <tr>#}
-{##}
-{#      <td><input type="checkbox"></td>#}
-{#      <td>Discussion</td>#}
-{##}
-{#     ideas #}
-{##}
-{#        <td >#}
-{#      <table class="nested-table-checklist">#}
-{##}
-{#          <tr>#}
-{##}
-{##}
-{##}
-{#                      <td>Short student introduction</td>#}
-{##}
-{##}
-{##}
-{#          </tr>#}
-{#          <tr>#}
-{#              <td>Instructor</td>#}
-{#          </tr>#}
-{##}
-{#      </table>#}
-{##}
-{##}
-{##}
-{##}
-{#      </td>#}
-{##}
-{##}
-{#        notes#}
-{#  <td>#}
-{#      <table class="nested-table-checklist">#}
-{#    <tr >#}
-{#        <td>{% lorem 10 w %}</td>#}
-{#    </tr>#}
-{#    <tr>#}
-{#        <td>{% lorem 10 w %}</td>#}
-{#    </tr>#}
-{#    </table>#}
-{#  </td>#}
-{##}
-{#        delete#}
-{##}
-{#  <td >#}
-{#      <table class=" nested-table-checklist">#}
-{#          <tr>#}
-{#              <td > <i class="bi bi-trash"> </td>#}
-{#          </tr>#}
-{#          <tr>#}
-{##}
-{#                  <td><i class="bi bi-trash"></td>#}
-{##}
-{#          </tr>#}
-{#      </table>#}
-{#  </td>#}
-{#    </tr>#}
+            {% endfor %}
 
 
 
@@ -228,87 +165,154 @@
 
 
 
-</table>
 
 
-{#  <div class="row">#}
-{##}
-{#      <div class="col-3">#}
-{#          <table class="table">#}
-{#  <thead>#}
-{#    <tr>#}
-{#      <th scope="col">Completed</th>#}
-{#      <th scope="col">Building Blokc</th>#}
-{##}
-{#    </tr>#}
-{#  </thead>#}
-{#  <tbody>#}
-{#    <tr>#}
-{#      <td >1</td>#}
-{#      <td rowspan="3">Human Touch</td>#}
-{##}
-{#    </tr>#}
-{#  <tr>#}
-{##}
-{#  </tr>#}
-{##}
-{#  </tbody>#}
-{#</table>#}
-{#      </div>#}
-{##}
-{#      <div class="col-9">#}
-{#          <table class="table">#}
-{#  <thead>#}
-{#    <tr>#}
-{#      <th scope="col">Idea</th>#}
-{#      <th scope="col">Notes</th>#}
-{#      <th scope="col">Delete</th>#}
-{##}
-{#    </tr>#}
-{#  </thead>#}
-{#  <tbody>#}
-{#    <tr>#}
-{#      <td scope="row">Short Intro</td>#}
-{#      <td>{% lorem 30 w %}</td>#}
-{#      <td>Delete</td>#}
-{##}
-{#    </tr>#}
-{##}
-{#    <tr>#}
-{#      <td scope="row">Short Intro</td>#}
-{#      <td>{% lorem 30 w %}</td>#}
-{#      <td>Delete</td>#}
-{##}
-{#    </tr>#}
-{##}
-{#  </tbody>#}
-{#</table>#}
-{#      </div>#}
-{##}
-{#  </div>#}
+
+
+
+
+            {##}
+            {#    <tr>#}
+            {##}
+            {#      <td><input type="checkbox"></td>#}
+            {#      <td>Discussion</td>#}
+            {##}
+            {#     ideas #}
+            {##}
+            {#        <td >#}
+            {#      <table class="nested-table-checklist">#}
+            {##}
+            {#          <tr>#}
+            {##}
+            {##}
+            {##}
+            {#                      <td>Short student introduction</td>#}
+            {##}
+            {##}
+            {##}
+            {#          </tr>#}
+            {#          <tr>#}
+            {#              <td>Instructor</td>#}
+            {#          </tr>#}
+            {##}
+            {#      </table>#}
+            {##}
+            {##}
+            {##}
+            {##}
+            {#      </td>#}
+            {##}
+            {##}
+            {#        notes#}
+            {#  <td>#}
+            {#      <table class="nested-table-checklist">#}
+            {#    <tr >#}
+            {#        <td>{% lorem 10 w %}</td>#}
+            {#    </tr>#}
+            {#    <tr>#}
+            {#        <td>{% lorem 10 w %}</td>#}
+            {#    </tr>#}
+            {#    </table>#}
+            {#  </td>#}
+            {##}
+            {#        delete#}
+            {##}
+            {#  <td >#}
+            {#      <table class=" nested-table-checklist">#}
+            {#          <tr>#}
+            {#              <td > <i class="bi bi-trash"> </td>#}
+            {#          </tr>#}
+            {#          <tr>#}
+            {##}
+            {#                  <td><i class="bi bi-trash"></td>#}
+            {##}
+            {#          </tr>#}
+            {#      </table>#}
+            {#  </td>#}
+            {#    </tr>#}
+
+
+        </table>
+
+
+        {#  <div class="row">#}
+        {##}
+        {#      <div class="col-3">#}
+        {#          <table class="table">#}
+        {#  <thead>#}
+        {#    <tr>#}
+        {#      <th scope="col">Completed</th>#}
+        {#      <th scope="col">Building Blokc</th>#}
+        {##}
+        {#    </tr>#}
+        {#  </thead>#}
+        {#  <tbody>#}
+        {#    <tr>#}
+        {#      <td >1</td>#}
+        {#      <td rowspan="3">Human Touch</td>#}
+        {##}
+        {#    </tr>#}
+        {#  <tr>#}
+        {##}
+        {#  </tr>#}
+        {##}
+        {#  </tbody>#}
+        {#</table>#}
+        {#      </div>#}
+        {##}
+        {#      <div class="col-9">#}
+        {#          <table class="table">#}
+        {#  <thead>#}
+        {#    <tr>#}
+        {#      <th scope="col">Idea</th>#}
+        {#      <th scope="col">Notes</th>#}
+        {#      <th scope="col">Delete</th>#}
+        {##}
+        {#    </tr>#}
+        {#  </thead>#}
+        {#  <tbody>#}
+        {#    <tr>#}
+        {#      <td scope="row">Short Intro</td>#}
+        {#      <td>{% lorem 30 w %}</td>#}
+        {#      <td>Delete</td>#}
+        {##}
+        {#    </tr>#}
+        {##}
+        {#    <tr>#}
+        {#      <td scope="row">Short Intro</td>#}
+        {#      <td>{% lorem 30 w %}</td>#}
+        {#      <td>Delete</td>#}
+        {##}
+        {#    </tr>#}
+        {##}
+        {#  </tbody>#}
+        {#</table>#}
+        {#      </div>#}
+        {##}
+        {#  </div>#}
 
 
     </section>
 
 
     <section class="bg-light text-dark p-md-5 p-sm-2 mb-md-2 mb-sm-1">
-    <p class="lead">You have not selected any online ideas from the building blocks:</p>
-    {% remaining_categories category_objects  as category_left%}
+        <p class="lead">You have not selected any online ideas from the building blocks:</p>
+        {% remaining_categories category_objects as category_left %}
         <ul>
-        {% for c in category_left %}
-            <li>{{ c }}</li>
-        {% endfor %}
+            {% for c in category_left %}
+                <li>{{ c }}</li>
+            {% endfor %}
 
-    </ul>
-    <div class="d-flex justify-content-end">
-        <div>
-            <a href="" class="btn btn-primary p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
+        </ul>
+        <div class="d-flex justify-content-end">
+            <div>
+                <a href="" class="btn btn-primary p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
+            </div>
         </div>
-    </div>
     </section>
 
 
-      <script src="{% static 'plan/js/utils.js' %}"></script>
+    <script src="{% static 'plan/js/utils.js' %}"></script>
     <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
 
 {% endblock %}

@@ -31,7 +31,7 @@ def context_summary(user, current_plan):
         user: current log-in user
         current_plan: plan user is currently working on.
     Returns:
-        category_idea_checklist: List whose elements are tuples with the following structure: (category_name, [idea_name,idea_id])
+        category_idea_checklist: List whose elements are tuples with the following structure: (category_name, [idea_name, pcoi_instance_id])
         category_done_summary: Set containing categories for which the user has selected at least one idea.
     """
     pcoi = PlanCategoryOnlineIdea.objects.get_pcoi(user, current_plan)
@@ -41,12 +41,13 @@ def context_summary(user, current_plan):
 
     for c in category_done_summary:
         # all these pcoi objects are related to a single category for which user already chose at least one idea
-      
+
         query_category= pcoi.filter(category__category_name=c)
         for pcoi_instance in query_category:
             idea_name = pcoi_instance.idea.idea_name
-            idea_id = pcoi_instance.idea.pk
-            info_idea.append((idea_name, idea_id))
+            # this id used to delete the pcoi object from checklist page
+            pcoi_instance_id = pcoi_instance.idea.pk
+            info_idea.append((idea_name, pcoi_instance_id))
 
         category_idea_checklist.append((c, info_idea))
         info_idea=[]

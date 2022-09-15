@@ -73,3 +73,9 @@ function add_delete_idea() {
 
 
 }
+
+function add_delete_idea_checklist(btn_id){
+    // deletes the idea, note and delete button from the checklist page
+    $('.'+ btn_id).remove()
+
+}
