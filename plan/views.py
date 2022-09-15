@@ -308,6 +308,15 @@ def use_idea(request):
         return redirect(GLOBAL_CONTEXT['current_category'])
 
 
+
+def delete_pcoi_checklist(request):
+    """
+    Manages all related to deleting PlanCategoryOnlineIdea objects when users interact with the checklist page
+    """
+
+    PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id')).delete()
+    return JsonResponse({},status=200)
+
 def select_plan(request):
     """
     Triggered when user chooses to work on a different plan. User can switch to a

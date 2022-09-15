@@ -73,3 +73,22 @@ function add_delete_idea() {
 
 
 }
+
+function add_delete_idea_checklist(btn_id){
+
+
+    $.ajax(
+        {
+            type: 'GET',
+            url:'/delete_pcoi_checklist/',
+            data: {
+                pcoi_id: btn_id.split('-')[2], //PlanCategoryOnlineIdea instance id. This instance will be deleted from the database
+
+            },
+            success:function (response){
+                 $('.'+ btn_id).remove()     // deletes the idea, note and delete button from the checklist page
+            }
+        }
+    )
+
+}
