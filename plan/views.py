@@ -179,15 +179,10 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
         return render(request, 'plan/idea_overview.html', context=context)
 
 
-# def idea_detail(request):
-#     return render(request, 'plan/idea_detail.html')
 
 
 def checklist(request):
-    # context={
-    #     'pcoi': PlanCategoryOnlineIdea.objects.get_pcoi(request.user, GLOBAL_CONTEXT['current_user_plan']),
-    #     'category_done': list(GLOBAL_CONTEXT['current_user_plan'].category_done())
-    # }
+
     c_s, c_d =context_summary(request.user, GLOBAL_CONTEXT['current_user_plan'])
     context={
         'context_summary':c_s,

@@ -89,8 +89,8 @@
                                         <span class="badge text-dark">
                                             <input type="checkbox" class="checkbox-sidebar {{ p.pk }}block" id="{{ c_url }}{{p.pk }}">
                                         </span>
+                             <a href="{% url c_url %}" class="link-no-decoration text-dark"> {{ c_name }}</a>
 
-                                        {{ c_name }}
                                     </p>
 
                                 {% endfor %}

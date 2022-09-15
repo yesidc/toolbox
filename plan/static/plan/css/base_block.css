@@ -50,6 +50,10 @@ Toolbox
   height: 300px;
 }
 
+.link-no-decoration{
+  text-decoration: none;
+}
+
 /*Disables checkboxes on the sidebar*/
 .disabled-checkbox, .checkbox-sidebar {
   opacity:1;

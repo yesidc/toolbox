@@ -1,4 +1,8 @@
 function add_delete_idea() {
+/**
+ * Triggered when user interacts with any checkbox on the block_content page.
+ * Manages all functionality related to either adding or deleting ideas from the current plan/course
+    */
 
 
     if (event.currentTarget.checked) {
@@ -9,13 +13,13 @@ function add_delete_idea() {
             '\n' +
             '                            </div>'
         $('.messages-js').append(message_idea_added)
+
         // request managed by use_idea view, that subsequently adds idea to the course plan.
 
 
         $.ajax(
             {
                 type: 'GET',
-                //url: i.id + '/save_idea/'
                 url: '/use_idea/',
                 data: {
                     idea_id: (event.target.id).split('-')[0], //Online Idea id.
@@ -39,7 +43,7 @@ function add_delete_idea() {
             '\n' +
             '                            </div>'
         $('.messages-js').append(message_delete)
-        //alert('Idea deleted');
+
         // Delete idea from the course plan (PlanCategoryOnlineIdea Object)
         $.ajax(
             {
@@ -76,10 +80,9 @@ function add_delete_idea() {
 
 function add_delete_idea_checklist(btn_id){
 /**
-    When user deletes an idea using any of the delete buttons checklist page: request is subsequently
-    handle by delete_pcoi_checklist django view. Upon success; the idea, note and associated delete button
-    are deleted from DOM. (Note is kept in database)
- @param btn_id {string} Contains the id of the pcoi instance to be deleted
+ * When user deletes an idea using any of the delete buttons checklist page: request is subsequently handle by delete_pcoi_checklist django view. Upon success; the idea, note and associated delete button are deleted from DOM. (Note is kept in database)
+ * @param btn_id {string} Contains the id of the pcoi instance to be deleted
+
 */
     $.ajax(
         {
