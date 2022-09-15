@@ -296,15 +296,22 @@
 
 
     <section class="bg-light text-dark p-md-5 p-sm-2 mb-md-2 mb-sm-1">
-        <p class="lead">You have not selected any online ideas from the building blocks:</p>
         {% remaining_categories category_objects as category_left %}
+        {% if category_left%}
+            <p class="lead">You have not selected any online ideas from the building blocks:</p>
+
         <ul>
             {% for c in category_left %}
                 <li>{{ c }}</li>
             {% endfor %}
 
         </ul>
-        <div class="d-flex justify-content-end">
+        {% else %}
+            <p class="lead">Well done! you have successfully selected ideas for all building blocks</p>
+
+        {% endif %}
+
+            <div class="d-flex justify-content-end">
             <div>
                 <a href="" class="btn btn-primary p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
             </div>

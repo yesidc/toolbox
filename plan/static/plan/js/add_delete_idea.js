@@ -75,8 +75,12 @@ function add_delete_idea() {
 }
 
 function add_delete_idea_checklist(btn_id){
-
-
+/**
+    When user deletes an idea using any of the delete buttons checklist page: request is subsequently
+    handle by delete_pcoi_checklist django view. Upon success; the idea, note and associated delete button
+    are deleted from DOM. (Note is kept in database)
+ @param btn_id {string} Contains the id of the pcoi instance to be deleted
+*/
     $.ajax(
         {
             type: 'GET',
