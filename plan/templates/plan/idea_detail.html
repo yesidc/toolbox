@@ -218,14 +218,17 @@
 
 
 
-    <section class="bg-body mt-4">
+    <section class="bg-body mt-1">
     <div class="container">
         <div class="row">
-            <div class="col-md-10 col-sm-12 p-5">
-                <form action="" method="POST">
+            <div class="col-md-5">
+                <div class="d-flex h-100"><p class="lead align-self-center">This is space is for you to take notes.</p></div>
+            </div>
+            <div class="col-md-7 p-5">
+                <form action="" method="POST" id="notes-form">
                     {% csrf_token %}
-                    {{ form }}
-                    <input type="submit" name="Submit">
+                    {{ form.idea_note }}
+
                 </form>
             </div>
         </div>
@@ -238,8 +241,9 @@
         <div class="d-flex justify-content-end">
             <div>
 
-                <a href="{% url 'use_idea' %}" class="btn btn-primary active m-4 pb-3" aria-current="page">Use this online recommendation in my
-                    course</a>
+{#                <a href="{% url 'use_idea' %}" class="btn btn-primary active m-4 pb-3" aria-current="page">Use this online recommendation in my#}
+{#                    course</a>#}
+<button type="submit" form="notes-form" value="Submit" class="btn btn-primary active m-4 pb-3">Use this online recommendation in my course</button>
 
             </div>
 
