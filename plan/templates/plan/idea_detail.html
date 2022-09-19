@@ -227,8 +227,7 @@
             <div class="col-md-7 p-5">
                 <form action="" method="POST" id="notes-form">
                     {% csrf_token %}
-                    {{ form.idea_note }}
-
+                    {{ form.note_content }}
                 </form>
             </div>
         </div>

@@ -147,32 +147,35 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
     update = False
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
     # This idea id is used when saving the idea to a PlanCategoryOnlineIdea Object
+    form = NotesForm()
     GLOBAL_CONTEXT['current_idea'] = current_idea.pk
+    GLOBAL_CONTEXT['form'] = form
     context = {
         'idea': current_idea,
 
     }
     context.update(GLOBAL_CONTEXT)
     if detailed_view == 'detailed_view':
-        try:
-            instance_note = current_idea.note_online_idea.all()[0]
-            form = NotesForm(
-                instance=instance_note)  # todo needs generalize to the case where there are many notes for an online idea
-            update = True
-        except IndexError:
-            form = NotesForm()
 
-        context['form'] = form
-        if request.method == 'POST':
-            form = NotesForm(request.POST, instance=instance_note) if update else NotesForm(request.POST)
-            if form.is_valid():
-                new_note = form.save(commit=False)
-                new_note.online_idea = current_idea
-                new_note.save()
-
-            # updates the form with the new note
-            context['form'] = NotesForm(instance=current_idea.note_online_idea.all()[0])
-            # pdb.set_trace()
+        # try:
+        #     instance_note = current_idea.note_online_idea.all()[0]
+        #     form = NotesForm(
+        #         instance=instance_note)  # todo needs generalize to the case where there are many notes for an online idea
+        #     update = True
+        # except IndexError:
+        #     form = NotesForm()
+        #
+        # context['form'] = form
+        # if request.method == 'POST':
+        #     form = NotesForm(request.POST, instance=instance_note) if update else NotesForm(request.POST)
+        #     if form.is_valid():
+        #         new_note = form.save(commit=False)
+        #         new_note.online_idea = current_idea
+        #         new_note.save()
+        #
+        #     # updates the form with the new note
+        #     context['form'] = NotesForm(instance=current_idea.note_online_idea.all()[0])
+        #     # pdb.set_trace()
         return render(request, 'plan/idea_detail.html', context=context)
     else:
         # todo this is where get request are handled, here is it where saved notes are displayed.
