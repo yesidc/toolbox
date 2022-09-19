@@ -225,7 +225,7 @@
                 <div class="d-flex h-100"><p class="lead align-self-center">This is space is for you to take notes.</p></div>
             </div>
             <div class="col-md-7 p-5">
-                <form action="{% url 'use_idea' %}" method="POST" id="notes-form">
+                <form action="" method="POST" id="notes-form">
                     {% csrf_token %}
                     {{ form.note_content }}
                 </form>
