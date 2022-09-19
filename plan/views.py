@@ -144,33 +144,50 @@ def rules_regulations(request):
 
 
 def idea_overview_detail(request, category_name, idea_id, detailed_view):
-
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
     # This idea id is used when saving the idea to a PlanCategoryOnlineIdea Object
-    form = NotesForm()
     GLOBAL_CONTEXT['current_idea'] = current_idea.pk
-    GLOBAL_CONTEXT['form'] = form
     if GLOBAL_CONTEXT['current_category'] is None:
         GLOBAL_CONTEXT['current_category'] = Category.objects.get(category_name=category_name)
+
+    note_form = NotesForm()
+    try:
+        pcoi_obj = PlanCategoryOnlineIdea.objects.get(
+                    plan=Plan.objects.get(plan_name=GLOBAL_CONTEXT['current_user_plan']),
+                    category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
+                    idea=OnlineIdea.objects.get(pk=GLOBAL_CONTEXT['current_idea']),
+
+                )
+        note_form = NotesForm(initial={'note_content':pcoi_obj.notes})
+    except:
+        pcoi_obj= None
+
+
+
+
+
     context = {
         'idea': current_idea,
-
+        'note_form':note_form
     }
     context.update(GLOBAL_CONTEXT)
+
+
 
     # handles all logic when user adds idea or/and note from the idea_detail page
     if request.method == "POST":
 
-        form = NotesForm(request.POST)
-        if form.is_valid():
-            pcoi_obj, created = PlanCategoryOnlineIdea.objects.get_or_create(
-                plan=Plan.objects.get(plan_name=GLOBAL_CONTEXT['current_user_plan']),
-                category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
-                idea=OnlineIdea.objects.get(pk=GLOBAL_CONTEXT['current_idea']),
+        note_form = NotesForm(request.POST)
+        if note_form.is_valid():
+            if pcoi_obj is None:
+                pcoi_obj= PlanCategoryOnlineIdea.objects.create(
+                    plan=Plan.objects.get(plan_name=GLOBAL_CONTEXT['current_user_plan']),
+                    category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
+                    idea=OnlineIdea.objects.get(pk=GLOBAL_CONTEXT['current_idea']),
 
-            )
+                )
 
-            pcoi_obj.notes = form.cleaned_data['note_content']
+            pcoi_obj.notes = note_form.cleaned_data['note_content']
             pcoi_obj.save()
 
         return redirect(GLOBAL_CONTEXT['current_category'])
