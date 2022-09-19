@@ -259,6 +259,25 @@ def use_idea(request, save_note=None):
     elif GLOBAL_CONTEXT['current_category'] is None:
         GLOBAL_CONTEXT['current_category'] = request.META.get('HTTP_REFERER').split('/')[3]
 
+
+
+    #handles all logic when user adds idea or/and note from the idea_detail page
+    if request.method == "POST":
+        print()
+        pcoi_obj, created = PlanCategoryOnlineIdea.objects.get_or_create(
+                plan=Plan.objects.get(plan_name=GLOBAL_CONTEXT['current_user_plan']),
+                category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
+                idea=OnlineIdea.objects.get(pk=GLOBAL_CONTEXT['current_idea']),
+
+            )
+        # pcoi object already exists in database, so we update the note
+        if not created:
+            form = NotesForm(request.POST)
+            if form.is_valid():
+                pcoi_obj.update(note= form.cleaned_data['note_content'])
+                return redirect(GLOBAL_CONTEXT['current_category'])
+
+
     if request.GET.get('delete_idea'):
         # Delete object
         PlanCategoryOnlineIdea.objects.filter(
