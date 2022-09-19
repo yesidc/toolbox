@@ -157,25 +157,6 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
     context.update(GLOBAL_CONTEXT)
     if detailed_view == 'detailed_view':
 
-        # try:
-        #     instance_note = current_idea.note_online_idea.all()[0]
-        #     form = NotesForm(
-        #         instance=instance_note)  # todo needs generalize to the case where there are many notes for an online idea
-        #     update = True
-        # except IndexError:
-        #     form = NotesForm()
-        #
-        # context['form'] = form
-        # if request.method == 'POST':
-        #     form = NotesForm(request.POST, instance=instance_note) if update else NotesForm(request.POST)
-        #     if form.is_valid():
-        #         new_note = form.save(commit=False)
-        #         new_note.online_idea = current_idea
-        #         new_note.save()
-        #
-        #     # updates the form with the new note
-        #     context['form'] = NotesForm(instance=current_idea.note_online_idea.all()[0])
-        #     # pdb.set_trace()
         return render(request, 'plan/idea_detail.html', context=context)
     else:
         # todo this is where get request are handled, here is it where saved notes are displayed.
@@ -264,20 +245,20 @@ def use_idea(request, save_note=None):
     #handles all logic when user adds idea or/and note from the idea_detail page
     if request.method == "POST":
 
-        pcoi_obj, created = PlanCategoryOnlineIdea.objects.get_or_create(
+        form = NotesForm(request.POST)
+        if form.is_valid():
+            pcoi_obj, created = PlanCategoryOnlineIdea.objects.get_or_create(
                 plan=Plan.objects.get(plan_name=GLOBAL_CONTEXT['current_user_plan']),
                 category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
                 idea=OnlineIdea.objects.get(pk=GLOBAL_CONTEXT['current_idea']),
 
             )
-        # pcoi object already exists in database, so we update the note
-        if not created:
-            form = NotesForm(request.POST)
-            if form.is_valid():
-                pcoi_obj.notes = form.cleaned_data['note_content']
-                pcoi_obj.save()
-                #pcoi_obj.update(notes= form.cleaned_data['note_content'])
-                return redirect(GLOBAL_CONTEXT['current_category'])
+
+            pcoi_obj.notes =  form.cleaned_data['note_content']
+            pcoi_obj.save()
+
+        return redirect(GLOBAL_CONTEXT['current_category'])
+
 
 
     if request.GET.get('delete_idea'):
