@@ -1,7 +1,7 @@
 {% extends "plan/base_block.html" %}
  {% load static %}
 {% block building_block_idea %}
-    <section class="bg-light text-dark">
+    <section class="bg-light text-dark mb-3">
 
         {#    Idea's Property#}
         <div class="container">
@@ -214,7 +214,7 @@
     </section>
 
 
-{#    User's notes/comments#}
+{% if user.is_authenticated%}{#    User's notes/comments#}
 
 
 
@@ -247,7 +247,7 @@
             </div>
 
         </div>
-</section>
+</section>{% endif %}
 
   <script src="{% static 'plan/js/utils.js' %}"></script>
     <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>

@@ -107,7 +107,7 @@
 
         <section class="bg-dark text-light">
 
-            <div class="d-flex justify-content-end">
+            {% if  user.is_authenticated%}<div class="d-flex justify-content-end">
                 <div>
 
                     <a href="{% url 'use_idea' %}" class="btn btn-primary active m-4 pb-3" aria-current="page"
@@ -116,7 +116,7 @@
 
                 </div>
 
-            </div>
+            </div>{% endif %}
         </section>
 
 
