@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from tbcore.models import Notes, Plan
+from tbcore.models import Plan
 
 
 class NotesForm(forms.Form):

@@ -263,7 +263,7 @@ def use_idea(request, save_note=None):
 
     #handles all logic when user adds idea or/and note from the idea_detail page
     if request.method == "POST":
-        print()
+
         pcoi_obj, created = PlanCategoryOnlineIdea.objects.get_or_create(
                 plan=Plan.objects.get(plan_name=GLOBAL_CONTEXT['current_user_plan']),
                 category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
@@ -274,7 +274,9 @@ def use_idea(request, save_note=None):
         if not created:
             form = NotesForm(request.POST)
             if form.is_valid():
-                pcoi_obj.update(note= form.cleaned_data['note_content'])
+                pcoi_obj.notes = form.cleaned_data['note_content']
+                pcoi_obj.save()
+                #pcoi_obj.update(notes= form.cleaned_data['note_content'])
                 return redirect(GLOBAL_CONTEXT['current_category'])
 
 
@@ -295,9 +297,6 @@ def use_idea(request, save_note=None):
         }
         return JsonResponse(json_dic)
 
-    # handles all logic related to saving an idea and note from the idea_detail page.
-    elif save_note:
-        print()
 
     else:
         # prevents user from saving the same ideas twice for the same course plan.
