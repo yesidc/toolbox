@@ -244,7 +244,7 @@ def create_plan(request, start_add):
 
 
 @login_required
-def use_idea(request):
+def use_idea(request, save_note=None):
     # todo this should be into a try method, or return and 404 error. IF the server is reloaed the GLOBAL_CONTEXT IS LOST AND the OBJECT below cannot be created
     # todo there should not be repeated objects, use Unique.
 
@@ -275,6 +275,10 @@ def use_idea(request):
             'plan_id': GLOBAL_CONTEXT['current_user_plan'].pk
         }
         return JsonResponse(json_dic)
+
+    # handles all logic related to saving an idea and note from the idea_detail page.
+    elif save_note:
+        print()
 
     else:
         # prevents user from saving the same ideas twice for the same course plan.
