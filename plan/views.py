@@ -19,10 +19,9 @@ import json
 # todo having a global context causes the migrations error Operational error. Since these lines of
 # todo are run before the migration operation is executed.
 GLOBAL_CONTEXT = {
-    'current_user_plan': None,  # the plan users works on
+
     'form': PlanForm(),
-    'current_category': None,
-    'current_idea': None
+
 }
 
 
@@ -42,9 +41,9 @@ def get_ideas(user, category_url, current_user_plan_id):
 
 # todo move to a helpers.py module. There should only be views definitions here
 def get_category(category_url):
-    # todo cache this information, as the output is always the same
-    # holds the name of the current building block or category
-    GLOBAL_CONTEXT['current_category'] = category_url
+    """
+    Fetches the CategoryOnlineIdea objects
+    """
     # There are a total of eight building blocks hence 8 CategoryOnlineIdea objects.
     return CategoryOnlineIdea.objects.get(category__category_url=category_url)
 
@@ -52,13 +51,15 @@ def get_category(category_url):
 # todo use get_object_or_404() function with all the category_block_name variable
 
 def show_block(request, category_url, next_page):
+    request.session['current_category'] = category_url
     if 'current_user_plan' in request.session:
         ideas_list = get_ideas(request.user, category_url, request.session['current_user_plan'])
     else:
         ideas_list = None
     context = {'category': get_category(category_url),
                'next_page': next_page,
-               'ideas_list': ideas_list, }
+               'ideas_list': ideas_list,
+               'current_category': category_url}
     context.update(GLOBAL_CONTEXT)
 
     return render(request, 'plan/block_content.html', context=context, )
@@ -76,16 +77,16 @@ def show_block(request, category_url, next_page):
 def idea_overview_detail(request, category_name, idea_id, detailed_view):
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
     # This idea id is used when saving the idea to a PlanCategoryOnlineIdea Object
-    GLOBAL_CONTEXT['current_idea'] = current_idea.pk
-    if GLOBAL_CONTEXT['current_category'] is None:
-        GLOBAL_CONTEXT['current_category'] = Category.objects.get(category_name=category_name)
+    request.session['current_idea'] = current_idea.pk
+    # if GLOBAL_CONTEXT['current_category'] is None:
+    #     GLOBAL_CONTEXT['current_category'] = Category.objects.get(category_name=category_name)
 
     note_form = NotesForm()
     try:
         pcoi_obj = PlanCategoryOnlineIdea.objects.get(
-            plan=Plan.objects.get(plan_name=GLOBAL_CONTEXT['current_user_plan']),
-            category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
-            idea=OnlineIdea.objects.get(pk=GLOBAL_CONTEXT['current_idea']),
+            plan=Plan.objects.get(pk=request.session['current_user_plan']),
+            category=Category.objects.get(category_url=request.session['current_category']),
+            idea=OnlineIdea.objects.get(pk=request.session['current_idea']),
 
         )
         note_form = NotesForm(initial={'note_content': pcoi_obj.notes})
@@ -94,7 +95,8 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
 
     context = {
         'idea': current_idea,
-        'note_form': note_form
+        'note_form': note_form,
+        'current_category': request.session['current_category']
     }
     context.update(GLOBAL_CONTEXT)
 
@@ -105,16 +107,16 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
         if note_form.is_valid():
             if pcoi_obj is None:
                 pcoi_obj = PlanCategoryOnlineIdea.objects.create(
-                    plan=Plan.objects.get(plan_name=GLOBAL_CONTEXT['current_user_plan']),
-                    category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
-                    idea=OnlineIdea.objects.get(pk=GLOBAL_CONTEXT['current_idea']),
+                    plan=Plan.objects.get(pk=request.session['current_user_plan']),
+                    category=Category.objects.get(category_url=request.session['current_category']),
+                    idea=OnlineIdea.objects.get(pk=request.session['current_idea']),
 
                 )
 
             pcoi_obj.notes = note_form.cleaned_data['note_content']
             pcoi_obj.save()
 
-        return redirect(GLOBAL_CONTEXT['current_category'])
+        return redirect(request.session['current_category'])
 
     # manages get request
     if detailed_view == 'detailed_view':

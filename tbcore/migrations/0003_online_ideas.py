@@ -417,7 +417,9 @@ Code (Git irgendwas)</li>
 )
 #    peer_review = OnlineIdea.objects.create(
 #        idea_name=,
-#        brief_description=,
+#        brief_description= """
+
+    #        """,
 #        examples_application=,
 #        tool=,
 #        implementation_steps=,
