@@ -26,7 +26,7 @@ GLOBAL_CONTEXT = {
 }
 
 
-def get_ideas(user, category_url):
+def get_ideas(user, category_url, current_user_plan_id):
     """
     Fetches all ideas that belong to a particular user, plan and category from PlanCategoryOnlineIdea object.
     """
@@ -35,7 +35,7 @@ def get_ideas(user, category_url):
         return None
     else:
         idea_list = [i.idea.id for i in PlanCategoryOnlineIdea.objects.filter(
-            Q(plan__user=user) & Q(plan__plan_name=GLOBAL_CONTEXT['current_user_plan']) & Q(
+            Q(plan__user=user) & Q(plan__pk=current_user_plan_id) & Q(
                 category__category_url=category_url))]
         return idea_list
 
@@ -55,7 +55,7 @@ def human_touch(request):
     context = {'category': get_category('human_touch'),
                'next_page': 'teaching_material',
                'name_next_page': 'Teaching Material',
-               'ideas_list': get_ideas(request.user, 'human_touch')}
+               'ideas_list': get_ideas(request.user, 'human_touch',request.session['current_user_plan']), }
     context.update(GLOBAL_CONTEXT)
 
     return render(request, 'plan/block_content.html', context=context, )
@@ -67,7 +67,7 @@ def teaching_material(request):
     context = {'category': get_category('teaching_material'),
                'next_page': 'organization',
                'name_next_page': 'Organization',
-               'ideas_list': get_ideas(request.user, 'teaching_material')}
+               'ideas_list': get_ideas(request.user, 'teaching_material',request.session['current_user_plan'])}
     context.update(GLOBAL_CONTEXT)
     # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
@@ -79,7 +79,7 @@ def organization(request):
     context = {'category': get_category('organization'),
                'next_page': 'assignment',
                'name_next_page': 'Assignment',
-               'ideas_list': get_ideas(request.user, 'organization')}
+               'ideas_list': get_ideas(request.user, 'organization',request.session['current_user_plan']),}
     context.update(GLOBAL_CONTEXT)
     # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
@@ -91,7 +91,7 @@ def assignment(request):
     context = {'category': get_category('assignment'),
                'next_page': 'discussion',
                'name_next_page': 'Discussion',
-               'ideas_list': get_ideas(request.user, 'assignment')}
+               'ideas_list': get_ideas(request.user, 'assignment',request.session['current_user_plan'])}
     context.update(GLOBAL_CONTEXT)
     # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
@@ -103,7 +103,7 @@ def discussion(request):
     context = {'category': get_category('discussion'),
                'next_page': 'student_engagement',
                'name_next_page': 'Student Engagement',
-               'ideas_list': get_ideas(request.user, 'discussion')}
+               'ideas_list': get_ideas(request.user, 'discussion',request.session['current_user_plan'])}
     context.update(GLOBAL_CONTEXT)
     # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
@@ -115,7 +115,7 @@ def student_engagement(request):
     context = {'category': get_category('student_engagement'),
                'next_page': 'assessment',
                'name_next_page': 'Assessment',
-               'ideas_list': get_ideas(request.user, 'student_engagement')}
+               'ideas_list': get_ideas(request.user, 'student_engagement',request.session['current_user_plan'])}
     context.update(GLOBAL_CONTEXT)
     # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
     return render(request, 'plan/block_content.html', context=context)
@@ -364,6 +364,7 @@ def update_selected_idea(request):
     the side navigation bar, the ticked-off ideas reflect that of the current chosen plan/course
     """
     context = {'category': get_category(GLOBAL_CONTEXT['current_category']),
-               'ideas_list': get_ideas(request.user, GLOBAL_CONTEXT['current_category'])}
+               'ideas_list': get_ideas(request.user, GLOBAL_CONTEXT['current_category'], request.session['current_user_plan'])
+               }
     context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/update_ideas.html', context=context)

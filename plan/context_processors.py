@@ -18,4 +18,4 @@ def category_obj (request):
     """
     Returns list of tuples (category_name, category_url)
     """
-    return {'category_objects': Category.objects.values_list('category_name','category_url')}
+    return {'category_objects': Category.objects.values_list('category_name','category_url','next_page')}

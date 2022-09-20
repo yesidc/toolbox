@@ -19,6 +19,7 @@ def create_category(apps, schema_editor):
                 'questions. Especially the CogSci student body is very active and engaged to give everyone the same '
                 'opportunity and this should apply to all students, on-site and online. ',
         category_url= 'human_touch',
+        next_page= 'teaching_material',
 
     )
     teaching_material = Category.objects.create(
@@ -26,6 +27,7 @@ def create_category(apps, schema_editor):
         short_description='The teaching material constitutes the basis of the study material. It covers all necessary sources for meeting the learning goals, which also includes additional explanations that make topics more tangible or comprehendable. If synchronous discussions comprise an essential part of the learning material, then they must be accessible to online students as well. Therefore, for online courses ',
         reasons='Since the COSMOS-program opened the Cognitive Science Master for online students students from any time zone, any single and synchronous time slot for lecture meetings on-site or online would exclude one of the students. ',
         category_url = 'teaching_material',
+        next_page= 'organization',
 
     )
     organization = Category.objects.create(
@@ -51,13 +53,15 @@ def create_category(apps, schema_editor):
 
         reasons=' Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
         category_url= 'organization',
-
+        next_page= 'assignment',
     )
     assignment = Category.objects.create(
         category_name='Assignments',
         short_description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
         reasons='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
         category_url = 'assignment',
+        next_page= 'discussion',
+
 
     )
     discussion = Category.objects.create(
@@ -65,6 +69,7 @@ def create_category(apps, schema_editor):
         short_description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
         reasons='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia ',
         category_url = 'discussion',
+        next_page='student_engagement',
 
     )
     student_engagement = Category.objects.create(
@@ -72,6 +77,7 @@ def create_category(apps, schema_editor):
         short_description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
         reasons='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
         category_url = 'student_engagement',
+        next_page= 'assessment',
 
     )
     assessment = Category.objects.create(
@@ -79,7 +85,7 @@ def create_category(apps, schema_editor):
         short_description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia',
         reasons='Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia ',
         category_url = 'assessment',
-
+        next_page= 'rules_regulations',
     )
     rules_regulations = Category.objects.create(
         category_name='Rules & Regulations',

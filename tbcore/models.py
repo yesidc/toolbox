@@ -58,6 +58,7 @@ class Category (models.Model):
     reasons = models.TextField()
     references = models.TextField(null=True)
     category_url= models.CharField(max_length=50)
+    next_page = models.CharField(max_length=100, null=True)
 
 
     def __str__(self):
