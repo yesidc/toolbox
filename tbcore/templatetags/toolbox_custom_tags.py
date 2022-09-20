@@ -24,5 +24,5 @@ def remaining_categories(context, all_categories):
     """
     #Set that contains the names of the categories for which user has chosen at least one idea
     c_done = context['category_done_summary']
-    remaining_c = set([c_name for c_name, _ in all_categories]) - c_done
+    remaining_c = set([c_name for c_name, _ , _ in all_categories]) - c_done
     return remaining_c

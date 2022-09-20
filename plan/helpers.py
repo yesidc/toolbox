@@ -1,5 +1,5 @@
-from tbcore.models import PlanCategoryOnlineIdea
-
+from tbcore.models import PlanCategoryOnlineIdea, CategoryOnlineIdea
+from django.db.models import Q
 
 # todo DELETE FUNCTION, function implemented as class method. take a look at the Plan's model
 def category_done(curret_user_plan):
@@ -52,3 +52,24 @@ def context_summary(user, current_plan):
         category_idea_checklist.append((c, info_idea))
         info_idea=[]
     return category_idea_checklist, category_done_summary
+
+
+def get_category(category_url):
+    """
+    Fetches the CategoryOnlineIdea objects
+    """
+    # There are a total of eight building blocks hence 8 CategoryOnlineIdea objects.
+    return CategoryOnlineIdea.objects.get(category__category_url=category_url)
+
+def get_ideas(user, category_url, current_user_plan_id):
+    """
+    Fetches all ideas that belong to a particular user, plan and category from PlanCategoryOnlineIdea object.
+    """
+
+    if user.is_anonymous:
+        return None
+    else:
+        idea_list = [i.idea.id for i in PlanCategoryOnlineIdea.objects.filter(
+            Q(plan__user=user) & Q(plan__pk=current_user_plan_id) & Q(
+                category__category_url=category_url))]
+        return idea_list

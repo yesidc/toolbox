@@ -7,50 +7,31 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 
-from .helpers import category_done, is_ajax, context_summary
+from .helpers import category_done, is_ajax, context_summary, get_category, get_ideas
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
 import json
 
-# Create your views here.
+
+
 # todo optimize database queries,ex. create 500 users and evaluate performance
 
 
-# todo having a global context causes the migrations error Operational error. Since these lines of
-# todo are run before the migration operation is executed.
-GLOBAL_CONTEXT = {
-
-    'form': PlanForm(),
-
-}
-
-
-def get_ideas(user, category_url, current_user_plan_id):
-    """
-    Fetches all ideas that belong to a particular user, plan and category from PlanCategoryOnlineIdea object.
-    """
-
-    if user.is_anonymous:
-        return None
-    else:
-        idea_list = [i.idea.id for i in PlanCategoryOnlineIdea.objects.filter(
-            Q(plan__user=user) & Q(plan__pk=current_user_plan_id) & Q(
-                category__category_url=category_url))]
-        return idea_list
-
-
-# todo move to a helpers.py module. There should only be views definitions here
-def get_category(category_url):
-    """
-    Fetches the CategoryOnlineIdea objects
-    """
-    # There are a total of eight building blocks hence 8 CategoryOnlineIdea objects.
-    return CategoryOnlineIdea.objects.get(category__category_url=category_url)
-
+# GLOBAL_CONTEXT = {
+#
+#     'form': PlanForm(),
+#
+# }
 
 # todo use get_object_or_404() function with all the category_block_name variable
 
 def show_block(request, category_url, next_page):
+    """
+    Manages the content for all building blocks.
+
+    """
+    # User utilizes this form to create new plans/courses. Form available in all block pages.
+
     request.session['current_category'] = category_url
     request.session['current_next_page'] = next_page
     if 'current_user_plan' in request.session:
@@ -60,19 +41,10 @@ def show_block(request, category_url, next_page):
     context = {'category': get_category(category_url),
                'next_page': next_page,
                'ideas_list': ideas_list,
-               'current_category': category_url}
-    context.update(GLOBAL_CONTEXT)
+               'current_category': category_url,
+               'plan_form':   PlanForm()}
 
     return render(request, 'plan/block_content.html', context=context, )
-
-# def human_touch(request):
-#     context = {'category': get_category('human_touch'),
-#                'next_page': 'teaching_material',
-#                'name_next_page': 'Teaching Material',
-#                'ideas_list': get_ideas(request.user, 'human_touch',request.session['current_user_plan']), }
-#     context.update(GLOBAL_CONTEXT)
-#
-#     return render(request, 'plan/block_content.html', context=context, )
 
 
 def idea_overview_detail(request, category_name, idea_id, detailed_view):
@@ -97,9 +69,9 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
     context = {
         'idea': current_idea,
         'note_form': note_form,
-        'current_category': request.session['current_category']
+        'current_category': request.session['current_category'],
+        'plan_form': PlanForm()
     }
-    context.update(GLOBAL_CONTEXT)
 
     # handles all logic when user adds idea or/and note from the idea_detail page
     if request.method == "POST":
@@ -130,7 +102,8 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
 
 @login_required
 def checklist(request):
-    c_s, c_d = context_summary(request.user, request.session['current_user_plan'])
+    current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
+    c_s, c_d = context_summary(request.user, current_user_plan)
     context = {
         'context_summary': c_s,
         'category_done_summary': c_d
@@ -162,6 +135,7 @@ def create_plan(request, start_add):
                 new_plan.user = User.objects.get(username=request.user)
                 new_plan.save()
                 request.session['current_user_plan'] = new_plan.pk
+                request.session['current_user_plan_name'] = new_plan.plan_name
 
 
         except IntegrityError:
@@ -198,10 +172,10 @@ def create_plan(request, start_add):
 def use_idea(request, save_note=None):
     # todo this should be into a try method, or return and 404 error. IF the server is reloaed the GLOBAL_CONTEXT IS LOST AND the OBJECT below cannot be created
     # todo there should not be repeated objects, use Unique.
-
+    current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
     request.session['current_idea'] = request.GET.get('idea_id') or request.session['current_idea']
     # If there's no plan in the request.session['current_user_plan'] dictionary; grab the plan name from the DOM
-    #request.session['current_user_plan'] = request.session['current_user_plan'] or request.GET.get('plan_name_dom')
+    # request.session['current_user_plan'] = request.session['current_user_plan'] or request.GET.get('plan_name_dom')
 
     # If the system lost track of the current idea or category e.g., the server crashed; these are extracted from the
     # current URL
@@ -218,7 +192,7 @@ def use_idea(request, save_note=None):
                 idea__pk=request.session['current_idea']))[0].delete()
         # todo add to sessions as this is also computed in select_plan view
         # categories for which user has already selected at least one idea
-        category_ready = category_done(request.session['current_user_plan'])
+        category_ready = category_done(current_user_plan)
         # messages.info(request, 'Idea successfully deleted from your plan')
         json_dic = {
             'category_ready': list(category_ready),
@@ -244,7 +218,6 @@ def use_idea(request, save_note=None):
             messages.add_message(request, messages.INFO, 'This idea has been already added to you course plan')
             return redirect(request.META.get('HTTP_REFERER'))
 
-
     json_dic = {
         "category_id": request.session['current_category'],
         'plan_id': request.session['current_user_plan']
@@ -254,7 +227,7 @@ def use_idea(request, save_note=None):
         return JsonResponse(json_dic)
     else:
         # if user has selected and idea using the buttons provided by both the overview or detail idea page.
-        return redirect(GLOBAL_CONTEXT['current_category'])
+        return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
 
 
 def delete_pcoi_checklist(request):
@@ -275,19 +248,19 @@ def select_plan(request):
     request.session['current_user_plan'] = request.GET.get('plan_id')
 
     current_user_plan = Plan.objects.get(pk=request.GET.get('plan_id'))
+    request.session['current_user_plan_name'] = current_user_plan.plan_name
     # categories for which user has already selected at least one idea
     category_ready = category_done(current_user_plan)
 
     response_dict = {
         'category_ready': list(category_ready),
         # this is the name that is shown on the top right (Name is changed dynamically through the DOM)
-        'plan_name_ajax': current_user_plan.plan_name,
+        'plan_name_ajax': request.session['current_user_plan_name'],
         # this is the id assigned to the div element that contains all blocks/categories on the sidebar
         'plan_id_response': request.GET.get('plan_id')
     }
 
     return JsonResponse(response_dict)
-
 
 
 def update_selected_idea(request):
@@ -296,8 +269,9 @@ def update_selected_idea(request):
     the side navigation bar, the ticked-off ideas reflect that of the current chosen plan/course
     """
     context = {'category': get_category(request.session['current_category']),
-               'ideas_list': get_ideas(request.user, request.session['current_category'], request.session['current_user_plan']),
+               'ideas_list': get_ideas(request.user, request.session['current_category'],
+                                       request.session['current_user_plan']),
                'current_category': request.session['current_category']
                }
-    context.update(GLOBAL_CONTEXT)
+
     return render(request, 'plan/update_ideas.html', context=context)

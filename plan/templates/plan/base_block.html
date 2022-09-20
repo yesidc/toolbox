@@ -26,8 +26,8 @@
                         <p><span class="lead">Current Course:</span>
                             <span id="plan_name_dom">
                         {#                    if user has not chosen a plan, it defaults to the last plan created#}
-                                {% if current_user_plan.plan_name %}
-                                    {{ current_user_plan.plan_name }}
+                                {% if request.session.current_user_plan_name %}
+                                    {{ request.session.current_user_plan_name }}
                                 {% else %}
                                     {{ user_filter_plans.last }}
                                 {% endif %}
@@ -54,7 +54,7 @@
                         <div class="list-group-item list-group-item-action list-group-item-light p-3">
                             <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-3">
                                 {% csrf_token %}
-                                {{ form.plan_name }}
+                                {{ plan_form.plan_name }}
                                 <input type="submit" name="Submit" value="Add new course" class="btn-primary my-3 px-3">
                             </form>
 

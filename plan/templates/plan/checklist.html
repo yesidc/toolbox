@@ -174,9 +174,9 @@
             <p class="lead">You have not selected any online ideas from the building blocks:</p>
 
         <ul>
-              {% for c_name, c_url in category_objects %}
+              {% for c_name, c_url,c_next in category_objects %}
                 {% if c_name in category_left %}
-                         <li><a href="{% url c_url %}" class="link-info">{{ c_name }}</a></li>
+                         <li><a href="{% url 'show_block' c_url c_next %}" class="link-info">{{ c_name }}</a></li>
                 {% endif %}
 
             {% endfor %}
