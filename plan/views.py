@@ -153,26 +153,20 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
     note_form = NotesForm()
     try:
         pcoi_obj = PlanCategoryOnlineIdea.objects.get(
-                    plan=Plan.objects.get(plan_name=GLOBAL_CONTEXT['current_user_plan']),
-                    category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
-                    idea=OnlineIdea.objects.get(pk=GLOBAL_CONTEXT['current_idea']),
+            plan=Plan.objects.get(plan_name=GLOBAL_CONTEXT['current_user_plan']),
+            category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
+            idea=OnlineIdea.objects.get(pk=GLOBAL_CONTEXT['current_idea']),
 
-                )
-        note_form = NotesForm(initial={'note_content':pcoi_obj.notes})
+        )
+        note_form = NotesForm(initial={'note_content': pcoi_obj.notes})
     except:
-        pcoi_obj= None
-
-
-
-
+        pcoi_obj = None
 
     context = {
         'idea': current_idea,
-        'note_form':note_form
+        'note_form': note_form
     }
     context.update(GLOBAL_CONTEXT)
-
-
 
     # handles all logic when user adds idea or/and note from the idea_detail page
     if request.method == "POST":
@@ -180,7 +174,7 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
         note_form = NotesForm(request.POST)
         if note_form.is_valid():
             if pcoi_obj is None:
-                pcoi_obj= PlanCategoryOnlineIdea.objects.create(
+                pcoi_obj = PlanCategoryOnlineIdea.objects.create(
                     plan=Plan.objects.get(plan_name=GLOBAL_CONTEXT['current_user_plan']),
                     category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
                     idea=OnlineIdea.objects.get(pk=GLOBAL_CONTEXT['current_idea']),
@@ -201,16 +195,14 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
         return render(request, 'plan/idea_overview.html', context=context)
 
 
-
-
+@login_required
 def checklist(request):
-
-    c_s, c_d =context_summary(request.user, GLOBAL_CONTEXT['current_user_plan'])
-    context={
-        'context_summary':c_s,
+    c_s, c_d = context_summary(request.user, GLOBAL_CONTEXT['current_user_plan'])
+    context = {
+        'context_summary': c_s,
         'category_done_summary': c_d
     }
-    return render(request, 'plan/checklist.html', context= context)
+    return render(request, 'plan/checklist.html', context=context)
 
 
 @login_required
@@ -235,25 +227,32 @@ def create_plan(request, start_add):
             if form.is_valid():
                 new_plan = form.save(commit=False)
                 new_plan.user = User.objects.get(username=request.user)
-                GLOBAL_CONTEXT['current_user_plan'] = new_plan
-
                 new_plan.save()
+                request.session['current_user_plan'] = new_plan.pk
+
+
         except IntegrityError:
             # todo implment django messages
 
             messages.add_message(request, messages.INFO, 'This plan already exists')
 
-    # When user logs in, is prompted to create a course/plan by being redirected to a form, thi if statement handles it.
+    # When user logs in, is prompted to create a course/plan by being redirected to a form, this if statement handles
+    # it.
     if start_add == 'get_started':
         if request.method == "POST":
             plan_to_database()
 
             return redirect('human_touch')
+        try:
+            # if user does not fill out the form to create a new course/plan, the current plan/course
+            # is default to the last course the user created.
+            request.session['current_user_plan'] = Plan.objects.select_related('user').filter(
+                user=request.user).last().pk
+        except AttributeError:
+            # occurs when user has no plans in database, hence needs to add at least one to be able to save idea and
+            # notes.
+            request.session['current_user_plan'] = None
 
-        # if user does not fill out the form to create a new course/plan, the current plan/course
-        # is default to the last course the user created.
-        GLOBAL_CONTEXT['current_user_plan'] = plans = Plan.objects.select_related('user').filter(
-            user=request.user).last()
         return render(request, 'plan/course_name.html', context=context)
     elif start_add == 'add_new_plan':
         if request.method == "POST":
@@ -278,8 +277,6 @@ def use_idea(request, save_note=None):
     elif GLOBAL_CONTEXT['current_category'] is None:
         GLOBAL_CONTEXT['current_category'] = request.META.get('HTTP_REFERER').split('/')[3]
 
-
-
     if request.GET.get('delete_idea'):
         # Delete object
         PlanCategoryOnlineIdea.objects.filter(
@@ -289,7 +286,7 @@ def use_idea(request, save_note=None):
         # todo add to sessions as this is also computed in select_plan view
         # categories for which user has already selected at least one idea
         category_ready = category_done(GLOBAL_CONTEXT['current_user_plan'])
-        #messages.info(request, 'Idea successfully deleted from your plan')
+        # messages.info(request, 'Idea successfully deleted from your plan')
         json_dic = {
             'category_ready': list(category_ready),
             "category_id": GLOBAL_CONTEXT['current_category'],
@@ -308,15 +305,15 @@ def use_idea(request, save_note=None):
 
             )
 
-            #messages.add_message(request, messages.ERROR, 'Idea successfully added to your plan')
+            # messages.add_message(request, messages.ERROR, 'Idea successfully added to your plan')
 
         except IntegrityError:
 
             messages.add_message(request, messages.INFO, 'This idea has been already added to you course plan')
             return redirect(request.META.get('HTTP_REFERER'))
-    #return redirect( GLOBAL_CONTEXT['current_category'])
+    # return redirect( GLOBAL_CONTEXT['current_category'])
 
-    json_dic ={
+    json_dic = {
         "category_id": GLOBAL_CONTEXT['current_category'],
         'plan_id': GLOBAL_CONTEXT['current_user_plan'].pk
     }
@@ -328,14 +325,14 @@ def use_idea(request, save_note=None):
         return redirect(GLOBAL_CONTEXT['current_category'])
 
 
-
 def delete_pcoi_checklist(request):
     """
     Manages all related to deleting PlanCategoryOnlineIdea objects when users interact with the checklist page
     """
 
     PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id')).delete()
-    return JsonResponse({},status=200)
+    return JsonResponse({}, status=200)
+
 
 def select_plan(request):
     """
