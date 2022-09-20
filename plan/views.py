@@ -52,6 +52,7 @@ def get_category(category_url):
 
 def show_block(request, category_url, next_page):
     request.session['current_category'] = category_url
+    request.session['current_next_page'] = next_page
     if 'current_user_plan' in request.session:
         ideas_list = get_ideas(request.user, category_url, request.session['current_user_plan'])
     else:
@@ -116,7 +117,7 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
             pcoi_obj.notes = note_form.cleaned_data['note_content']
             pcoi_obj.save()
 
-        return redirect(request.session['current_category'])
+        return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
 
     # manages get request
     if detailed_view == 'detailed_view':
@@ -129,7 +130,7 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
 
 @login_required
 def checklist(request):
-    c_s, c_d = context_summary(request.user, GLOBAL_CONTEXT['current_user_plan'])
+    c_s, c_d = context_summary(request.user, request.session['current_user_plan'])
     context = {
         'context_summary': c_s,
         'category_done_summary': c_d
@@ -198,31 +199,31 @@ def use_idea(request, save_note=None):
     # todo this should be into a try method, or return and 404 error. IF the server is reloaed the GLOBAL_CONTEXT IS LOST AND the OBJECT below cannot be created
     # todo there should not be repeated objects, use Unique.
 
-    GLOBAL_CONTEXT['current_idea'] = request.GET.get('idea_id') or GLOBAL_CONTEXT['current_idea']
-    # If there's no plan in the GLOBAL_CONTEXT dictionary; grab the plan name from the DOM
-    GLOBAL_CONTEXT['current_user_plan'] = GLOBAL_CONTEXT['current_user_plan'] or request.GET.get('plan_name_dom')
+    request.session['current_idea'] = request.GET.get('idea_id') or request.session['current_idea']
+    # If there's no plan in the request.session['current_user_plan'] dictionary; grab the plan name from the DOM
+    #request.session['current_user_plan'] = request.session['current_user_plan'] or request.GET.get('plan_name_dom')
 
     # If the system lost track of the current idea or category e.g., the server crashed; these are extracted from the
     # current URL
-    if GLOBAL_CONTEXT['current_idea'] is None:
-        GLOBAL_CONTEXT['current_idea'] = request.META.get('HTTP_REFERER').split('/')[4]
-    elif GLOBAL_CONTEXT['current_category'] is None:
-        GLOBAL_CONTEXT['current_category'] = request.META.get('HTTP_REFERER').split('/')[3]
+    # if GLOBAL_CONTEXT['current_idea'] is None:
+    #     GLOBAL_CONTEXT['current_idea'] = request.META.get('HTTP_REFERER').split('/')[4]
+    # elif GLOBAL_CONTEXT['current_category'] is None:
+    #     GLOBAL_CONTEXT['current_category'] = request.META.get('HTTP_REFERER').split('/')[3]
 
     if request.GET.get('delete_idea'):
         # Delete object
         PlanCategoryOnlineIdea.objects.filter(
-            Q(plan__user=request.user) & Q(plan__plan_name=GLOBAL_CONTEXT['current_user_plan']) & Q(
-                category__category_url=GLOBAL_CONTEXT['current_category']) & Q(
-                idea__pk=GLOBAL_CONTEXT['current_idea']))[0].delete()
+            Q(plan__user=request.user) & Q(plan__pk=request.session['current_user_plan']) & Q(
+                category__category_url=request.session['current_category']) & Q(
+                idea__pk=request.session['current_idea']))[0].delete()
         # todo add to sessions as this is also computed in select_plan view
         # categories for which user has already selected at least one idea
-        category_ready = category_done(GLOBAL_CONTEXT['current_user_plan'])
+        category_ready = category_done(request.session['current_user_plan'])
         # messages.info(request, 'Idea successfully deleted from your plan')
         json_dic = {
             'category_ready': list(category_ready),
-            "category_id": GLOBAL_CONTEXT['current_category'],
-            'plan_id': GLOBAL_CONTEXT['current_user_plan'].pk
+            "category_id": request.session['current_category'],
+            'plan_id': request.session['current_user_plan']
         }
         return JsonResponse(json_dic)
 
@@ -231,23 +232,22 @@ def use_idea(request, save_note=None):
         # prevents user from saving the same ideas twice for the same course plan.
         try:
             PlanCategoryOnlineIdea.objects.create(
-                plan=Plan.objects.get(plan_name=GLOBAL_CONTEXT['current_user_plan']),
-                category=Category.objects.get(category_url=GLOBAL_CONTEXT['current_category']),
-                idea=OnlineIdea.objects.get(pk=GLOBAL_CONTEXT['current_idea']),
+                plan=Plan.objects.get(pk=request.session['current_user_plan']),
+                category=Category.objects.get(category_url=request.session['current_category']),
+                idea=OnlineIdea.objects.get(pk=request.session['current_idea']),
 
             )
 
-            # messages.add_message(request, messages.ERROR, 'Idea successfully added to your plan')
 
         except IntegrityError:
 
             messages.add_message(request, messages.INFO, 'This idea has been already added to you course plan')
             return redirect(request.META.get('HTTP_REFERER'))
-    # return redirect( GLOBAL_CONTEXT['current_category'])
+
 
     json_dic = {
-        "category_id": GLOBAL_CONTEXT['current_category'],
-        'plan_id': GLOBAL_CONTEXT['current_user_plan'].pk
+        "category_id": request.session['current_category'],
+        'plan_id': request.session['current_user_plan']
     }
     # if user has either deleted or added an idea using the checkboxes on the blocks/category page
     if is_ajax(request):
@@ -295,8 +295,9 @@ def update_selected_idea(request):
     Updates the content of the block_content page such that when the user switches to a different course/plan using
     the side navigation bar, the ticked-off ideas reflect that of the current chosen plan/course
     """
-    context = {'category': get_category(GLOBAL_CONTEXT['current_category']),
-               'ideas_list': get_ideas(request.user, GLOBAL_CONTEXT['current_category'], request.session['current_user_plan'])
+    context = {'category': get_category(request.session['current_category']),
+               'ideas_list': get_ideas(request.user, request.session['current_category'], request.session['current_user_plan']),
+               'current_category': request.session['current_category']
                }
     context.update(GLOBAL_CONTEXT)
     return render(request, 'plan/update_ideas.html', context=context)
