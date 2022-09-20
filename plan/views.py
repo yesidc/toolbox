@@ -339,21 +339,23 @@ def select_plan(request):
     Triggered when user chooses to work on a different plan. User can switch to a
     different plan using the navigation bar on the left.
     """
-    GLOBAL_CONTEXT['current_user_plan'] = Plan.objects.get(pk=request.GET.get('plan_id'))
+    # update current_user_plan stored in sessions.
+    request.session['current_user_plan'] = request.GET.get('plan_id')
 
+    current_user_plan = Plan.objects.get(pk=request.GET.get('plan_id'))
     # categories for which user has already selected at least one idea
-    category_ready = category_done(GLOBAL_CONTEXT['current_user_plan'])
+    category_ready = category_done(current_user_plan)
 
     response_dict = {
         'category_ready': list(category_ready),
         # this is the name that is shown on the top right (Name is changed dynamically through the DOM)
-        'plan_name_ajax': GLOBAL_CONTEXT['current_user_plan'].plan_name,
+        'plan_name_ajax': current_user_plan.plan_name,
         # this is the id assigned to the div element that contains all blocks/categories on the sidebar
         'plan_id_response': request.GET.get('plan_id')
     }
-    # return JsonResponse(response_dict, safe=False)
+
     return JsonResponse(response_dict)
-    # return render(request, 'plan/block_content.html', context=context)
+
 
 
 def update_selected_idea(request):
