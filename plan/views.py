@@ -102,13 +102,18 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
 
 @login_required
 def checklist(request):
-    current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
-    c_s, c_d = context_summary(request.user, current_user_plan)
-    context = {
-        'context_summary': c_s,
-        'category_done_summary': c_d
-    }
-    return render(request, 'plan/checklist.html', context=context)
+    if request.session['current_user_plan'] is not None:
+        current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
+        c_s, c_d = context_summary(request.user, current_user_plan)
+        context = {
+            'context_summary': c_s,
+            'category_done_summary': c_d
+        }
+        return render(request, 'plan/checklist.html', context=context)
+    else:
+        messages.add_message(request, messages.INFO, 'First add a plan to be able to see the checklist page')
+        return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
+
 
 
 @login_required
