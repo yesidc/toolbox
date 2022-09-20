@@ -51,96 +51,26 @@ def get_category(category_url):
 
 # todo use get_object_or_404() function with all the category_block_name variable
 
-def human_touch(request):
-    context = {'category': get_category('human_touch'),
-               'next_page': 'teaching_material',
-               'name_next_page': 'Teaching Material',
-               'ideas_list': get_ideas(request.user, 'human_touch',request.session['current_user_plan']), }
+def show_block(request, category_url, next_page):
+    if 'current_user_plan' in request.session:
+        ideas_list = get_ideas(request.user, category_url, request.session['current_user_plan'])
+    else:
+        ideas_list = None
+    context = {'category': get_category(category_url),
+               'next_page': next_page,
+               'ideas_list': ideas_list, }
     context.update(GLOBAL_CONTEXT)
 
     return render(request, 'plan/block_content.html', context=context, )
 
-
-def teaching_material(request):
-    # category_teaching_material = CategoryOnlineIdea.objects.get(category__category_name='Teaching Material')
-    # GLOBAL_CONTEXT['current_category'] = 'teaching_material'
-    context = {'category': get_category('teaching_material'),
-               'next_page': 'organization',
-               'name_next_page': 'Organization',
-               'ideas_list': get_ideas(request.user, 'teaching_material',request.session['current_user_plan'])}
-    context.update(GLOBAL_CONTEXT)
-    # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
-    return render(request, 'plan/block_content.html', context=context)
-
-
-def organization(request):
-    # category_organization = CategoryOnlineIdea.objects.get(category__category_name='Organization')
-    # GLOBAL_CONTEXT['current_category'] = 'organization'
-    context = {'category': get_category('organization'),
-               'next_page': 'assignment',
-               'name_next_page': 'Assignment',
-               'ideas_list': get_ideas(request.user, 'organization',request.session['current_user_plan']),}
-    context.update(GLOBAL_CONTEXT)
-    # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
-    return render(request, 'plan/block_content.html', context=context)
-
-
-def assignment(request):
-    # category_assignmet = CategoryOnlineIdea.objects.get(category__category_name='Assignments')
-    # GLOBAL_CONTEXT['current_category'] = 'assignment'
-    context = {'category': get_category('assignment'),
-               'next_page': 'discussion',
-               'name_next_page': 'Discussion',
-               'ideas_list': get_ideas(request.user, 'assignment',request.session['current_user_plan'])}
-    context.update(GLOBAL_CONTEXT)
-    # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
-    return render(request, 'plan/block_content.html', context=context)
-
-
-def discussion(request):
-    # category_discussion = CategoryOnlineIdea.objects.get(category__category_name='Discussion')
-    # GLOBAL_CONTEXT['current_category'] = 'discussion'
-    context = {'category': get_category('discussion'),
-               'next_page': 'student_engagement',
-               'name_next_page': 'Student Engagement',
-               'ideas_list': get_ideas(request.user, 'discussion',request.session['current_user_plan'])}
-    context.update(GLOBAL_CONTEXT)
-    # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
-    return render(request, 'plan/block_content.html', context=context)
-
-
-def student_engagement(request):
-    # category_student_engagement = CategoryOnlineIdea.objects.get(category__category_name='Student Engagement')
-    # GLOBAL_CONTEXT['current_category'] = 'student_engagement'
-    context = {'category': get_category('student_engagement'),
-               'next_page': 'assessment',
-               'name_next_page': 'Assessment',
-               'ideas_list': get_ideas(request.user, 'student_engagement',request.session['current_user_plan'])}
-    context.update(GLOBAL_CONTEXT)
-    # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
-    return render(request, 'plan/block_content.html', context=context)
-
-
-def assessment(request):
-    # category_assessment = CategoryOnlineIdea.objects.get(category__category_name='Assessment')
-    # GLOBAL_CONTEXT['current_category'] = 'assessment'
-    context = {'category': get_category('assessment'),
-               'next_page': 'rules_regulations',
-               'name_next_page': 'Rules & Regulations',
-               'ideas_list': get_ideas(request.user, 'assessment')}
-    context.update(GLOBAL_CONTEXT)
-    # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
-    return render(request, 'plan/block_content.html', context=context)
-
-
-def rules_regulations(request):
-    # category_rules_regulations = CategoryOnlineIdea.objects.get(category__category_name='Rules & Regulations')
-    # GLOBAL_CONTEXT['current_category'] = 'rules_regulations'
-    context = {'category': get_category('rules_regulations'),
-               'ideas_list': get_ideas(request.user, 'rules_regulations')}
-    context.update(GLOBAL_CONTEXT)
-    # context['current_user_plan'] = get_latest_plan(request.user,context['current_user_plan'])
-    return render(request, 'plan/block_content.html', context=context)
+# def human_touch(request):
+#     context = {'category': get_category('human_touch'),
+#                'next_page': 'teaching_material',
+#                'name_next_page': 'Teaching Material',
+#                'ideas_list': get_ideas(request.user, 'human_touch',request.session['current_user_plan']), }
+#     context.update(GLOBAL_CONTEXT)
+#
+#     return render(request, 'plan/block_content.html', context=context, )
 
 
 def idea_overview_detail(request, category_name, idea_id, detailed_view):

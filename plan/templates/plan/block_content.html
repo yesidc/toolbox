@@ -162,8 +162,8 @@
             <div>
 
                 {% if category.category.category_name != 'Rules & Regulations' %}
-                    <a href="{% url  next_page %}" class="btn btn-primary active m-4" aria-current="page">Next Building
-                        Block: {{ name_next_page }}</a>
+                    <a href="{% url  'show_block' next_page category.category.next_page %}" class="btn btn-primary active m-4" aria-current="page">Next Building
+                        Block: {{ category.category.category_name }}</a>
                 {% endif %}
 
             </div>
