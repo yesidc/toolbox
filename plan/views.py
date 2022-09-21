@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 
-from .helpers import category_done, is_ajax, context_summary, get_category, get_ideas
+from .helpers import category_done, is_ajax, context_summary, get_category, get_ideas, has_plan
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
 import json
@@ -72,7 +72,9 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
 
     # handles all logic when user adds idea or/and note from the idea_detail page
     if request.method == "POST":
-
+        # checks if user has already created a plan
+        if not has_plan(request):
+            return redirect(request.META.get('HTTP_REFERER'))
         note_form = NotesForm(request.POST)
         if note_form.is_valid():
             if pcoi_obj is None:
@@ -172,7 +174,12 @@ def create_plan(request, start_add):
 def use_idea(request, save_note=None):
     # todo this should be into a try method, or return and 404 error. IF the server is reloaed the GLOBAL_CONTEXT IS LOST AND the OBJECT below cannot be created
     # todo there should not be repeated objects, use Unique.
+    # checks if user has already created a plan
+    if not has_plan(request):
+        return redirect(request.META.get('HTTP_REFERER'))
+
     current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
+
     request.session['current_idea'] = request.GET.get('idea_id') or request.session['current_idea']
     # If there's no plan in the request.session['current_user_plan'] dictionary; grab the plan name from the DOM
     # request.session['current_user_plan'] = request.session['current_user_plan'] or request.GET.get('plan_name_dom')
@@ -193,7 +200,6 @@ def use_idea(request, save_note=None):
         # todo add to sessions as this is also computed in select_plan view
         # categories for which user has already selected at least one idea
         category_ready = category_done(current_user_plan)
-        # messages.info(request, 'Idea successfully deleted from your plan')
         json_dic = {
             'category_ready': list(category_ready),
             "category_id": request.session['current_category'],
@@ -204,6 +210,8 @@ def use_idea(request, save_note=None):
 
     else:
         # prevents user from saving the same ideas twice for the same course plan.
+
+
         try:
             PlanCategoryOnlineIdea.objects.create(
                 plan=Plan.objects.get(pk=request.session['current_user_plan']),

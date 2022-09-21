@@ -1,5 +1,7 @@
-from tbcore.models import PlanCategoryOnlineIdea, CategoryOnlineIdea
+from tbcore.models import PlanCategoryOnlineIdea, CategoryOnlineIdea, Plan
 from django.db.models import Q
+from django.contrib import messages
+
 
 # todo DELETE FUNCTION, function implemented as class method. take a look at the Plan's model
 def category_done(curret_user_plan):
@@ -42,7 +44,7 @@ def context_summary(user, current_plan):
     for c in category_done_summary:
         # all these pcoi objects are related to a single category for which user already chose at least one idea
 
-        query_category= pcoi.filter(category__category_name=c)
+        query_category = pcoi.filter(category__category_name=c)
         for pcoi_instance in query_category:
             idea_name = pcoi_instance.idea.idea_name
             # this id used to delete the pcoi object from checklist page
@@ -50,7 +52,7 @@ def context_summary(user, current_plan):
             info_idea.append((idea_name, pcoi_instance_id))
 
         category_idea_checklist.append((c, info_idea))
-        info_idea=[]
+        info_idea = []
     return category_idea_checklist, category_done_summary
 
 
@@ -60,6 +62,7 @@ def get_category(category_url):
     """
     # There are a total of eight building blocks hence 8 CategoryOnlineIdea objects.
     return CategoryOnlineIdea.objects.get(category__category_url=category_url)
+
 
 def get_ideas(user, category_url, current_user_plan_id):
     """
@@ -73,3 +76,13 @@ def get_ideas(user, category_url, current_user_plan_id):
             Q(plan__user=user) & Q(plan__pk=current_user_plan_id) & Q(
                 category__category_url=category_url))]
         return idea_list
+
+
+def has_plan(request):
+    """
+    Checks if user has already created a plan.
+    Returns: returns false is user has not added any plans yet.
+    """
+    if not Plan.objects.select_related('user').filter(user=request.user).exists():
+        messages.add_message(request, messages.INFO, 'First create a plan to be able to save your progress.')
+        return False
