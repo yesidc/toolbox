@@ -1,5 +1,5 @@
 from django import template
-
+from tbcore.models import Category
 register = template.Library()
 
 
@@ -10,7 +10,15 @@ def add_hyphen(value):
     """
     return value.replace(' ', '-')
 
-
+@register.simple_tag()
+def get_name_next_category (value):
+    """
+    Retrieves the name of the next category
+    """
+    c = Category.objects.get(category_url=value)
+    c_name = c.category_name
+    c_next = c.next_page
+    return {'c_name':c_name, 'c_next':c_next}
 
 
 @register.simple_tag(takes_context=True)

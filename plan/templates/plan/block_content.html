@@ -1,4 +1,5 @@
 {% extends "plan/base_block.html" %}
+{% load toolbox_custom_tags %}
 {% block title %}
     ToolBox | Building Blocks
 {% endblock %}
@@ -162,8 +163,9 @@
             <div>
 
                 {% if category.category.category_name != 'Rules & Regulations' %}
-                    <a href="{% url  'show_block' next_page category.category.next_page %}" class="btn btn-primary active m-4" aria-current="page">Next Building
-                        Block: {{ category.category.category_name }}</a>
+                    {% get_name_next_category next_page as c_next_button %}
+                    <a href="{% url  'show_block' next_page c_next_button.c_next %}" class="btn btn-primary active m-4" aria-current="page">Next Building
+                        Block: {{ c_next_button.c_name }} </a>
                 {% endif %}
 
             </div>
