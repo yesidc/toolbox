@@ -13,7 +13,6 @@ from .forms import NotesForm, PlanForm
 import json
 
 
-
 # todo optimize database queries,ex. create 500 users and evaluate performance
 
 
@@ -30,8 +29,6 @@ def show_block(request, category_url, next_page):
     Manages the content for all building blocks.
 
     """
-    # User utilizes this form to create new plans/courses. Form available in all block pages.
-
     request.session['current_category'] = category_url
     request.session['current_next_page'] = next_page
     if 'current_user_plan' in request.session:
@@ -42,7 +39,7 @@ def show_block(request, category_url, next_page):
                'next_page': next_page,
                'ideas_list': ideas_list,
                'current_category': category_url,
-               'plan_form':   PlanForm()}
+               'plan_form': PlanForm()} # User utilizes this form to create new plans/courses. Form available in all block pages.
 
     return render(request, 'plan/block_content.html', context=context, )
 
@@ -115,7 +112,6 @@ def checklist(request):
         return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
 
 
-
 @login_required
 def create_plan(request, start_add):
     """
@@ -144,8 +140,6 @@ def create_plan(request, start_add):
 
 
         except IntegrityError:
-            # todo implment django messages
-
             messages.add_message(request, messages.INFO, 'This plan already exists')
 
     # When user logs in, is prompted to create a course/plan by being redirected to a form, this if statement handles
@@ -154,7 +148,8 @@ def create_plan(request, start_add):
         if request.method == "POST":
             plan_to_database()
 
-            return redirect('human_touch')
+            return redirect('show_block', 'human_touch', 'teaching_material')
+
         try:
             # if user does not fill out the form to create a new course/plan, the current plan/course
             # is default to the last course the user created.
