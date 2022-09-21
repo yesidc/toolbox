@@ -86,3 +86,5 @@ def has_plan(request):
     if not Plan.objects.select_related('user').filter(user=request.user).exists():
         messages.add_message(request, messages.INFO, 'First create a plan to be able to save your progress.')
         return False
+    else:
+        return True
