@@ -16,10 +16,20 @@ class PlanCategoryOnlineIdeaManager (models.Manager):
         return self.get_queryset().select_related('plan','idea').filter(plan__user=current_user,plan=current_plan)
 
 
+class PlanManager(models.Manager):
+
+    def get_user_plans (self, current_user):
+        """
+           Filters plan by user
+           Args:
+               current_user: current logged user
+           """
+        return self.get_queryset().select_related('user').filter(user=current_user)
+
 class Plan (models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    #todo should be unique, there should not be more than one plan with the same name.
     plan_name = models.CharField(max_length=100)  #usually something like course title
+    objects = PlanManager()
 
     class Meta:
         constraints = [
@@ -76,34 +86,21 @@ class OnlineIdea (models.Model):
     reusable = models.TextField(null=True)
     testimony = models.TextField(null=True)
     references = models.TextField( null=True)
-    #todo add how I plan to implement this idea. This field is not mandatory
+
 
     def __str__(self):
         return self.idea_name
 
 
-# class CategoryOnlineIdea1 (models.Model):
-#     #todo if category is deleted this object 'CategoryOnlineIdea' should be delted as well
-#     category = models.ManyToManyField(Category) #todo here you need something like on_delete
-#     online_idea = models.ForeignKey(OnlineIdea, on_delete = models.CASCADE)  #todo implement related name
-#     display = models.BooleanField()
 
 
 class CategoryOnlineIdea (models.Model):
-    #todo if category is deleted this object 'CategoryOnlineIdea' should be delted as well
+
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     online_idea = models.ManyToManyField(OnlineIdea) #todo implement related name
     # display = models.BooleanField()
 
-#todo needs a user field as a note also belongs to a single user, although a Plan object already belongs to a User, so maybe this is not needed.
-# todo retrieve all the notes that belong a user and then all the notes that belong to a particular idea.
-# class Notes (models.Model):
-#     idea_note = models.TextField(null=True) #todo delete null. we do not wat user to submit empy object
-#     online_idea = models.ForeignKey(OnlineIdea, on_delete=models.CASCADE, related_name='note_online_idea')
 
-
-
-#todo do we want to delete this object if for example a category is deleted?
 
 class PlanCategoryOnlineIdea (models.Model):
     plan = models.ForeignKey(Plan, on_delete= models.CASCADE,  related_name = 'plan_category_onlide_idea_plan')

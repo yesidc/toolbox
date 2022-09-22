@@ -5,22 +5,14 @@ from django.db.models import Q, Count
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
-from django.template import RequestContext
-
 from .helpers import category_done, is_ajax, context_summary, get_category, get_ideas, has_plan
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
-import json
+
 
 
 # todo optimize database queries,ex. create 500 users and evaluate performance
 
-
-# GLOBAL_CONTEXT = {
-#
-#     'form': PlanForm(),
-#
-# }
 
 # todo use get_object_or_404() function with all the category_block_name variable
 
@@ -49,8 +41,6 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
     # This idea id is used when saving the idea to a PlanCategoryOnlineIdea Object
     request.session['current_idea'] = current_idea.pk
     request.session['current_category']= category_name
-    # if GLOBAL_CONTEXT['current_category'] is None:
-    #     GLOBAL_CONTEXT['current_category'] = Category.objects.get(category_name=category_name)
 
     note_form = NotesForm()
     try:
@@ -96,7 +86,6 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
 
         return render(request, 'plan/idea_detail.html', context=context)
     else:
-        # todo this is where get request are handled, here is it where saved notes are displayed.
         return render(request, 'plan/idea_overview.html', context=context)
 
 
@@ -285,3 +274,15 @@ def update_selected_idea(request):
                }
 
     return render(request, 'plan/update_ideas.html', context=context)
+
+def delete_plan (request, plan_id):
+    Plan.objects.get(pk=plan_id).delete()
+    messages.add_message(request, messages.INFO, 'Your plan was deleted.')
+    # if user deletes current plan (the plan she is working on)
+    if str(plan_id) == request.session['current_user_plan']:
+        p= Plan.objects.get_user_plans(request.user).last()
+        request.session['current_user_plan'] =p.pk
+        request.session['current_user_plan_name']= p.plan_name
+        return redirect('show_block', 'human_touch', 'teaching_material')
+    else:
+        return redirect(request.META.get('HTTP_REFERER'))

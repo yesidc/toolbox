@@ -63,7 +63,7 @@
 
                         <!--        Nav bar items -->
 
-{# user_filter_plans return from context manager#}
+{# user_filter_plans return from context processor#}
                         {% for p in user_filter_plans reversed %}
 {#                            when user clicks on the button the associated node is shown#}
                             <button class="list-group-item list-group-item-action list-group-item-light p-3 {{ p }}"
@@ -74,7 +74,7 @@
                                     aria-controls="{{p.plan_name |add_hyphen }}"
                             >
                                 {{ p.plan_name }}
-
+                                <span href="{% url 'delete_plan' p.pk  %}" class="badge text-dark" data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}" onclick="delete_plan(this)"><i class="bi bi-trash"></i></span>
 
                             </button>
                             <div class=" container collapse plan-collapse" id="{{p.plan_name |add_hyphen }}">

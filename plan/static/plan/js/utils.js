@@ -49,5 +49,18 @@ for (i of plan_collapse) {
 }
 
 
+function delete_plan(obj) {
+    let plan_name = obj.getAttribute('data-object-name');
+    let plan_id = obj.getAttribute('data-object-id');
+    const ask = confirm('Do you want to delete: ' + plan_name);
+    if (ask){
+        console.log('hi')
+        document.location.href = "/delete_plan"+ "/"+plan_id+"/"
+        //document.location.href = "{% url 'delete_plan'%}"+ "/"+plan_id
+        console.log("{% url 'delete_plan'%}"+ "/"+plan_id)
+    }
+}
+
+
 // closes the messages
 $('.alert').alert()

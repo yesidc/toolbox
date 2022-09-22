@@ -15,5 +15,6 @@ urlpatterns = [
     path('delete_pcoi_checklist/', views.delete_pcoi_checklist, name='delete_pcoi_checklist'),
 
     path('checklist/', views.checklist, name='checklist'),
+    path('delete_plan/<int:plan_id>/', views.delete_plan, name='delete_plan'),
 
 ]
