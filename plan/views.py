@@ -48,6 +48,7 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
     # This idea id is used when saving the idea to a PlanCategoryOnlineIdea Object
     request.session['current_idea'] = current_idea.pk
+    request.session['current_category']= category_name
     # if GLOBAL_CONTEXT['current_category'] is None:
     #     GLOBAL_CONTEXT['current_category'] = Category.objects.get(category_name=category_name)
 
@@ -66,7 +67,7 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
     context = {
         'idea': current_idea,
         'note_form': note_form,
-        'current_category': request.session['current_category'],
+        'current_category': category_name,
         'plan_form': PlanForm()
     }
 
@@ -106,7 +107,8 @@ def checklist(request):
         c_s, c_d = context_summary(request.user, current_user_plan)
         context = {
             'context_summary': c_s,
-            'category_done_summary': c_d
+            'category_done_summary': c_d,
+            'plan_form': PlanForm()
         }
         return render(request, 'plan/checklist.html', context=context)
     else:
