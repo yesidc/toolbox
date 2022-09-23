@@ -108,6 +108,7 @@
         <section class="bg-dark text-light">
 
             {% if  user.is_authenticated%}<div class="d-flex justify-content-end">
+{#            {% if  user.is_authenticated and request.session.current_user_plan%}<div class="d-flex justify-content-end">#}
                 <div>
 
                     <a href="{% url 'use_idea' %}" class="btn btn-primary active m-4 pb-3" aria-current="page"

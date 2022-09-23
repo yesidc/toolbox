@@ -63,20 +63,37 @@
 
                         <!--        Nav bar items -->
 
-{# user_filter_plans return from context manager#}
+{# user_filter_plans return from context processor#}
                         {% for p in user_filter_plans reversed %}
 {#                            when user clicks on the button the associated node is shown#}
-                            <button class="list-group-item list-group-item-action list-group-item-light p-3 {{ p }}"
-                                    data-bs-target="#{{ p.plan_name |add_hyphen }}"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    aria-expanded="false"
-                                    aria-controls="{{p.plan_name |add_hyphen }}"
-                            >
-                                {{ p.plan_name }}
 
 
-                            </button>
+
+                            <div class="d-flex flex-row h-100">
+                                <button class="list-group-item list-group-item-action list-group-item-light p-3 {{ p }}"
+                                        data-bs-target="#{{ p.plan_name |add_hyphen }}"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        aria-expanded="false"
+                                        aria-controls="{{ p.plan_name |add_hyphen }}"
+                                >
+                                    {{ p.plan_name }}
+
+
+                                </button>
+
+                                <div class="align-self-end align-self-stretch">
+
+                                        <button href="{% url 'delete_plan' p.pk %}" class="h-100"
+                                          data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
+                                          onclick="delete_plan(this)"><i class="bi bi-trash"></i></button>
+
+                                </div>
+                            </div>
+
+
+
+
                             <div class=" container collapse plan-collapse" id="{{p.plan_name |add_hyphen }}">
 
                                {#The idea on this p html element is subsequently passed to the select_view for it to load the current plan and thus have it ready to save ideas to it#}

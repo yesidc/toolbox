@@ -5,22 +5,14 @@ from django.db.models import Q, Count
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
-from django.template import RequestContext
-
-from .helpers import category_done, is_ajax, context_summary, get_category, get_ideas
+from .helpers import category_done, is_ajax, context_summary, get_category, get_ideas, has_plan
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
-import json
+
 
 
 # todo optimize database queries,ex. create 500 users and evaluate performance
 
-
-# GLOBAL_CONTEXT = {
-#
-#     'form': PlanForm(),
-#
-# }
 
 # todo use get_object_or_404() function with all the category_block_name variable
 
@@ -48,8 +40,7 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
     # This idea id is used when saving the idea to a PlanCategoryOnlineIdea Object
     request.session['current_idea'] = current_idea.pk
-    # if GLOBAL_CONTEXT['current_category'] is None:
-    #     GLOBAL_CONTEXT['current_category'] = Category.objects.get(category_name=category_name)
+    request.session['current_category']= category_name
 
     note_form = NotesForm()
     try:
@@ -66,13 +57,15 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
     context = {
         'idea': current_idea,
         'note_form': note_form,
-        'current_category': request.session['current_category'],
+        'current_category': category_name,
         'plan_form': PlanForm()
     }
 
     # handles all logic when user adds idea or/and note from the idea_detail page
     if request.method == "POST":
-
+        # checks if user has already created a plan
+        if not has_plan(request):
+            return redirect(request.META.get('HTTP_REFERER'))
         note_form = NotesForm(request.POST)
         if note_form.is_valid():
             if pcoi_obj is None:
@@ -93,7 +86,6 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
 
         return render(request, 'plan/idea_detail.html', context=context)
     else:
-        # todo this is where get request are handled, here is it where saved notes are displayed.
         return render(request, 'plan/idea_overview.html', context=context)
 
 
@@ -104,7 +96,8 @@ def checklist(request):
         c_s, c_d = context_summary(request.user, current_user_plan)
         context = {
             'context_summary': c_s,
-            'category_done_summary': c_d
+            'category_done_summary': c_d,
+            'plan_form': PlanForm()
         }
         return render(request, 'plan/checklist.html', context=context)
     else:
@@ -172,7 +165,12 @@ def create_plan(request, start_add):
 def use_idea(request, save_note=None):
     # todo this should be into a try method, or return and 404 error. IF the server is reloaed the GLOBAL_CONTEXT IS LOST AND the OBJECT below cannot be created
     # todo there should not be repeated objects, use Unique.
+    # checks if user has already created a plan
+    if not has_plan(request):
+        return redirect(request.META.get('HTTP_REFERER'))
+
     current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
+
     request.session['current_idea'] = request.GET.get('idea_id') or request.session['current_idea']
     # If there's no plan in the request.session['current_user_plan'] dictionary; grab the plan name from the DOM
     # request.session['current_user_plan'] = request.session['current_user_plan'] or request.GET.get('plan_name_dom')
@@ -193,7 +191,6 @@ def use_idea(request, save_note=None):
         # todo add to sessions as this is also computed in select_plan view
         # categories for which user has already selected at least one idea
         category_ready = category_done(current_user_plan)
-        # messages.info(request, 'Idea successfully deleted from your plan')
         json_dic = {
             'category_ready': list(category_ready),
             "category_id": request.session['current_category'],
@@ -204,6 +201,8 @@ def use_idea(request, save_note=None):
 
     else:
         # prevents user from saving the same ideas twice for the same course plan.
+
+
         try:
             PlanCategoryOnlineIdea.objects.create(
                 plan=Plan.objects.get(pk=request.session['current_user_plan']),
@@ -275,3 +274,15 @@ def update_selected_idea(request):
                }
 
     return render(request, 'plan/update_ideas.html', context=context)
+
+def delete_plan (request, plan_id):
+    Plan.objects.get(pk=plan_id).delete()
+    messages.add_message(request, messages.INFO, 'Your plan was deleted.')
+    # if user deletes current plan (the plan she is working on)
+    if str(plan_id) == request.session['current_user_plan']:
+        p= Plan.objects.get_user_plans(request.user).last()
+        request.session['current_user_plan'] =p.pk
+        request.session['current_user_plan_name']= p.plan_name
+        return redirect('show_block', 'human_touch', 'teaching_material')
+    else:
+        return redirect(request.META.get('HTTP_REFERER'))

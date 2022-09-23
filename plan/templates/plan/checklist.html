@@ -78,7 +78,7 @@
             <thead>
             <tr>
 
-                <th scope="col">Completed</th>
+                <th scope="col">Done</th>
                 <th scope="col">Building Block</th>
                 <th scope="col">Idea</th>
                 <th scope="col">Note</th>
@@ -148,7 +148,7 @@
                         <table class=" nested-table-checklist">
                             {% for idea_name, pcoi_instance_id in idea_ins %}
                                 <tr class="pcoi-instance-{{ pcoi_instance_id }}">
-                                    <td><button onclick="add_delete_idea_checklist(this.id)" id="pcoi-instance-{{ pcoi_instance_id }}"><i class="bi bi-trash"></button></td>
+                                    <td><button onclick="add_delete_idea_checklist(this.id)" id="pcoi-instance-{{ pcoi_instance_id }}"><i class="bi bi-trash"></i></button></td>
                                 </tr>
                             {% endfor %}
 

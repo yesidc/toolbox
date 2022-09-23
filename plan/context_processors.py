@@ -8,8 +8,8 @@ def user_plans (request):
 
 
 
-        plans = Plan.objects.select_related('user').filter(user=request.user)
-        return {'user_filter_plans':plans}
+        #plans = Plan.objects.select_related('user').filter(user=request.user)
+        return {'user_filter_plans':Plan.objects.get_user_plans(request.user)}
     else:
         return {}
 
