@@ -1,0 +1,29 @@
+{% extends 'tbcore/start_page.html' %}
+{% block create_course %}
+
+    <div class="row">
+        <div class="d-flex">
+            <div>
+                <h5>Enter a course name to get started:</h5>
+            </div>
+            <div>
+                <form action="" method="POST" class="mx-3">
+                    {% csrf_token %}
+                    {{ form.plan_name }}
+                    <input type="submit" name="Submit" value="Save" class="btn-primary mx-4 px-5">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+    <div class="d-flex">
+        <div>
+            <h5>Do you want to work on an existing course? </h5>
+        </div>
+        <div>
+            <a href="{% url 'show_block' "human_touch" "teaching_material" %}" class="btn btn-primary mx-1 px-2">Keep working on my courses</a>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

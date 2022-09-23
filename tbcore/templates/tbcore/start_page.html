@@ -1,4 +1,6 @@
 {% extends 'tbcore/base_core.html' %}
+
+
 {% load bootstrap5 %}
 
 {% block specific_css %}
@@ -7,6 +9,102 @@
 {% endblock %}
 
 {% block content %}
-<h1>Start page </h1>
+
+    {#Showcase#}
+
+    <section class="bg-light text-dark p-3 mt-0">
+        <div class="container">
+
+            <div class="row">
+                <h1>Opening on-site courses for online learning.</h1>
+                <div class="col-md-8">
+                    <div class="row my-4 py-5">
+                        <ol>
+                            <li class="lead">Find recommendations and technical tools for opening your courses (for all
+                                8 course building blocks)
+                            </li>
+                            <li class="lead">Assess the preparation effort</li>
+                            <li class="lead">Create a to do / checklist of your selected teaching methods with your
+                                personal notes and use it as a checklist for preparation (sign in)
+                            </li>
+
+                        </ol>
+
+
+                    </div>
+
+
+
+
+                    {% block create_course %}
+                        <div class="d-flex">
+
+                            {% if not user.is_authenticated %}
+                                <div>
+                                    <a href="{% url 'login' %}" class="btn btn-primary mx-5">Sign in to Stud.Ip</a>
+                                </div>
+                                <div>
+                                    <a href="{% url 'show_block' "human_touch" "teaching_material" %}" class="btn btn-primary mx-5">Start without log-in</a>
+                                </div>
+                            {% endif %}
+
+                        </div>{% endblock %}
+
+
+                </div>
+                <div class="col-md-4">
+                    <img class="img-fluid my-4 py-5" src="{% static '/tbcore/images/start_page.png' %}" alt="">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="bg-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 my-2 py-5">
+                    <h4>How to use the tool box</h4>
+                    <p>
+                        Easily transform the courses by walking through the 8 building blocks (via tab navigation) / we
+                        will take you through an 8-step process, offering recommendations for each of the 8 sentral
+                        aspects that make up / compose an online course acknowledging/ considering online learning
+                        needs/ requirements and the material and approaches that you already have. You don't have to
+                        throw away all your teaching stuff but take it and refine it/ make use of it
+                    </p>
+                </div>
+                <div class="col-md-4 my-2 py-5">
+                    <img class="img-fluid" src="{% static '/tbcore/images/start_page.png' %}" alt="">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="bg-light text-dark py-5 my-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <div class="row">
+                        <p>
+                            Further general teaching tips can be found here/ Find inspiration for solution to very
+                            common yet individual problems in teaching. Browse through general teaching tips to stumble
+                            upon explanations why things might not work. You can find solutions to problems you cant put
+                            in words before/ were not aware of.
+                        </p>
+
+
+                    </div>
+                    <div class="d-flex">
+                     <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/ " class="btn btn-primary" target="_blank">Teaching Tips to improve your class</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 
 {% endblock content %}

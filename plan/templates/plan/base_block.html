@@ -1,5 +1,5 @@
 {% extends 'tbcore/base_core.html' %}
-
+{% load toolbox_custom_tags %}
 
 {% block specific_css %}
     {% load static %}
@@ -8,92 +8,148 @@
 
 {% block content %}
 
-    <nav class="navbar bg-light navbar-light navbar-expand-lg sticky-top border border-bottom-4 mb-3">
-
-        <div class="container-fluid">
-
-            {#todo change brand Icon here#}
-
-            <!-- Brand -->
-            <a class="navbar-brand" href="{% url 'start-page' %}">
-                <i class="bi bi-pencil-square"></i>
-                ToolBox
-            </a>
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span
-                    class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div id="navcol-1" class="collapse navbar-collapse">
-                <div class="row ms-auto">
-                    <div class="col-12">
-                        <ul class="navbar-nav float-none float-md-end">
-
-                            <li class="nav-item active"><a class="nav-link" href="#!">Hallway Chatter & Human
-                                Touch</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Organization</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Assignments</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Discussion/Interaction</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Student Engagement</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Assessment</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Rules & Regulations</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Teaching Material</a></li>
-
-
-                        </ul>
-                    </div>
-                    <!-- username and logout navbar  -->
-                    <div class="col-12 order-md-first">
-                        <ul class="navbar-nav float-none float-md-end">
-                            <li class="nav-item"><a class="nav-link active" href="#">Username</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Log out</a></li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-
-
-
 
 
     <!-- Sidebar-->
 
     <!-- Page content wrapper-->
     <div id="page-content-wrapper">
-        <!-- Top navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container-fluid">
+        {% if user.is_authenticated %}
 
-                <!-- Icon sidebar -->
-                <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i></button>
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light p-0 m-0">
+                <div class="container-fluid">
 
+                    <!-- Icon sidebar -->
+                    <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i></button>
+                    <div class="d-flex">
+                        <p><span class="lead">Current Course:</span>
+                            <span id="plan_name_dom">
+                        {#                    if user has not chosen a plan, it defaults to the last plan created#}
+                                {% if request.session.current_user_plan_name %}
+                                    {{ request.session.current_user_plan_name }}
+                                {% else %}
+                                    {{ user_filter_plans.last }}
+                                {% endif %}
+                    </span>
+                        </p>
+                    </div>
 
-
-
-
-            </div>
-        </nav>
-
+                </div>
+            </nav>
+        {% endif %}
 
         <div class="d-flex" id="wrapper">
 
-            <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom m-0">My Courses</div>
-                <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+            {#left navigation bar#}
+
+            {% if user.is_authenticated %}
+                <div class="border-end bg-white" id="sidebar-wrapper">
+                    <div class="sidebar-heading border-bottom m-0">My Courses</div>
+                    <div class="list-group list-group-flush">
+
+
+                        {#              <a class="list-group-item list-group-item-action list-group-item-light p-3"#}
+                        {#                                  href="{% url 'create_plan' 'add_new_plan' %}">Add</a>#}
+                        <div class="list-group-item list-group-item-action list-group-item-light p-3">
+                            <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-3">
+                                {% csrf_token %}
+                                {{ plan_form.plan_name }}
+                                <input type="submit" name="Submit" value="Add new course" class="btn-primary my-3 px-3">
+                            </form>
+
+                        </div>
+
+
+                        <!--        Nav bar items -->
+
+{# user_filter_plans return from context processor#}
+                        {% for p in user_filter_plans reversed %}
+{#                            when user clicks on the button the associated node is shown#}
+
+
+
+                            <div class="d-flex flex-row h-100">
+                                <button class="list-group-item list-group-item-action list-group-item-light p-3 {{ p }}"
+                                        data-bs-target="#{{ p.plan_name |add_hyphen }}"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        aria-expanded="false"
+                                        aria-controls="{{ p.plan_name |add_hyphen }}"
+                                >
+                                    {{ p.plan_name }}
+
+
+                                </button>
+
+                                <div class="align-self-end align-self-stretch">
+
+                                        <button href="{% url 'delete_plan' p.pk %}" class="h-100"
+                                          data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
+                                          onclick="delete_plan(this)"><i class="bi bi-trash"></i></button>
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class=" container collapse plan-collapse" id="{{p.plan_name |add_hyphen }}">
+
+                               {#The idea on this p html element is subsequently passed to the select_view for it to load the current plan and thus have it ready to save ideas to it#}
+{#                                    The first element in this div container must have as an id the plan's primary key#}
+
+                                <div id="{{ p.pk }}"> </div>
+
+                                {% for c_name, c_url, c_next in category_objects%}
+                         <p>
+                                        <span class="badge text-dark">
+                                            <input type="checkbox" class="checkbox-sidebar {{ p.pk }}block" id="{{ c_url }}{{p.pk }}">
+                                        </span>
+                             <a href="{% url 'show_block' c_url c_next%}" class="link-no-decoration text-dark"> {{ c_name }}</a>
+
+                                    </p>
+
+                                {% endfor %}
+
+                                 <div class="d-flex justify-content-end my-md-3">
+                                     <div>
+                                         <a href="{% url 'checklist' %}" class="btn btn-primary">View checklist</a>
+                                     </div>
+                                 </div>
+
+                            </div>
+
+
+                        {% endfor %}
+
+
+                    </div>
                 </div>
-            </div>
+            {% endif %}
             <!-- Page content-->
             <div class="container-fluid">
 
+                <!-- Messages-->
 
-                {% block building_block %}
+                <section class="messages-js">
+
+                    {% if messages %}
+                        {% for msg in messages %}
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">&times;
+                                </button>
+                                {{ msg }}
+
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+
+
+                </section>
+
+                {% block building_block_idea %}
 
                 {% endblock %}
 
@@ -106,10 +162,11 @@
 
 
 
+    <script src="{% static 'plan/js/menu_bar.js' %}"></script>
 
 
 
-    <script src="{% static 'plan/js/toggler.js' %}"></script>
+
 {% endblock %}
 
 

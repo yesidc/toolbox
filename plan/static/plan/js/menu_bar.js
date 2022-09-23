@@ -1,4 +1,4 @@
-/*!
+/*
 * Start Bootstrap - Simple Sidebar v6.0.5 (https://startbootstrap.com/template/simple-sidebar)
 * Copyright 2013-2022 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-simple-sidebar/blob/master/LICENSE)
@@ -9,11 +9,11 @@
 
 // arrows
 
-const leftArrowClass = "bi-chevron-double-left";
-const rightArrowClass = "bi-chevron-double-right";
-const arrowClass = "bi"
-const arrowElem = document.querySelector("." + leftArrowClass);
-var statebar = true;
+// const leftArrowClass = "bi-chevron-double-left";
+// const rightArrowClass = "bi-chevron-double-right";
+// const arrowClass = "bi"
+// const arrowElem = document.querySelector("." + leftArrowClass);
+// var statebar = true;
 
 window.addEventListener('DOMContentLoaded', event => {
 
@@ -38,3 +38,17 @@ window.addEventListener('DOMContentLoaded', event => {
 
 
 });
+
+// underlines active menus on top nav bar.
+   $(document).ready(function () {
+
+        jQuery(function ($) {
+          var path_top_nav = window.location.href;
+          $('.nav-link').each(function () {
+            if (this.href === path_top_nav) {
+              $(this).addClass('active-top-bar');
+            }
+          });
+        });
+      });
+
