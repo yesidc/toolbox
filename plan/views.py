@@ -286,3 +286,8 @@ def delete_plan (request, plan_id):
         return redirect('show_block', 'human_touch', 'teaching_material')
     else:
         return redirect(request.META.get('HTTP_REFERER'))
+
+# todo delete
+def test_code(request):
+    idea = OnlineIdea.objects.get(idea_name='Assignment Checklist')
+    return render(request,'plan/test_code.html', locals())

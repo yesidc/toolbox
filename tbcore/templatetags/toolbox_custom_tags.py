@@ -1,5 +1,7 @@
 from django import template
 from tbcore.models import Category
+import markdown
+
 register = template.Library()
 
 
@@ -10,15 +12,16 @@ def add_hyphen(value):
     """
     return value.replace(' ', '-')
 
+
 @register.simple_tag()
-def get_name_next_category (value):
+def get_name_next_category(value):
     """
     Retrieves the name of the next category
     """
     c = Category.objects.get(category_url=value)
     c_name = c.category_name
     c_next = c.next_page
-    return {'c_name':c_name, 'c_next':c_next}
+    return {'c_name': c_name, 'c_next': c_next}
 
 
 @register.simple_tag(takes_context=True)
@@ -30,7 +33,12 @@ def remaining_categories(context, all_categories):
         context: current template context
         all_categories: List of tuples, where each element (tuple) contains (category_name, category_url)
     """
-    #Set that contains the names of the categories for which user has chosen at least one idea
+    # Set that contains the names of the categories for which user has chosen at least one idea
     c_done = context['category_done_summary']
-    remaining_c = set([c_name for c_name, _ , _ in all_categories]) - c_done
+    remaining_c = set([c_name for c_name, _, _ in all_categories]) - c_done
     return remaining_c
+
+@register.simple_tag()
+def md_to_html(value):
+
+    return  markdown.markdown(value)

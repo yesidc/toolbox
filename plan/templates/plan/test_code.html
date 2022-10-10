@@ -1,0 +1,13 @@
+{% extends "plan/base_block.html" %}
+{% load toolbox_custom_tags %}
+
+
+{% block building_block_idea %}
+
+{% md_to_html idea.brief_description as html_description %}
+   {{ html_description|safe }}
+<p>{% md_to_html idea.recommendations as html_recommendations %}</p>
+    {{ html_recommendations|safe }}
+
+
+{% endblock %}

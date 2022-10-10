@@ -21,7 +21,7 @@
                     </div>
                     <div class="col">
                         <h5>Use cases</h5>
-                        <p class="lead">{% if idea.examples_application %}{{ idea.examples_application|safe }}{% else %}
+                        <p class="lead">{% if idea.use_cases %}{{ idea.examples_application|safe }}{% else %}
                             {{ 'No data' }}{% endif %}</p>
 
 
@@ -44,7 +44,7 @@
                                     <h4>Technology</h4>
                                 </div>
                                 <div class="col">
-                                    <p>{% if idea.tool %}{{ idea.tool|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
+                                    <p>{% if idea.technology %}{{ idea.technology|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
                                 </div>
                             </div>
                         </div>
