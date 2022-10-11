@@ -130,6 +130,7 @@ class OnlineIdea(models.Model):
         # delete old ideas
         try:
             OnlineIdea.objects.get(idea_name=idea["idea_name"]).delete()
+
         except:
             pass
 
@@ -171,8 +172,10 @@ class CategoryOnlineIdea(models.Model):
             raise Json5ParseException("Lesson code must be a dictionary.")
 
         json5_fields = idea_fields() if mode == 'ideas' else category_fields()
+
         # Checks
         for field in json5_fields:
+
             if field not in d_json5:
                 raise Json5ParseException('Field "{}" is missing'.format(field))
             if not d_json5[field]:

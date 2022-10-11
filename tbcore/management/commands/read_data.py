@@ -1,9 +1,9 @@
 from django.core.management.base import BaseCommand, CommandError
 import glob
 from tbcore.models import CategoryOnlineIdea, OnlineIdea, Category
-from tbcore.utils.base import Json5ParseException
+from tbcore.utils.base import Json5ParseException,InvalidDataException
 
-
+# todo raise InvalidDataException if the directory (ideas or categories) contains no data
 class Command(BaseCommand):
     help = "Reads json5 file and saves either ideas or categories/building blocks to the database"
 
@@ -36,10 +36,11 @@ class Command(BaseCommand):
         for filename in glob.glob("data/" + mode + "/*.json5"):
             with open(filename, "r", encoding="UTF-8") as f:
                 data_json5 = f.read()
+
                 try:
                     CategoryOnlineIdea.check_json5(data_json5, mode)
                 except Json5ParseException as e:
-                    print("Data {} invalid. Error message: \n{}".format(filename, e))
+                    raise InvalidDataException("Data {} invalid. Error message: \n{}".format(filename, e))
 
                 if mode == 'ideas':
                     OnlineIdea.create_from_json5(data_json5)
@@ -47,4 +48,4 @@ class Command(BaseCommand):
                     Category.create_from_json5(data_json5)
                 num_items_created += 1
 
-        self.stdout.write(self.style.SUCCESS('Successfully created {} ideas.'.format(num_items_created)))
+        self.stdout.write(self.style.SUCCESS('Successfully created {} items.'.format(num_items_created)))
