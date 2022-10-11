@@ -1,6 +1,9 @@
-from tbcore.models import PlanCategoryOnlineIdea, CategoryOnlineIdea, Plan
+from tbcore.models import  CategoryOnlineIdea, Plan,PlanCategoryOnlineIdea
 from django.db.models import Q
 from django.contrib import messages
+
+
+
 
 
 # todo DELETE FUNCTION, function implemented as class method. take a look at the Plan's model
@@ -88,3 +91,17 @@ def has_plan(request):
         return False
     else:
         return True
+
+# def json5_is_valid (data_json5):
+#     """
+#     Check if a JSON5 representation of an idea or category is valid.
+#     Args:
+#         data_json5: Json5 file containing either an online idea or category data.
+#     """
+#     try:
+#         d_json5 = json5.loads(data_json5)
+#     except ValueError as err:
+#         raise Json5ParseException("Error in JSON5 code Error message: '{}'".format(err))
+#
+#     if not isinstance(d_json5, dict):
+#         raise Json5ParseException("Lesson code must be a dictionary.")

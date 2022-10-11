@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 import json5
+from tbcore.utils.fields import idea_fields, category_fields
+from tbcore.utils.base import Json5ParseException
 
 
 # Create your models here
@@ -75,6 +77,30 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
 
+    @classmethod
+    def create_from_json5(cls, data_json5):
+        """
+                Extracts idea's information from a json5 file and saves it to the database
+                """
+
+        category = json5.loads(data_json5)
+
+        # delete old categories
+        try:
+            Category.objects.get(category_name=category["category_name"]).delete()
+        except:
+            pass
+
+        Category.objects.create(category_name=category["category_name"],
+                                short_description=category["short_description"],
+                                further_information=category["further_information"],
+                                requirements=category["requirements"],
+                                references=category["references"],
+                                category_url=category['category_url'],
+                                next_page=category["next_page"],
+
+                                )
+
 
 class OnlineIdea(models.Model):
     idea_name = models.CharField(max_length=200)
@@ -94,16 +120,16 @@ class OnlineIdea(models.Model):
         return self.idea_name
 
     @classmethod
-    def create_from_json5(cls, idea_json5):
+    def create_from_json5(cls, data_json5):
         """
         Extracts idea's information from a json5 file and saves it to the database
         """
 
-        idea = json5.loads(idea_json5)
+        idea = json5.loads(data_json5)
 
         # delete old ideas
         try:
-            OnlineIdea.objects.get(idea_name=idea["id"]).delete()
+            OnlineIdea.objects.get(idea_name=idea["idea_name"]).delete()
         except:
             pass
 
@@ -125,7 +151,33 @@ class OnlineIdea(models.Model):
 class CategoryOnlineIdea(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     online_idea = models.ManyToManyField(OnlineIdea)  # todo implement related name
+
     # display = models.BooleanField()
+    @staticmethod
+    def check_json5(data_json5, mode):
+        """
+        Check if a JSON5 representation of an idea or category is valid.
+        Args:
+            data_json5: Json5 file containing either an online idea or category data.
+            mode: OnlineIdea or Category fields.
+        """
+
+        try:
+            d_json5 = json5.loads(data_json5)
+        except ValueError as err:
+            raise Json5ParseException("Error in JSON5 code Error message: '{}'".format(err))
+
+        if not isinstance(d_json5, dict):
+            raise Json5ParseException("Lesson code must be a dictionary.")
+
+        json5_fields = idea_fields() if mode == 'ideas' else category_fields()
+        # Checks
+        for field in json5_fields:
+            if field not in d_json5:
+                raise Json5ParseException('Field "{}" is missing'.format(field))
+            if not d_json5[field]:
+                raise Json5ParseException('Field "{}" is empty'.format(field))
+        return True
 
 
 class PlanCategoryOnlineIdea(models.Model):
