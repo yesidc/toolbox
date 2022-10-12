@@ -104,6 +104,7 @@ class Category(models.Model):
 
 class OnlineIdea(models.Model):
     idea_name = models.CharField(max_length=200)
+    idea_id = models.SlugField(max_length=70) # internal id
     brief_description = models.TextField()  # used for checklist on the building block page
     technology = models.TextField()
     implementation_steps = models.TextField(null=True)
@@ -129,12 +130,13 @@ class OnlineIdea(models.Model):
 
         # delete old ideas
         try:
-            OnlineIdea.objects.get(idea_name=idea["idea_name"]).delete()
+            OnlineIdea.objects.get(idea_name=idea["idea_id"]).delete()
 
         except:
             pass
 
         OnlineIdea.objects.create(idea_name=idea["idea_name"],
+                                  idea_id = idea['idea_id'],
                                   brief_description=idea["brief_description"],
                                   technology=idea["technology"],
                                   implementation_steps=idea["implementation_steps"],
@@ -175,11 +177,12 @@ class CategoryOnlineIdea(models.Model):
 
         # Checks
         for field in json5_fields:
-
-            if field not in d_json5:
-                raise Json5ParseException('Field "{}" is missing'.format(field))
-            if not d_json5[field]:
-                raise Json5ParseException('Field "{}" is empty'.format(field))
+            # this field is not mandatory
+            if field != 'testimony':
+                if field not in d_json5:
+                    raise Json5ParseException('Field "{}" is missing'.format(field))
+                if not d_json5[field]:
+                    raise Json5ParseException('Field "{}" is empty'.format(field))
         return True
 
 

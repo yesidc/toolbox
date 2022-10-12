@@ -1,0 +1,21 @@
+
+
+{
+
+
+idea_name: "Grading Rubric",
+  idea_id: "idea-gr-002",
+brief_description: "Grading rubrics put assessment criteria on a continuum and guide the grading based on the criteria that were established before the exam. They help communicating grades to students and show that learning and understanding is a process.",
+technology: "- Upload the grading rubric PDF in the [files section](https://hilfe.studip.de/help/5.0/en/Basis/Dateien) and provide a PDF preview courseware with the [PDF preview block](https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckePDF) (before grading) \n- When graded hand out paper copy or send individual files via email or element.",
+implementation_steps: "- Focus on describing, not evaluating. Rubrics are about quality not quantity.\n- When describing content, the following criteria will help: \n  - Accuracy \n  - Specificity and use of examples \n  - Relevance \n  - Completeness/ thoroughness  (LCI Tips for writing quality rubrics and checklists)\n  \n[Process for developing standards based rubrics]\n1. Describe the task\n2. Identify quality attributes/indicators\n3. Develop dimensions \n4. Describe the levels \n5. Use the rubric\n6. Revise the rubric",
+teacher_effort:"- Using the rubric while grading can reduce the time necessary to evaluate an assignment. \n- Preparing the rubric can take longer as the grading work is \"front-loaded\" but is highly dependent on the assignment type to be graded.\n- Using a rubric makes grading more transparent which reduces the extent of questions regarding grades. " ,
+recommendations: "Only some of the criteria need to be met and certain criteria are more important than others. A rubric is meant to make the grading more accountable, but it should not provide an objective grade that can be calculated. This allows for flexible/ individual grading while sticking to criteria. ",
+resources: "Online resources:\nTips for writing quality rubrics and checklists (LCI) \nTool: Process for developing standards-based rubrics\nTool: Checklist for Quality Rubrics",
+testimony: "",
+use_cases: "Especially useful for project work, essays, and presentations but also for exams.",
+references: "Seven strategies for supporting student learning in a remote environment",
+reusable: "yes",
+task_complexity: "1",
+
+
+}

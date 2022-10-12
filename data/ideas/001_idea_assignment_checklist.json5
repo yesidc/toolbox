@@ -2,6 +2,7 @@
 
 {
 idea_name: "Assignment Checklist",
+  idea_id: "idea-ac-001",
 brief_description: "Students need clear directions for the work they are tasked with, especially in remote settings. The checklist lists the (thinking) skills that you expect to see *proof of*. \nFurther, the checklist identifies what you accept *as proof*. Giving students clear criteria that they can check off helps them to be more confident in what they do \nand how they study. Basically, the assignment checklist lists all criteria that you would evaluate for grading. ",
 technology: "- Use the syllabus (Link to syllabus teaching tool)\n- [Confirmation block] in courseware ",
 implementation_steps:"Some advice on checklists\n- Confirm everything on the list is tangible. It needs to be immediately clear to the students whether they have reached the goal or not. \n- Don’t worry about stating the obvious, the list needs to be complete, no matter how trivial things may seem. \n- Be transparent and precise about what you want. \n- Keep the items short and align them with the learning objectives. ",

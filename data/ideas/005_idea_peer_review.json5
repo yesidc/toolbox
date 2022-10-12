@@ -1,0 +1,20 @@
+
+{
+
+
+idea_name:"Peer Review" ,
+idea_id: "idea-pr-005",
+brief_description: "Students review each others' assignments based on given criteria and give feedback, which is then integrated or rejected with sound reasoning. Peer review helps to create awareness for assessment criteria and to think with the eyes of an external. Practising meta-cognition skills helps to detect issues quickly and to plan task implementation. ",
+technology: "- [ShareLaTeX (Overleaf)](https://academiccloud.de/services): Service provided by Academic Cloud. Activate the review function to give feedback.\n\n- [Cloud](https://academiccloud.de/services): ONLYOFFICE service provided by Academic Cloud. Create documents, share them, collaborate and, give feedback in the comments (works like google docs)\n\n- [Forum](https://hilfe.studip.de/help/5.0/de/Basis/Forum) for peer feedback: Students upload their submissions in the forum and others can give feedback in the comment function.\n\n- [Courseware](https://hilfe.studip.de/help/5.0/de/Basis/CoursewareSeite): create an extra page with editing rights for reviewers or give feedback via the comment function in courseware. Further, a discussion block is currently being built for courseware.\n\n- [//]: <> (Mention somewhere how to give editing rights? 3 dots on the top right > page settings > rights)  \n\n- [GitLab](https://gitlab.com/gitlab-org/gitlab): for peer feedback on code and programming assignments",
+implementation_steps: "- Feedback for Video Assignments Neuroinfo example \n- Specific criteria for peer feedback example ",
+teacher_effort: "You have to come up with quality criteria which students can use to give feedback to each other. Further, peer feedback needs supervision and is not a sure-fire to success. So, additional effort for reading the feedback and managing late feedback is needed, but chances are that final submissions improve substantially.",
+recommendations: "- Clearly detail the procedure for peer feedback since it is easy to get confused about which group provides feedback for whom and to mix up deadlines.\n\n- Share your expectations clearly and assignment instructions to which the students can refer in their feedback.\n\n- Providing protocol templates/ examples for peer‐review that is focused on specific criteria helps students to see how they can support each other.",
+resources: "- [Rubric Feedback Practice](https://lciltd.org/resources/rubric-feedback-on-practice)\n- [Criteria for Quality Feedback](https://lciltd.org/resources/checklist-for-quality-feedback)",
+testimony: "",
+use_cases: "- As reviews of assignments and as a second level of student reflection\n\n- Before students hand in their final submission\n\n- It is not suitable in cases where there's a specific correct or incorrect answer ",
+references: "no-data",
+reusable: "yes",
+task_complexity: "2",
+
+
+}
