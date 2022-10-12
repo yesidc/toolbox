@@ -1,0 +1,19 @@
+{
+
+
+idea_name:"Optional Resources" ,
+idea_id: "idea-or-022",
+brief_description: "Add optional resources like blog or news articles about current applications, conference posts, \nYouTube videos of interviews or experiments that ponder the topic, or even in-depth journal articles \nwhich invite further exploration to your courseware. \nContents hosted on external webservers cannot be an obligatory part of course requirements due to potential \nlegal issues regarding data privacy. (For those of you who are interested, you might want to have a look at \nthe website of the \n[data privacy officer]( https://www.uni-osnabrueck.de/universitaet/organisation/zentrale-verwaltung/datenschutz-und-it-sicherheit/)) ",
+technology: "Courseware: \n- [Embed block](https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckeEmbed): With this block, image, audio, video, code (e.g., codepen codesandbox) content from various \nplatforms can be integrated into courseware.\n- [iFrame block](https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckeIFrame): This block integrates external content from other websites.\n- [Link block](https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckeLink): With the link block, links can be set to structural elements within courseware and \nexternal links can be created.\n- [File folder](https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckeDateiordner): a folder from the file area of the event can be integrated into courseware.\n- [PDF preview block](https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckePDF):  preview PDF files from the file area in courseware for reading and downloading \n(PDFs will be rendered as images, hence screen readers won’t work) ",
+implementation_steps: "For learning how to use courseware, please consult the [courseware crash course](https://hilfe.studip.de/help/5.0/de/Basis/CoursewareVideotutorials)\n",
+teacher_effort: "- If you have the additional material at hand and are familiar with courseware, embedding links takes about 5-15 min./ unit., depending on how you imbed the material in courseware.  \n- Check the [courseware crash course](https://hilfe.studip.de/help/5.0/de/Basis/CoursewareVideotutorials) (quick!) which gives you all you need to know for handling courseware smoothly.",
+recommendations: "Make it a habit to note down material that you encounter by chance. ",
+resources: "no-data",
+testimony: "",
+use_cases: "- Suitable for any material that is interesting but not substantial / essential to understand the topic or to pass the course \n- Integrate (YouTube) videos with the video block, related websites, or podcast episodes about the unit/ to hear how others discuss the issue, etc. \n",
+references: "no-data",
+reusable: "(Parts of) your courseware can be copy + pasted to other courses which are about similar topics. ",
+task_complexity: "1",
+
+
+}

@@ -1,0 +1,19 @@
+{
+
+
+idea_name:"Anecdotes and Stories" ,
+idea_id: "idea-as-014",
+brief_description: "Tell anecdotes and stories (professional or relevant personal) and be humorous if appropriate. Invite students to share their own stories. Students come to your class for *your* version of the story of your topic. The content is already in the books.",
+technology: "1.\tMicro lectures: spice up your micro lectures with an anecdote \n\n[//]: <> (Link to our micro lecture teaching tool)\n2.\t[Courseware](https://hilfe.studip.de/help/5.0/de/Basis/CoursewareNutzung): you can use the free text block and the design of the pages and sections to share stories or experiences which relate to the presented material. This can give our whole courseware a new flavour, even if you do it only in a few instances. \n3.\t[BBB](https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/bigbluebutton/): you can easily tell stories during a discussion.\n4.\t[Element](https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/instant-messenger-element-vorher-riot/): You can open a conversation with your students by sharing a story, experience or anecdote and connect it to a question about a topic in the written discussion. Element is quick and provides a mobile app which is handy for spontaneous communication. \n5.\t[Forum](https://hilfe.studip.de/help/5.0/de/Basis/Forum): You can do the same as in element but the forum just has a different connotation and is not as fast but more sorted.",
+implementation_steps: "There's no one size fits all, so use your own best judgement of what and when you want to tell stories and experiences with students to motivate them or to simply liven up the conversation.",
+teacher_effort: "This is very individual.",
+recommendations: "Prepare the session a day earlier: \n- Is there a funny story or anecdote about this topic from a conference / from when you were a student/ an activity of students that you still remember, etc...?  \n- When was the topic relevant in the news? \n- Which lecturers do you like and why? Is there something that you can adapt from them? \nYou might have one thing about you that is odd in a random way, like wearing funny ties, giving topic-unrelated riddles in class just to keep up the student's attention, or even a mascot that sits in your BBB conferences, virtually or in the room that you are calling from. You may even adopt a habit like always drink from the same personalized cup. \n- **Remember, being eccentric is ok!**",
+resources: "[Patrick Winston about how to find your own style](https://www.youtube.com/watch?v=TmWd4cfHQb0&list=PL9F536001A3C605FC&index=10)",
+testimony: "",
+use_cases: "You can make your course more personal by showing your own style. If you are someone who writes a special program for organizing your files on a brand-new mac or have a funny quirk, students love to hear about them.",
+references: "no-data",
+reusable: "yes",
+task_complexity: "1",
+
+
+}
