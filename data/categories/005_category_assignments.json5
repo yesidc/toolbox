@@ -1,0 +1,12 @@
+{
+
+  category_name: "Assignments",
+    category_id: "category-a-005"  ,
+    short_description: "Online students need a reliable source of information that they can go back to and look \nthings up because they have much less opportunities to double check in person or verbally. \nOften enough, online students and you have no common background or shared understanding of your \nexpectations and would approach tasks based on the academic culture from your home university and \nmajor (which might strongly differ from what you want to see!).",
+    further_information : "no-data",
+    requirements : "no-data",
+    references : "no-data",
+    category_url : "assignment",
+    next_page : "discussion",
+
+}

@@ -1,0 +1,12 @@
+{
+
+  category_name: "Assessment",
+    category_id: "category-a-007"  ,
+    short_description: "no-data",
+    further_information : "no-data",
+    requirements : "no-data",
+    references : "no-data",
+    category_url : "assessment",
+    next_page : "rules_regulations",
+
+}

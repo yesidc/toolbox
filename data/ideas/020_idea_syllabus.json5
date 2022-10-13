@@ -10,7 +10,7 @@ teacher_effort: "The syllabus ties all links of your course together. **The more
 recommendations: "- Use this  [template from Purdue OWL](https://www.purdue.edu/innovativelearning/developing-courses/syllabus-template/) to fill in your course information. Use the prompts and complete the necessary sections including assignment instructions that clearly outline your expectations of the students' output\n- Give complete and exact information by the start of the semester and always refer to the syllabus section in courseware/ PDF (provide both, a syllabus PDF and a courseware integration of the syllabus)\n- Consider adding some words about: \n  - Handling incompletes or late work (less for interaction)\n  - Course logistics (less for interaction but organization)",
 resources: "- [Syllabus template from Purdue OWL](https://www.purdue.edu/innovativelearning/developing-courses/syllabus-template/) \n- [Short overview about a syllabus](https://digitale-lehre.virtuos.uni-osnabrueck.de/2022/03/18/ein-dokument-alle-antworten-oder-haben-sie-schon-im-syllabus-nachgeschaut/)\n- [Courseware crash course](https://hilfe.studip.de/help/5.0/de/Basis/CoursewareVideotutorials): This tutorial will teach you the necessary skills to configure Courseware so that you can structure and display your course content using pages, sections, and blocks.",
 testimony: "",
-use_cases: "",
+use_cases: "no-data",
 references: "no-data",
 reusable: "If you give the same course again, you only need to change the dates. Large parts  can be reused in other courses as well. \n\t\n[//]:<> (## Testimony \"the syllabus is a huge planning document with which I can easily organize and plan my semester\", Peter König \n- Ask Peter)",
 task_complexity: "1",

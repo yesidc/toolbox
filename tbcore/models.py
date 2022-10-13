@@ -67,6 +67,7 @@ class Plan(models.Model):
 class Category(models.Model):
     category_name = models.CharField(
         max_length=100)  # there are a total of 8 categories: hallway chatter, organization etc.
+    category_id = models.SlugField(max_length=70)  # internal id
     short_description = models.TextField()
     further_information = models.TextField(null=True)  # accordion info
     requirements = models.TextField()  # requirements --> add to the accordion (building block page)
@@ -130,7 +131,8 @@ class OnlineIdea(models.Model):
 
         # delete old ideas
         try:
-            OnlineIdea.objects.get(idea_name=idea["idea_id"]).delete()
+            OnlineIdea.objects.get(idea_id=idea["idea_id"]).delete()
+            print(f'idea deleted: {idea["idea_id"]}')
 
         except:
             pass
@@ -178,7 +180,7 @@ class CategoryOnlineIdea(models.Model):
         # Checks
         for field in json5_fields:
             # this field is not mandatory
-            if field != 'testimony':
+            if field not in ['testimony','next_page']:
                 if field not in d_json5:
                     raise Json5ParseException('Field "{}" is missing'.format(field))
                 if not d_json5[field]:
