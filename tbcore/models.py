@@ -92,20 +92,25 @@ class Category(models.Model):
         except:
             pass
 
+        try:
+            next_page = category["next_page"]
+        except:
+            next_page = None
+
         Category.objects.create(category_name=category["category_name"],
                                 short_description=category["short_description"],
                                 further_information=category["further_information"],
                                 requirements=category["requirements"],
                                 references=category["references"],
                                 category_url=category['category_url'],
-                                next_page=category["next_page"],
+                                next_page=next_page if next_page else None,
 
                                 )
 
 
 class OnlineIdea(models.Model):
     idea_name = models.CharField(max_length=200)
-    idea_id = models.SlugField(max_length=70) # internal id
+    idea_id = models.SlugField(max_length=70)  # internal id
     brief_description = models.TextField()  # used for checklist on the building block page
     technology = models.TextField()
     implementation_steps = models.TextField(null=True)
@@ -138,7 +143,7 @@ class OnlineIdea(models.Model):
             pass
 
         OnlineIdea.objects.create(idea_name=idea["idea_name"],
-                                  idea_id = idea['idea_id'],
+                                  idea_id=idea['idea_id'],
                                   brief_description=idea["brief_description"],
                                   technology=idea["technology"],
                                   implementation_steps=idea["implementation_steps"],
@@ -180,7 +185,7 @@ class CategoryOnlineIdea(models.Model):
         # Checks
         for field in json5_fields:
             # this field is not mandatory
-            if field not in ['testimony','next_page']:
+            if field not in ['testimony', 'next_page']:
                 if field not in d_json5:
                     raise Json5ParseException('Field "{}" is missing'.format(field))
                 if not d_json5[field]:

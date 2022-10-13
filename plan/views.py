@@ -18,7 +18,7 @@ from .forms import NotesForm, PlanForm
 
 def show_block(request, category_url, next_page):
     """
-    Manages the content for all building blocks.
+    Manages the content for all building blocks/categories.
 
     """
     request.session['current_category'] = category_url
