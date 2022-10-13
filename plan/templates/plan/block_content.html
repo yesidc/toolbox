@@ -1,5 +1,6 @@
 {% extends "plan/base_block.html" %}
 {% load toolbox_custom_tags %}
+{% load static %}
 {% block title %}
     ToolBox | Building Blocks
 {% endblock %}
@@ -49,7 +50,7 @@
     <section class="p-2 mt-2">
         <div class="container">
             <h3 class="text-center mb-5">{{ category.category.category_name }}</h3>
-            <p class="text-start">{{ category.category.short_description |safe }}</p>
+            <p class="text-start">{% md_to_html category.category.short_description as short_d_html %}{{ short_d_html|safe }}</p>
 
         </div>
     </section>
