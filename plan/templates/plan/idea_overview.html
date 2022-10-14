@@ -122,14 +122,17 @@
         </section>
 
 
-        <section class="bg-light mt-4 p-5 mb-4">
+        {% if idea.testimony %}
+            <section class="bg-light mt-4 p-5 mb-4">
             <div class="container">
 
-                <h3 class="text-center">here goes the testimony</h3>
+                <h3 class="text-center">Testimony</h3>
+
+                <p>{% md_to_html idea.testimony as testimony_html %}{{ testimony_html|safe }}</p>
 
 
             </div>
-        </section>
+        </section>{% endif %}
     </div>
 
 
