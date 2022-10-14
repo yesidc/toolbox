@@ -2,7 +2,7 @@
 
 
 idea_name:"Quizzes" ,
-idea_id: "idea-q-007",
+idea_id: "007-idea-q",
 brief_description: "Quizzes activate students and make micro lectures much more effective. Quizzes can be multiple choice, open text entry, true or false are great to activate students, e.g. with self-tests.",
 technology: "- [Vips](https://hilfe.studip.de/help/5.0/de/Basis/Vips): There are several task types you can use to create quizzes. E.g., single choice, multiple choice, gap text etc.",
 implementation_steps: "- The content of the Quizzes should be guided by the type of knowledge the students should gain from the content. For example, if they should know the facts, ask for a recall of the facts, but if they should understand a concept, try to keep the questions more open.\n- Quizzes are created based on learning objectives or the main idea that was meant to be tackled in the unit. \n- Be creative with the different types of format that can be used to create a quizz.",

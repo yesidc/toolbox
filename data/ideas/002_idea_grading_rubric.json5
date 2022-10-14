@@ -4,7 +4,7 @@
 
 
 idea_name: "Grading Rubric",
-  idea_id: "idea-gr-002",
+  idea_id: "002-idea-gr",
 brief_description: "Grading rubrics put assessment criteria on a continuum and guide the grading based on the criteria that were established before the exam. They help communicating grades to students and show that learning and understanding is a process.",
 technology: "- Upload the grading rubric PDF in the [files section](https://hilfe.studip.de/help/5.0/en/Basis/Dateien) and provide a PDF preview courseware with the [PDF preview block](https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckePDF) (before grading) \n- When graded hand out paper copy or send individual files via email or element.",
 implementation_steps: "- Focus on describing, not evaluating. Rubrics are about quality not quantity.\n- When describing content, the following criteria will help: \n  - Accuracy \n  - Specificity and use of examples \n  - Relevance \n  - Completeness/ thoroughness  (LCI Tips for writing quality rubrics and checklists)\n  \n[Process for developing standards based rubrics]\n1. Describe the task\n2. Identify quality attributes/indicators\n3. Develop dimensions \n4. Describe the levels \n5. Use the rubric\n6. Revise the rubric",

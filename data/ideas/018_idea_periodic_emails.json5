@@ -2,7 +2,7 @@
 
 
 idea_name:"Periodic emails" ,
-idea_id: "idea-pe-018",
+idea_id: "018-idea-pe",
 brief_description: "Sending announcements/ emails on a regular basis establishes structure in the everyday life of students and keeps them on their toes. Weekly emails are good to establish a course rhythm, \nto give reminders, to put certain topics in the spotlight or to provide additional resources, tips or links just in time and to show that the course is organized by someone. \nFurther, showing that you are available to get in touch with students and are following the course, timely responses, showing availability and presence helps \nstudents to build a connection to instructors.",
 technology: "1.\tStud.IP email to all participants \n2.\t[Announcements](https://digitale-lehre.virtuos.uni-osnabrueck.de/kursverwaltung-mit-stud-ip/): Suitable for current news. Announcements appear prominently on the course start page, profile, and/or facility summary pages.\n3.\t[Element](https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/instant-messenger-element-vorher-riot/): Element is a tool comparable to Slack or Discord that implements conversation threading and can easily be used for the day-to-day organization of events, \nreplacing the need to send emails. You can create a separate room dedicated to general/organizational matters where you constantly make announcements about the course.",
 implementation_steps: "Inform students about \n- This week's focus \n- Study tips (if applicable) \n- Organizational information (e.g. how late submissions will be handled) \n- Special dates\n- How to reach you (e.g. Element Chat, Email, walk-in hours/ office hours)",

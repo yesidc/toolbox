@@ -2,7 +2,7 @@
 
 
 idea_name:"Walk-in Hours and Online Practice Session" ,
-idea_id: "idea-whops-012",
+idea_id: "012-idea-whops",
 brief_description: "Online practice sessions are your offer to the students without an explicit request for help and shows that you \ncare about providing structure and helping students understand. Usually, it is a 30-60 -minute synchronous online \nsession where students can ask any kind of questions and/ or work on their assignments while the instructor is \navailable to help if needed. You can offer to recap a topic in dialogue with the students.",
 technology: "- [Schedule tool stud.IP](https://digitale-lehre.virtuos.uni-osnabrueck.de/kursverwaltung-mit-stud-ip/): \nList the walk-in hours dates. Lecturers can add topics to dates that contain a short description \nof the content for better orientation and to let students know the topics in advance if there are any. \n- [BBB](https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/bigbluebutton/)",
 implementation_steps: "1. Announce the walk-in hour (+ the topic) via email/ element. If you plan an open practice session \nin which you will simply be available for questions as students work on their assignments, let them \nknow about it.  \n2. Communicate how you conceptualize the walk-in hours: Will you figure out their questions/ \nuncertainties together or do they have to know what they don't know? \n3. Be present in the walk-in hours also if no one shows up because students could join later \n(A walk-in hour is not an appointment), meanwhile you can use the time for your own work. \n4. If students want to work on their assignments, set up break out rooms that they can use.",

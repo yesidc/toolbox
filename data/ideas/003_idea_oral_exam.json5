@@ -3,7 +3,7 @@
 
 
 idea_name: "Oral exam",
-  idea_id: "idea-oe-003",
+  idea_id: "003-idea-oe",
 brief_description:"Online synchronous exam with a single student of 20-30 minutes max., asking students to connect concepts and topics or to check how well they can apply a technique or method. In the latter case, students may prepare a small assignment that demonstrates their mastery of the topic which you discuss in the oral exam, giving insight into the student's understanding and decision-making. Oral exams are less useful for checking factual knowledge.",
 technology: "- [Your personal online meeting room](https://webconf.uni-osnabrueck.de/b/), secured with an entry code ",
 implementation_steps: "1. Think about what you would accept as evidence for the student's learning in the course; i.e. what are they able to do and what overarching skill have they acquired? \n2. How can you scale down an assignment which targets such a proof of skill mastery or understanding? \n3. Inform students about their assignment that they should prepare and explain in the oral exam. Let them know that you want them to explain how they developed the solution and that you will ask them for alternative ways and why / why not they have discarded that idea.",

@@ -4,7 +4,7 @@
 
 
 idea_name:"Reflection portfolio (for Individual Assessment)" ,
-  idea_id: "idea-rpia-004",
+  idea_id: "004-idea-rpia",
 brief_description: "In a reflection portfolio, students showcase their learning process. For assessment, let them elaborate on the same question twice and let them self-assess \nthe growth of sophistication in their answer. You can even provoke them with “unanswerable” (essential) questions and let them justify their answers. ",
 technology: "-\tFiles Stud.Ip: Reflection portfolio files can be up- and downloaded by students and lecturers. \n-\t[Tasks (reflection) Plug-In]() for reflection tasks: Students submit free text answers or upload a file (document, mp3, etc.). \nThe plug-in provides a quick overview about who already submitted their answer. \nYou can give upload rights to particular students in the task section of somebody else, \nso, they can give feedback to each other or submit an assignment together.\n\n[//]: <> (Own material: Adding the task Plug-in + preview)\n\n- [Courseware](https://hilfe.studip.de/help/5.0/en/Basis/CoursewareSeite): Create a page for each student in the courseware of your course in which they write their portfolio. \n\tIdeally, you create a reflection portfolio template with writing prompts in your workspace in stud.IP and copy it as many times as the number of students into your courseware. \nNow, you can give editing and reading rights to individual students or groups for pages within courseware and you can make pages invisible for certain participants. \n",
 implementation_steps: "-\t[Individual reflection portfolio example instructions] \n\n[//]: <> (Own material: Individual Reflection Portfolio example NI)",

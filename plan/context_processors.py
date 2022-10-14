@@ -16,6 +16,7 @@ def user_plans (request):
 
 def category_obj (request):
     """
-    Returns list of tuples (category_name, category_url)
+    Returns list of tuples (category_name, category_url, next_page)
     """
+
     return {'category_objects': Category.objects.values_list('category_name','category_url','next_page')}

@@ -2,7 +2,7 @@
 
 
 idea_name:"Checklist for Learning Objectives" ,
-idea_id: "idea-clo-026",
+idea_id: "026-idea-clo",
 brief_description: "A well-phrased learning objective (LO) makes your expectations for student activity and results more transparent (Wunderlich, Szczyrba, 2016).\nIn order to enable students to reach the learning / course goals effectively, learning objectives should indicate which activities students need to engage in. \nBy doing so, students acquire academic skills and engage in higher-order cognitive processes, allowing them to reach the learning goals (Wunderlich, Szczyrba, 2016; Ollermann, 2020).",
 technology: "- [Confirmation Block](https://hilfe.studip.de/help/5.0/de/Basis/CoursewareBloeckeBestaetigung) in Courseware: creates a checklist that students need to confirm. \n- [VIPs](https://hilfe.studip.de/help/5.0/en/Basis/Vips) for self-tests",
 implementation_steps: "*Prerequisite: learning objectives have been defined.* --> see resources.\n1. Decide whether you want to do LOs per course or unit. \n2. Write down your learning objectives following the what-methode structure: \nThe students are able to ______________________ by using _______________________ . \n3. Integrate the LOs with [confirmation blocks](https://hilfe.studip.de/help/5.0/de/Basis/CoursewareBloeckeBestaetigung) as checklists at the end of a unit in courseware. \n",

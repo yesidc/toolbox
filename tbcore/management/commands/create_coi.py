@@ -10,64 +10,64 @@ class Command(BaseCommand):
         # create CategoryOnlineIdea objects
 
         CategoryOnlineIdea.objects.create(category=Category.objects.get(category_name='Human Touch')).online_idea.add(
-            OnlineIdea.objects.get(idea_id='idea-as-014'),
-            OnlineIdea.objects.get(idea_id='idea-hf-013'),
-            OnlineIdea.objects.get(idea_id='idea-iv-015'),
-            OnlineIdea.objects.get(idea_id='idea-pll-016')
+            OnlineIdea.objects.get(idea_id='014-idea-as'),
+            OnlineIdea.objects.get(idea_id='013-idea-hf'),
+            OnlineIdea.objects.get(idea_id='015-idea-iv'),
+            OnlineIdea.objects.get(idea_id='016-idea-pll')
         )
 
         CategoryOnlineIdea.objects.create(category=Category.objects.get(category_name='Organization')).online_idea.add(
-            OnlineIdea.objects.get(idea_id='idea-s-020'),
-            OnlineIdea.objects.get(idea_id='idea-stm-019'),
-            OnlineIdea.objects.get(idea_id='idea-pe-018'),
-            OnlineIdea.objects.get(idea_id='idea-ce-017')
+            OnlineIdea.objects.get(idea_id='020-idea-s'),
+            OnlineIdea.objects.get(idea_id='019-idea-stm'),
+            OnlineIdea.objects.get(idea_id='018-idea-pe'),
+            OnlineIdea.objects.get(idea_id='017-idea-ce')
         )
 
         CategoryOnlineIdea.objects.create(category=Category.objects.get(category_name='Assignments')).online_idea.add(
-            OnlineIdea.objects.get(idea_id='idea-rp-008'),
-            OnlineIdea.objects.get(idea_id='idea-q-007'),
-            OnlineIdea.objects.get(idea_id='idea-ps-006'),
-            OnlineIdea.objects.get(idea_id='idea-pr-005')
+            OnlineIdea.objects.get(idea_id='008-idea-rp'),
+            OnlineIdea.objects.get(idea_id='007-idea-q'),
+            OnlineIdea.objects.get(idea_id='006-idea-ps'),
+            OnlineIdea.objects.get(idea_id='005-idea-pr')
         )
 
         CategoryOnlineIdea.objects.create(
             category=Category.objects.get(category_name='Teaching Material')).online_idea.add(
-            OnlineIdea.objects.get(idea_id='idea-cm-024'),
-            OnlineIdea.objects.get(idea_id='idea-cc-025'),
-            OnlineIdea.objects.get(idea_id='idea-clo-026'),
-            OnlineIdea.objects.get(idea_id='idea-ml-027')
+            OnlineIdea.objects.get(idea_id='024-idea-cm'),
+            OnlineIdea.objects.get(idea_id='025-idea-cc'),
+            OnlineIdea.objects.get(idea_id='026-idea-clo'),
+            OnlineIdea.objects.get(idea_id='027-idea-ml')
 
         )
 
         CategoryOnlineIdea.objects.create(category=Category.objects.get(category_name='Discussion')).online_idea.add(
-            OnlineIdea.objects.get(idea_id='idea-afm-009'),
-            OnlineIdea.objects.get(idea_id='idea-sdt-010'),
-            OnlineIdea.objects.get(idea_id='idea-pp-011'),
-            OnlineIdea.objects.get(idea_id='idea-whops-012')
+            OnlineIdea.objects.get(idea_id='009-idea-afm'),
+            OnlineIdea.objects.get(idea_id='010-idea-sdt'),
+            OnlineIdea.objects.get(idea_id='011-idea-pp'),
+            OnlineIdea.objects.get(idea_id='012-idea-whops')
         )
 
         CategoryOnlineIdea.objects.create(
             category=Category.objects.get(category_name='Student Engagement')).online_idea.add(
-            OnlineIdea.objects.get(idea_id='idea-af-020'),
-            OnlineIdea.objects.get(idea_id='idea-or-022'),
-            OnlineIdea.objects.get(idea_id='idea-q-007'),
-            OnlineIdea.objects.get(idea_id='idea-sct-023')
+            OnlineIdea.objects.get(idea_id='021-idea-af'),
+            OnlineIdea.objects.get(idea_id='022-idea-or'),
+            OnlineIdea.objects.get(idea_id='007-idea-q'),
+            OnlineIdea.objects.get(idea_id='023-idea-sct')
         )
 
         CategoryOnlineIdea.objects.create(category=Category.objects.get(category_name='Assessment')).online_idea.add(
-            OnlineIdea.objects.get(idea_id='idea-ac-001'),
-            OnlineIdea.objects.get(idea_id='idea-gr-002'),
-            OnlineIdea.objects.get(idea_id='idea-oe-003'),
-            OnlineIdea.objects.get(idea_id='idea-rpia-004')
+            OnlineIdea.objects.get(idea_id='001-idea-ac'),
+            OnlineIdea.objects.get(idea_id='002-idea-gr'),
+            OnlineIdea.objects.get(idea_id='003-idea-oe'),
+            OnlineIdea.objects.get(idea_id='004-idea-rpia')
         )
 
         CategoryOnlineIdea.objects.create(
             category=Category.objects.get(category_name='Rules & Regulations')).online_idea.add(
-            OnlineIdea.objects.get(idea_id='idea-ac-001'),
+            OnlineIdea.objects.get(idea_id='001-idea-ac'),
             # todo add ideas for rules and regulations. These are not correct.
-            OnlineIdea.objects.get(idea_id='idea-gr-002'),
-            OnlineIdea.objects.get(idea_id='idea-oe-003'),
-            OnlineIdea.objects.get(idea_id='idea-rpia-004')
+            OnlineIdea.objects.get(idea_id='002-idea-gr'),
+            OnlineIdea.objects.get(idea_id='003-idea-oe'),
+            OnlineIdea.objects.get(idea_id='004-idea-rpia')
         )
 
         self.stdout.write(self.style.SUCCESS('Successfully crated the CategoryOnline objects'))

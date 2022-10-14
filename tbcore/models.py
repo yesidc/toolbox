@@ -75,8 +75,13 @@ class Category(models.Model):
     category_url = models.CharField(max_length=50)
     next_page = models.CharField(max_length=100, null=True)
 
+
+
     def __str__(self):
         return self.category_name
+
+    class Meta:
+        ordering= ('category_id',)
 
     @classmethod
     def create_from_json5(cls, data_json5):
@@ -88,7 +93,7 @@ class Category(models.Model):
 
         # delete old categories
         try:
-            Category.objects.get(category_name=category["category_name"]).delete()
+            Category.objects.get(category_id=category["category_id"]).delete()
         except:
             pass
 
@@ -98,6 +103,7 @@ class Category(models.Model):
             next_page = None
 
         Category.objects.create(category_name=category["category_name"],
+                                category_id= category['category_id'],
                                 short_description=category["short_description"],
                                 further_information=category["further_information"],
                                 requirements=category["requirements"],

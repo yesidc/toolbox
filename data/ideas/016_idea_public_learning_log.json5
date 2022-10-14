@@ -2,7 +2,7 @@
 
 
 idea_name:"Public learning log" ,
-idea_id: "idea-pll-016",
+idea_id: "016-idea-pll",
 brief_description: "Students write a weekly open journal entry about how they are learning, i.e. what strategies they use, \nwhen they study, what works, what doesn't etc.  This supports meta cognition and reflection skills about their \nlearning strategies and will naturally keep them engaged with the content. \nLearning logs can help to build a meaningful learning community in the course.",
 technology: "- [Courseware](https://hilfe.studip.de/help/4.6/en/Basis/Courseware): give editing rights to students such that they can write short [text blocks](https://hilfe.studip.de/help/4.6/en/Basis/CoursewareBloeckeFreitext)\n- [Announcements](https://hilfe.studip.de/help/4.6/en/Basis/StartseiteNews): Publish the reflection question for the learning log in the course announcements and enable comments.  \n- [Wiki](https://hilfe.studip.de/help/4.6/en/Basis/Wiki): Create a wiki about well-working learning strategies, common distractors from work, study tips etc.",
 implementation_steps: "Give concrete information about the learning log requirements: \n- Which technology do you use? \n- Word limit \n- Provide reflection prompts\n- When are the learning logs due? How often?",

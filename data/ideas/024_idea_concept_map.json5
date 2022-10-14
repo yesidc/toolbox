@@ -2,7 +2,7 @@
 
 
 idea_name:"Concept map" ,
-idea_id: "idea-cm-024",
+idea_id: "024-idea-cm",
 brief_description: "Visualize the links between important concepts of a topic/ unit/ course. Have students create the concept map or let them upvote/ down vote the different links between the terms. \nConcept maps allow instructors to judge the growth in the relative sophistication of a student’s model or explanation, if developed and assessed over time. \n",
 technology: "[Collaboard](https://www.collaboard.app/de/) (access via [Academic Cloud](https://academiccloud.de/home) > *”Whiteboard”*): \nOnline collaboration board provided by Academic Cloud  for mind maps, concept maps or visualizations.  Import templates and start reconstructing visual representations of \nrelationships among concepts or ideas. (**This is the only online collaboration board that is GSDVO compliant**)\n\n## Implementation Steps\n1. Decide if students should come up with their own list of key terms that should be linked or share(parts of) \nyour list with the students. \n2. Assemble a list of key terms that should be included.\n3. Communicate what you expect this concept map to look like. ",
 implementation_steps: "no-data",

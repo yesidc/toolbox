@@ -2,7 +2,7 @@
 
 
 idea_name:"Structured Teaching Material" ,
-idea_id: "idea-stm-019",
+idea_id: "019-idea-stm",
 brief_description: "A clear and easy to navigate structure in courseware organized by topics helps your students find the material, videos, readings, tasks, deadlines and submission folders. \nA clear structure helps them to revisit sections easily and avoids frustration.  A difficult to follow structure of teaching material often leads to organizational issues.",
 technology: "- [Courseware](https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/courseware/) structure: pages, sections and blocks allow \nlearning content to be hierarchically divided as desired. Have a look at this [crash course](https://hilfe.studip.de/help/5.0/de/Basis/CoursewareVideotutorials) for guidance. \n- Content section on the courseware start page. \n\n[//]: <> (For learning how to implement the content section in courseware, we have to link one of the video tutorials. --> Check which video to link. )",
 implementation_steps: "1.\tCreate structure to sort material meaningfully, e.g. material about one topic should not be spread across several units\n2.\tCreate pages with sections to implement your content in courseware blocks\nPrerequsite: the material has already been created/ is currently being created ",
