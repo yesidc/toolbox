@@ -2,13 +2,14 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.db.models import Q, Count
-from django.http import JsonResponse
+from django.template import RequestContext
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from .helpers import category_done, is_ajax, context_summary, get_category, get_ideas, has_plan
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
-
+from tbcore.utils.create_pdf import render_to_pdf
 
 
 # todo optimize database queries,ex. create 500 users and evaluate performance
@@ -97,9 +98,17 @@ def checklist(request):
         context = {
             'context_summary': c_s,
             'category_done_summary': c_d,
+            'current_plan':current_user_plan,
             'plan_form': PlanForm()
         }
-        return render(request, 'plan/checklist.html', context=context)
+        if 'crate_pdf' in request.GET:
+            context.update({'category_objects': Category.objects.values_list('category_name', 'category_url',
+                                                                             'next_page')})
+            pdf = render_to_pdf('plan/test_code.html', context)
+            return HttpResponse(pdf, content_type='application/pdf')
+        else:
+
+            return render(request, 'plan/checklist.html', context=context)
     else:
         messages.add_message(request, messages.INFO, 'First add a plan to be able to see the checklist page')
         return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
@@ -287,7 +296,23 @@ def delete_plan (request, plan_id):
     else:
         return redirect(request.META.get('HTTP_REFERER'))
 
+
+
+
 # todo delete
 def test_code(request):
-    idea = OnlineIdea.objects.get(idea_name='Assignment Checklist')
-    return render(request,'plan/test_code.html', locals())
+    current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
+    c_s, c_d = context_summary(request.user, current_user_plan)
+    request_context = RequestContext (request)
+    category_obj =request_context.get('category_objects')
+
+    context = {
+        'context_summary': c_s,
+        'category_done_summary': c_d,
+        'current_plan': current_user_plan,
+        'plan_form': PlanForm(),
+        'category_objects': Category.objects.values_list('category_name', 'category_url', 'next_page')
+    }
+    pdf = render_to_pdf('plan/test_code.html',context)
+    return HttpResponse(pdf, content_type='application/pdf')
+    # return render(request,'plan/test_code.html', locals())

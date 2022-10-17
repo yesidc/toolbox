@@ -43,8 +43,10 @@ window.addEventListener('DOMContentLoaded', event => {
    $(document).ready(function () {
 
         jQuery(function ($) {
+            //current active link
           var path_top_nav = window.location.href;
           $('.nav-link').each(function () {
+              // if the href attribute of the elements with .nav-link class == the current link (see browser )
             if (this.href === path_top_nav) {
               $(this).addClass('active-top-bar');
             }

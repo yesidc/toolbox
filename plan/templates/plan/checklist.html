@@ -10,66 +10,8 @@
 {% block building_block_idea %}
 
     <section>
-        <h1 class="text-center mb-md-4 mb-sm-2">Checklist</h1>
+        <h1 class="text-center mb-md-4 mb-sm-2 text-primary">Checklist: {{ current_plan.plan_name }}</h1>
 
-        {#      <div class="row border-bottom border-danger">#}
-        {#          <div class="col border border-0">In progress</div>#}
-        {#          <div class="col align-middle">Completed</div>#}
-        {#            <div class="col">Building Block</div>#}
-        {#            <div class="col">Idea</div>#}
-        {#            <div class="col">Notes</div>#}
-        {#            <div class="col">Delete</div>#}
-        {##}
-        {##}
-        {#      </div>#}
-        {##}
-        {#      <div class="row border-bottom border-danger">#}
-        {#          <div class="col border border-0 align-self-center">In progress</div>#}
-        {#          <div class="col align-self-center">Completed</div>#}
-        {#            <div class="col align-self-center">Human Touch</div>#}
-        {#            <div class="col">#}
-        {#                <div class="row align-self-center">- Short Instructor video</div>#}
-        {#                <div class="row align-self-center">- Share stores and experiences with your students</div>#}
-        {#            </div>#}
-        {#            <div class="col align-self-center">#}
-        {#                <div class="row align-self-center">- I need to talk to my instructors first to see if they have a computer</div>#}
-        {#                <div class="row align-self-center">- This note I took is about how to implement 'share experiences with your students</div>#}
-        {#            </div>#}
-        {#            <div class="col align-self-center">Delete</div>#}
-        {##}
-        {##}
-        {#      </div>#}
-        {#      <div class="row border-bottom border-danger">#}
-        {#          <div class="col border border-0 align-self-center">In progress</div>#}
-        {#          <div class="col align-self-center">Completed</div>#}
-        {#            <div class="col align-self-center">Human Touch</div>#}
-        {#            <div class="col">#}
-        {#                <div class="row align-self-center">- Short Instructor video</div>#}
-        {#                <div class="row align-self-center">- Share stores and experiences with your students</div>#}
-        {#            </div>#}
-        {#            <div class="col align-self-center">#}
-        {#                <div class="row align-self-center">- I need to talk to my instructors first to see if they have a computer</div>#}
-        {#                <div class="row align-self-center">- This note I took is about how to implement 'share experiences with your students</div>#}
-        {#            </div>#}
-        {#            <div class="col align-self-center">Delete</div>#}
-        {##}
-        {##}
-        {#      </div>#}
-
-
-        {#<div class="row">#}
-        {##}
-        {#    <div class="col">In progress</div>#}
-        {#          <div class="col">Completed</div>#}
-        {#            <div class="col">Building Block</div>#}
-        {#            <div class="col">Idea</div>#}
-        {#            <div class="col">Notes</div>#}
-        {#            <div class="col">Delete</div>#}
-        {##}
-        {##}
-        {##}
-        {#</div>#}
-        {##}
 
 
         {#Summary Table#}
@@ -189,7 +131,7 @@
 
             <div class="d-flex justify-content-end">
             <div>
-                <a href="" class="btn btn-primary p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
+                <a href="{% url 'checklist'  %}?crate_pdf={{ True }} " class="btn btn-primary p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
             </div>
         </div>
     </section>

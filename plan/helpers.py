@@ -40,6 +40,7 @@ def context_summary(user, current_plan):
         category_done_summary: Set containing categories for which the user has selected at least one idea.
     """
     pcoi = PlanCategoryOnlineIdea.objects.get_pcoi(user, current_plan)
+
     category_idea_checklist = []
     info_idea = []
     category_done_summary = current_plan.category_done(mode='category_name')
