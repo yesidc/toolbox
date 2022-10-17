@@ -9,7 +9,7 @@ from django.shortcuts import render, get_object_or_404
 from .helpers import category_done, is_ajax, context_summary, get_category, get_ideas, has_plan
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
-from tbcore.utils.create_pdf import render_to_pdf
+from tbcore.utils.create_pdf import render_pdf
 
 
 # todo optimize database queries,ex. create 500 users and evaluate performance
@@ -104,7 +104,7 @@ def checklist(request):
         if 'crate_pdf' in request.GET:
             context.update({'category_objects': Category.objects.values_list('category_name', 'category_url',
                                                                              'next_page')})
-            pdf = render_to_pdf('plan/test_code.html', context)
+            pdf = render_pdf('plan/checklist_pdf.html', context)
             return HttpResponse(pdf, content_type='application/pdf')
         else:
 
@@ -301,18 +301,19 @@ def delete_plan (request, plan_id):
 
 # todo delete
 def test_code(request):
-    current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
-    c_s, c_d = context_summary(request.user, current_user_plan)
-    request_context = RequestContext (request)
-    category_obj =request_context.get('category_objects')
-
-    context = {
-        'context_summary': c_s,
-        'category_done_summary': c_d,
-        'current_plan': current_user_plan,
-        'plan_form': PlanForm(),
-        'category_objects': Category.objects.values_list('category_name', 'category_url', 'next_page')
-    }
-    pdf = render_to_pdf('plan/test_code.html',context)
-    return HttpResponse(pdf, content_type='application/pdf')
-    # return render(request,'plan/test_code.html', locals())
+    # current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
+    # c_s, c_d = context_summary(request.user, current_user_plan)
+    # request_context = RequestContext (request)
+    # category_obj =request_context.get('category_objects')
+    #
+    # context = {
+    #     'context_summary': c_s,
+    #     'category_done_summary': c_d,
+    #     'current_plan': current_user_plan,
+    #     'plan_form': PlanForm(),
+    #     'category_objects': Category.objects.values_list('category_name', 'category_url', 'next_page')
+    # }
+    # pdf = render_to_pdf('plan/checklist_pdf.html',context)
+    # return HttpResponse(pdf, content_type='application/pdf')
+    # # return render(request,'plan/checklist_pdf.html', locals())
+    return render(request,'plan/test_code.html', locals())
