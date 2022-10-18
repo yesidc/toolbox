@@ -4,16 +4,9 @@
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-simple-sidebar/blob/master/LICENSE)
 */
 //
-// Scripts
-//
 
-// arrows
 
-// const leftArrowClass = "bi-chevron-double-left";
-// const rightArrowClass = "bi-chevron-double-right";
-// const arrowClass = "bi"
-// const arrowElem = document.querySelector("." + leftArrowClass);
-// var statebar = true;
+
 
 window.addEventListener('DOMContentLoaded', event => {
 
@@ -39,6 +32,25 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
+// Toolbox code
+
+const category_urls = JSON.parse(document.getElementById('category-urls').textContent)
+
+
+
+function get_current_category(link){
+    // Extracts the category/building from the provided link
+     let c = ''
+    for(var i=0; i<category_urls.length;i++){
+        if(link.includes(category_urls[i])){
+            c=category_urls[i]
+            console.log(category_urls[i])
+            break;
+        }
+    }
+    return c
+}
+
 // underlines active menus on top nav bar.
    $(document).ready(function () {
 
@@ -46,11 +58,20 @@ window.addEventListener('DOMContentLoaded', event => {
             //current active link
           var path_top_nav = window.location.href;
           $('.nav-link').each(function () {
-              // if the href attribute of the elements with .nav-link class == the current link (see browser )
-            if (this.href === path_top_nav) {
+              // the href attribute of the elements with .nav-link class == the current link (see browser )
+              let link =  this.href.split('/')
+              currec_c= get_current_category(link)
+              if ( path_top_nav.split('/').includes(currec_c)) {
               $(this).addClass('active-top-bar');
+              return false;
             }
+
           });
         });
       });
+
+
+
+
+
 
