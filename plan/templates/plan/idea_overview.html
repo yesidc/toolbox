@@ -45,7 +45,7 @@
                                     <h4>Technology</h4>
                                 </div>
                                 <div class="col">
-                                    <p>{% if idea.technology %}{% md_to_html idea.technology as t_html %}{{ t_html|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
+                                    <p>{% if idea.technology %}{% md_to_html idea.technology as t_html %}{{ t_html|truncatewords_html:10|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                                     <h4>Teacher Effort</h4>
                                 </div>
                                 <div class="col">
-                                    <p>{% if idea.teacher_effort %}{% md_to_html idea.teacher_effort as te_html %}{{ te_html|safe }}{% else %}
+                                    <p>{% if idea.teacher_effort %}{% md_to_html idea.teacher_effort as te_html %}{{ te_html|truncatewords_html:10|safe }}{% else %}
                                         {{ 'No data' }}{% endif %}</p>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                     <h4>Implementation steps</h4>
                                 </div>
                                 <div class="col">
-                                    <p>{% if idea.implementation_steps %}{% md_to_html idea.implementation_steps as is_html%}{{ is_html|safe }}{% else %}
+                                    <p>{% if idea.implementation_steps %}{% md_to_html idea.implementation_steps as is_html%}{{ is_html|truncatewords_html:10|safe }}{% else %}
                                         {{ 'No data' }}{% endif %}</p>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                                     <h4>Recomendations</h4>
                                 </div>
                                 <div class="col">
-                                    <p>{% if idea.recommendations %}{% md_to_html idea.recommendations as recom_html  %}{{ recom_html|safe }}{% else %}
+                                    <p>{% if idea.recommendations %}{% md_to_html idea.recommendations as recom_html  %}{{ recom_html|truncatewords_html:10|safe }}{% else %}
                                         {{ 'No data' }}{% endif %}</p>
                                 </div>
                             </div>
