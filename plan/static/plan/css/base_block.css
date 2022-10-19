@@ -37,6 +37,11 @@ Toolbox
   border-bottom: 3px solid deepskyblue;
 }
 
+.my-flex-card > div > div.card {
+    height: calc(100% - 15px);
+    margin-bottom: 15px;
+}
+
 /*moves brand to the right*/
 .navbar-brand{
      margin-left:10px !important;
