@@ -90,27 +90,7 @@
                     {#online_idea is M2M field#}
 
 
-                    {#todo use dynamic urls to pass the corresponding idea object to the idea_overview page, passing the primary#}
 
-                    {% if user.is_authenticated %}
-                        <div class="row">
-                            {% for idea in category.online_idea.all %}
-                                {# Checkbox#}
-                                <div class="col">
-
-
-                                    <input type="checkbox" class="idea-checkbox" id="{{ idea.id }}-idea"
-                                           onclick="add_delete_idea()"
-                                            {#                        The ideas that have been already chosen by users are ticked off by default#}
-                                            {% if idea.id in ideas_list %}
-                                           checked
-                                            {% endif %}
-                                    >
-                                </div>
-
-                            {% endfor %}
-                        </div>
-                    {% endif %}
 
                     <div class="container">
 
@@ -120,12 +100,25 @@
 
                                 <div class="col d-flex">
 
+                                    <div class="card">
 
-                                        <div class="card card-body text-center bg-body text-black flex-fill">
+                                        {% if user.is_authenticated%}<div class="card-header bg-light">
 
-                                           <a
-                                            href="{% url 'idea_overview_detail' current_category idea.id 'overview' %}"
-                                            class="btn">
+                                                    <input type="checkbox" class="idea-checkbox" id="{{ idea.id }}-idea"
+                                           onclick="add_delete_idea()"
+                                            {#                        The ideas that have been already chosen by users are ticked off by default#}
+                                            {% if idea.id in ideas_list %}
+                                           checked
+                                            {% endif %}
+                                    >
+
+                                        </div>{% endif %}
+
+                                        <div class="card-body text-center bg-body text-black flex-fill">
+
+                                            <a
+                                                    href="{% url 'idea_overview_detail' current_category idea.id 'overview' %}"
+                                                    class="btn">
 
                                                 <div class="h1 mb-3">
                                                     <i class="bi bi-journal-code"></i>
@@ -138,9 +131,9 @@
 
                                                 </p>
 
-   </a>
+                                            </a>
                                         </div>
-
+                                    </div>
 
 
                                 </div>
