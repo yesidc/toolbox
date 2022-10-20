@@ -16,6 +16,11 @@ def user_plans (request):
 
 def category_obj (request):
     """
-    Returns list of tuples (category_name, category_url)
+    Returns list of tuples (category_name, category_url, next_page)
     """
-    return {'category_objects': Category.objects.values_list('category_name','category_url','next_page')}
+    category_objects= Category.objects.values_list('category_name','category_url','next_page')
+    # This list is eventually used by menu_bar.js to active links on top nav bar.
+    #category_urls = {c_url:c_url for c_name,c_url,_ in category_objects}
+    category_urls = [c_url for _,c_url,_ in category_objects]
+
+    return {'category_objects': category_objects, 'category_urls': category_urls}

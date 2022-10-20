@@ -16,5 +16,6 @@ urlpatterns = [
 
     path('checklist/', views.checklist, name='checklist'),
     path('delete_plan/<int:plan_id>/', views.delete_plan, name='delete_plan'),
+    path('test_code/', views.test_code, name='test_code'), #todo delete
 
 ]

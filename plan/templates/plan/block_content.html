@@ -1,5 +1,6 @@
 {% extends "plan/base_block.html" %}
 {% load toolbox_custom_tags %}
+{% load static %}
 {% block title %}
     ToolBox | Building Blocks
 {% endblock %}
@@ -11,33 +12,31 @@
 {% block building_block_idea %}
 
 
-
-
-
-
     <!-- Showcase-->
 
 
-    {% if not user.is_authenticated  %}
+    {% if not user.is_authenticated %}
         <section class="bg-light text-dark p-3 mt-1">
-        <div class="container">
-            <div class="d-flex flex-column ">
-                {#                <div class="text-center">#}
-                {#                    <h4>Online Ideas</h4>#}
-                {#                #}
-                {#                </div>#}
-                <div>
-                    <h5>Course Exploration Mode</h5>
-                    <p class="lead">If you want to save changes as well as the online ideas, please log in and crate a course to get started!</p>
-                    <a class="btn btn-primary button-touch" href="{% url 'login' %}">Switch to Revision Mode</a>
-                </div>
+            <div class="container">
+                <div class="d-flex flex-column ">
+                    {#                <div class="text-center">#}
+                    {#                    <h4>Online Ideas</h4>#}
+                    {#                #}
+                    {#                </div>#}
+                    <div>
+                        <h5>Course Exploration Mode</h5>
+                        <p class="lead">If you want to save changes as well as the online ideas, please log in and crate
+                            a
+                            course to get started!</p>
+                        <a class="btn btn-primary button-touch" href="{% url 'login' %}">Switch to Revision Mode</a>
+                    </div>
 
+
+                </div>
 
             </div>
 
-        </div>
-
-    </section>
+        </section>
     {% endif %}
 
 
@@ -49,12 +48,11 @@
     <section class="p-2 mt-2">
         <div class="container">
             <h3 class="text-center mb-5">{{ category.category.category_name }}</h3>
-            <p class="text-start">{{ category.category.short_description |safe }}</p>
+            <p class="text-start">
+                {% md_to_html category.category.short_description as short_d_html %}{{ short_d_html|safe }}</p>
 
         </div>
     </section>
-
-
 
 
     <!-- Online Ideas -->
@@ -82,65 +80,70 @@
     </section>
 
 
-
-
-
-
-
-
     <!-- Online Ideas -->
     <div id="online-idea-container">
         <section class="p-5">
             <div class="container">
                 <h2 class="text-center mb-md-5"> Discover the Teaching Tools</h2>
-                <div class="row align-items-center justify-content-between">
+                <div class="row">
 
-{#online_idea is M2M field#}
-
-                    {% for idea in category.online_idea.all %}
-                        <div class="col-md">
-
-                            {#todo use dynamic urls to pass the corresponding idea object to the idea_overview page, passing the primary#}
-
-                            {% if user.is_authenticated %}
-                                {# Checkbox#}
-                                <div class="row">
+                    {#online_idea is M2M field#}
 
 
-                                    <input type="checkbox" class="idea-checkbox" id="{{ idea.id }}-idea" onclick="add_delete_idea()"
+
+
+                    <div class="container">
+
+                        <div class="row">
+
+                            {% for idea in category.online_idea.all %}
+
+                                <div class="col d-flex">
+
+                                    <div class="card">
+
+                                        {% if user.is_authenticated%}<div class="card-header bg-light">
+
+                                                    <input type="checkbox" class="idea-checkbox" id="{{ idea.id }}-idea"
+                                           onclick="add_delete_idea()"
                                             {#                        The ideas that have been already chosen by users are ticked off by default#}
                                             {% if idea.id in ideas_list %}
                                            checked
                                             {% endif %}
                                     >
-                                </div>
 
-                            {% endif %}
+                                        </div>{% endif %}
 
-                            <div class="row">
-                                <a href="{% url 'idea_overview_detail' current_category idea.id 'overview' %}"
-                                   class="btn">
-                                    <div class="card bg-body text-black">
-                                        <div class="card-body text-center">
-                                            <div class="h1 mb-3">
-                                                <i class="bi bi-journal-code"></i>
-                                            </div>
-                                            <h3 class="card-title mb-3 bg-light">{{ idea.idea_name }}</h3>
-                                            <p class="card-text">
+                                        <div class="card-body text-center bg-body text-black flex-fill">
 
-                                                idea's brief description
+                                            <a
+                                                    href="{% url 'idea_overview_detail' current_category idea.id 'overview' %}"
+                                                    class="btn">
+
+                                                <div class="h1 mb-3">
+                                                    <i class="bi bi-journal-code"></i>
+                                                </div>
+                                                <h3 class="card-title mb-3 bg-light">{{ idea.idea_name }}</h3>
+                                                <p class="card-text">
+
+                                                    idea's brief description
 
 
-                                            </p>
+                                                </p>
+
+                                            </a>
                                         </div>
                                     </div>
-                                </a>
-                            </div>
+
+
+                                </div>
+                            {% endfor %}
 
 
                         </div>
 
-                    {% endfor %}
+
+                    </div>
 
 
                 </div>
@@ -149,7 +152,7 @@
     </div>
 
 
-{#    Buttons bottom of the page#}
+    {#    Buttons bottom of the page#}
 
     </section>
 
@@ -157,14 +160,17 @@
         <div class="d-flex justify-content-end">
             <div>
 
-                {% if user.is_authenticated%}<a href="{% url 'checklist' %}" class="btn btn-primary active m-4" aria-current="page">View Summary checklist</a>{% endif %}
+                {% if user.is_authenticated %}
+                    <a href="{% url 'checklist' %}" class="btn btn-primary active m-4" aria-current="page">View Summary
+                        checklist</a>{% endif %}
 
             </div>
             <div>
 
                 {% if category.category.category_name != 'Rules & Regulations' %}
                     {% get_name_next_category next_page as c_next_button %}
-                    <a href="{% url  'show_block' next_page c_next_button.c_next %}" class="btn btn-primary active m-4" aria-current="page">Next Building
+                    <a href="{% url  'show_block' next_page c_next_button.c_next %}" class="btn btn-primary active m-4"
+                       aria-current="page">Next Building
                         Block: {{ c_next_button.c_name }} </a>
                 {% endif %}
 
@@ -175,7 +181,7 @@
     </section>
 
 
-  <script src="{% static 'plan/js/utils.js' %}"></script>
+    <script src="{% static 'plan/js/utils.js' %}"></script>
     <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
 
 {% endblock %}
