@@ -67,7 +67,7 @@ class Plan(models.Model):
 class Category(models.Model):
     category_name = models.CharField(
         max_length=100)  # there are a total of 8 categories: hallway chatter, organization etc.
-    category_id = models.SlugField(max_length=70)  # internal id
+    category_id = models.SlugField(max_length=70, unique=True)  # internal id
     short_description = models.TextField()
     further_information = models.TextField(null=True)  # accordion info
     requirements = models.TextField()  # requirements --> add to the accordion (building block page)
@@ -75,13 +75,11 @@ class Category(models.Model):
     category_url = models.CharField(max_length=50)
     next_page = models.CharField(max_length=100, null=True)
 
-
-
     def __str__(self):
         return self.category_name
 
     class Meta:
-        ordering= ('category_id',)
+        ordering = ('category_id',)
 
     @classmethod
     def create_from_json5(cls, data_json5):
@@ -91,32 +89,27 @@ class Category(models.Model):
 
         category = json5.loads(data_json5)
 
-        # delete old categories
-        try:
-            Category.objects.get(category_id=category["category_id"]).delete()
-        except:
-            pass
-
         try:
             next_page = category["next_page"]
         except:
-            next_page = None
+            category['next_page'] = None
 
-        Category.objects.create(category_name=category["category_name"],
-                                category_id= category['category_id'],
-                                short_description=category["short_description"],
-                                further_information=category["further_information"],
-                                requirements=category["requirements"],
-                                references=category["references"],
-                                category_url=category['category_url'],
-                                next_page=next_page if next_page else None,
-
-                                )
+        Category.objects.update_or_create(category_name=category["category_name"],
+                                          category_id=category['category_id'],
+                                          short_description=category["short_description"],
+                                          further_information=category["further_information"],
+                                          requirements=category["requirements"],
+                                          references=category["references"],
+                                          category_url=category['category_url'],
+                                          # next_page=next_page if next_page else None,
+                                          next_page=category['next_page'],
+                                          defaults=category
+                                          )
 
 
 class OnlineIdea(models.Model):
     idea_name = models.CharField(max_length=200)
-    idea_id = models.SlugField(max_length=70)  # internal id
+    idea_id = models.SlugField(max_length=70, unique=True)  # internal id
     brief_description = models.TextField()  # used for checklist on the building block page
     technology = models.TextField()
     implementation_steps = models.TextField(null=True)
@@ -140,28 +133,21 @@ class OnlineIdea(models.Model):
 
         idea = json5.loads(data_json5)
 
-        # delete old ideas
-        try:
-            OnlineIdea.objects.get(idea_id=idea["idea_id"]).delete()
-            print(f'idea deleted: {idea["idea_id"]}')
-
-        except:
-            pass
-
-        OnlineIdea.objects.create(idea_name=idea["idea_name"],
-                                  idea_id=idea['idea_id'],
-                                  brief_description=idea["brief_description"],
-                                  technology=idea["technology"],
-                                  implementation_steps=idea["implementation_steps"],
-                                  teacher_effort=idea["teacher_effort"],
-                                  recommendations=idea["recommendations"],
-                                  resources=idea["resources"],
-                                  testimony=idea["testimony"],
-                                  use_cases=idea["use_cases"],
-                                  references=idea["references"],
-                                  reusable=idea["reusable"],
-                                  task_complexity=idea["task_complexity"]
-                                  )
+        OnlineIdea.objects.update_or_create(idea_name=idea["idea_name"],
+                                            idea_id=idea['idea_id'],
+                                            brief_description=idea["brief_description"],
+                                            technology=idea["technology"],
+                                            implementation_steps=idea["implementation_steps"],
+                                            teacher_effort=idea["teacher_effort"],
+                                            recommendations=idea["recommendations"],
+                                            resources=idea["resources"],
+                                            testimony=idea["testimony"],
+                                            use_cases=idea["use_cases"],
+                                            references=idea["references"],
+                                            reusable=idea["reusable"],
+                                            task_complexity=idea["task_complexity"],
+                                            defaults=idea
+                                            )
 
 
 class CategoryOnlineIdea(models.Model):
