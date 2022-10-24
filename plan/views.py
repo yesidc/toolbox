@@ -106,6 +106,8 @@ def checklist(request):
                                                                              'next_page')})
             pdf = render_pdf('plan/checklist_pdf.html', context)
             return HttpResponse(pdf, content_type='application/pdf')
+
+            # return render(request, 'plan/checklist_pdf.html', context=context)
         else:
 
             return render(request, 'plan/checklist.html', context=context)

@@ -22,9 +22,12 @@
             font-size: 1rem;
         }
 
-        {##}
+
+
+
         {#tr{#}
         {#      border: 1px solid rgb(190,190,190);#}
+        {##}
         {##}
         {#}#}
 
@@ -33,7 +36,7 @@
         }
 
 
-         th {
+        th {
 
             padding: 5px 5px;
         }
@@ -45,19 +48,25 @@
         td {
             text-align: center;
             padding: 1px;
+            word-wrap: break-word
         }
-.border-internal-td{
-      border-bottom: 1px solid rgb(190, 190, 190);
-}
+        .td-note{
+            text-align: left;
+        }
 
 
 
-        .margin-internal-td{
+        .border-internal-td {
+            border-bottom: 1px solid rgb(190, 190, 190);
+        }
+
+
+        .margin-internal-td {
             margin-left: 15px;
             margin-right: 3px;
+            margin-top: 14px;
 
         }
-
 
 
         tr:nth-child(even) td {
@@ -86,7 +95,7 @@
 
     {#Summary Table#}
 
-    <table class="table table-hover align-middle table-responsive">
+    <table style="width: 100%;" class="table table-hover align-middle table-responsive">
         <thead>
         <tr>
 
@@ -102,25 +111,26 @@
 
         {% for c_done, idea_ins in context_summary %}
             <tr class="border-unique">
-
-                <td>done</td>
+{#todo here you can use an icon with the shape of chekcbox#}
+                <td style="width: 10%">done</td>
 
                 {#                    category for which the user has chosen at least one idea#}
-                <td>{{ c_done }}</td>
+                <td style="width: 20%">{{ c_done }}</td>
 
 
                 {#     ideas #}
 
-                <td>
-                    <table class="nested-table-checklist">
+                <td style="width: 70%">
+                    <table style="border-collapse: collapse;table-layout: fixed; width: 100%" class="nested-table-checklist">
                         {# todo there needs to be another loop here, as there may be several pcoi per block/category#}
                         {% for idea_name, pcoi_instance_id, pcoi_instance_note in idea_ins %}
                             <tr class="pcoi-instance-{{ pcoi_instance_id }}">
 
 
-                                <td class="border-internal-td"><h3>{{ idea_name }}</h3></td>
+                                <td style="width: 30%" class="border-internal-td"><h3>{{ idea_name }}</h3></td>
 
-                                <td class="margin-internal-td border-internal-td">{{ pcoi_instance_note }}</td>
+                                <td style="width: 70%; word-break: break-word;"
+                                    class="margin-internal-td border-internal-td td-note">{{ pcoi_instance_note }}</td>
 
                             </tr>
                         {% endfor %}
