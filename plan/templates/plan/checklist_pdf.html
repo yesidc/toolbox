@@ -15,16 +15,11 @@
         }
 
 
-
         table {
             border-collapse: collapse;
             letter-spacing: 1px;
             font-size: 1rem;
         }
-
-
-
-
 
 
         .border-unique {
@@ -46,10 +41,10 @@
             padding: 1px;
 
         }
-        .td-note{
+
+        .td-note {
             text-align: left;
         }
-
 
 
         .border-internal-td {
@@ -77,6 +72,10 @@
             padding: 10px;
         }
 
+        .style-headings{
+            padding-top: 10px;
+        }
+
 
     </style>
 
@@ -85,13 +84,26 @@
 <body>
 
 {#The images used on this page were taken from https://icons8.com #}
-<section>
- <img src="tbcore/images/icon.png" alt="">
+<section >
+    <table style="width: 50%; background-color: #b6effb; margin-bottom: 5px">
+        <tr>
+            <td style="width: 10%;">
+                <img src="tbcore/images/icon.png" alt="" style="padding-bottom: 1px">
                 <h2>ToolBox</h2>
+            </td>
+                     <td>
+                <h1 class="center-text text-primary mb-md-4 mb-sm-2 ">Checklist: {{ current_plan.plan_name }}</h1>
+            </td>
+        </tr>
+
+    </table>
 </section>
 
 <section>
-    <h1 class="center-text text-primary mb-md-4 mb-sm-2 ">Checklist: {{ current_plan.plan_name }}</h1>
+
+</section>
+
+<section>
 
 
     {#Summary Table#}
@@ -100,9 +112,9 @@
         <thead>
         <tr>
 
-            <th scope="col">Done</th>
-            <th scope="col">Building Block</th>
-            <th scope="col">Idea & note</th>
+            <th scope="col" class="style-headings">Done</th>
+            <th scope="col" class="style-headings">Building Block</th>
+            <th scope="col" class="style-headings">Idea & note</th>
 
 
         </tr>
@@ -112,9 +124,9 @@
 
         {% for c_done, idea_ins in context_summary %}
             <tr class="border-unique">
-{#todo here you can use an icon with the shape of chekcbox#}
+                {#todo here you can use an icon with the shape of chekcbox#}
                 <td style="width: 10%">
-                     <img src="tbcore/images/checkbox.png" alt="">
+                    <img src="tbcore/images/checkbox.png" alt="">
                 </td>
 
                 {#                    category for which the user has chosen at least one idea#}
@@ -130,7 +142,7 @@
                             <tr class="pcoi-instance-{{ pcoi_instance_id }}">
 
 
-                                <td style="width: 30%; padding: 5px" ><h3>{{ idea_name }}</h3></td>
+                                <td style="width: 30%; padding: 5px"><h3>{{ idea_name }}</h3></td>
 
                                 <td style="width: 57%; padding: 5px"
                                     class="margin-internal-td td-note"><p>{{ pcoi_instance_note }}</p></td>
@@ -173,10 +185,10 @@
 </section>
 
 
-<section class="bg-light text-dark p-md-5 p-sm-2 mb-md-2 mb-sm-1">
+<section >
     {% remaining_categories category_objects as category_left %}
     {% if category_left %}
-        <p class="lead">You have not selected any online ideas from the building blocks:</p>
+        <h4 class="lead" style="padding-top: 50px;">You have not selected any online ideas from the building blocks:</h4>
 
         <ul>
             {% for c_name, c_url,c_next in category_objects %}
@@ -188,7 +200,7 @@
 
         </ul>
     {% else %}
-        <p class="lead">Well done! you have successfully selected ideas for all building blocks</p>
+        <h4 class="lead" style="padding-top: 50px">Well done! you have successfully selected ideas for all building blocks!</h4>
 
     {% endif %}
 
