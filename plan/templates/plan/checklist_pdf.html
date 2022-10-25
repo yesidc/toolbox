@@ -15,9 +15,9 @@
         }
 
 
+
         table {
             border-collapse: collapse;
-
             letter-spacing: 1px;
             font-size: 1rem;
         }
@@ -25,11 +25,7 @@
 
 
 
-        {#tr{#}
-        {#      border: 1px solid rgb(190,190,190);#}
-        {##}
-        {##}
-        {#}#}
+
 
         .border-unique {
             border: 1px solid rgb(190, 190, 190);
@@ -48,7 +44,7 @@
         td {
             text-align: center;
             padding: 1px;
-            word-wrap: break-word
+
         }
         .td-note{
             text-align: left;
@@ -115,22 +111,22 @@
                 <td style="width: 10%">done</td>
 
                 {#                    category for which the user has chosen at least one idea#}
-                <td style="width: 20%">{{ c_done }}</td>
+                <td style="width: 20%; padding: 15px">{{ c_done }}</td>
 
 
                 {#     ideas #}
 
-                <td style="width: 70%">
-                    <table style="border-collapse: collapse;table-layout: fixed; width: 100%" class="nested-table-checklist">
+                <td style="width: 70%; margin-top: 10px">
+                    <table style="width: 100%;" class="nested-table-checklist">
                         {# todo there needs to be another loop here, as there may be several pcoi per block/category#}
                         {% for idea_name, pcoi_instance_id, pcoi_instance_note in idea_ins %}
                             <tr class="pcoi-instance-{{ pcoi_instance_id }}">
 
 
-                                <td style="width: 30%" class="border-internal-td"><h3>{{ idea_name }}</h3></td>
+                                <td style="width: 30%; padding: 10px" ><h3>{{ idea_name }}</h3></td>
 
-                                <td style="width: 70%; word-break: break-word;"
-                                    class="margin-internal-td border-internal-td td-note">{{ pcoi_instance_note }}</td>
+                                <td style="width: 57%; padding: 10px"
+                                    class="margin-internal-td td-note"><p>{{ pcoi_instance_note }}</p></td>
 
                             </tr>
                         {% endfor %}

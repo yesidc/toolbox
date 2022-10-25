@@ -12,6 +12,11 @@ from .forms import NotesForm, PlanForm
 from tbcore.utils.create_pdf import render_pdf
 
 
+from django.views.generic.base import TemplateView
+
+
+
+
 # todo optimize database queries,ex. create 500 users and evaluate performance
 
 
@@ -104,10 +109,14 @@ def checklist(request):
         if 'crate_pdf' in request.GET:
             context.update({'category_objects': Category.objects.values_list('category_name', 'category_url',
                                                                              'next_page')})
+
+
+
+
             pdf = render_pdf('plan/checklist_pdf.html', context)
             return HttpResponse(pdf, content_type='application/pdf')
 
-            # return render(request, 'plan/checklist_pdf.html', context=context)
+            #return render(request, 'plan/checklist_pdf.html', context=context)
         else:
 
             return render(request, 'plan/checklist.html', context=context)
