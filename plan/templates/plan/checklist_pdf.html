@@ -1,0 +1,215 @@
+{% load toolbox_custom_tags %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checklist</title>
+
+
+    <style>
+
+        .center-text {
+            text-align: center;
+            color: #0a53be;
+            padding-bottom: 10px;
+        }
+
+
+        table {
+            border-collapse: collapse;
+            letter-spacing: 1px;
+            font-size: 1rem;
+        }
+
+
+        .border-unique {
+            border: 1px solid rgb(190, 190, 190);
+        }
+
+
+        th {
+
+            padding: 5px 5px;
+        }
+
+        th {
+            background-color: rgb(235, 235, 235);
+        }
+
+        td {
+            text-align: center;
+            padding: 1px;
+
+        }
+
+        .td-note {
+            text-align: left;
+        }
+
+
+        .border-internal-td {
+            border-bottom: 1px solid rgb(190, 190, 190);
+        }
+
+
+        .margin-internal-td {
+            margin-left: 15px;
+            margin-right: 3px;
+            margin-top: 14px;
+
+        }
+
+
+        tr:nth-child(even) td {
+            background-color: rgb(250, 250, 250);
+        }
+
+        tr:nth-child(odd) td {
+            background-color: rgb(245, 245, 245);
+        }
+
+        caption {
+            padding: 10px;
+        }
+
+        .style-headings{
+            padding-top: 10px;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+{#The images used on this page were taken from https://icons8.com #}
+<section >
+    <table style="width: 50%; background-color: #b6effb; margin-bottom: 5px">
+        <tr>
+            <td style="width: 10%;">
+                <img src="tbcore/images/icon.png" alt="" style="padding-bottom: 1px">
+                <h2>ToolBox</h2>
+            </td>
+                     <td>
+                <h1 class="center-text text-primary mb-md-4 mb-sm-2 ">Checklist: {{ current_plan.plan_name }}</h1>
+            </td>
+        </tr>
+
+    </table>
+</section>
+
+<section>
+
+</section>
+
+<section>
+
+
+    {#Summary Table#}
+
+    <table style="width: 100%;" class="table table-hover align-middle table-responsive">
+        <thead>
+        <tr>
+
+            <th scope="col" class="style-headings">Done</th>
+            <th scope="col" class="style-headings">Building Block</th>
+            <th scope="col" class="style-headings">Idea & note</th>
+
+
+        </tr>
+        </thead>
+
+        {#Todo add conditional, if user has not added any ideas this loop should not be executed#}
+
+        {% for c_done, idea_ins in context_summary %}
+            <tr class="border-unique">
+                {#todo here you can use an icon with the shape of chekcbox#}
+                <td style="width: 10%">
+                    <img src="tbcore/images/checkbox.png" alt="">
+                </td>
+
+                {#                    category for which the user has chosen at least one idea#}
+                <td style="width: 20%; padding: 15px">{{ c_done }}</td>
+
+
+                {#     ideas #}
+
+                <td style="width: 70%; margin-top: 10px">
+                    <table style="width: 100%;" class="nested-table-checklist">
+                        {# todo there needs to be another loop here, as there may be several pcoi per block/category#}
+                        {% for idea_name, pcoi_instance_id, pcoi_instance_note in idea_ins %}
+                            <tr class="pcoi-instance-{{ pcoi_instance_id }}">
+
+
+                                <td style="width: 30%; padding: 5px"><h3>{{ idea_name }}</h3></td>
+
+                                <td style="width: 57%; padding: 5px"
+                                    class="margin-internal-td td-note"><p>{{ pcoi_instance_note }}</p></td>
+
+                            </tr>
+                        {% endfor %}
+
+
+                    </table>
+
+
+                </td>
+
+
+                {#        notes#}
+
+                {#                    <td>#}
+                {#                        <table class="nested-table-checklist">#}
+                {#                            {% for idea_name, pcoi_instance_id, pcoi_instance_note in idea_ins %}#}
+                {#                                <tr class="pcoi-instance-{{ pcoi_instance_id }}">#}
+                {#                                    <td>{{ pcoi_instance_note }}</td>#}
+                {#                                </tr>#}
+                {#                            {% endfor %}#}
+                {##}
+                {#                        </table>#}
+                {#                    </td>#}
+
+
+                {#        delete#}
+
+
+            </tr>
+
+        {% endfor %}
+
+
+    </table>
+
+
+</section>
+
+
+<section >
+    {% remaining_categories category_objects as category_left %}
+    {% if category_left %}
+        <h4 class="lead" style="padding-top: 50px;">You have not selected any online ideas from the building blocks:</h4>
+
+        <ul>
+            {% for c_name, c_url,c_next in category_objects %}
+                {% if c_name in category_left %}
+                    <li> {{ c_name }}</li>
+                {% endif %}
+
+            {% endfor %}
+
+        </ul>
+    {% else %}
+        <h4 class="lead" style="padding-top: 50px">Well done! you have successfully selected ideas for all building blocks!</h4>
+
+    {% endif %}
+
+
+</section>
+
+
+</body>
+</html>
+
+
+

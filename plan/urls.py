@@ -3,14 +3,9 @@ from django.urls import include, path, re_path
 from . import views
 
 urlpatterns = [
-    path('human_touch/', views.human_touch, name='human_touch'),
-    path('teaching_material/', views.teaching_material, name='teaching_material'),
-    path('organization/', views.organization, name='organization'),
-    path('assignment/', views.assignment, name='assignment'),
-    path('student_engagement/', views.student_engagement, name='student_engagement'),
-    path('discussion/', views.discussion, name='discussion'),
-    path('assessment/', views.assessment, name='assessment'),
-    path('rules_regulations/', views.rules_regulations, name='rules_regulations'),
+    path('category/<str:category_url>/<str:next_page>/', views.show_block, name='show_block'),
+    # path('human_touch/', views.human_touch, name='human_touch'),
+
     path('<str:category_name>/<int:idea_id>/<str:detailed_view>/', views.idea_overview_detail,
          name='idea_overview_detail'),
     path('use_idea/', views.use_idea, name='use_idea'),
@@ -20,5 +15,7 @@ urlpatterns = [
     path('delete_pcoi_checklist/', views.delete_pcoi_checklist, name='delete_pcoi_checklist'),
 
     path('checklist/', views.checklist, name='checklist'),
+    path('delete_plan/<int:plan_id>/', views.delete_plan, name='delete_plan'),
+    path('test_code/', views.test_code, name='test_code'), #todo delete
 
 ]

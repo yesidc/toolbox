@@ -1,7 +1,8 @@
 {% extends "plan/base_block.html" %}
  {% load static %}
+{% load toolbox_custom_tags %}
 {% block building_block_idea %}
-    <section class="bg-light text-dark">
+    <section class="bg-light text-dark mb-3">
 
         {#    Idea's Property#}
         <div class="container">
@@ -21,7 +22,9 @@
                                 <h3>Description</h3>
                             </div>
                             <div class="col">
-                                <p>{% if idea.brief_description %}{{ idea.brief_description|safe }}{% else %}{{ 'No data' }}{% endif %} </p>
+                              {#                   Brief description#}
+                        <p class="lead">{% if idea.brief_description %}{% md_to_html  idea.brief_description as bd_html%}{{bd_html|safe }}{% else %}
+                            {{ 'No data' }}{% endif %}</p>
                             </div>
                         </div>
                     </div>
@@ -41,10 +44,11 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <h3>Example</h3>
+                                <h3>Use cases</h3>
                             </div>
                             <div class="col">
-                                <p>{% if idea.examples_application %}{{ idea.examples_application|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
+                                     <p class="lead">{% if idea.use_cases %}{% md_to_html  idea.use_cases as ea_html%}{{ ea_html|safe }}{% else %}
+                            {{ 'No data' }}{% endif %}</p>
                             </div>
                         </div>
                     </div>
@@ -63,10 +67,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <h3>Tool</h3>
+                                <h3>Technology</h3>
                             </div>
                             <div class="col">
-                                <p>{% if idea.tool %}{{ idea.tool|safe }}{% else %}{{ 'No data' }}{% endif %} </p>
+                            <p>{% if idea.technology %}{% md_to_html idea.technology as t_html %}{{ t_html|safe }}{% else %}{{ 'No data' }}{% endif %}</p
                             </div>
                         </div>
                     </div>
@@ -88,7 +92,8 @@
                                 <h3>Teacher Effort</h3>
                             </div>
                             <div class="col">
-                                <p>{% if idea.teacher_effort %}{{ idea.teacher_effort|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
+                                 <p>{% if idea.teacher_effort %}{% md_to_html idea.teacher_effort as te_html %}{{ te_html|safe }}{% else %}
+                                        {{ 'No data' }}{% endif %}</p>
                             </div>
                         </div>
                     </div>
@@ -110,7 +115,8 @@
                                 <h3>Implementation Steps</h3>
                             </div>
                             <div class="col">
-                                <p>{% if idea.implementation_steps %}{{ idea.implementation_steps|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
+                              <p>{% if idea.implementation_steps %}{% md_to_html idea.implementation_steps as is_html%}{{ is_html|safe }}{% else %}
+                                        {{ 'No data' }}{% endif %}</p>
                             </div>
                         </div>
                     </div>
@@ -132,7 +138,8 @@
                                 <h3>Recommendations</h3>
                             </div>
                             <div class="col">
-                                <p> {% if idea.recommendations %}{{ idea.recommendations|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
+                                 <p>{% if idea.recommendations %}{% md_to_html idea.recommendations as recom_html  %}{{ recom_html|safe }}{% else %}
+                                        {{ 'No data' }}{% endif %}</p>
                             </div>
                         </div>
                     </div>
@@ -154,7 +161,7 @@
                                 <h3>Supplementary Material</h3>
                             </div>
                             <div class="col">
-                                <p>{% if idea.supplementary_material %}{{ idea.supplementary_material|safe }}{% else %}{{ 'No data' }}{% endif %} </p>
+                                <p>{% if idea.resources %}{% md_to_html idea.resources as idea_r_html %}{{ idea_r_html|safe }}{% else %}{{ 'No data' }}{% endif %} </p>
                             </div>
                         </div>
                     </div>
@@ -176,7 +183,7 @@
                                 <h3>Reusable</h3>
                             </div>
                             <div class="col">
-                                <p>{% if idea.reusable %}{{ idea.reusable|safe }}{% else %}{{ 'No data' }}{% endif %} </p>
+                                <p>{% if idea.reusable %}{% md_to_html idea.reusable as idea_reusable_html %}{{ idea_reusable_html|safe }}{% else %}{{ 'No data' }}{% endif %} </p>
                             </div>
                         </div>
                     </div>
@@ -200,7 +207,7 @@
                                 <h3>References</h3>
                             </div>
                             <div class="col">
-                                <p>{% if idea.references %}{{ idea.references|safe }}{% else %}{{ 'No data' }}{% endif %} </p>
+                                <p>{% if idea.references %}{% md_to_html idea.references as idea_references %}{{ idea_references|safe }}{% else %}{{ 'No data' }}{% endif %} </p>
                             </div>
                         </div>
                     </div>
@@ -214,18 +221,20 @@
     </section>
 
 
-{#    User's notes/comments#}
+{% if user.is_authenticated%}{#    User's notes/comments#}
 
 
 
-    <section class="bg-body mt-4">
+    <section class="bg-body mt-1">
     <div class="container">
         <div class="row">
-            <div class="col-md-10 col-sm-12 p-5">
-                <form action="" method="POST">
+            <div class="col-md-5">
+                <div class="d-flex h-100"><p class="lead align-self-center">This is space is for you to take notes.</p></div>
+            </div>
+            <div class="col-md-7 p-5">
+                <form action="" method="POST" id="notes-form">
                     {% csrf_token %}
-                    {{ form }}
-                    <input type="submit" name="Submit">
+                    {{ note_form.note_content }}
                 </form>
             </div>
         </div>
@@ -238,13 +247,14 @@
         <div class="d-flex justify-content-end">
             <div>
 
-                <a href="{% url 'use_idea' %}" class="btn btn-primary active m-4 pb-3" aria-current="page">Use this online recommendation in my
-                    course</a>
+{#                <a href="{% url 'use_idea' %}" class="btn btn-primary active m-4 pb-3" aria-current="page">Use this online recommendation in my#}
+{#                    course</a>#}
+<button type="submit" form="notes-form" value="Submit" class="btn btn-primary active m-4 pb-3">Use this online recommendation in my course</button>
 
             </div>
 
         </div>
-</section>
+</section>{% endif %}
 
   <script src="{% static 'plan/js/utils.js' %}"></script>
     <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>

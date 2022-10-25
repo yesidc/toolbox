@@ -10,66 +10,8 @@
 {% block building_block_idea %}
 
     <section>
-        <h1 class="text-center mb-md-4 mb-sm-2">Checklist</h1>
+        <h1 class="text-center mb-md-5 mb-sm-2 py-md-3 py-sm-1 mb-sm-2 text-primary">Checklist: {{ current_plan.plan_name }}</h1>
 
-        {#      <div class="row border-bottom border-danger">#}
-        {#          <div class="col border border-0">In progress</div>#}
-        {#          <div class="col align-middle">Completed</div>#}
-        {#            <div class="col">Building Block</div>#}
-        {#            <div class="col">Idea</div>#}
-        {#            <div class="col">Notes</div>#}
-        {#            <div class="col">Delete</div>#}
-        {##}
-        {##}
-        {#      </div>#}
-        {##}
-        {#      <div class="row border-bottom border-danger">#}
-        {#          <div class="col border border-0 align-self-center">In progress</div>#}
-        {#          <div class="col align-self-center">Completed</div>#}
-        {#            <div class="col align-self-center">Human Touch</div>#}
-        {#            <div class="col">#}
-        {#                <div class="row align-self-center">- Short Instructor video</div>#}
-        {#                <div class="row align-self-center">- Share stores and experiences with your students</div>#}
-        {#            </div>#}
-        {#            <div class="col align-self-center">#}
-        {#                <div class="row align-self-center">- I need to talk to my instructors first to see if they have a computer</div>#}
-        {#                <div class="row align-self-center">- This note I took is about how to implement 'share experiences with your students</div>#}
-        {#            </div>#}
-        {#            <div class="col align-self-center">Delete</div>#}
-        {##}
-        {##}
-        {#      </div>#}
-        {#      <div class="row border-bottom border-danger">#}
-        {#          <div class="col border border-0 align-self-center">In progress</div>#}
-        {#          <div class="col align-self-center">Completed</div>#}
-        {#            <div class="col align-self-center">Human Touch</div>#}
-        {#            <div class="col">#}
-        {#                <div class="row align-self-center">- Short Instructor video</div>#}
-        {#                <div class="row align-self-center">- Share stores and experiences with your students</div>#}
-        {#            </div>#}
-        {#            <div class="col align-self-center">#}
-        {#                <div class="row align-self-center">- I need to talk to my instructors first to see if they have a computer</div>#}
-        {#                <div class="row align-self-center">- This note I took is about how to implement 'share experiences with your students</div>#}
-        {#            </div>#}
-        {#            <div class="col align-self-center">Delete</div>#}
-        {##}
-        {##}
-        {#      </div>#}
-
-
-        {#<div class="row">#}
-        {##}
-        {#    <div class="col">In progress</div>#}
-        {#          <div class="col">Completed</div>#}
-        {#            <div class="col">Building Block</div>#}
-        {#            <div class="col">Idea</div>#}
-        {#            <div class="col">Notes</div>#}
-        {#            <div class="col">Delete</div>#}
-        {##}
-        {##}
-        {##}
-        {#</div>#}
-        {##}
 
 
         {#Summary Table#}
@@ -78,7 +20,7 @@
             <thead>
             <tr>
 
-                <th scope="col">Completed</th>
+                <th scope="col">Done</th>
                 <th scope="col">Building Block</th>
                 <th scope="col">Idea</th>
                 <th scope="col">Note</th>
@@ -105,7 +47,7 @@
                     <td>
                         <table class="nested-table-checklist">
                             {# todo there needs to be another loop here, as there may be several pcoi per block/category#}
-                            {% for idea_name, pcoi_instance_id in idea_ins %}
+                            {% for idea_name, pcoi_instance_id,_ in idea_ins %}
                                 <tr class="pcoi-instance-{{ pcoi_instance_id }}">
 
 
@@ -130,9 +72,9 @@
 
                     <td>
                         <table class="nested-table-checklist">
-                            {% for idea_name, pcoi_instance_id in idea_ins %}
+                            {% for idea_name, pcoi_instance_id, pcoi_instance_note in idea_ins %}
                                 <tr class="pcoi-instance-{{ pcoi_instance_id }}">
-                                    <td>{% lorem 30 w %}</td>
+                                    <td>{{ pcoi_instance_note }}</td>
                                 </tr>
                             {% endfor %}
 
@@ -146,9 +88,9 @@
 
                     <td>
                         <table class=" nested-table-checklist">
-                            {% for idea_name, pcoi_instance_id in idea_ins %}
+                            {% for idea_name, pcoi_instance_id, _ in idea_ins %}
                                 <tr class="pcoi-instance-{{ pcoi_instance_id }}">
-                                    <td><button onclick="add_delete_idea_checklist(this.id)" id="pcoi-instance-{{ pcoi_instance_id }}"><i class="bi bi-trash"></button></td>
+                                    <td><button onclick="add_delete_idea_checklist(this.id)" id="pcoi-instance-{{ pcoi_instance_id }}"><i class="bi bi-trash"></i></button></td>
                                 </tr>
                             {% endfor %}
 
@@ -174,9 +116,9 @@
             <p class="lead">You have not selected any online ideas from the building blocks:</p>
 
         <ul>
-              {% for c_name, c_url in category_objects %}
+              {% for c_name, c_url,c_next in category_objects %}
                 {% if c_name in category_left %}
-                         <li><a href="{% url c_url %}" class="link-info">{{ c_name }}</a></li>
+                         <li><a href="{% url 'show_block' c_url c_next %}" class="link-info">{{ c_name }}</a></li>
                 {% endif %}
 
             {% endfor %}
@@ -189,7 +131,7 @@
 
             <div class="d-flex justify-content-end">
             <div>
-                <a href="" class="btn btn-primary p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
+                <a href="{% url 'checklist'  %}?crate_pdf={{ True }} " class="btn btn-primary p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
             </div>
         </div>
     </section>

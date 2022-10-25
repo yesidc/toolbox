@@ -1,4 +1,5 @@
 {% extends "plan/base_block.html" %}
+{% load toolbox_custom_tags %}
   {% load static %}
 {% block building_block_idea %}
     <div class=" container">
@@ -16,12 +17,12 @@
                 <div class="row">
                     <div class="col">
                         {#                   Brief description#}
-                        <p class="lead">{% if idea.brief_description %}{{ idea.brief_description|safe }}{% else %}
+                        <p class="lead">{% if idea.brief_description %}{% md_to_html  idea.brief_description as bd_html%}{{bd_html|safe }}{% else %}
                             {{ 'No data' }}{% endif %}</p>
                     </div>
                     <div class="col">
-                        <h5>Example</h5>
-                        <p class="lead">{% if idea.examples_application %}{{ idea.examples_application|safe }}{% else %}
+                        <h5>Use cases</h5>
+                        <p class="lead">{% if idea.use_cases %}{% md_to_html  idea.use_cases as ea_html%}{{ ea_html|safe }}{% else %}
                             {{ 'No data' }}{% endif %}</p>
 
 
@@ -41,10 +42,10 @@
                         <div class="container">
                             <div class="row ideas-b-property">
                                 <div class="col">
-                                    <h4>Tool</h4>
+                                    <h4>Technology</h4>
                                 </div>
                                 <div class="col">
-                                    <p>{% if idea.tool %}{{ idea.tool|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
+                                    <p>{% if idea.technology %}{% md_to_html idea.technology as t_html %}{{ t_html|truncatewords_html:10|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +57,7 @@
                                     <h4>Teacher Effort</h4>
                                 </div>
                                 <div class="col">
-                                    <p>{% if idea.teacher_effort %}{{ idea.teacher_effort|safe }}{% else %}
+                                    <p>{% if idea.teacher_effort %}{% md_to_html idea.teacher_effort as te_html %}{{ te_html|truncatewords_html:10|safe }}{% else %}
                                         {{ 'No data' }}{% endif %}</p>
                                 </div>
                             </div>
@@ -69,7 +70,7 @@
                                     <h4>Implementation steps</h4>
                                 </div>
                                 <div class="col">
-                                    <p>{% if idea.implementation_steps %}{{ idea.implementation_steps|safe }}{% else %}
+                                    <p>{% if idea.implementation_steps %}{% md_to_html idea.implementation_steps as is_html%}{{ is_html|truncatewords_html:10|safe }}{% else %}
                                         {{ 'No data' }}{% endif %}</p>
                                 </div>
                             </div>
@@ -82,7 +83,7 @@
                                     <h4>Recomendations</h4>
                                 </div>
                                 <div class="col">
-                                    <p>{% if idea.recommendations %}{{ idea.recommendations|safe }}{% else %}
+                                    <p>{% if idea.recommendations %}{% md_to_html idea.recommendations as recom_html  %}{{ recom_html|truncatewords_html:10|safe }}{% else %}
                                         {{ 'No data' }}{% endif %}</p>
                                 </div>
                             </div>
@@ -99,7 +100,7 @@
             <div class="container">
                 <div class="row mt-0 p-3">
                     <div class="col"><a href="{% url 'idea_overview_detail' current_category idea.id 'detailed_view' %}"
-                                        class="btn btn-primary">Show me more</a></div>
+                                        class="btn btn-primary">Show more and take notes</a></div>
                 </div>
             </div>
 
@@ -107,7 +108,8 @@
 
         <section class="bg-dark text-light">
 
-            <div class="d-flex justify-content-end">
+            {% if  user.is_authenticated%}<div class="d-flex justify-content-end">
+{#            {% if  user.is_authenticated and request.session.current_user_plan%}<div class="d-flex justify-content-end">#}
                 <div>
 
                     <a href="{% url 'use_idea' %}" class="btn btn-primary active m-4 pb-3" aria-current="page"
@@ -116,19 +118,23 @@
 
                 </div>
 
-            </div>
+            </div>{% endif %}
         </section>
 
 
-        <section class="bg-light mt-4 p-5 mb-4">
+        {% if idea.testimony %}
+            <section class="bg-light mt-4 p-5 mb-4">
             <div class="container">
 
-                <h3 class="text-center">here goes the testimony</h3>
+                <h3 class="text-center">Testimony</h3>
+
+                <p>{% md_to_html idea.testimony as testimony_html %}{{ testimony_html|safe }}</p>
 
 
             </div>
-        </section>
+        </section>{% endif %}
     </div>
+
 
 
   <script src="{% static 'plan/js/utils.js' %}"></script>
