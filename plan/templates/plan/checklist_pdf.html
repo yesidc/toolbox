@@ -11,7 +11,7 @@
         .center-text {
             text-align: center;
             color: #0a53be;
-            padding: 30px 20px;
+            padding-bottom: 10px;
         }
 
 
@@ -84,6 +84,11 @@
 </head>
 <body>
 
+{#The images used on this page were taken from https://icons8.com #}
+<section>
+ <img src="tbcore/images/icon.png" alt="">
+                <h2>ToolBox</h2>
+</section>
 
 <section>
     <h1 class="center-text text-primary mb-md-4 mb-sm-2 ">Checklist: {{ current_plan.plan_name }}</h1>
@@ -108,7 +113,9 @@
         {% for c_done, idea_ins in context_summary %}
             <tr class="border-unique">
 {#todo here you can use an icon with the shape of chekcbox#}
-                <td style="width: 10%">done</td>
+                <td style="width: 10%">
+                     <img src="tbcore/images/checkbox.png" alt="">
+                </td>
 
                 {#                    category for which the user has chosen at least one idea#}
                 <td style="width: 20%; padding: 15px">{{ c_done }}</td>
@@ -123,9 +130,9 @@
                             <tr class="pcoi-instance-{{ pcoi_instance_id }}">
 
 
-                                <td style="width: 30%; padding: 10px" ><h3>{{ idea_name }}</h3></td>
+                                <td style="width: 30%; padding: 5px" ><h3>{{ idea_name }}</h3></td>
 
-                                <td style="width: 57%; padding: 10px"
+                                <td style="width: 57%; padding: 5px"
                                     class="margin-internal-td td-note"><p>{{ pcoi_instance_note }}</p></td>
 
                             </tr>
