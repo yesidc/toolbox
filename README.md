@@ -1,3 +1,5 @@
+## Note: this tool is under development
+
 # toolbox
 ## Save Categories/Building Blocks and online ideas to the Database
 1. Create a `json5` file with the information correspoding to a single Category or Online Idea
