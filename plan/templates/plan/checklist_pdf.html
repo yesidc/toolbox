@@ -138,7 +138,7 @@
                 <td style="width: 70%; margin-top: 10px">
                     <table style="width: 100%;" class="nested-table-checklist">
                         {# todo there needs to be another loop here, as there may be several pcoi per block/category#}
-                        {% for idea_name, pcoi_instance_id, pcoi_instance_note in idea_ins %}
+                        {% for idea_name, pcoi_instance_id, pcoi_instance_note,_ in idea_ins %}
                             <tr class="pcoi-instance-{{ pcoi_instance_id }}">
 
 
