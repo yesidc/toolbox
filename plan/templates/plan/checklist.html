@@ -24,6 +24,7 @@
                 <th scope="col">Building Block</th>
                 <th scope="col">Idea</th>
                 <th scope="col">Note</th>
+                <th scope="col">Complexity</th>
                 <th scope="col">Delete</th>
 
             </tr>
@@ -47,7 +48,7 @@
                     <td>
                         <table class="nested-table-checklist">
 
-                            {% for idea_name, pcoi_instance_id,_ in idea_ins %}
+                            {% for idea_name, pcoi_instance_id,_,_ in idea_ins %}
                                 <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows">
 
 
@@ -72,7 +73,7 @@
 
                     <td>
                         <table class="nested-table-checklist">
-                            {% for idea_name, pcoi_instance_id, pcoi_instance_note in idea_ins %}
+                            {% for idea_name, pcoi_instance_id, pcoi_instance_note,_ in idea_ins %}
                                 <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows">
                                     <td>{{ pcoi_instance_note }}</td>
                                 </tr>
@@ -83,12 +84,42 @@
 
 
 
+       {#        taks complexity#}
+
+                    <td>
+                        <table class="nested-table-checklist">
+                            {% for idea_name, pcoi_instance_id, _,complexity in idea_ins %}
+                                <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows">
+                                {% task_complexity_to_int complexity as task_complexity %}
+
+                                    {% if task_complexity == 'no-data' %}
+                                        no-data
+                                {% else %}
+
+
+                                        {% for i in task_complexity %}
+                                        <td><i class="bi bi-star-fill"></i></td>
+                                    {% endfor %}
+
+                                {% endif %}
+
+
+
+
+
+                                </tr>
+                            {% endfor %}
+
+                        </table>
+                    </td>
+
+
 
                     {#        delete#}
 
                     <td>
                         <table class="nested-table-checklist">
-                            {% for idea_name, pcoi_instance_id, _ in idea_ins %}
+                            {% for idea_name, pcoi_instance_id, _,_ in idea_ins %}
                                 <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows">
                                     <td><button onclick="add_delete_idea_checklist(this.id)" id="pcoi-instance-{{ pcoi_instance_id }}"><i class="bi bi-trash"></i></button></td>
                                 </tr>
