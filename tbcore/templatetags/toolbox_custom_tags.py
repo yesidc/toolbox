@@ -38,7 +38,22 @@ def remaining_categories(context, all_categories):
     remaining_c = set([c_name for c_name, _, _ in all_categories]) - c_done
     return remaining_c
 
+
 @register.simple_tag()
 def md_to_html(value):
+    return markdown.markdown(value)
 
-    return  markdown.markdown(value)
+
+@register.simple_tag()
+def task_complexity_to_int(value):
+    """
+    Converts task complexity to int or returns 'no-data'
+    """
+
+    try:
+        num_stars= int(value)
+        list_starts = ['star' for i in range(num_stars)]
+        return list_starts
+    except ValueError:
+        print('Task complexity must be of type int')
+        return 'no-data'

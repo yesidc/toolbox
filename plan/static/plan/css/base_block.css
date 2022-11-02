@@ -37,6 +37,11 @@ Toolbox
   border-bottom: 3px solid deepskyblue;
 }
 
+.vertical{
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+
+}
 .my-flex-card > div > div.card {
     height: calc(100% - 15px);
     margin-bottom: 15px;
@@ -52,7 +57,11 @@ Toolbox
     to be largest field*/
 .nested-table-checklist{
 
-  height: 300px;
+  height: 100%;
+}
+.nested-rows{
+  height: 150px;
+  overflow: hidden;
 }
 
 .link-no-decoration{
