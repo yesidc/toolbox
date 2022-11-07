@@ -14,8 +14,12 @@ def add_hyphen(value):
 
 
 @register.simple_tag()
-def get_accordion_content(value):
-    pass
+def get_accordion_content(title, content):
+    titles = title.split('[split]')
+    content_accordion = content.split('[split]')
+    len_content= len(titles)
+    content_accordion = [*zip(titles,content_accordion)]
+    return {'len_content':len_content,'content_accordion': content_accordion}
 
 @register.simple_tag()
 def get_name_next_category(value):

@@ -55,29 +55,33 @@
     </section>
 
 
-    <!-- Online Ideas -->
+    <!-- Accordion Content -->
 
+{% get_accordion_content category.category.titles_accordion category.category.content_accordion as show_content%}
+    {% if show_content.len_content > 0%}<section class="p-5">
 
-    <section class="p-5">
-        <div class="accordion bg-info" id="accordionInfo">
+        {% for t,c in show_content.content_accordion%}<div class="accordion bg-info" id="accordionInfo">
 
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Some important information
+                        {% md_to_html t as title_html %}{{ title_html|safe }}
                     </button>
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                      data-bs-parent="#accordionInfo">
                     <div class="accordion-body">
-                        <strong>here goes some text</strong>
+                    {% md_to_html c as accordion_con_html %}{{ accordion_con_html|safe }}
                     </div>
                 </div>
             </div>
 
-        </div>
+        </div>{% endfor %}
+
+
     </section>
+    {% endif %}
 
 
     <!-- Online Ideas -->
