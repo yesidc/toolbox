@@ -14,6 +14,10 @@ def add_hyphen(value):
 
 
 @register.simple_tag()
+def get_accordion_content(value):
+    pass
+
+@register.simple_tag()
 def get_name_next_category(value):
     """
     Retrieves the name of the next category

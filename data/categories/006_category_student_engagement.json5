@@ -2,9 +2,9 @@
 
   category_name: "Student Engagement",
     category_id: "006-category-se"  ,
-    short_description: "no-data",
-    further_information : "no-data",
-    requirements : "no-data",
+    short_description: "Remote students are not integrated in a study community per se and need explicit reminders and motivation to keep up with the course.\nRemote students are more isolated than on-site students and therefore instructors have to give information explicitly that they otherwise would have relied on that students “just know”.\n",
+    titles_accordion : "Requirement",
+    content_accordion : "There must be a rhythm or regular time structure in the course connected to the content, e.g. sending emails, publishing content, tasks to do, etc.\n",
     references : "no-data",
     category_url : "student_engagement",
     next_page : "assessment",

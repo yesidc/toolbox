@@ -66,11 +66,11 @@ class Plan(models.Model):
 
 class Category(models.Model):
     category_name = models.CharField(
-        max_length=100)  # there are a total of 8 categories: hallway chatter, organization etc.
+        max_length=100)  # there are a total of 8 categories: human touch, organization etc.
     category_id = models.SlugField(max_length=70, unique=True)  # internal id
     short_description = models.TextField()
-    further_information = models.TextField(null=True)  # accordion info
-    requirements = models.TextField()  # requirements --> add to the accordion (building block page)
+    titles_accordion = models.TextField(null=True)  # accordion info
+    content_accordion = models.TextField(null=True)  # requirements --> added to the accordion (building block page)
     references = models.TextField(null=True)
     category_url = models.CharField(max_length=50)
     next_page = models.CharField(max_length=100, null=True)
@@ -97,8 +97,8 @@ class Category(models.Model):
         Category.objects.update_or_create(category_name=category["category_name"],
                                           category_id=category['category_id'],
                                           short_description=category["short_description"],
-                                          further_information=category["further_information"],
-                                          requirements=category["requirements"],
+                                          titles_accordion=category["titles_accordion"],
+                                          content_accordion=category["content_accordion"],
                                           references=category["references"],
                                           category_url=category['category_url'],
                                           # next_page=next_page if next_page else None,
