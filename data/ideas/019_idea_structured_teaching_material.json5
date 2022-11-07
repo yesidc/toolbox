@@ -8,10 +8,10 @@ technology: "- <a href=\"https://digitale-lehre.virtuos.uni-osnabrueck.de/eintra
   implementation_steps: "1.\tCreate structure to sort material meaningfully, e.g. material about one topic should not be spread across several units\n2.\tCreate pages with sections to implement your content in courseware blocks\nPrerequsite: the material has already been created/ is currently being created ",
 teacher_effort: "~2 hours ",
 recommendations: "•\tRemember the structure should be meaningful also on a lower level and serve understanding. \n•\tUse this template the get familiar with levels in courseware. \n•\tCourseware basics <a href=\"https://hilfe.studip.de/help/5.0/de/Basis/CoursewareVideotutorials\" target=\"_blank\">crash course</a> (short!)\n",
-  resources: "no-data",
-testimony: "no-data",
+  resources: "",
+testimony: "",
 use_cases: "Suitable in any course that has online material.",
-references: "no-data",
+references: "",
 reusable: "Yes, for the same course.",
 task_complexity: "2",
 

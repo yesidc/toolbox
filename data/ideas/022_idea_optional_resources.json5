@@ -8,10 +8,10 @@ technology: "- <a href=\"https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBlo
 implementation_steps: "For learning how to use Courseware, please consult the  <a href=\"https://hilfe.studip.de/help/5.0/de/Basis/CoursewareVideotutorials\" target=\"_blank\">crash course</a>\n",
 teacher_effort: "- If you have the additional material at hand and are familiar with courseware, embedding links takes about 5-15 min./ unit., depending on how you imbed the material in courseware.  \n- Check the  <a href=\"https://hilfe.studip.de/help/5.0/de/Basis/CoursewareVideotutorials\" target=\"_blank\">crash course</a> (quick!) which gives you all you need to know for handling courseware smoothly.\n",
   recommendations: "Make it a habit to note down material that you encounter by chance. ",
-resources: "no-data",
-testimony: "no-data",
+resources: "",
+testimony: "",
 use_cases: "- Suitable for any material that is interesting but not substantial / essential to understand the topic or to pass the course \n- Integrate (YouTube) videos with the video block, related websites, or podcast episodes about the unit/ to hear how others discuss the issue, etc. \n",
-references: "no-data",
+references: "",
 reusable: "(Parts of) your courseware can be copy + pasted to other courses which are about similar topics. ",
 task_complexity: "1",
 

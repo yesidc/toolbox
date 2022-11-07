@@ -10,9 +10,9 @@ implementation_steps: "1. Think about what you would accept as evidence for the 
 teacher_effort: "Come up with application assignments for the oral exam and prepare an expectation rubric, exam time + grading time ",
 recommendations: "It is sensible to record your expectations on a continuum instead of fixed points which gives you and the student enough guidance to understand the grading, while you don't get lost in nitty-gritty half-points.\nAlternative set-up: \n- Prepare some cards with assignments/ questions and let students draw a card from the card pile. If they don't feel confident to answer the question, they can pull one more time. \n- Combine the oral exam with an assignment that students had to complete during the semester. (They should be informed about it at the beginning of the term)\n## Resources \n[Heterogenial Prüfen](https://www-docs.b-tu.de/elearning/public/hetPruef_GMW_Begleitpraesi_22-09.pdf) --> slide 11\n",
 resources: " <a href=\"https://www-docs.b-tu.de/elearning/public/hetPruef_GMW_Begleitpraesi_22-09.pdf\" target=\"_blank\">Heterogenial Prüfen</a> --> slide 11\n",
-testimony: "no-data",
+testimony: "",
 use_cases:"- For exams in which you want to evaluate more general and professional competencies\n- For online students \n- For students with disabilities\n- For a retake exam with only a few students " ,
-references: "No data",
+references: "",
 reusable: "yes",
 task_complexity: "1",
 

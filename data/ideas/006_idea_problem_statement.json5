@@ -11,9 +11,9 @@ technology: "-  <a href=\"https://digitale-lehre.virtuos.uni-osnabrueck.de/eintr
 teacher_effort: "Read the students' problem statements (or use the peer review for a first check) and give feedback, e.g. by sending them an annotated version.",
 recommendations: "A full problem statement could count for (a part of) the final course grade. \n- Provide a checklist about all aspects of a problem statement\n- Give a good example of an introduction (real world example) of a paper that students should read anyways\n- Provide papers with examples of good problem statements",
 resources: "- <a href=\"/static/tbcore/support_documents/Problem_statement_checklist.pdf\" target=\"_blank\">Problem Statement Checklist</a>\n- Academic writing: <a href=\"https://owl.purdue.edu/owl/purdue_owl.html\" target=\"_blank\">OWL (Online writing lab Purdue University)</a>\n- Resource for students to understand the structure of a problem statement and paper: \n <a href=\"https://www.phrasebank.manchester.ac.uk/introducing-work/\" target=\"_blank\">Academic Phrasebank</a>\n",
-  testimony: "no-data",
+  testimony: "",
 use_cases: "- Suitable as a prerequisite for a final paper",
-references: "no-data",
+references: "",
 reusable: "yes",
 task_complexity: "1",
 

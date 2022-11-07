@@ -9,9 +9,9 @@ technology: "- <a href=\"https://hilfe.studip.de/help/5.0/de/Basis/VotingsErstel
 teacher_effort: "~ 10-15 Minutes per feedback question ",
 recommendations: "-\tMake sure that the answers can be submitted anonymously. \n-\tPolls can appear as some kind of a referendum, but you can point out that you will use this as a basis for the next step/ your decision regarding xy. \n-\tDepending on the issue you can iterate feedback, e.g. how is the course going for you? What do you need? What works for you? ect. \"",
 resources: "<a href=\"https://digitale-lehre.virtuos.uni-osnabrueck.de/2022/04/26/die-eigene-lehre-im-blick-ergaenzende-evaluation-mit-teaching-analysis-poll-tap/\" target=\"_blank\">Teaching Analysis Poll (TAP)</a>\n",
-testimony: "no-data",
+testimony: "",
 use_cases: "- To activate students \n- When you feel the course participants are stuck\n- To check in with your students and make their voice heard \n- When you don't understand why people don't show up to live classes",
-references: "no-data",
+references: "",
 reusable: "yes",
 task_complexity: "1",
 
