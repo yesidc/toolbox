@@ -6,5 +6,5 @@ def idea_fields():
 
 
 def category_fields():
-    return ["category_name","category_id", "short_description", "further_information", "requirements", "references", "category_url",
+    return ["category_name","category_id", "short_description", "titles_accordion", "content_accordion", "references", "category_url",
             "next_page"]

@@ -66,8 +66,8 @@ def get_category(category_url):
     """
     Fetches the CategoryOnlineIdea objects
     """
-    # There are a total of eight building blocks hence 8 CategoryOnlineIdea objects.
-    return CategoryOnlineIdea.objects.get(category__category_url=category_url)
+    # There are a total of eight building blocks.
+    return CategoryOnlineIdea.objects.select_related('category').get(category__category_url=category_url)
 
 
 def get_ideas(user, category_url, current_user_plan_id):

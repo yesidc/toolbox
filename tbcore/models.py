@@ -66,11 +66,11 @@ class Plan(models.Model):
 
 class Category(models.Model):
     category_name = models.CharField(
-        max_length=100)  # there are a total of 8 categories: hallway chatter, organization etc.
+        max_length=100)  # there are a total of 8 categories: human touch, organization etc.
     category_id = models.SlugField(max_length=70, unique=True)  # internal id
     short_description = models.TextField()
-    further_information = models.TextField(null=True)  # accordion info
-    requirements = models.TextField()  # requirements --> add to the accordion (building block page)
+    titles_accordion = models.TextField(null=True)  # accordion info
+    content_accordion = models.TextField(null=True)  # requirements --> added to the accordion (building block page)
     references = models.TextField(null=True)
     category_url = models.CharField(max_length=50)
     next_page = models.CharField(max_length=100, null=True)
@@ -97,11 +97,10 @@ class Category(models.Model):
         Category.objects.update_or_create(category_name=category["category_name"],
                                           category_id=category['category_id'],
                                           short_description=category["short_description"],
-                                          further_information=category["further_information"],
-                                          requirements=category["requirements"],
+                                          titles_accordion=category["titles_accordion"],
+                                          content_accordion=category["content_accordion"],
                                           references=category["references"],
                                           category_url=category['category_url'],
-                                          # next_page=next_page if next_page else None,
                                           next_page=category['next_page'],
                                           defaults=category
                                           )
@@ -115,9 +114,9 @@ class OnlineIdea(models.Model):
     implementation_steps = models.TextField(null=True)
     teacher_effort = models.TextField()
     recommendations = models.TextField()
-    resources = models.TextField()
+    resources = models.TextField(null=True)
     testimony = models.TextField(null=True)
-    use_cases = models.TextField()
+    use_cases = models.TextField(null=True)
     references = models.TextField(null=True)
     reusable = models.TextField(null=True)
     task_complexity = models.CharField(max_length=3, null=True)
@@ -170,14 +169,14 @@ class CategoryOnlineIdea(models.Model):
             raise Json5ParseException("Error in JSON5 code Error message: '{}'".format(err))
 
         if not isinstance(d_json5, dict):
-            raise Json5ParseException("Lesson code must be a dictionary.")
+            raise Json5ParseException("Data  must be a dictionary.")
 
         json5_fields = idea_fields() if mode == 'ideas' else category_fields()
 
         # Checks
         for field in json5_fields:
-            # this field is not mandatory
-            if field not in ['testimony', 'next_page']:
+            # these fields are not mandatory
+            if field not in ['testimony', 'next_page', 'references', 'resources', 'reusable','implementation_steps','use_cases']:
                 if field not in d_json5:
                     raise Json5ParseException('Field "{}" is missing'.format(field))
                 if not d_json5[field]:
