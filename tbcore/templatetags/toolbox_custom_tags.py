@@ -18,10 +18,16 @@ def get_accordion_content(title, content):
     """
     Fetches the content that is eventually displayed using the accordions.
     """
-    titles = title.split('[split]')
-    content_accordion = content.split('[split]')
-    len_content= len(titles)
-    content_accordion = tuple([*zip([*range(len_content)],titles,content_accordion)])
+
+    if len(title) is 0:
+        len_content = 0
+        return {'len_content':len_content}
+    else:
+
+        titles = title.split('[split]')
+        content_accordion = content.split('[split]')
+        len_content= len(titles)
+        content_accordion = tuple([*zip([*range(len_content)],titles,content_accordion)])
 
     return {'len_content':len_content,'content_accordion': content_accordion}
 

@@ -4,9 +4,9 @@
   category_name: "Teaching Material",
     category_id: "002-category-tm"  ,
     short_description: "Since the COSMOS-program opened the Cognitive Science Master for online students from \nany time zone, any single and synchronous time slot would exclude one of the students. \nFor Online students all presentation material must be available asynchronously and online \n(this includes lecture recordings, which are uploaded afterwards) and instructors must make sure \nthat all students have access to the required readings.\n",
-    titles_accordion : "no-data",
-    content_accordion : "no-data",
-    references : "no-data",
+    titles_accordion : "",
+    content_accordion : "",
+    references : "",
     category_url : "teaching_material",
     next_page : "organization",
 
