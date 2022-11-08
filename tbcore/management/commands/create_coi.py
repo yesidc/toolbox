@@ -61,13 +61,6 @@ class Command(BaseCommand):
             OnlineIdea.objects.get(idea_id='004-idea-rpia')
         )
 
-        CategoryOnlineIdea.objects.create(
-            category=Category.objects.get(category_name='Rules & Regulations')).online_idea.add(
-            OnlineIdea.objects.get(idea_id='001-idea-ac'),
-            # todo add ideas for rules and regulations. These are not correct.
-            OnlineIdea.objects.get(idea_id='002-idea-gr'),
-            OnlineIdea.objects.get(idea_id='003-idea-oe'),
-            OnlineIdea.objects.get(idea_id='004-idea-rpia')
-        )
+
 
         self.stdout.write(self.style.SUCCESS('Successfully crated the CategoryOnline objects'))

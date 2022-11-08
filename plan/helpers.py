@@ -1,4 +1,4 @@
-from tbcore.models import  CategoryOnlineIdea, Plan,PlanCategoryOnlineIdea
+from tbcore.models import CategoryOnlineIdea, Plan, PlanCategoryOnlineIdea, Category
 from django.db.models import Q
 from django.contrib import messages
 
@@ -64,10 +64,13 @@ def context_summary(user, current_plan):
 
 def get_category(category_url):
     """
-    Fetches the CategoryOnlineIdea objects
+    Fetches the CategoryOnlineIdea objects or the corresponding Category object, if there is no CategoryOnlineIdea instance.
     """
-    # There are a total of eight building blocks.
-    return CategoryOnlineIdea.objects.select_related('category').get(category__category_url=category_url)
+    try:
+         # There are a total of eight building blocks.
+        return (CategoryOnlineIdea.objects.select_related('category').get(category__category_url=category_url),'categoryonlineidea')
+    except CategoryOnlineIdea.DoesNotExist:
+        return ({'category':Category.objects.get(category_url=category_url)},'category')
 
 
 def get_ideas(user, category_url, current_user_plan_id):
@@ -95,16 +98,4 @@ def has_plan(request):
     else:
         return True
 
-# def json5_is_valid (data_json5):
-#     """
-#     Check if a JSON5 representation of an idea or category is valid.
-#     Args:
-#         data_json5: Json5 file containing either an online idea or category data.
-#     """
-#     try:
-#         d_json5 = json5.loads(data_json5)
-#     except ValueError as err:
-#         raise Json5ParseException("Error in JSON5 code Error message: '{}'".format(err))
-#
-#     if not isinstance(d_json5, dict):
-#         raise Json5ParseException("Lesson code must be a dictionary.")
+

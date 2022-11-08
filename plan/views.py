@@ -33,7 +33,11 @@ def show_block(request, category_url, next_page):
         ideas_list = get_ideas(request.user, category_url, request.session['current_user_plan'])
     else:
         ideas_list = None
-    context = {'category': get_category(category_url),
+
+    category, instance_type = get_category(category_url) # a CategoryOnlineIdea instance
+
+    context = {'category': category,
+               'instance_type': instance_type,
                'next_page': next_page,
                'ideas_list': ideas_list,
                'current_category': category_url,
