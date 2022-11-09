@@ -1,5 +1,5 @@
 from django import template
-from tbcore.models import Category
+from tbcore.models import Category, CategoryOnlineIdea
 import markdown
 
 register = template.Library()
@@ -51,9 +51,13 @@ def remaining_categories(context, all_categories):
         context: current template context
         all_categories: List of tuples, where each element (tuple) contains (category_name, category_url)
     """
-    # Set that contains the names of the categories for which user has chosen at least one idea
+
+    # Some categories do not contain online ideas, hence we must compare user's progress against the CategoryOnlineIdea table.
+    categories_list = [*zip(*CategoryOnlineIdea.objects.values_list('category__category_name'))]
     c_done = context['category_done_summary']
-    remaining_c = set([c_name for c_name, _, _ in all_categories]) - c_done
+
+    remaining_c = set([c_name for c_name, _, _ in all_categories if c_name in categories_list[0] ]) - c_done
+
     return remaining_c
 
 

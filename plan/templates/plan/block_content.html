@@ -91,6 +91,8 @@
 
     {% endif %}
 
+{% if instance_type != 'category' %}
+    <section>
 
     <!-- Online Ideas -->
     <div id="online-idea-container">
@@ -162,10 +164,11 @@
         </section>
     </div>
 
+    </section>{% endif %}
 
-    {#    Buttons bottom of the page#}
 
-    </section>
+
+        {#    Buttons bottom of the page#}
 
     <section class="p-2">
         <div class="d-flex justify-content-end">

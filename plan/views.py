@@ -291,13 +291,11 @@ def update_selected_idea(request):
     Updates the content of the block_content page such that when the user switches to a different course/plan using
     the side navigation bar, the ticked-off ideas reflect that of the current chosen plan/course
     """
-    context = {'category': get_category(request.session['current_category']),
-               'ideas_list': get_ideas(request.user, request.session['current_category'],
-                                       request.session['current_user_plan']),
-               'current_category': request.session['current_category']
-               }
+    category, instance_type = get_category(request.session['current_category'])  # a CategoryOnlineIdea instance
+    ideas_list = get_ideas(request.user, request.session['current_category'],request.session['current_user_plan'])
+    current_category =  request.session['current_category']
 
-    return render(request, 'plan/update_ideas.html', context=context)
+    return render(request, 'plan/update_ideas.html', context=locals())
 
 def delete_plan (request, plan_id):
     Plan.objects.get(pk=plan_id).delete()
