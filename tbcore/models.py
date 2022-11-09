@@ -94,16 +94,17 @@ class Category(models.Model):
         except:
             category['next_page'] = None
 
-        Category.objects.update_or_create(category_name=category["category_name"],
-                                          category_id=category['category_id'],
-                                          short_description=category["short_description"],
-                                          titles_accordion=category["titles_accordion"],
-                                          content_accordion=category["content_accordion"],
-                                          references=category["references"],
-                                          category_url=category['category_url'],
-                                          next_page=category['next_page'],
-                                          defaults=category
-                                          )
+
+        try:
+            obj = Category.objects.get(category_id=category['category_id'])
+            for key, value in category.items():
+                setattr(obj, key, value)
+            obj.save()
+        except Category.DoesNotExist:
+            obj = Category(**category)
+            obj.save()
+
+
 
 
 class OnlineIdea(models.Model):
@@ -132,21 +133,15 @@ class OnlineIdea(models.Model):
 
         idea = json5.loads(data_json5)
 
-        OnlineIdea.objects.update_or_create(idea_name=idea["idea_name"],
-                                            idea_id=idea['idea_id'],
-                                            brief_description=idea["brief_description"],
-                                            technology=idea["technology"],
-                                            implementation_steps=idea["implementation_steps"],
-                                            teacher_effort=idea["teacher_effort"],
-                                            recommendations=idea["recommendations"],
-                                            resources=idea["resources"],
-                                            testimony=idea["testimony"],
-                                            use_cases=idea["use_cases"],
-                                            references=idea["references"],
-                                            reusable=idea["reusable"],
-                                            task_complexity=idea["task_complexity"],
-                                            defaults=idea
-                                            )
+
+        try:
+            obj = OnlineIdea.objects.get(idea_id=idea['idea_id'])
+            for key, value in idea.items():
+                setattr(obj, key, value)
+            obj.save()
+        except OnlineIdea.DoesNotExist:
+            obj = OnlineIdea(**idea)
+            obj.save()
 
 
 class CategoryOnlineIdea(models.Model):
@@ -176,7 +171,8 @@ class CategoryOnlineIdea(models.Model):
         # Checks
         for field in json5_fields:
             # these fields are not mandatory
-            if field not in ['testimony', 'next_page', 'references', 'resources', 'reusable','implementation_steps','use_cases']:
+            if field not in ['testimony', 'next_page', 'references', 'resources', 'reusable','implementation_steps',
+                             'use_cases','titles_accordion','content_accordion']:
                 if field not in d_json5:
                     raise Json5ParseException('Field "{}" is missing'.format(field))
                 if not d_json5[field]:
