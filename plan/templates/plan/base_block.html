@@ -63,19 +63,20 @@
 
                         <!--        Nav bar items -->
 
-{# user_filter_plans return from context processor#}
+                        {# user_filter_plans return from context processor#}
                         {% for p in user_filter_plans reversed %}
-{#                            when user clicks on the button the associated node is shown#}
+                            {#                            when user clicks on the button the associated node is shown#}
 
 
 
                             <div class="d-flex flex-row h-100">
-                                <button class="list-group-item list-group-item-action list-group-item-light p-3 {{ p }}"
+                                <button class="list-group-item list-group-item-action list-group-item-light p-3 all-plan-sidebar {{ p }} "
                                         data-bs-target="#{{ p.plan_name |add_hyphen }}"
                                         type="button"
                                         data-bs-toggle="collapse"
                                         aria-expanded="false"
                                         aria-controls="{{ p.plan_name |add_hyphen }}"
+                                        id="plan-side-bar-{{ p.pk }}"
                                 >
                                     {{ p.plan_name }}
 
@@ -84,9 +85,9 @@
 
                                 <div class="align-self-end align-self-stretch">
 
-                                        <button href="{% url 'delete_plan' p.pk %}" class="h-100"
-                                          data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
-                                          onclick="delete_plan(this)"><i class="bi bi-trash"></i></button>
+                                    <button href="{% url 'delete_plan' p.pk %}" class="h-100"
+                                            data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
+                                            onclick="delete_plan(this)"><i class="bi bi-trash"></i></button>
 
                                 </div>
                             </div>
@@ -94,25 +95,28 @@
 
 
 
-                            <div class=" container collapse plan-collapse" id="{{p.plan_name |add_hyphen }}" data-plan-id="{{ p.pk }}">
+                            <div class=" container collapse plan-collapse" id="{{ p.plan_name |add_hyphen }}"
+                                 data-plan-id="{{ p.pk }}">
 
 
-                                {% for c_name, c_url, c_next in category_objects%}
-                         <p>
+                                {% for c_name, c_url, c_next in category_objects %}
+                                    <p>
                                         <span class="badge text-dark">
-                                            <input type="checkbox" class="checkbox-sidebar {{ p.pk }}block" id="{{ c_url }}{{p.pk }}">
+                                            <input type="checkbox" class="checkbox-sidebar {{ p.pk }}block"
+                                                   id="{{ c_url }}{{ p.pk }}">
                                         </span>
-                             <a href="{% url 'show_block' c_url c_next%}" class="link-no-decoration text-dark"> {{ c_name }}</a>
+                                        <a href="{% url 'show_block' c_url c_next %}"
+                                           class="link-no-decoration text-dark"> {{ c_name }}</a>
 
                                     </p>
 
                                 {% endfor %}
 
-                                 <div class="d-flex justify-content-end my-md-3">
-                                     <div>
-                                         <a href="{% url 'checklist' %}" class="btn btn-primary">View checklist</a>
-                                     </div>
-                                 </div>
+                                <div class="d-flex justify-content-end my-md-3">
+                                    <div>
+                                        <a href="{% url 'checklist' %}" class="btn btn-primary">View checklist</a>
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -142,7 +146,6 @@
                     {% endif %}
 
 
-
                 </section>
 
                 {% block building_block_idea %}
@@ -157,7 +160,7 @@
 
 
 
-  {{ category_urls|json_script:"category-urls" }}
+    {{ category_urls|json_script:"category-urls" }}
     <script src="{% static 'plan/js/menu_bar.js' %}"></script>
 
 

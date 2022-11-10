@@ -1,11 +1,17 @@
 const plan_collapse = document.getElementsByClassName('plan-collapse')
+const all_plans = document.getElementsByClassName('all-plan-sidebar')
+function set_menu_color(){
+    for (i of all_plans){
+        i.style.backgroundColor='white'
+    }
+}
+
 for (i of plan_collapse) {
     // triggered when the user clicks on the course/plan's name and categories/blocks are shown (human touch, teaching material etc. )
     i.addEventListener('show.bs.collapse', event => {
         // subsequently handled by django select_plan view
-        console.log('first child')
-        console.log(event.target.children[0].id)
-        i.style.backgroundColor = 'red'
+
+        //i.style.backgroundColor = 'red'
         $.ajax(
             {
                 type: 'GET',
@@ -16,7 +22,8 @@ for (i of plan_collapse) {
                 success: function (response) {
 
                     $('#plan_name_dom').text(response.plan_name_ajax)
-
+                    set_menu_color()
+                    document.getElementById('plan-side-bar-'+response.plan_id_response).style.backgroundColor='Khaki'
 
                     for (const c_done of response.category_ready){
                         //ticks off the (sidebar)checkbox if user has already selected at least one idea for any given category
