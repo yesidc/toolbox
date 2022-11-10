@@ -94,12 +94,8 @@
 
 
 
-                            <div class=" container collapse plan-collapse" id="{{p.plan_name |add_hyphen }}">
+                            <div class=" container collapse plan-collapse" id="{{p.plan_name |add_hyphen }}" data-plan-id="{{ p.pk }}">
 
-                               {#The idea on this p html element is subsequently passed to the select_view for it to load the current plan and thus have it ready to save ideas to it#}
-{#                                    The first element in this div container must have as an id the plan's primary key#}
-
-                                <div id="{{ p.pk }}"> </div>
 
                                 {% for c_name, c_url, c_next in category_objects%}
                          <p>

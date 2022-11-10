@@ -5,12 +5,13 @@ for (i of plan_collapse) {
         // subsequently handled by django select_plan view
         console.log('first child')
         console.log(event.target.children[0].id)
+        i.style.backgroundColor = 'red'
         $.ajax(
             {
                 type: 'GET',
                 url: '/select_plan/',
                 data: {
-                    plan_id: event.target.children[0].id// this id refers to id assigned to the FIRST child node of the  html element that triggers this event, which is the plan's pk
+                    plan_id: event.target.getAttribute('data-plan-id')
                 },
                 success: function (response) {
 
