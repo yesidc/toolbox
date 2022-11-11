@@ -1,5 +1,23 @@
 const plan_collapse = document.getElementsByClassName('plan-collapse')
 const all_plans = document.getElementsByClassName('all-plan-sidebar')
+const plan_name_dom = document.getElementById('plan_name_dom')
+
+
+
+if(plan_name_dom){
+
+    console.log(plan_name_dom.dataset.planName)
+
+    document.getElementById('plan-side-bar-'+add_hyphen(plan_name_dom.dataset.planName)).style.backgroundColor='Khaki'
+}
+
+
+
+
+function add_hyphen(plan){
+    return plan.replaceAll(' ', '-');
+}
+
 function set_menu_color(){
     for (i of all_plans){
         i.style.backgroundColor='white'
@@ -22,8 +40,10 @@ for (i of plan_collapse) {
                 success: function (response) {
 
                     $('#plan_name_dom').text(response.plan_name_ajax)
+                    // plan's name color
                     set_menu_color()
-                    document.getElementById('plan-side-bar-'+response.plan_id_response).style.backgroundColor='Khaki'
+                    console.log(add_hyphen(response.plan_name_ajax))
+                    document.getElementById('plan-side-bar-'+add_hyphen(response.plan_name_ajax)).style.backgroundColor='Khaki'
 
                     for (const c_done of response.category_ready){
                         //ticks off the (sidebar)checkbox if user has already selected at least one idea for any given category

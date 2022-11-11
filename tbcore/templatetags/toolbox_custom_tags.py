@@ -9,7 +9,10 @@ register = template.Library()
 def add_hyphen(value):
     """
     Replaces blank spaces with a hyphen
+    Args:
+        value: string
     """
+
     return value.replace(' ', '-')
 
 
@@ -21,15 +24,16 @@ def get_accordion_content(title, content):
 
     if len(title) is 0:
         len_content = 0
-        return {'len_content':len_content}
+        return {'len_content': len_content}
     else:
 
         titles = title.split('[split]')
         c_accordion = content.split('[split]')
-        len_content= len(titles)
-        content_accordion = tuple([*zip([*range(len_content)],titles,c_accordion)])
+        len_content = len(titles)
+        content_accordion = tuple([*zip([*range(len_content)], titles, c_accordion)])
 
-    return {'len_content':len_content,'content_accordion': content_accordion}
+    return {'len_content': len_content, 'content_accordion': content_accordion}
+
 
 @register.simple_tag()
 def get_name_next_category(value):
@@ -56,7 +60,7 @@ def remaining_categories(context, all_categories):
     categories_list = [*zip(*CategoryOnlineIdea.objects.values_list('category__category_name'))]
     c_done = context['category_done_summary']
 
-    remaining_c = set([c_name for c_name, _, _ in all_categories if c_name in categories_list[0] ]) - c_done
+    remaining_c = set([c_name for c_name, _, _ in all_categories if c_name in categories_list[0]]) - c_done
 
     return remaining_c
 
@@ -73,7 +77,7 @@ def task_complexity_to_int(value):
     """
 
     try:
-        num_stars= int(value)
+        num_stars = int(value)
         list_starts = ['star' for i in range(num_stars)]
         return list_starts
     except ValueError:
