@@ -22,7 +22,7 @@ def get_accordion_content(title, content):
     Fetches the content that is eventually displayed using the accordions.
     """
 
-    if len(title) is 0:
+    if len(title) == 0:
         len_content = 0
         return {'len_content': len_content}
     else:

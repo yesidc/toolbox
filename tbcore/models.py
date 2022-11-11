@@ -126,6 +126,20 @@ class OnlineIdea(models.Model):
     def __str__(self):
         return self.idea_name
 
+    @staticmethod
+    def add_category_to_idea(obj, idea_category):
+        if isinstance(idea_category, list):
+            for c in idea_category:
+                try:
+                    obj.category.add(Category.objects.get(category_url=c))
+                except Category.DoesNotExist:
+                    print(f'this category does not exist: {c}')
+        else:
+            try:
+                obj.category.add(Category.objects.get(category_url=idea_category))
+            except Category.DoesNotExist:
+                print(f'this category does not exist: {idea_category}')
+
     @classmethod
     def create_from_json5(cls, data_json5):
         """
@@ -138,11 +152,16 @@ class OnlineIdea(models.Model):
         try:
             obj = OnlineIdea.objects.get(idea_id=idea['idea_id'])
             for key, value in idea.items():
-                setattr(obj, key, value)
+                if key != 'category':
+                    setattr(obj, key, value)
             obj.save()
+            OnlineIdea.add_category_to_idea(obj, idea['category'])
         except OnlineIdea.DoesNotExist:
+            idea_ = idea.pop('category', None)
             obj = OnlineIdea(**idea)
             obj.save()
+
+            OnlineIdea.add_category_to_idea(obj, idea_)
 
 
 class CategoryOnlineIdea(models.Model):
