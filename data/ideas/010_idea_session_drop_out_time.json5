@@ -14,6 +14,6 @@ use_cases: "- Teacher Presence is important in all courses",
 references: "<a href=\"https://ilias.uni-giessen.de/goto.php?target=file_286775&client_id=JLUG&lang=en\" target=\"_blank\">Handreichung Digitale Nähe in der Online-Lehre gestalten</a>\n",
   reusable: "yes",
 task_complexity: "1",
-
+category: 'discussion',
 
 }

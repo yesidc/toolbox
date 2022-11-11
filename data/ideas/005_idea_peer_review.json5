@@ -15,6 +15,6 @@ use_cases: "- As reviews of assignments and as a second level of student reflect
 references: "",
 reusable: "yes",
 task_complexity: "2",
-
+category: 'assignments',
 
 }

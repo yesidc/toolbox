@@ -1,6 +1,7 @@
 //Idea Assignment checklist
 
 {
+
 idea_name: "Assignment Checklist",
   idea_id: "001-idea-ac",
 brief_description: "Students need clear directions for the work they are tasked with, especially in remote settings. The checklist lists the (thinking) skills that you expect to see *proof of*. \nFurther, the checklist identifies what you accept *as proof*. Giving students clear criteria that they can check off helps them to be more confident in what they do \nand how they study. Basically, the assignment checklist lists all criteria that you would evaluate for grading. ",
@@ -13,6 +14,7 @@ testimony: '“Overall, the assignment submissions show less variance and less i
 use_cases: "- For complex assignments where students have to analyse, evaluate, create, or develop something on their own. \n- When students work independently and with little contact with you or little to no feedback loops.",
 references: "McTighe &Martin-Kniep *Seven strategies for supporting student learning in a remote environment* 2020",
 reusable: "yes",
-task_complexity: "2"
+task_complexity: "2",
+  category: 'assessment',
 }
 

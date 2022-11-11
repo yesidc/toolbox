@@ -14,6 +14,6 @@ use_cases: "Suitable in every course where you introduce yourself to the student
 references: "",
 reusable: "Yes, for the same course",
 task_complexity: "1",
-
+category: 'human_touch',
 
 }

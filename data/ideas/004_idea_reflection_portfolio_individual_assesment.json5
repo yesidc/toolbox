@@ -16,8 +16,7 @@ use_cases: "- The tip on the scale for grading \n- As a means for individual ass
 references: "",
 reusable: "yes",
 task_complexity: "2",
-
-
+  category: 'assessment',
 }
 
 

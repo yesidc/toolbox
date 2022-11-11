@@ -15,6 +15,6 @@ use_cases: '- Extending class discussions beyond the classroom\n- For discussing
 references: "- Anderson, Terry; Rourke, Liam; Garrison, Randy & Archer, Walter (2001). ASSESSING TEACHING PRESENCE IN A COMPUTER CONFERENCING CONTEXT. Online Learning, 5 (2), 1-17. <a href=\"doi: 10.24059/olj.v5i2.1875\" target=\"_blank\">doi: 10.24059/olj.v5i2.1875</a>.\n- Berge, Z. L. (2008). Changing instructor's roles in virtual worlds. Quarterly Review of Distance Education, 9 (4), 407-415.\n- Martin, Florence; Ritzhaupt, Albert; Kumar, Swapna & Budhrani, Kiran (2019). Award-winning faculty online teaching practices: Course design, assessment and evaluation, and facilitation. The internet and higher education, 42, 34-43. <a href=\"doi: 10.1016/j.iheduc.2019.04.001\" target=\"_blank\">doi: 10.1016/j.iheduc.2019.04.001</a>.\n- Salmon, Gilly (2013). E-tivities. The key to active online learning (2. ed.). New York, NY: Routledge.\n- <a href=\"https://www.ascd.org/books/essential-questions?chapter=what-makes-a-question-essential-essential-questions\" target=\"_blank\">What Makes a Question Essential?</a>\n",
   reusable: "Questions, your own strategy and tasks can be reused.",
 task_complexity: "1",
-
+category: 'discussion'
 
 }

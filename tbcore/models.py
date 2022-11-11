@@ -121,6 +121,7 @@ class OnlineIdea(models.Model):
     references = models.TextField(null=True)
     reusable = models.TextField(null=True)
     task_complexity = models.CharField(max_length=3, null=True)
+    category = models.ManyToManyField(Category)
 
     def __str__(self):
         return self.idea_name

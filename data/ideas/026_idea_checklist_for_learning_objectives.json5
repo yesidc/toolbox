@@ -14,6 +14,5 @@ use_cases: "- At the end of each unit \n- You can use the checklist for assignme
 references: "- Bixler, B. Key Action Verbs for the Cognitive Domain. http://www.personal.psu.edu/bxb11/Objectives/cognitiveobjs.html\n- Center for Innovation in Teaching and Learning, University of Illinois. Guidelines for Writing Learning Objectives. https://citl.illinois.edu/citl-101/online-strategy-development/develop-or-revise-an-online-course/online-course-in-a-box/designing-your-course/bigpicture/defining-the-goal\n- Krathwohl, D. R. (2002). A revision of Bloom's taxonomy: An overview. Theory into practice, 41(4), 212-218.\n- Ollermann, F. (2020). Kurzleitfaden zur Formulierung kompetenzorientierter Lernziele. Unpublished guideline. Universität Osnabrück.\n- Wunderlich, A. (2016). Learning-Outcomes „lupenrein “formulieren. Hg. v. Technische Hochschule Köln. Available online at https://www.th-koeln.de/mam/downloads/deutsch/hochschule/profil/lehre/steckbrief_learning_outcomes.pdf.\n",
   reusable: "yes",
 task_complexity: "2",
-
-
+category: 'teaching_material',
 }
