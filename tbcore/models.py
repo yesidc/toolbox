@@ -164,11 +164,21 @@ class OnlineIdea(models.Model):
             OnlineIdea.add_category_to_idea(obj, idea_)
 
 
-class CategoryOnlineIdea(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    online_idea = models.ManyToManyField(OnlineIdea)  # todo implement related name
 
-    # display = models.BooleanField()
+
+class PlanCategoryOnlineIdea(models.Model):
+    plan = models.ForeignKey(Plan, on_delete=models.CASCADE, related_name='plan_category_onlide_idea_plan')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='plan_category_onlide_idea_category')
+    idea = models.ForeignKey(OnlineIdea, on_delete=models.CASCADE, null=True,
+                             related_name='plan_category_onlide_idea_i')
+    notes = models.TextField(max_length=500, null=True)  # todo delete the null this is mandatory
+    objects = PlanCategoryOnlineIdeaManager()
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['plan', 'category', 'idea'], name='plancategoryonlineidea_constraint')
+        ]
+
     @staticmethod
     def check_json5(data_json5, mode):
         """
@@ -191,24 +201,11 @@ class CategoryOnlineIdea(models.Model):
         # Checks
         for field in json5_fields:
             # these fields are not mandatory
-            if field not in ['testimony', 'next_page', 'references', 'resources', 'reusable','implementation_steps',
-                             'use_cases','titles_accordion','content_accordion']:
+            if field not in ['testimony', 'next_page', 'references', 'resources', 'reusable', 'implementation_steps',
+                             'use_cases', 'titles_accordion', 'content_accordion']:
                 if field not in d_json5:
                     raise Json5ParseException('Field "{}" is missing'.format(field))
                 if not d_json5[field]:
                     raise Json5ParseException('Field "{}" is empty'.format(field))
         return True
 
-
-class PlanCategoryOnlineIdea(models.Model):
-    plan = models.ForeignKey(Plan, on_delete=models.CASCADE, related_name='plan_category_onlide_idea_plan')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='plan_category_onlide_idea_category')
-    idea = models.ForeignKey(OnlineIdea, on_delete=models.CASCADE, null=True,
-                             related_name='plan_category_onlide_idea_i')
-    notes = models.TextField(max_length=500, null=True)  # todo delete the null this is mandatory
-    objects = PlanCategoryOnlineIdeaManager()
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['plan', 'category', 'idea'], name='plancategoryonlineidea_constraint')
-        ]

@@ -1,4 +1,4 @@
-from tbcore.models import CategoryOnlineIdea, Plan, PlanCategoryOnlineIdea, Category
+from tbcore.models import Plan, PlanCategoryOnlineIdea, Category, OnlineIdea
 from django.db.models import Q
 from django.contrib import messages
 
@@ -62,15 +62,6 @@ def context_summary(user, current_plan):
     return category_idea_checklist, category_done_summary
 
 
-def get_category(category_url):
-    """
-    Fetches the CategoryOnlineIdea objects or the corresponding Category object, if there is no CategoryOnlineIdea instance.
-    """
-    try:
-         # There are a total of eight building blocks.
-        return (CategoryOnlineIdea.objects.select_related('category').get(category__category_url=category_url),'categoryonlineidea')
-    except CategoryOnlineIdea.DoesNotExist:
-        return ({'category':Category.objects.get(category_url=category_url)},'category')
 
 
 def get_ideas(user, category_url, current_user_plan_id):

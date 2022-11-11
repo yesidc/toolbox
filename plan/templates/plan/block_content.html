@@ -47,9 +47,16 @@
 
     <section class="p-2 mt-2">
         <div class="container">
-            <h3 class="text-center mb-5">{{ category.category.category_name }}</h3>
+            <h3 class="text-center mb-5">{{ category.category_name }}</h3>
             <p class="text-start">
-                {% md_to_html category.category.short_description as short_d_html %}{{ short_d_html|safe }}</p>
+
+
+
+
+                    {% md_to_html category.short_description as short_d_html %}{{ short_d_html|safe }}
+
+
+            </p>
 
         </div>
     </section>
@@ -57,7 +64,7 @@
 
     <!-- Accordion Content -->
 
-    {% get_accordion_content category.category.titles_accordion category.category.content_accordion as show_content %}
+    {% get_accordion_content category.titles_accordion category.content_accordion as show_content %}
     {% if show_content.len_content > 0 %}
 
         <section class="p-5">
@@ -91,8 +98,9 @@
 
     {% endif %}
 
-{% if instance_type != 'category' %}
-    <section>
+
+    {% if ideas%}
+        <section>
 
     <!-- Online Ideas -->
     <div id="online-idea-container">
@@ -108,7 +116,7 @@
 
                         <div class="row">
 
-                            {% for idea in category.online_idea.all %}
+                            {% for idea in ideas %}
 
                                 <div class="col d-flex">
 
@@ -181,7 +189,7 @@
             </div>
             <div>
 
-                {% if category.category.category_name != 'Rules & Regulations' %}
+                {% if category.category_name != 'Rules & Regulations' %}
                     {% get_name_next_category next_page as c_next_button %}
                     <a href="{% url  'show_block' next_page c_next_button.c_next %}" class="btn btn-primary active m-4"
                        aria-current="page">Next Building

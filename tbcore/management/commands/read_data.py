@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 import glob
-from tbcore.models import CategoryOnlineIdea, OnlineIdea, Category
+from tbcore.models import PlanCategoryOnlineIdea, OnlineIdea, Category
 from tbcore.utils.base import Json5ParseException,InvalidDataException
 
 # todo raise InvalidDataException if the directory (ideas or categories) contains no data
@@ -38,7 +38,7 @@ class Command(BaseCommand):
                 data_json5 = f.read()
 
                 try:
-                    CategoryOnlineIdea.check_json5(data_json5, mode)
+                    PlanCategoryOnlineIdea.check_json5(data_json5, mode)
                 except Json5ParseException as e:
                     raise InvalidDataException("Data {} invalid. Error message: \n{}".format(filename, e))
 

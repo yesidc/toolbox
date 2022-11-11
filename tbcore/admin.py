@@ -4,5 +4,4 @@ from .models import *
 admin.site.register(Plan)
 admin.site.register(Category)
 admin.site.register(OnlineIdea)
-admin.site.register(CategoryOnlineIdea)
 admin.site.register(PlanCategoryOnlineIdea)

@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
-from .helpers import category_done, is_ajax, context_summary, get_category, get_ideas, has_plan
+from .helpers import category_done, is_ajax, context_summary, get_ideas, has_plan
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
 from tbcore.utils.create_pdf import render_pdf
@@ -34,10 +34,8 @@ def show_block(request, category_url, next_page):
     else:
         ideas_list = None
 
-    category, instance_type = get_category(category_url) # a CategoryOnlineIdea instance
-
-    context = {'category': category,
-               'instance_type': instance_type,
+    context = {'category': Category.objects.get(category_url=category_url),
+               'ideas': OnlineIdea.objects.prefetch_related('category').filter(category__category_url=category_url), # these are the ideas displayed by default
                'next_page': next_page,
                'ideas_list': ideas_list,
                'current_category': category_url,
