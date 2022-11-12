@@ -12,9 +12,6 @@ from .forms import NotesForm, PlanForm
 from tbcore.utils.create_pdf import render_pdf
 
 
-from django.views.generic.base import TemplateView
-
-
 
 
 # todo optimize database queries,ex. create 500 users and evaluate performance
@@ -46,20 +43,6 @@ def show_block(request, category_url, next_page):
         return render(request, 'plan/update_ideas.html', context=locals())
     else:
         return render(request, 'plan/block_content.html', context=locals())
-
-
-
-# def update_selected_idea(request):
-#     """
-#     Updates the content of the block_content page such that when the user switches to a different course/plan using
-#     the side navigation bar, the ticked-off ideas reflect that of the current chosen plan/course
-#     """
-#     category, instance_type = get_category(request.session['current_category'])  # a CategoryOnlineIdea instance
-#     ideas_list = get_ideas(request.user, request.session['current_category'],request.session['current_user_plan'])
-#     current_category =  request.session['current_category']
-#
-#     return render(request, 'plan/update_ideas.html', context=locals())
-
 
 
 

@@ -75,6 +75,16 @@ def remaining_categories(context, all_categories):
     return remaining_c
 
 
+@register.inclusion_tag('plan/show_ideas.html',takes_context=True)
+def show_ideas(context,user_authenticated):
+    return {
+        'ideas': context['ideas'],
+        'current_category': context['current_category'],
+        'ideas_list':context['ideas_list'],
+        'user_authenticated':user_authenticated,
+    }
+
+
 @register.simple_tag()
 def md_to_html(value):
     return markdown.markdown(value)
