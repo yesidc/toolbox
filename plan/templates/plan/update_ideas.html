@@ -2,39 +2,44 @@
 
 <!-- Online Ideas -->
     <div id="online-idea-container">
+
+
+
+    {% if ideas%}
+        <section>
+
+    <!-- Online Ideas -->
+    <div id="online-idea-container">
         <section class="p-5">
             <div class="container">
-
-
-                 <h2 class="text-center mb-md-5"> Discover the Teaching Tools</h2>
+                <h2 class="text-center mb-md-5"> Discover the Teaching Tools</h2>
                 <div class="row">
 
                     {#online_idea is M2M field#}
-
-
 
 
                     <div class="container">
 
                         <div class="row">
 
-                            {% for idea in category.online_idea.all %}
+                            {% for idea in ideas %}
 
                                 <div class="col d-flex">
 
                                     <div class="card">
 
-                                        {% if user.is_authenticated%}<div class="card-header bg-light">
+                                        {% if user.is_authenticated %}
+                                            <div class="card-header bg-light">
 
-                                                    <input type="checkbox" class="idea-checkbox" id="{{ idea.id }}-idea"
-                                           onclick="add_delete_idea()"
-                                            {#                        The ideas that have been already chosen by users are ticked off by default#}
-                                            {% if idea.id in ideas_list %}
-                                           checked
-                                            {% endif %}
-                                    >
+                                                <input type="checkbox" class="idea-checkbox" id="{{ idea.id }}-idea"
+                                                       onclick="add_delete_idea()"
+                                                        {#                        The ideas that have been already chosen by users are ticked off by default#}
+                                                        {% if idea.id in ideas_list %}
+                                                       checked
+                                                        {% endif %}
+                                                >
 
-                                        </div>{% endif %}
+                                            </div>{% endif %}
 
                                         <div class="card-body text-center bg-body text-black flex-fill">
 
@@ -69,11 +74,13 @@
 
 
                 </div>
-
-
-
             </div>
         </section>
+    </div>
+
+    </section>{% endif %}
+
+
     </div>
 
 {#   <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>#}
