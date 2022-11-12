@@ -1,7 +1,7 @@
 from django import template
-from tbcore.models import Category
+from tbcore.models import Category, OnlineIdea
 import markdown
-
+from django.db.models import Count
 register = template.Library()
 
 
@@ -56,7 +56,7 @@ def get_name_next_category(value):
 
 
 @register.simple_tag(takes_context=True)
-def remaining_categories(context, all_categories):
+def remaining_categories(context):
     """
     Computes the (set) difference between all categories/building blocks and the categories for which user has chosen
     at least one idea.
@@ -64,13 +64,14 @@ def remaining_categories(context, all_categories):
         context: current template context
         all_categories: List of tuples, where each element (tuple) contains (category_name, category_url)
     """
-    # todo fix using idea object
-    CategoryOnlineIdea=0
+
     # Some categories do not contain online ideas, hence we must compare user's progress against the CategoryOnlineIdea table.
-    categories_list = [*zip(*CategoryOnlineIdea.objects.values_list('category__category_name'))]
+    idea_grouped_by_c = OnlineIdea.objects.values('category__category_name').annotate(c=Count('category__category_name')).order_by()
+    categories_list = [i['category__category_name'] for i in idea_grouped_by_c]
+
     c_done = context['category_done_summary']
 
-    remaining_c = set([c_name for c_name, _, _ in all_categories if c_name in categories_list[0]]) - c_done
+    remaining_c = set(categories_list) - c_done
 
     return remaining_c
 
