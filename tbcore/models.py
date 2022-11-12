@@ -121,9 +121,24 @@ class OnlineIdea(models.Model):
     references = models.TextField(null=True)
     reusable = models.TextField(null=True)
     task_complexity = models.CharField(max_length=3, null=True)
+    category = models.ManyToManyField(Category)
 
     def __str__(self):
         return self.idea_name
+
+    @staticmethod
+    def add_category_to_idea(obj, idea_category):
+        if isinstance(idea_category, list):
+            for c in idea_category:
+                try:
+                    obj.category.add(Category.objects.get(category_url=c))
+                except Category.DoesNotExist:
+                    print(f'this category does not exist: {c}')
+        else:
+            try:
+                obj.category.add(Category.objects.get(category_url=idea_category))
+            except Category.DoesNotExist:
+                print(f'this category does not exist: {idea_category}')
 
     @classmethod
     def create_from_json5(cls, data_json5):
@@ -137,18 +152,33 @@ class OnlineIdea(models.Model):
         try:
             obj = OnlineIdea.objects.get(idea_id=idea['idea_id'])
             for key, value in idea.items():
-                setattr(obj, key, value)
+                if key != 'category':
+                    setattr(obj, key, value)
             obj.save()
+            OnlineIdea.add_category_to_idea(obj, idea['category'])
         except OnlineIdea.DoesNotExist:
+            idea_ = idea.pop('category', None)
             obj = OnlineIdea(**idea)
             obj.save()
 
+            OnlineIdea.add_category_to_idea(obj, idea_)
 
-class CategoryOnlineIdea(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    online_idea = models.ManyToManyField(OnlineIdea)  # todo implement related name
 
-    # display = models.BooleanField()
+
+
+class PlanCategoryOnlineIdea(models.Model):
+    plan = models.ForeignKey(Plan, on_delete=models.CASCADE, related_name='plan_category_onlide_idea_plan')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='plan_category_onlide_idea_category')
+    idea = models.ForeignKey(OnlineIdea, on_delete=models.CASCADE, null=True,
+                             related_name='plan_category_onlide_idea_i')
+    notes = models.TextField(max_length=500, null=True)  # todo delete the null this is mandatory
+    objects = PlanCategoryOnlineIdeaManager()
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['plan', 'category', 'idea'], name='plancategoryonlineidea_constraint')
+        ]
+
     @staticmethod
     def check_json5(data_json5, mode):
         """
@@ -171,24 +201,11 @@ class CategoryOnlineIdea(models.Model):
         # Checks
         for field in json5_fields:
             # these fields are not mandatory
-            if field not in ['testimony', 'next_page', 'references', 'resources', 'reusable','implementation_steps',
-                             'use_cases','titles_accordion','content_accordion']:
+            if field not in ['testimony', 'next_page', 'references', 'resources', 'reusable', 'implementation_steps',
+                             'use_cases', 'titles_accordion', 'content_accordion']:
                 if field not in d_json5:
                     raise Json5ParseException('Field "{}" is missing'.format(field))
                 if not d_json5[field]:
                     raise Json5ParseException('Field "{}" is empty'.format(field))
         return True
 
-
-class PlanCategoryOnlineIdea(models.Model):
-    plan = models.ForeignKey(Plan, on_delete=models.CASCADE, related_name='plan_category_onlide_idea_plan')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='plan_category_onlide_idea_category')
-    idea = models.ForeignKey(OnlineIdea, on_delete=models.CASCADE, null=True,
-                             related_name='plan_category_onlide_idea_i')
-    notes = models.TextField(max_length=500, null=True)  # todo delete the null this is mandatory
-    objects = PlanCategoryOnlineIdeaManager()
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['plan', 'category', 'idea'], name='plancategoryonlineidea_constraint')
-        ]

@@ -14,6 +14,6 @@ use_cases: "",
 references: "- Online Article <a href=\"https://www.edutopia.org/article/science-drawing-and-memory?fbclid=IwAR3IJV7eHQ3rLLniYiZOsVZ2ewADgUxMpRwLvOQr9UOEmAuuzRhkN_LOnZM\">The Science of Drawing and Memory</a>\n- Fernandes, M. A., Wammes, J. D., & Meade, M. E. (2018). The Surprisingly Powerful Influence of Drawing on Memory. Current Directions in Psychological Science, 27(5), 302–308. <a href=\"https://doi.org/10.1177/0963721418755385\">https://doi.org/10.1177/0963721418755385</a>\n",
   reusable: "yes",
 task_complexity: "1",
-
+category: 'teaching_material',
 
 }

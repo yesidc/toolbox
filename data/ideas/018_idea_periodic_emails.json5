@@ -14,6 +14,6 @@ use_cases: "- Regular communication is relevant for all courses but especially w
 references: "Martin, Florence; Ritzhaupt, Albert; Kumar, Swapna & Budhrani, Kiran (2019). Award-winning faculty online teaching practices: Course design, assessment and evaluation, and facilitation. The internet and higher education, 42, 34-43. doi: 10.1016/j.iheduc.2019.04.001.\n",
   reusable: "Not the texts but the structure. If you develop a habit, it is going to be super quick.",
 task_complexity: "1",
-
+category: 'organization',
 
 }

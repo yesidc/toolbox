@@ -14,6 +14,5 @@ use_cases: "- Suitable for any material that is interesting but not substantial 
 references: "",
 reusable: "(Parts of) your courseware can be copy + pasted to other courses which are about similar topics. ",
 task_complexity: "1",
-
-
+category: 'student_engagement',
 }

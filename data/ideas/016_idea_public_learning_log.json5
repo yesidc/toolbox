@@ -14,6 +14,6 @@ use_cases: "- Suitable in courses which are structured by assignments \n- Reduce
 references: "<a href=\"https://lciltd.org/resources/three-interrelated-keys-to-greater-student-engagement-and-deeper-learning\" target=\"_blank\">Three Interrelated Keys to Greater Student Engagement and Deeper Learning</a>\n",
 reusable: "yes",
 task_complexity: "2",
-
+category: 'human_touch',
 
 }

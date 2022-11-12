@@ -53,7 +53,7 @@ for (i of plan_collapse) {
                     // when the user selects a plan (using the left-navigation bar); the checkboxes on the block_content page are updated accordingly/dynamically
                     if (document.getElementById('online-idea-container')!== null) {
                         let request_new_template = new XMLHttpRequest();
-                        request_new_template.open('GET', '/update_selected_idea/');
+                        request_new_template.open('GET', window.location.pathname+'?mode=update');
                         request_new_template.onload = function () {
                             // the response is the rendered HTML
 

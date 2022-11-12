@@ -1,8 +1,10 @@
 from django import template
-from tbcore.models import Category, CategoryOnlineIdea
+from tbcore.models import Category, OnlineIdea
 import markdown
-
+from django.db.models import Count
 register = template.Library()
+
+
 
 
 @register.filter(name='add_hyphen')
@@ -17,12 +19,19 @@ def add_hyphen(value):
 
 
 @register.simple_tag()
+def get_single_category(value):
+    """
+    Takes as an argument a queryset and returns a single object Category instance
+    """
+    return  value[0]
+
+@register.simple_tag()
 def get_accordion_content(title, content):
     """
     Fetches the content that is eventually displayed using the accordions.
     """
 
-    if len(title) is 0:
+    if len(title) == 0:
         len_content = 0
         return {'len_content': len_content}
     else:
@@ -47,7 +56,7 @@ def get_name_next_category(value):
 
 
 @register.simple_tag(takes_context=True)
-def remaining_categories(context, all_categories):
+def remaining_categories(context):
     """
     Computes the (set) difference between all categories/building blocks and the categories for which user has chosen
     at least one idea.
@@ -57,12 +66,24 @@ def remaining_categories(context, all_categories):
     """
 
     # Some categories do not contain online ideas, hence we must compare user's progress against the CategoryOnlineIdea table.
-    categories_list = [*zip(*CategoryOnlineIdea.objects.values_list('category__category_name'))]
+    idea_grouped_by_c = OnlineIdea.objects.values('category__category_name').annotate(c=Count('category__category_name')).order_by()
+    categories_list = [i['category__category_name'] for i in idea_grouped_by_c]
+
     c_done = context['category_done_summary']
 
-    remaining_c = set([c_name for c_name, _, _ in all_categories if c_name in categories_list[0]]) - c_done
+    remaining_c = set(categories_list) - c_done
 
     return remaining_c
+
+
+@register.inclusion_tag('plan/show_ideas.html',takes_context=True)
+def show_ideas(context,user_authenticated):
+    return {
+        'ideas': context['ideas'],
+        'current_category': context['current_category'],
+        'ideas_list':context['ideas_list'],
+        'user_authenticated':user_authenticated,
+    }
 
 
 @register.simple_tag()
