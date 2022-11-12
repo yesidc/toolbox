@@ -294,8 +294,10 @@ def delete_plan (request, plan_id):
     # if user deletes current plan (the plan she is working on)
     if str(plan_id) == request.session['current_user_plan']:
         p= Plan.objects.get_user_plans(request.user).last()
-        request.session['current_user_plan'] =p.pk
-        request.session['current_user_plan_name']= p.plan_name
+
+        if p is not None:
+            request.session['current_user_plan'] =p.pk
+            request.session['current_user_plan_name']= p.plan_name
         return redirect('show_block', 'human_touch', 'teaching_material')
     else:
         return redirect(request.META.get('HTTP_REFERER'))
