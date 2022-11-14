@@ -28,6 +28,10 @@ Toolbox
 /*     vertical-align: middle;*/
 /*}*/
 
+.card-rcorner{
+  border-radius: 25px;
+}
+
 /*Underline top-nav bar*/
 .top-nav a:hover {
   border-bottom: 3px solid red;

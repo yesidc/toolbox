@@ -21,8 +21,16 @@
                 <div class="container-fluid">
 
                     <!-- Icon sidebar -->
-                    <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i></button>
+                    <div>
+                        <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i>My course Plans</button>
+
+{#                        <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i></button>#}
+{#                        My course Plans#}
+                    </div>
+
+
                     <div class="d-flex">
+
                         <p><span class="lead">Current Course:</span>
                             <span id="plan_name_dom"
                             data-plan-name=  {% if request.session.current_user_plan_name %}
@@ -55,15 +63,15 @@
 
             {% if user.is_authenticated %}
                 <div class="border-end bg-white" id="sidebar-wrapper">
-                    <div class="sidebar-heading border-bottom m-0">My Course Plans</div>
+
                     <div class="list-group list-group-flush">
 
 
                         <div class="list-group-item list-group-item-action list-group-item-light p-3">
-                            <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-3">
+                            <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-0">
                                 {% csrf_token %}
                                 {{ plan_form.plan_name }}
-                                <input type="submit" name="Submit" value="Add new course" class="btn-primary my-3 px-3">
+                                <input type="submit" name="Submit" value="Add new course" class="btn btn-primary menu-btn my-3 px-3">
                             </form>
 
                         </div>

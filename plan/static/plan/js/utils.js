@@ -8,7 +8,7 @@ if(plan_name_dom){
 
     console.log(plan_name_dom.dataset.planName)
 
-    document.getElementById('plan-side-bar-'+add_hyphen(plan_name_dom.dataset.planName)).style.backgroundColor='Khaki'
+    document.getElementById('plan-side-bar-'+add_hyphen(plan_name_dom.dataset.planName)).style.backgroundColor='#ADD8E6'
 }
 
 
@@ -43,7 +43,7 @@ for (i of plan_collapse) {
                     // plan's name color
                     set_menu_color()
                     console.log(add_hyphen(response.plan_name_ajax))
-                    document.getElementById('plan-side-bar-'+add_hyphen(response.plan_name_ajax)).style.backgroundColor='Khaki'
+                    document.getElementById('plan-side-bar-'+add_hyphen(response.plan_name_ajax)).style.backgroundColor='#ADD8E6'
 
                     for (const c_done of response.category_ready){
                         //ticks off the (sidebar)checkbox if user has already selected at least one idea for any given category
