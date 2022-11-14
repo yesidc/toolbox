@@ -93,3 +93,5 @@ function delete_plan(obj) {
 
 // closes the messages
 $('.alert').alert()
+
+

@@ -1,72 +1,66 @@
 {# Some building blocks (e.g., Rules and Regulations) do not contain any ideas#}
-    {% if ideas%}
-        <section>
+{% if ideas %}
+    <section>
 
-    <!-- Online Ideas -->
+        <!-- Online Ideas -->
 
         <section class="p-5">
             <div class="container">
                 <h2 class="text-center mb-md-5"> Discover the Teaching Tools</h2>
-                <div class="row">
-
-                    {#online_idea is M2M field#}
 
 
-                    <div class="container">
-
-                        <div class="row">
-
-                            {% for idea in ideas %}
-
-                                <div class="col d-flex">
-
-                                    <div class="card">
-
-                                        {% if user_authenticated %}
-                                            <div class="card-header bg-light">
-
-                                                <input type="checkbox" class="idea-checkbox" id="{{ idea.id }}-idea"
-                                                       onclick="add_delete_idea()"
-                                                        {#                        The ideas that have been already chosen by users are ticked off by default#}
-                                                        {% if idea.id in ideas_list %}
-                                                       checked
-                                                        {% endif %}
-                                                >
-
-                                            </div>
-{% endif %}
-
-                                        <div class="card-body text-center bg-body text-black flex-fill card-rcorner">
-
-                                            <a
-                                                    href="{% url 'idea_overview_detail' current_category idea.id 'overview' %}"
-                                                    class="btn">
+                {#online_idea is M2M field#}
 
 
-
-                                                <p class="card-text ">
-
-                                                    <h3 class="mb-3 bg-light">{{ idea.idea_name }}</h3>
+                <div class="container">
 
 
-                                                </p>
+                    <div class="row row-cols-1 row-cols-md-4 row-cols-sm-3 my-flex-card">
 
-                                            </a>
+                        {% for idea in ideas %}
+
+
+                            <div class="col">
+                                <div class="card card-rcorner shadow-lg">
+
+                                    {% if user_authenticated %}
+                                        <div class=" py-0 my-0">
+
+                                            <input type="checkbox" class="idea-checkbox" id="{{ idea.id }}-idea"
+                                                   onclick="add_delete_idea()"
+                                                    {#                        The ideas that have been already chosen by users are ticked off by default#}
+                                                    {% if idea.id in ideas_list %}
+                                                   checked
+                                                    {% endif %}
+                                            >
+
                                         </div>
+                                    {% endif %}
+
+                                    <div class=" card-body text-center text-black flex-fill">
+
+                                        <a
+                                                href="{% url 'idea_overview_detail' current_category idea.id 'overview' %}"
+                                                class="btn">
+
+
+                                            <h5 class="mb-3">{{ idea.idea_name }}</h5>
+
+
+                                        </a>
                                     </div>
 
 
                                 </div>
-                            {% endfor %}
-
-
-                        </div>
-
+                            </div>
+                        {% endfor %}
 
                     </div>
 
 
                 </div>
+
+
             </div>
         </section>
 
