@@ -290,7 +290,7 @@ def select_plan(request):
 
 def delete_plan (request, plan_id):
     Plan.objects.get(pk=plan_id).delete()
-    messages.add_message(request, messages.INFO, 'Your plan was deleted.')
+    messages.add_message(request, messages.INFO, 'Your course plan was deleted.')
     # if user deletes current plan (the plan she is working on)
     if str(plan_id) == request.session['current_user_plan']:
         p= Plan.objects.get_user_plans(request.user).last()

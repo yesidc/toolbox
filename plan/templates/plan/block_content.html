@@ -116,8 +116,7 @@
             <div>
 
                 {% if user.is_authenticated %}
-                    <a href="{% url 'checklist' %}" class="btn btn-primary active m-4" aria-current="page">View Summary
-                        checklist</a>{% endif %}
+                    <a href="{% url 'checklist' %}" class="btn btn-primary active m-4" aria-current="page">View checklist</a>{% endif %}
 
             </div>
             <div>
@@ -125,8 +124,7 @@
                 {% if category.category_name != 'Rules & Regulations' %}
                     {% get_name_next_category next_page as c_next_button %}
                     <a href="{% url  'show_block' next_page c_next_button.c_next %}" class="btn btn-primary active m-4"
-                       aria-current="page">Next Building
-                        Block: {{ c_next_button.c_name }} </a>
+                       aria-current="page">{{ c_next_button.c_name }} </a>
                 {% endif %}
 
             </div>
