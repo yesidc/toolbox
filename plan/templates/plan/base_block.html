@@ -21,39 +21,49 @@
                 <div class="container-fluid">
 
                     <!-- Icon sidebar -->
-                    <div>
-                        <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i>My course Plans</button>
-
-{#                        <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i></button>#}
-{#                        My course Plans#}
-                    </div>
-
-
                     <div class="d-flex">
+                        <div>
+                            <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i> My
+                                course Plans
+                            </button>
+                        </div>
 
-                        <p><span class="lead">Current Course:</span>
-                            <span id="plan_name_dom"
-                            data-plan-name=  {% if request.session.current_user_plan_name %}
-                                    {{ request.session.current_user_plan_name|add_hyphen }}
+                        {#                        <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i></button>#}
+                        {#                        My course Plans#}
 
-                                {% else %}
-                                    {{ user_filter_plans.last.plan_name|add_hyphen }}
-                                {% endif %}
+<div class="mx-5 px-4 ">
+                        {% block idea_detail_name %}
 
 
+                        {% endblock %}
 
-                            >
-                        {#                    if user has not chosen a plan, it defaults to the last plan created#}
-                                {% if request.session.current_user_plan_name %}
-                                    {{ request.session.current_user_plan_name }}
-                                {% else %}
-                                    {{ user_filter_plans.last }}
-                                {% endif %}
-                    </span>
-                        </p>
+</div>
+
                     </div>
 
+
+                    <p style="visibility: hidden"><span class="lead">Current Course:</span>
+                        <span id="plan_name_dom"
+                              data-plan-name=  {% if request.session.current_user_plan_name %}
+                                  {{ request.session.current_user_plan_name|add_hyphen }}
+
+                              {% else %}
+                                  {{ user_filter_plans.last.plan_name|add_hyphen }}
+                              {% endif %}
+
+
+                        >
+                        {#                    if user has not chosen a plan, it defaults to the last plan created#}
+                            {% if request.session.current_user_plan_name %}
+                                {{ request.session.current_user_plan_name }}
+                            {% else %}
+                                {{ user_filter_plans.last }}
+                            {% endif %}
+                    </span>
+                    </p>
                 </div>
+
+
             </nav>
         {% endif %}
 
@@ -71,7 +81,8 @@
                             <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-0">
                                 {% csrf_token %}
                                 {{ plan_form.plan_name }}
-                                <input type="submit" name="Submit" value="Add new course" class="btn btn-primary menu-btn my-3 px-3">
+                                <input type="submit" name="Submit" value="Add new course"
+                                       class="btn btn-primary menu-btn my-3 px-3">
                             </form>
 
                         </div>

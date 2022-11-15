@@ -1,278 +1,288 @@
 {% extends "plan/base_block.html" %}
- {% load static %}
+{% load static %}
 {% load toolbox_custom_tags %}
+
+
+{% block idea_detail_name %}
+
+    <h3>{{ idea.idea_name }}</h3>
+
+{% endblock %}
+
 {% block building_block_idea %}
 
     <section class="bg-light text-dark mb-3">
 
+
         {#    Idea's Property#}
         <div class="container">
             <div class="row">
-                <div class="col-md-10 col-sm-12">
-
-                    <div class="container mt-0 pt-4 pb-5">
-                        <div class="row">
-                            <h1 class="text-center">{{ idea.idea_name }}</h1>
-                        </div>
-                    </div>
-
-                    {#Ideas' property#}
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <h3>Description</h3>
-                            </div>
-                            <div class="col">
-                              {#                   Brief description#}
-                        <p class="lead">{% if idea.brief_description %}{% md_to_html  idea.brief_description as bd_html%}{{bd_html|safe }}{% else %}
-                            {{ 'No data' }}{% endif %}</p>
-                            </div>
-                        </div>
-                    </div>
 
 
+                <div class="col-md-3">
+
+
+                    <h3>Description</h3>
                 </div>
+
+                <div class="col-md-9">
+                    {#                   Brief description#}
+                    <p class="lead">{% if idea.brief_description %}{% md_to_html idea.brief_description as bd_html %}
+                        {{ bd_html|safe }}{% else %}
+                        {{ 'No data' }}{% endif %}</p>
+                </div>
+
+
             </div>
         </div>
 
+
+        {#    #}
+        {#        #}
+        {#    Idea's Property#}
+        {#        <div class="container">#}
+        {#            <div class="row">#}
+        {#                <div class="col-md-10 col-sm-12">#}
+        {##}
+        {#Ideas' property#}
+        {#                    <div class="container">#}
+        {#                        <div class="row">#}
+        {#                            <div class="col">#}
+        {#                                <h3>Description</h3>#}
+        {#                            </div>#}
+        {#                            <div class="col">#}
+        {#                   Brief description#}
+        {#                        <p class="lead">{% if idea.brief_description %}{% md_to_html  idea.brief_description as bd_html%}{{bd_html|safe }}{% else %}#}
+        {#                            {{ 'No data' }}{% endif %}</p>#}
+        {#                            </div>#}
+        {#                        </div>#}
+        {#                    </div>#}
+        {##}
+        {##}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </div>#}
+        {##}
+        {#    #}
+        {#    #}
 
         {#    Idea's Property#}
 
         {% if idea.use_cases %}
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-sm-12">
+            <div class="container">
+                <div class="row">
 
-                    {#Ideas' property#}
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <h3>Use cases</h3>
-                            </div>
-                            <div class="col">
-                                     <p class="lead">{% md_to_html  idea.use_cases as ea_html%}{{ ea_html|safe }}</p>
-                            </div>
-                        </div>
+                    <div class="col-md-3">
+
+                        {#Ideas' property#}
+
+
+                        <h3>Use cases</h3>
+
+                    </div>
+
+                    <div class="col-md-9">
+                        <p class="lead">{% md_to_html idea.use_cases as ea_html %}{{ ea_html|safe }}</p>
                     </div>
 
 
                 </div>
+
+
             </div>
-        </div>
-{% endif %}
+
+        {% endif %}
 
 
         {#    Idea's Property#}
         <div class="container">
             <div class="row">
-                <div class="col-md-10 col-sm-12">
 
-                    {#Ideas' property#}
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
+
+
+
+
+                            <div class="col-md-3">
                                 <h3>Technology</h3>
                             </div>
-                            <div class="col">
-                            <p>{% if idea.technology %}{% md_to_html idea.technology as t_html %}{{ t_html|safe }}{% else %}{{ 'No data' }}{% endif %}</p
+                            <div class="col-md-9">
+                                <p>{% if idea.technology %}{% md_to_html idea.technology as t_html %}
+                                    {{ t_html|safe }}{% else %}{{ 'No data' }}{% endif %}</p
                             </div>
-                        </div>
-                    </div>
 
 
-                </div>
+
+
             </div>
         </div>
 
         {#    Idea's Property#}
         <div class="container">
             <div class="row">
-                <div class="col-md-10 col-sm-12">
 
-                    {#Ideas' property#}
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
+
+
+
+
+                            <div class="col-md-3">
                                 <h3>Teacher Effort</h3>
                             </div>
-                            <div class="col">
-                                 <p>{% if idea.teacher_effort %}{% md_to_html idea.teacher_effort as te_html %}{{ te_html|safe }}{% else %}
-                                        {{ 'No data' }}{% endif %}</p>
+
+                            <div class="col-md-9">
+                                <p>{% if idea.teacher_effort %}{% md_to_html idea.teacher_effort as te_html %}
+                                    {{ te_html|safe }}{% else %}
+                                    {{ 'No data' }}{% endif %}</p>
                             </div>
-                        </div>
-                    </div>
 
 
-                </div>
+
+
             </div>
         </div>
 
 
-    {% if idea.implementation_steps %}
-        {#    Idea's Property#}
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-sm-12">
+        {% if idea.implementation_steps %}
+            {#    Idea's Property#}
+            <div class="container">
+                <div class="row">
 
-                    {#Ideas' property#}
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <h3>Implementation Steps</h3>
-                            </div>
-                            <div class="col">
-                              <p>{% md_to_html idea.implementation_steps as is_html%}{{ is_html|safe }}</p>
-                            </div>
-                        </div>
-                    </div>
+
+
+
+
+                                <div class="col-md-3">
+                                    <h3>Implementation Steps</h3>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>{% md_to_html idea.implementation_steps as is_html %}{{ is_html|safe }}</p>
+                                </div>
+
+
 
 
                 </div>
             </div>
-        </div>
-{% endif %}
+        {% endif %}
 
 
 
         {#    Idea's Property#}
         <div class="container">
             <div class="row">
-                <div class="col-md-10 col-sm-12">
 
-                    {#Ideas' property#}
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
+
+
+                            <div class="col-md-3">
                                 <h3>Recommendations</h3>
                             </div>
-                            <div class="col">
-                                 <p>{% md_to_html idea.recommendations as recom_html  %}{{ recom_html|safe }}</p>
+                            <div class="col-md-9">
+                                <p>{% md_to_html idea.recommendations as recom_html %}{{ recom_html|safe }}</p>
                             </div>
-                        </div>
-                    </div>
 
 
-                </div>
+
             </div>
         </div>
 
 
-    {% if idea.resources %}
-        {#    Idea's Property#}
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-sm-12">
+        {% if idea.resources %}
+            {#    Idea's Property#}
+            <div class="container">
+                <div class="row">
 
-                    {#Ideas' property#}
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <h3>Supplementary Material</h3>
-                            </div>
-                            <div class="col">
-                                <p>{% md_to_html idea.resources as idea_r_html %}{{ idea_r_html|safe }} </p>
-                            </div>
-                        </div>
-                    </div>
-
+                                <div class="col-md-3">
+                                    <h3>Supplementary Material</h3>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>{% md_to_html idea.resources as idea_r_html %}{{ idea_r_html|safe }} </p>
+                                </div>
 
                 </div>
             </div>
-        </div>
-{% endif %}
+        {% endif %}
 
 
 
-    {% if idea.reusable %}
-        {#    Idea's Property#}
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-sm-12">
+        {% if idea.reusable %}
+            {#    Idea's Property#}
+            <div class="container">
+                <div class="row">
 
-                    {#Ideas' property#}
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <h3>Reusable</h3>
-                            </div>
-                            <div class="col">
-                                <p>{% md_to_html idea.reusable as idea_reusable_html %}{{ idea_reusable_html|safe }} </p>
-                            </div>
-                        </div>
-                    </div>
-
+                                <div class="col-md-3">
+                                    <h3>Reusable</h3>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>
+                                        {% md_to_html idea.reusable as idea_reusable_html %}{{ idea_reusable_html|safe }} </p>
+                                </div>
 
                 </div>
             </div>
-        </div>
-{% endif %}
+        {% endif %}
 
 
 
-{% if idea.references %}
-              {#    Idea's Property#}
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-sm-12">
+        {% if idea.references %}
+            {#    Idea's Property#}
+            <div class="container">
+                <div class="row">
 
-                    {#Ideas' property#}
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <h3>References</h3>
-                            </div>
-                            <div class="col">
-                                <p>{% md_to_html idea.references as idea_references %}{{ idea_references|safe }} </p>
-                            </div>
-                        </div>
-                    </div>
 
+                                <div class="col-md-3">
+                                    <h3>References</h3>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>
+                                        {% md_to_html idea.references as idea_references %}{{ idea_references|safe }} </p>
+                                </div>
 
                 </div>
             </div>
-        </div>
 
 
-    {% endif %}
+        {% endif %}
 
     </section>
 
 
-{% if user.is_authenticated%}{#    User's notes/comments#}
+    {% if user.is_authenticated %}{#    User's notes/comments#}
 
 
 
-    <section class="bg-body mt-1">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5">
-                <div class="d-flex h-100"><p class="lead align-self-center">This is space is for you to take notes.</p></div>
+        <section class="bg-body mt-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="d-flex h-100"><p class="lead align-self-center">This is space is for you to take
+                            notes.</p></div>
+                    </div>
+                    <div class="col-md-7 p-5">
+                        <form action="" method="POST" id="notes-form">
+                            {% csrf_token %}
+                            {{ note_form.note_content }}
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-7 p-5">
-                <form action="" method="POST" id="notes-form">
-                    {% csrf_token %}
-                    {{ note_form.note_content }}
-                </form>
-            </div>
-        </div>
-    </div>
-    </section>
+        </section>
 
 
-<section class="bg-light text-dark mb-4">
+        <section class="bg-light text-dark mb-4">
 
-        <div class="d-flex justify-content-end">
-            <div>
+            <div class="d-flex justify-content-end">
+                <div>
 
 
-<button type="submit" form="notes-form" value="Submit" class="btn btn-primary active m-4 pb-3">Use this online recommendation in my course</button>
+                    <button type="submit" form="notes-form" value="Submit" class="btn btn-primary active m-4 pb-3">Use
+                        this online recommendation in my course
+                    </button>
+
+                </div>
 
             </div>
+        </section>{% endif %}
 
-        </div>
-</section>{% endif %}
-
-  <script src="{% static 'plan/js/utils.js' %}"></script>
+    <script src="{% static 'plan/js/utils.js' %}"></script>
     <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
 
 
