@@ -115,7 +115,7 @@ class OnlineIdea(models.Model):
     implementation_steps = models.TextField(null=True)
     teacher_effort = models.TextField()
     recommendations = models.TextField()
-    resources = models.TextField(null=True)
+    supplementary_material = models.TextField(null=True)
     testimony = models.TextField(null=True)
     use_cases = models.TextField(null=True)
     references = models.TextField(null=True)
@@ -201,7 +201,7 @@ class PlanCategoryOnlineIdea(models.Model):
         # Checks
         for field in json5_fields:
             # these fields are not mandatory
-            if field not in ['testimony', 'next_page', 'references', 'resources', 'reusable', 'implementation_steps',
+            if field not in ['testimony', 'next_page', 'references', 'supplementary_material', 'reusable', 'implementation_steps',
                              'use_cases', 'titles_accordion', 'content_accordion']:
                 if field not in d_json5:
                     raise Json5ParseException('Field "{}" is missing'.format(field))

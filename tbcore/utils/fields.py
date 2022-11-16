@@ -4,7 +4,7 @@
 def idea_fields():
     return ["idea_name", "idea_id", "brief_description", "technology", "implementation_steps", "teacher_effort",
             "recommendations",
-            "resources", "testimony", "use_cases", "references", "reusable", "task_complexity", "category"]
+            "supplementary_material", "testimony", "use_cases", "references", "reusable", "task_complexity", "category"]
 
 
 def category_fields():
