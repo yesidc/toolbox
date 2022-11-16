@@ -11,6 +11,31 @@
 
 {% block building_block_idea %}
 
+
+        {% if user.is_authenticated %}{#    User's notes/comments#}
+
+
+
+        <section class="bg-body mt-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="d-flex h-100"><h3 class="align-self-center">Note</h3></div>
+                    </div>
+                    <div class="col-md-9 p-5">
+                        <form action="" method="POST" id="notes-form">
+                            {% csrf_token %}
+                            {{ note_form.note_content }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+
+
+
     <section class="bg-light text-dark mb-3">
 
 
@@ -22,12 +47,12 @@
                 <div class="col-md-3">
 
 
-                    <h3>Description</h3>
+                    <div class="d-flex h-100"><h3 class="align-self-center">Description</h3></div>
                 </div>
 
                 <div class="col-md-9">
                     {#                   Brief description#}
-                    <p class="lead">{% if idea.brief_description %}{% md_to_html idea.brief_description as bd_html %}
+                    <p>{% if idea.brief_description %}{% md_to_html idea.brief_description as bd_html %}
                         {{ bd_html|safe }}{% else %}
                         {{ 'No data' }}{% endif %}</p>
                 </div>
@@ -77,12 +102,12 @@
                         {#Ideas' property#}
 
 
-                        <h3>Use cases</h3>
+                        <div class="d-flex h-100"><h3 class="align-self-center">Use cases</h3></div>
 
                     </div>
 
                     <div class="col-md-9">
-                        <p class="lead">{% md_to_html idea.use_cases as ea_html %}{{ ea_html|safe }}</p>
+                        <p>{% md_to_html idea.use_cases as ea_html %}{{ ea_html|safe }}</p>
                     </div>
 
 
@@ -103,11 +128,11 @@
 
 
                             <div class="col-md-3">
-                                <h3>Technology</h3>
+                                <div class="d-flex h-100"><h3 class="align-self-center">Technology</h3></div>
                             </div>
                             <div class="col-md-9">
                                 <p>{% if idea.technology %}{% md_to_html idea.technology as t_html %}
-                                    {{ t_html|safe }}{% else %}{{ 'No data' }}{% endif %}</p
+                                    {{ t_html|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
                             </div>
 
 
@@ -125,7 +150,7 @@
 
 
                             <div class="col-md-3">
-                                <h3>Teacher Effort</h3>
+                                <div class="d-flex h-100"><h3 class="align-self-center">Teacher Effort</h3></div>
                             </div>
 
                             <div class="col-md-9">
@@ -151,7 +176,7 @@
 
 
                                 <div class="col-md-3">
-                                    <h3>Implementation Steps</h3>
+                                    <div class="d-flex h-100"><h3 class="align-self-center">Implementation Steps</h3></div>
                                 </div>
                                 <div class="col-md-9">
                                     <p>{% md_to_html idea.implementation_steps as is_html %}{{ is_html|safe }}</p>
@@ -173,7 +198,7 @@
 
 
                             <div class="col-md-3">
-                                <h3>Recommendations</h3>
+                                <div class="d-flex h-100"><h3 class="align-self-center">Recommendations</h3></div>
                             </div>
                             <div class="col-md-9">
                                 <p>{% md_to_html idea.recommendations as recom_html %}{{ recom_html|safe }}</p>
@@ -191,7 +216,7 @@
                 <div class="row">
 
                                 <div class="col-md-3">
-                                    <h3>Supplementary Material</h3>
+                                    <div class="d-flex h-100"><h3 class="align-self-center">Supplementary Material</h3></div>
                                 </div>
                                 <div class="col-md-9">
                                     <p>{% md_to_html idea.resources as idea_r_html %}{{ idea_r_html|safe }} </p>
@@ -209,7 +234,7 @@
                 <div class="row">
 
                                 <div class="col-md-3">
-                                    <h3>Reusable</h3>
+                                    <div class="d-flex h-100"><h3 class="align-self-center">Reusable</h3></div>
                                 </div>
                                 <div class="col-md-9">
                                     <p>
@@ -229,7 +254,7 @@
 
 
                                 <div class="col-md-3">
-                                    <h3>References</h3>
+                                    <div class="d-flex h-100"><h3 class="align-self-center">References</h3></div>
                                 </div>
                                 <div class="col-md-9">
                                     <p>
@@ -245,28 +270,8 @@
     </section>
 
 
-    {% if user.is_authenticated %}{#    User's notes/comments#}
 
-
-
-        <section class="bg-body mt-1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="d-flex h-100"><p class="lead align-self-center">This is space is for you to take
-                            notes.</p></div>
-                    </div>
-                    <div class="col-md-7 p-5">
-                        <form action="" method="POST" id="notes-form">
-                            {% csrf_token %}
-                            {{ note_form.note_content }}
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
+{% if user.is_authenticated %}
         <section class="bg-light text-dark mb-4">
 
             <div class="d-flex justify-content-end">
