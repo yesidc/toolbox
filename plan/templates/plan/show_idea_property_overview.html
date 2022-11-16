@@ -1,0 +1,16 @@
+
+{% load toolbox_custom_tags %}
+
+<div class="container mt-3">
+    <div class="row ideas-b-property">
+        <div class="col-3">
+            <h4>{{ property_name }}</h4>
+        </div>
+        <div class="col-9">
+            <p>{% if idea_property %}
+                {% md_to_html idea_property as idea_html %}
+                {{ idea_html|truncatewords_html:10|safe }}{% else %}
+                {{ 'No data' }}{% endif %}</p>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
 {% endblock %}
 
+  {% block category_name %}
+
+<div class="col text-center">
+     <h3 class="text-center mb-5">{{ category.category_name }}</h3>
+</div>
+
+                            {% endblock %}
+
+
 {% block building_block_idea %}
 
 
@@ -47,7 +56,7 @@
 
     <section class="p-2 mt-2">
         <div class="container">
-            <h3 class="text-center mb-5">{{ category.category_name }}</h3>
+
             <p class="text-start">
 
 

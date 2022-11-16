@@ -3,14 +3,19 @@
 {% load toolbox_custom_tags %}
 
 
-{% block idea_detail_name %}
-
+{% block idea_name_detail %}
+     <div class="col text-center">
     <h3>{{ idea.idea_name }}</h3>
+       </div>
 
 {% endblock %}
 
 {% block building_block_idea %}
 
+
+    {% if request.user.is_anonymous %}
+        <section class="bg-light"><h3>{{ idea.idea_name }}</h3></section>
+    {% endif %}
 
     {% if user.is_authenticated %}{#    User's notes/comments#}
 
@@ -22,7 +27,7 @@
                     <div class="col-md-3">
                         <div class="d-flex h-100"><h3 class="align-self-center">Note</h3></div>
                     </div>
-                    <div class="col-md-9 p-5">
+                    <div class="col-md-9 pt-1">
                         <form action="" method="POST" id="notes-form">
                             {% csrf_token %}
                             {{ note_form.note_content }}
