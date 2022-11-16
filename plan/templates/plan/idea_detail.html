@@ -12,7 +12,7 @@
 {% block building_block_idea %}
 
 
-        {% if user.is_authenticated %}{#    User's notes/comments#}
+    {% if user.is_authenticated %}{#    User's notes/comments#}
 
 
 
@@ -38,201 +38,47 @@
 
     <section class="bg-light text-dark mb-3">
 
-
-        {#    Idea's Property#}
-        <div class="container">
-            <div class="row">
-
-
-                <div class="col-md-3">
-
-
-                    <div class="d-flex h-100"><h3 class="align-self-center">Description</h3></div>
-                </div>
-
-                <div class="col-md-9">
-                    {#                   Brief description#}
-                    <p>{% if idea.brief_description %}{% md_to_html idea.brief_description as bd_html %}
-                        {{ bd_html|safe }}{% else %}
-                        {{ 'No data' }}{% endif %}</p>
-                </div>
-
-
-            </div>
-        </div>
-
-
+        {% show_idea_property idea.brief_description 'Description' %}
 
         {% if idea.use_cases %}
-            <div class="container">
-                <div class="row">
 
-                    <div class="col-md-3">
-
-                        {#Ideas' property#}
-
-
-                        <div class="d-flex h-100"><h3 class="align-self-center">Use cases</h3></div>
-
-                    </div>
-
-                    <div class="col-md-9">
-                        <p>{% md_to_html idea.use_cases as ea_html %}{{ ea_html|safe }}</p>
-                    </div>
-
-
-                </div>
-
-
-            </div>
+            {% show_idea_property idea.use_cases 'Use cases' %}
 
         {% endif %}
+        {% show_idea_property idea.technology 'Technology' %}
+
+        {% show_idea_property idea.teacher_effort 'Teacher Effort' %}
 
 
-        {#    Idea's Property#}
-        <div class="container">
-            <div class="row">
-
-
-
-
-
-                            <div class="col-md-3">
-                                <div class="d-flex h-100"><h3 class="align-self-center">Technology</h3></div>
-                            </div>
-                            <div class="col-md-9">
-                                <p>{% if idea.technology %}{% md_to_html idea.technology as t_html %}
-                                    {{ t_html|safe }}{% else %}{{ 'No data' }}{% endif %}</p>
-                            </div>
-
-
-
-
-            </div>
-        </div>
-
-        {#    Idea's Property#}
-        <div class="container">
-            <div class="row">
-
-
-
-
-
-                            <div class="col-md-3">
-                                <div class="d-flex h-100"><h3 class="align-self-center">Teacher Effort</h3></div>
-                            </div>
-
-                            <div class="col-md-9">
-                                <p>{% if idea.teacher_effort %}{% md_to_html idea.teacher_effort as te_html %}
-                                    {{ te_html|safe }}{% else %}
-                                    {{ 'No data' }}{% endif %}</p>
-                            </div>
-
-
-
-
-            </div>
-        </div>
 
 
         {% if idea.implementation_steps %}
-            {#    Idea's Property#}
-            <div class="container">
-                <div class="row">
+            {% show_idea_property idea.implementation_steps 'Implementation Steps' %}
 
-
-
-
-
-                                <div class="col-md-3">
-                                    <div class="d-flex h-100"><h3 class="align-self-center">Implementation Steps</h3></div>
-                                </div>
-                                <div class="col-md-9">
-                                    <p>{% md_to_html idea.implementation_steps as is_html %}{{ is_html|safe }}</p>
-                                </div>
-
-
-
-
-                </div>
-            </div>
         {% endif %}
 
 
-
-        {#    Idea's Property#}
-        <div class="container">
-            <div class="row">
-
-
-
-                            <div class="col-md-3">
-                                <div class="d-flex h-100"><h3 class="align-self-center">Recommendations</h3></div>
-                            </div>
-                            <div class="col-md-9">
-                                <p>{% md_to_html idea.recommendations as recom_html %}{{ recom_html|safe }}</p>
-                            </div>
-
-
-
-            </div>
-        </div>
+        {% show_idea_property idea.recommendations 'Recommendations' %}
 
 
         {% if idea.supplementary_material %}
-            {#    Idea's Property#}
-            <div class="container">
-                <div class="row">
 
-                                <div class="col-md-3">
-                                    <div class="d-flex h-100"><h3 class="align-self-center">Supplementary Material</h3></div>
-                                </div>
-                                <div class="col-md-9">
-                                    <p>{% md_to_html idea.supplementary_material as idea_r_html %}{{ idea_r_html|safe }} </p>
-                                </div>
+            {% show_idea_property idea.supplementary_material 'Supplementary Material' %}
 
-                </div>
-            </div>
         {% endif %}
 
 
 
         {% if idea.reusable %}
-            {#    Idea's Property#}
-            <div class="container">
-                <div class="row">
+            {% show_idea_property idea.reusable 'Reusable' %}
 
-                                <div class="col-md-3">
-                                    <div class="d-flex h-100"><h3 class="align-self-center">Reusable</h3></div>
-                                </div>
-                                <div class="col-md-9">
-                                    <p>
-                                        {% md_to_html idea.reusable as idea_reusable_html %}{{ idea_reusable_html|safe }} </p>
-                                </div>
-
-                </div>
-            </div>
         {% endif %}
 
 
 
         {% if idea.references %}
-            {#    Idea's Property#}
-            <div class="container">
-                <div class="row">
 
-
-                                <div class="col-md-3">
-                                    <div class="d-flex h-100"><h3 class="align-self-center">References</h3></div>
-                                </div>
-                                <div class="col-md-9">
-                                    <p>
-                                        {% md_to_html idea.references as idea_references %}{{ idea_references|safe }} </p>
-                                </div>
-
-                </div>
-            </div>
+            {% show_idea_property idea.references 'References' %}
 
 
         {% endif %}
@@ -241,7 +87,7 @@
 
 
 
-{% if user.is_authenticated %}
+    {% if user.is_authenticated %}
         <section class="bg-light text-dark mb-4">
 
             <div class="d-flex justify-content-end">
