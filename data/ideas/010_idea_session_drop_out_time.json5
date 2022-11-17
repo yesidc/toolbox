@@ -8,12 +8,12 @@ technology: "1. <a href=\"https://digitale-lehre.virtuos.uni-osnabrueck.de/eintr
   implementation_steps: "1. Inform students that you will be available for about 15-20 after the session for casual discussions or any questions related to their studies. \n2. Ask them to bring a concrete question, topic, or issue. \n2. Invite students to take the opportunity and show that you're looking forward to speaking to them.",
 teacher_effort: "15-20 minutes before or after a session or during a designated time slot of your choice. The time you spend on making yourself available is the time you used to spend to run from one room to the other.",
 recommendations: "Proactively make time to talk to you with a welcoming tone. It's especially useful at the beginning and end of the semester when questions tend to arise. \nIf there are no pertinent issues to discuss, try to be open to talk about other non-topic related topics and set an informal and casual tone with the students to build trust. This will carry over to the more formal discussions during the session. \nMake explicit what you're probably doing anyway: students come to you and ask questions about the exam, some formality, the lecture set-up, the home work or discuss a study project with you.",
-resources: "",
+supplementary_material: "",
 testimony: "",
 use_cases: "- Teacher Presence is important in all courses",
 references: "<a href=\"https://ilias.uni-giessen.de/goto.php?target=file_286775&client_id=JLUG&lang=en\" target=\"_blank\">Handreichung Digitale Nähe in der Online-Lehre gestalten</a>\n",
   reusable: "yes",
 task_complexity: "1",
-
+category: 'discussion',
 
 }

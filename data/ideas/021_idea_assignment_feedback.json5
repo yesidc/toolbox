@@ -8,12 +8,12 @@ technology: "1. <a href=\"/static/tbcore/support_documents/How_to_add_task_plugI
   implementation_steps: "1. Tell your students when and for what purpose they get feedback in the beginning of the class. \n2. Come up with one or two guiding questions to narrow down the scope of your feedback and help students to use it efficiently.  \n3. Give feedback that is kind, specific, and actionable. \nTiming, detail and frequency are very individual, so you have to think of what works best for you and for your class.",
 teacher_effort: "- Create a rubric/ table with the feedback criteria from the assignment instructions  \n- Effort for giving feedback depends on the scope and at what stage of the process feedback is given.",
 recommendations: "- If students give presentations, go through the slides before they present it. \n- Make it personal: \"in your group I have seen that...\" so they know that you read their submissions. \n- Check how helpful your feedback is with the <a href=\"https://lciltd.org/resources/rubric-feedback-on-practice\" target=\"_blank\">Rubric for Feedback on Practice</a>: comparing judging, informing, guiding revision and supporting improved quality)\n- Choose feedback criteria, e.g. completeness, language, use of a specific method, etc. \n- <a href=\"https://lciltd.org/search?searchQuery=feedback+checklist\" target=\"_blank\">checklist for actionable feedback</a>\n- Tell students  how you use the Element room (or other communication channels) during your office hours (e.g.and not like What's App). \n",
-  resources: "",
+  supplementary_material: "",
 testimony: "",
 use_cases: "- Project work, term papers\n- Any kind of group submissions\n- Parts of a writing process, e.g. a problem statement or a draft",
 references: "",
 reusable: "",
 task_complexity: "2",
-
+category: 'student_engagement',
 
 }

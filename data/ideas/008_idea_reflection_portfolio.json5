@@ -8,12 +8,11 @@ technology: "-  <a href=\"/static/tbcore/support_documents/How_to_add_task_plugI
 implementation_steps: "-\t<a href=\"/static/tbcore/support_documents/Individual_reflection_portfolio_example.pdf\" target=\"_blank\">Individual Reflection Portfolio example</a>\n",
   teacher_effort: "Reading the Reflection portfolios (pass/ fail) depends on the time frame that the portfolio represents.",
 recommendations: "- Portfolios should substitute some of the current assignments and should not be simply added to the workload.\n- You can assess what the students are up to and what they are involved with pertaining subject matter and prerequisites, or whether they understand \n\tthe task by asking them to self-assess their past as well as their present work. This allows you to gain more insight into how sophisticated and \n\taccurate a student’s view is on tasks, criteria and standards they are to master.\n\n### We recommend using reflection portfolios as: \n- The tip on the scale for grading \n- Means for individual assessment \n- Encouraging student reflection \n- Set a word limit of about 750 words",
-resources: "-  <a href=\"/static/tbcore/support_documents/Portfolio_prompt_inspiration.pdf\" target=\"_blank\">Portfolio Prompt Inspiration</a>\n",
+supplementary_material: "-  <a href=\"/static/tbcore/support_documents/Portfolio_prompt_inspiration.pdf\" target=\"_blank\">Portfolio Prompt Inspiration</a>\n",
 testimony: "*„Ich war ja erst skeptisch was die individual reflection portfolios angeht, aber ich lese gerade einen Teil und das ist so toll was die schreiben! \nEs ist sehr schön zu sehen, wie einzelne Aufgaben den Leuten richtig was gebracht haben und was für Soft Skills die aus dem Kurs mit rausnehmen.“*\n(Laura Krieger)",
 use_cases: "- After project work or group work phase \n- At the end of the course and as preparation for the exam \n- For reflecting priorities for exam preparation  \n- Before group work: What do I want to contribute/ learn? What am I already skilled at? What do I bring to the group work?",
 references: "",
 reusable: "yes",
 task_complexity: "2",
-
-
+category: 'assignment',
 }

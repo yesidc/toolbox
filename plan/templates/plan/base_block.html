@@ -17,26 +17,64 @@
         {% if user.is_authenticated %}
 
             <!-- Top navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light p-0 m-0">
-                <div class="container-fluid">
+            <div class="row p-0 m-0">
+
 
                     <!-- Icon sidebar -->
-                    <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i></button>
-                    <div class="d-flex">
-                        <p><span class="lead">Current Course:</span>
-                            <span id="plan_name_dom">
-                        {#                    if user has not chosen a plan, it defaults to the last plan created#}
-                                {% if request.session.current_user_plan_name %}
-                                    {{ request.session.current_user_plan_name }}
-                                {% else %}
-                                    {{ user_filter_plans.last }}
-                                {% endif %}
-                    </span>
-                        </p>
-                    </div>
+                
+                        <div class="col-2">
+                            <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i> My
+                                course Plans
+                            </button>
+                        </div>
 
-                </div>
-            </nav>
+                        {#                        <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i></button>#}
+                        {#                        My course Plans#}
+
+                        {% block idea_name_overview %}
+
+
+                        {% endblock %}
+
+
+                            {% block idea_name_detail %}
+
+
+                            {% endblock %}
+
+              {% block category_name %}
+
+
+                            {% endblock %}
+
+
+
+
+
+
+                    <p style="visibility: hidden; height: 0px"><span class="lead">Current Course:</span>
+                        <span id="plan_name_dom"
+                              data-plan-name=  {% if request.session.current_user_plan_name %}
+                                  {{ request.session.current_user_plan_name|add_hyphen }}
+
+                              {% else %}
+                                  {{ user_filter_plans.last.plan_name|add_hyphen }}
+                              {% endif %}
+
+
+                        >
+                        {#                    if user has not chosen a plan, it defaults to the last plan created#}
+                            {% if request.session.current_user_plan_name %}
+                                {{ request.session.current_user_plan_name }}
+                            {% else %}
+                                {{ user_filter_plans.last }}
+                            {% endif %}
+                    </span>
+                    </p>
+
+
+
+            </div>
         {% endif %}
 
         <div class="d-flex" id="wrapper">
@@ -45,17 +83,16 @@
 
             {% if user.is_authenticated %}
                 <div class="border-end bg-white" id="sidebar-wrapper">
-                    <div class="sidebar-heading border-bottom m-0">My Courses</div>
+
                     <div class="list-group list-group-flush">
 
 
-                        {#              <a class="list-group-item list-group-item-action list-group-item-light p-3"#}
-                        {#                                  href="{% url 'create_plan' 'add_new_plan' %}">Add</a>#}
                         <div class="list-group-item list-group-item-action list-group-item-light p-3">
-                            <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-3">
+                            <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-0">
                                 {% csrf_token %}
                                 {{ plan_form.plan_name }}
-                                <input type="submit" name="Submit" value="Add new course" class="btn-primary my-3 px-3">
+                                <input type="submit" name="Submit" value="Add new course"
+                                       class="btn btn-primary menu-btn my-3 px-3">
                             </form>
 
                         </div>
@@ -63,19 +100,20 @@
 
                         <!--        Nav bar items -->
 
-{# user_filter_plans return from context processor#}
+                        {# user_filter_plans return from context processor#}
                         {% for p in user_filter_plans reversed %}
-{#                            when user clicks on the button the associated node is shown#}
+                            {#                            when user clicks on the button the associated node is shown#}
 
 
 
                             <div class="d-flex flex-row h-100">
-                                <button class="list-group-item list-group-item-action list-group-item-light p-3 {{ p }}"
+                                <button class="list-group-item list-group-item-action list-group-item-light p-3 all-plan-sidebar {{ p }} "
                                         data-bs-target="#{{ p.plan_name |add_hyphen }}"
                                         type="button"
                                         data-bs-toggle="collapse"
                                         aria-expanded="false"
                                         aria-controls="{{ p.plan_name |add_hyphen }}"
+                                        id="plan-side-bar-{{ p.plan_name |add_hyphen }}"
                                 >
                                     {{ p.plan_name }}
 
@@ -84,9 +122,9 @@
 
                                 <div class="align-self-end align-self-stretch">
 
-                                        <button href="{% url 'delete_plan' p.pk %}" class="h-100"
-                                          data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
-                                          onclick="delete_plan(this)"><i class="bi bi-trash"></i></button>
+                                    <button href="{% url 'delete_plan' p.pk %}" class="h-100"
+                                            data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
+                                            onclick="delete_plan(this)"><i class="bi bi-trash"></i></button>
 
                                 </div>
                             </div>
@@ -94,29 +132,28 @@
 
 
 
-                            <div class=" container collapse plan-collapse" id="{{p.plan_name |add_hyphen }}">
+                            <div class=" container collapse plan-collapse" id="{{ p.plan_name |add_hyphen }}"
+                                 data-plan-id="{{ p.pk }}">
 
-                               {#The idea on this p html element is subsequently passed to the select_view for it to load the current plan and thus have it ready to save ideas to it#}
-{#                                    The first element in this div container must have as an id the plan's primary key#}
 
-                                <div id="{{ p.pk }}"> </div>
-
-                                {% for c_name, c_url, c_next in category_objects%}
-                         <p>
+                                {% for c_name, c_url, c_next in category_objects %}
+                                    <p>
                                         <span class="badge text-dark">
-                                            <input type="checkbox" class="checkbox-sidebar {{ p.pk }}block" id="{{ c_url }}{{p.pk }}">
+                                            <input type="checkbox" class="checkbox-sidebar {{ p.pk }}block"
+                                                   id="{{ c_url }}{{ p.pk }}">
                                         </span>
-                             <a href="{% url 'show_block' c_url c_next%}" class="link-no-decoration text-dark"> {{ c_name }}</a>
+                                        <a href="{% url 'show_block' c_url c_next %}"
+                                           class="link-no-decoration text-dark"> {{ c_name }}</a>
 
                                     </p>
 
                                 {% endfor %}
 
-                                 <div class="d-flex justify-content-end my-md-3">
-                                     <div>
-                                         <a href="{% url 'checklist' %}" class="btn btn-primary">View checklist</a>
-                                     </div>
-                                 </div>
+                                <div class="d-flex justify-content-end my-md-3">
+                                    <div>
+                                        <a href="{% url 'checklist' %}" class="btn btn-primary">View checklist</a>
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -146,7 +183,6 @@
                     {% endif %}
 
 
-
                 </section>
 
                 {% block building_block_idea %}
@@ -161,7 +197,7 @@
 
 
 
-  {{ category_urls|json_script:"category-urls" }}
+    {{ category_urls|json_script:"category-urls" }}
     <script src="{% static 'plan/js/menu_bar.js' %}"></script>
 
 

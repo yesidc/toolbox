@@ -1,0 +1,23 @@
+{% load toolbox_custom_tags %}
+
+<div class="container">
+                <div class="row">
+
+                    <div class="col-md-3">
+
+                        {#Ideas' property#}
+
+
+                        <div class="d-flex h-100"><h5 class="align-self-center">{{ property_name }}</h5></div>
+
+                    </div>
+
+                    <div class="col-md-9">
+                        <p>{% md_to_html idea_property as idea_html %}{{ idea_html|safe }}</p>
+                    </div>
+
+
+                </div>
+
+
+            </div>

@@ -6,13 +6,10 @@ from django.template import RequestContext
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
-from .helpers import category_done, is_ajax, context_summary, get_category, get_ideas, has_plan
+from .helpers import category_done, is_ajax, context_summary, get_ideas, has_plan
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
 from tbcore.utils.create_pdf import render_pdf
-
-
-from django.views.generic.base import TemplateView
 
 
 
@@ -34,16 +31,19 @@ def show_block(request, category_url, next_page):
     else:
         ideas_list = None
 
-    category, instance_type = get_category(category_url) # a CategoryOnlineIdea instance
+    category = Category.objects.get(category_url=category_url)
+    ideas = OnlineIdea.objects.prefetch_related('category').filter(category__category_url=category_url) # these are the ideas displayed by default
+    next_page = next_page
+    current_category = category_url
+    plan_form= PlanForm()  # User utilizes this form to create new plans/courses. Form available in all block pages.
 
-    context = {'category': category,
-               'instance_type': instance_type,
-               'next_page': next_page,
-               'ideas_list': ideas_list,
-               'current_category': category_url,
-               'plan_form': PlanForm()} # User utilizes this form to create new plans/courses. Form available in all block pages.
 
-    return render(request, 'plan/block_content.html', context=context, )
+
+    if 'mode' in request.GET:
+        return render(request, 'plan/update_ideas.html', context=locals())
+    else:
+        return render(request, 'plan/block_content.html', context=locals())
+
 
 
 def idea_overview_detail(request, category_name, idea_id, detailed_view):
@@ -286,25 +286,18 @@ def select_plan(request):
     return JsonResponse(response_dict)
 
 
-def update_selected_idea(request):
-    """
-    Updates the content of the block_content page such that when the user switches to a different course/plan using
-    the side navigation bar, the ticked-off ideas reflect that of the current chosen plan/course
-    """
-    category, instance_type = get_category(request.session['current_category'])  # a CategoryOnlineIdea instance
-    ideas_list = get_ideas(request.user, request.session['current_category'],request.session['current_user_plan'])
-    current_category =  request.session['current_category']
 
-    return render(request, 'plan/update_ideas.html', context=locals())
 
 def delete_plan (request, plan_id):
     Plan.objects.get(pk=plan_id).delete()
-    messages.add_message(request, messages.INFO, 'Your plan was deleted.')
+    messages.add_message(request, messages.INFO, 'Your course plan was deleted.')
     # if user deletes current plan (the plan she is working on)
     if str(plan_id) == request.session['current_user_plan']:
         p= Plan.objects.get_user_plans(request.user).last()
-        request.session['current_user_plan'] =p.pk
-        request.session['current_user_plan_name']= p.plan_name
+
+        if p is not None:
+            request.session['current_user_plan'] =p.pk
+            request.session['current_user_plan_name']= p.plan_name
         return redirect('show_block', 'human_touch', 'teaching_material')
     else:
         return redirect(request.META.get('HTTP_REFERER'))

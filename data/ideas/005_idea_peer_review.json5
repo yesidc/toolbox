@@ -9,12 +9,12 @@ technology: "-  <a href=\"https://academiccloud.de/services\" target=\"_blank\">
 implementation_steps: "- <a href=\"/static/tbcore/support_documents/Feedback_for_video_assignments_example.pdf\" target=\"_blank\">Feedback for Video Assignments example</a>\n- <a href=\"/static/tbcore/support_documents/Peer-feedback_criteria.pdf\" target=\"_blank\">Peer Feedback Criteria example</a>\n",
   teacher_effort: "You have to come up with quality criteria which students can use to give feedback to each other. Further, peer feedback needs supervision and is not a sure-fire to success. So, additional effort for reading the feedback and managing late feedback is needed, but chances are that final submissions improve substantially.",
 recommendations: "- Clearly detail the procedure for peer feedback since it is easy to get confused about which group provides feedback for whom and to mix up deadlines.\n\n- Share your expectations clearly and assignment instructions to which the students can refer in their feedback.\n\n- Providing protocol templates/ examples for peer‐review that is focused on specific criteria helps students to see how they can support each other.",
-resources: "- <a href=\"https://lciltd.org/resources/rubric-feedback-on-practice\" target=\"_blank\">Rubric Feedback Practice</a>\n- <a href=\"https://lciltd.org/resources/checklist-for-quality-feedback\" target=\"_blank\">Criteria for Quality Feedback</a>\n",
+supplementary_material: "- <a href=\"https://lciltd.org/resources/rubric-feedback-on-practice\" target=\"_blank\">Rubric Feedback Practice</a>\n- <a href=\"https://lciltd.org/resources/checklist-for-quality-feedback\" target=\"_blank\">Criteria for Quality Feedback</a>\n",
   testimony: "",
 use_cases: "- As reviews of assignments and as a second level of student reflection\n\n- Before students hand in their final submission\n\n- It is not suitable in cases where there's a specific correct or incorrect answer ",
 references: "",
 reusable: "yes",
 task_complexity: "2",
-
+category: 'assignment',
 
 }

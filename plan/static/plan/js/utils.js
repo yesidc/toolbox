@@ -1,21 +1,49 @@
 const plan_collapse = document.getElementsByClassName('plan-collapse')
+const all_plans = document.getElementsByClassName('all-plan-sidebar')
+const plan_name_dom = document.getElementById('plan_name_dom')
+
+
+
+if(plan_name_dom){
+
+    console.log(plan_name_dom.dataset.planName)
+
+    document.getElementById('plan-side-bar-'+add_hyphen(plan_name_dom.dataset.planName)).style.backgroundColor='#ADD8E6'
+}
+
+
+
+
+function add_hyphen(plan){
+    return plan.replaceAll(' ', '-');
+}
+
+function set_menu_color(){
+    for (i of all_plans){
+        i.style.backgroundColor='white'
+    }
+}
+
 for (i of plan_collapse) {
     // triggered when the user clicks on the course/plan's name and categories/blocks are shown (human touch, teaching material etc. )
     i.addEventListener('show.bs.collapse', event => {
         // subsequently handled by django select_plan view
-        console.log('first child')
-        console.log(event.target.children[0].id)
+
+        //i.style.backgroundColor = 'red'
         $.ajax(
             {
                 type: 'GET',
                 url: '/select_plan/',
                 data: {
-                    plan_id: event.target.children[0].id// this id refers to id assigned to the FIRST child node of the  html element that triggers this event, which is the plan's pk
+                    plan_id: event.target.getAttribute('data-plan-id')
                 },
                 success: function (response) {
 
                     $('#plan_name_dom').text(response.plan_name_ajax)
-
+                    // plan's name color
+                    set_menu_color()
+                    console.log(add_hyphen(response.plan_name_ajax))
+                    document.getElementById('plan-side-bar-'+add_hyphen(response.plan_name_ajax)).style.backgroundColor='#ADD8E6'
 
                     for (const c_done of response.category_ready){
                         //ticks off the (sidebar)checkbox if user has already selected at least one idea for any given category
@@ -25,7 +53,7 @@ for (i of plan_collapse) {
                     // when the user selects a plan (using the left-navigation bar); the checkboxes on the block_content page are updated accordingly/dynamically
                     if (document.getElementById('online-idea-container')!== null) {
                         let request_new_template = new XMLHttpRequest();
-                        request_new_template.open('GET', '/update_selected_idea/');
+                        request_new_template.open('GET', window.location.pathname+'?mode=update');
                         request_new_template.onload = function () {
                             // the response is the rendered HTML
 
@@ -65,3 +93,5 @@ function delete_plan(obj) {
 
 // closes the messages
 $('.alert').alert()
+
+

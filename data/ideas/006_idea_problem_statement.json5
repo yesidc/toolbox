@@ -10,12 +10,12 @@ technology: "-  <a href=\"https://digitale-lehre.virtuos.uni-osnabrueck.de/eintr
   implementation_steps: "- A problem statement is the start of an academic paper and thus the beginning of the writing process and not the result. But it can also be a stand-alone assignment.  \n- It needs to be clear what the result should look like. Students probably cannot identify the problem statement, so most likely you need to take some time to explain what a good propblem statement looks like.\nIndicate a minimal and maximal word limit for the problem statement. \n\n### 4-step process: \n1. Outline\n2. Feedback\n3. Revision\n4. Submission \n- Ideally, you have some teaching assistants who check  the problem statement outlines and give advice on how to improve it. \n- Additional: go through the sections of the example introduction and identify the different sections together with the students.",
 teacher_effort: "Read the students' problem statements (or use the peer review for a first check) and give feedback, e.g. by sending them an annotated version.",
 recommendations: "A full problem statement could count for (a part of) the final course grade. \n- Provide a checklist about all aspects of a problem statement\n- Give a good example of an introduction (real world example) of a paper that students should read anyways\n- Provide papers with examples of good problem statements",
-resources: "- <a href=\"/static/tbcore/support_documents/Problem_statement_checklist.pdf\" target=\"_blank\">Problem Statement Checklist</a>\n- Academic writing: <a href=\"https://owl.purdue.edu/owl/purdue_owl.html\" target=\"_blank\">OWL (Online writing lab Purdue University)</a>\n- Resource for students to understand the structure of a problem statement and paper: \n <a href=\"https://www.phrasebank.manchester.ac.uk/introducing-work/\" target=\"_blank\">Academic Phrasebank</a>\n",
+supplementary_material: "- <a href=\"/static/tbcore/support_documents/Problem_statement_checklist.pdf\" target=\"_blank\">Problem Statement Checklist</a>\n- Academic writing: <a href=\"https://owl.purdue.edu/owl/purdue_owl.html\" target=\"_blank\">OWL (Online writing lab Purdue University)</a>\n- Resource for students to understand the structure of a problem statement and paper: \n <a href=\"https://www.phrasebank.manchester.ac.uk/introducing-work/\" target=\"_blank\">Academic Phrasebank</a>\n",
   testimony: "",
 use_cases: "- Suitable as a prerequisite for a final paper",
 references: "",
 reusable: "yes",
 task_complexity: "1",
-
+category: 'assignment',
 
 }

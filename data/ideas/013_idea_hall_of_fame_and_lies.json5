@@ -8,12 +8,12 @@ technology: "-  <a href=\"https://hilfe.studip.de/help/5.0/de/Basis/Forum\" targ
   implementation_steps: "1.\tInform students where and by what time the game two truths and one lie is on. \n2.\tEncourage students to be creative and allow to post pictures, a small poster, a text, a comic, a song, basically any form that they are inspired to.\n3.\tSet a word limit, e.g. 200 words/ 3 sentences. \n4.\tStudents should to react to at least one other post by commenting, forming groups, finding two persons with the same interest, or figure out the lie.",
 teacher_effort: "It's fun to read the student posts!",
 recommendations: "You might want to give some prompts for students which stimulates their creativity: \n- Academic interest\n- Opinion about university/ technology/teamwork of the future\n- Hobbies\n- A quirky routine \n- Favourite course + why (also from their Bachelor)",
-resources: "",
+supplementary_material: "",
 testimony: "",
 use_cases: "- Suitable in all courses to get to know each other.",
 references: "",
 reusable: "yes",
 task_complexity: "1",
-
+category: 'human_touch',
 
 }
