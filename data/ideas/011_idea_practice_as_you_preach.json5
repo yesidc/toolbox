@@ -1,0 +1,19 @@
+{
+
+
+idea_name:"Practice as You Preach" ,
+idea_id: "011-idea-pp",
+brief_description: "If you want your students to be active in written discussions, practice as you preach.\n\nModel how and when you want students to participate in discussions and provoke their opinions and \nthoughts in your discussion forum/ Chat.  If you invite them to share additional learning material that \nthey encountered, do so as well! \n\nAssume that students bear some responsibility for the success of the course, including a (potentially) \ncold or fun atmosphere and communicate your expectations as well as your vision for the chat clearly: is it a “tea room”, a “market place”, or should it be considered a “glossary” etc.? ",
+technology: "1. <a href=\"https://hilfe.studip.de/help/4.0/en/Basis/StartseiteNews\" target=\"_blank\">Stud.IP announcements</a>: you can state your intentions for course interaction and discussion in a \nprominent place in Stud.IP \n2. [Syllabus] (link to the syllabus) to state your intentions for course interaction and discussion. \n3. [Course emails] (link to weekly emails): Use your first course email to set the tone of the course. \n",
+  implementation_steps: "1. Communicate very hands-on in a prominent place what you expect students to do regarding: \n- Preparing sessions/ following the courseware material (workload) \n- How to handle uncertainties about a topic\n- When to reach out and respond to others \n- Additionally, clarify what students can expect from you. \n2. Do what you preach and get involved in the discussion forum / chat by  \n- Posting thought-provoking questions, \n- Posting controversial news articles or quotes about the topics \n- Ask for student's opinions \n- Use anonymized old assignment results to illustrate a point you made in class or in the courseware.",
+teacher_effort: "Depends on how you envision the discussions.",
+recommendations: "Consider recording a short video in which you explain your teaching approach as to underline the \nreasoning for your expectations and intentions (for tools and implementation steps see teaching \nmaterial > micro lectures). \nInclude guidance on how to succeed in the course (and what interferes with success) if this is \nconnected to how you intend the interactions to go. A code of conduct clarifies how you expect \neveryone to respond to each other.  \nLiterature finds that more demanding courses with high expectations are rated better by students.",
+supplementary_material: "",
+testimony: "",
+use_cases: "In every course with an interactive element",
+references: "",
+reusable: "Students get used to your teaching approach and usually adapt themselves to it.",
+task_complexity: "1",
+category: 'discussion',
+
+}

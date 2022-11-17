@@ -1,0 +1,18 @@
+{
+
+
+idea_name:"Quizzes" ,
+idea_id: "007-idea-q",
+brief_description: "Quizzes activate students and make micro lectures much more effective. Quizzes can be multiple choice, open text entry, true or false are great to activate students, e.g. with self-tests.",
+technology: "- <a href=\"https://hilfe.studip.de/help/5.0/de/Basis/Vips\" target=\"_blank\">Vips</a>: There are several task types you can use to create quizzes. E.g., single choice, multiple choice, gap text etc.\n",
+  implementation_steps: "- The content of the Quizzes should be guided by the type of knowledge the students should gain from the content. For example, if they should know the facts, ask for a recall of the facts, but if they should understand a concept, try to keep the questions more open.\n- Quizzes are created based on learning objectives or the main idea that was meant to be tackled in the unit. \n- Be creative with the different types of format that can be used to create a quizz.",
+teacher_effort: "Student assistants need ~ 15-30 minutes to create 1-2 self-tests from the idea to VIPS implementation.",
+recommendations: "An easy way to create VIPS is to take a sentence from the lecture and make it a cloze text (Lückentext).\n- Use quizzes to gauge prior knowledge before starting a subsection\n- Place the quizzes right before the micro lectures to activate prior knowledge \n- place quizzes right after a video to check student understanding and cognitive presence\n- Decide whether they get automated feedback or if the quizzes need manual review\n- Regular quizzes can become part of the course routine and gives students a course pace\n- Quizzes can be used to enforce/ encourage students to work on subjects regularly",
+supplementary_material: "If student assistants create the quizzes, they usually use only the lecture materials but sometimes also additional material (e.g. research papers or other websites) to verify the answers.",
+testimony: "",
+use_cases: "- Lectures which would be rather passive without quizzes \n- For courses with less interaction opportunities \n- During a synchronous live session to activate students \n- Integrated into asynchronous course material (courseware) to activate students during self-study",
+references: "Brame, Cynthia J. (2016). Effective Educational Videos: Principles and Guidelines for Maximizing Student Learning from Video Content. *CBE life sciences education*, 15 (4). doi: 10.1187/cbe.16-03-0125.",
+reusable: "",
+task_complexity: "1",
+category: ['assignment','student_engagement'],
+}

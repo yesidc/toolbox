@@ -1,0 +1,115 @@
+{% extends "plan/base_block.html" %}
+{% load static %}
+{% load toolbox_custom_tags %}
+
+
+{% block idea_name_detail %}
+     <div class="col text-center">
+    <h3>{{ idea.idea_name }}</h3>
+       </div>
+
+{% endblock %}
+
+{% block building_block_idea %}
+
+
+    {% if request.user.is_anonymous %}
+        <section class="bg-light"><h3>{{ idea.idea_name }}</h3></section>
+    {% endif %}
+
+    {% if user.is_authenticated %}{#    User's notes/comments#}
+
+
+
+        <section class="bg-body mt-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="d-flex h-100"><h3 class="align-self-center">Note</h3></div>
+                    </div>
+                    <div class="col-md-9 pt-1">
+                        <form action="" method="POST" id="notes-form">
+                            {% csrf_token %}
+                            {{ note_form.note_content }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+
+
+
+    <section class="bg-light text-dark mb-3">
+
+        {% show_idea_property idea.brief_description 'Description' %}
+
+        {% if idea.use_cases %}
+
+            {% show_idea_property idea.use_cases 'Use cases' %}
+
+        {% endif %}
+        {% show_idea_property idea.technology 'Technology' %}
+
+        {% show_idea_property idea.teacher_effort 'Teacher Effort' %}
+
+
+
+
+        {% if idea.implementation_steps %}
+            {% show_idea_property idea.implementation_steps 'Implementation Steps' %}
+
+        {% endif %}
+
+
+        {% show_idea_property idea.recommendations 'Recommendations' %}
+
+
+        {% if idea.supplementary_material %}
+
+            {% show_idea_property idea.supplementary_material 'Supplementary Material' %}
+
+        {% endif %}
+
+
+
+        {% if idea.reusable %}
+            {% show_idea_property idea.reusable 'Reusable' %}
+
+        {% endif %}
+
+
+
+        {% if idea.references %}
+
+            {% show_idea_property idea.references 'References' %}
+
+
+        {% endif %}
+
+    </section>
+
+
+
+    {% if user.is_authenticated %}
+        <section class="bg-light text-dark mb-4">
+
+            <div class="d-flex justify-content-end">
+                <div>
+
+
+                    <button type="submit" form="notes-form" value="Submit" class="btn btn-primary active m-4 pb-3">Use
+                        this online recommendation in my course
+                    </button>
+
+                </div>
+
+            </div>
+        </section>{% endif %}
+
+    <script src="{% static 'plan/js/utils.js' %}"></script>
+    <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
+
+
+{% endblock %}

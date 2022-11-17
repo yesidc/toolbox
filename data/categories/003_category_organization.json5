@@ -1,0 +1,12 @@
+{
+
+  category_name: "Organization",
+    category_id: "003-category-o"  ,
+    short_description: "Online students don’t have contact with many other students to get information along the semester, \nand on-site classroom norms are not available for neither students nor instructors. The building block *Organization* involves a thorough course planning including the process, structure, evaluation and interaction components of your course. Therefore,\n\n- course instructors must be explicit and transparent in their planning. \n\nAdditionally, highly individual factors like a designated study place,  family obligations, political or financial factors affect possibilities and flexibility regarding study place or study times. \n\n- Having all organizational information upfront is essential to plan study times, to accommodate to working \nhours of student jobs, and to compensate missing classroom norms. \n\nBeing able to plan their semester, helps students to create a study “rhythm” \nthat others get from attending courses and for planning their studies – an important factor for effective online teaching and learning (Martin, Ritzhaupt, Kumar & Budhrani, 2019). ",
+    titles_accordion: "Online Course Requirements",
+    content_accordion: "Give complete, exact information (incl. teaching mode) available at the \nstart of the semester concerning: \n\n- Course information: meeting days and time for courses with \nsynchronous meetings, Instructional modality, as a way to help\nstudents understand how the course is designed, ECTS, \n- Prerequisites: „linear algebra“ is too vague. Please list the prerequisites concisely, i.e. in a way that students can check if they need to brush up the prerequisites. You can list UOS or external courses that cover the prerequisites.\n- Teaching staff contact information\n- Course description\n- Learning resources, technology and texts\n- Learning outcomes / course goals\n- Assignments\n- Grading scale\n",
+    references : "- Anderson, Terry; Rourke, Liam; Garrison, Randy & Archer, Walter (2001). ASSESSING TEACHING PRESENCE IN A COMPUTER CONFERENCING CONTEXT. Online Learning, 5 (2), 1-17. doi: 10.24059/olj.v5i2.1875.\n- Martin, Florence; Ritzhaupt, Albert; Kumar, Swapna & Budhrani, Kiran (2019). Award-winning faculty online teaching practices: Course design, assessment and evaluation, and facilitation. The internet and higher education, 42, 34-43. doi: 10.1016/j.iheduc.2019.04.001.",
+    category_url : "organization",
+    next_page : "discussion",
+
+}

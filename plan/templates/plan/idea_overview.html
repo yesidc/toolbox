@@ -1,0 +1,117 @@
+{% extends "plan/base_block.html" %}
+{% load toolbox_custom_tags %}
+{% load static %}
+
+{% block idea_name_overview %}
+
+
+
+    <div class="col text-center"><h2> {{ idea.idea_name }}</h2></div>
+
+
+
+
+
+{% endblock %}
+
+
+{% block building_block_idea %}
+
+
+    <div class=" container">
+
+
+        <section class="p-1 mt-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        {#                   Brief description#}
+                        <h5>Description</h5>
+                        <p class="lead">
+                            {% if idea.brief_description %}{% md_to_html idea.brief_description as bd_html %}
+                                {{ bd_html|safe }}{% else %}
+                                {{ 'No data' }}{% endif %}</p>
+                    </div>
+                    <div class="col">
+                        <h5>Use cases</h5>
+                        <p class="lead">{% if idea.use_cases %}{% md_to_html idea.use_cases as ea_html %}
+                            {{ ea_html|safe }}{% else %}
+                            {{ 'No data' }}{% endif %}</p>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        {#Contains ideas' properties shown on the idea_overview page#}
+        <div class="container">
+            <div class="row bg-dark">
+                <div class="col-md-11">
+                    <section class=" text-light p-3 mt-md-3 mt-sm-1">
+
+                        {% show_idea_property_overview idea.technology 'Tehcnology' %}
+
+                        {% show_idea_property_overview idea.teacher_effort 'Teacher Effort' %}
+
+                        {% show_idea_property_overview idea.implementation_steps 'Implmentation Steps' %}
+
+                        {% show_idea_property_overview idea.recommendations 'Recommendations' %}
+
+
+                    </section>
+                </div>
+            </div>
+        </div>
+
+
+        <section class="bg-dark text-light">
+            <div class="container">
+                <div class="row mt-0 p-3">
+                    <div class="col"><a href="{% url 'idea_overview_detail' current_category idea.id 'detailed_view' %}"
+                                        class="btn btn-primary">Show more and take notes</a></div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="bg-dark text-light">
+
+            {% if  user.is_authenticated %}
+                <div class="d-flex justify-content-end">
+                    {#            {% if  user.is_authenticated and request.session.current_user_plan%}<div class="d-flex justify-content-end">#}
+                    <div>
+
+                        <a href="{% url 'use_idea' %}" class="btn btn-primary active m-4 pb-3" aria-current="page"
+                           id="save_idea_overview">Use this online recommendation in my
+                            course</a>
+
+                    </div>
+
+                </div>{% endif %}
+        </section>
+
+
+        {% if idea.testimony %}
+            <section class="bg-light mt-4 p-5 mb-4">
+                <div class="container">
+
+                    <h3 class="text-center">Testimony</h3>
+
+                    <p>{% md_to_html idea.testimony as testimony_html %}{{ testimony_html|safe }}</p>
+
+
+                </div>
+            </section>{% endif %}
+    </div>
+
+
+
+    <script src="{% static 'plan/js/utils.js' %}"></script>
+    <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
+
+{% endblock %}
+

@@ -1,0 +1,208 @@
+{% extends 'tbcore/base_core.html' %}
+{% load toolbox_custom_tags %}
+
+{% block specific_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+
+    <!-- Sidebar-->
+
+    <!-- Page content wrapper-->
+    <div id="page-content-wrapper">
+        {% if user.is_authenticated %}
+
+            <!-- Top navigation-->
+            <div class="row p-0 m-0">
+
+
+                    <!-- Icon sidebar -->
+                
+                        <div class="col-2">
+                            <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i> My
+                                course Plans
+                            </button>
+                        </div>
+
+                        {#                        <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i></button>#}
+                        {#                        My course Plans#}
+
+                        {% block idea_name_overview %}
+
+
+                        {% endblock %}
+
+
+                            {% block idea_name_detail %}
+
+
+                            {% endblock %}
+
+              {% block category_name %}
+
+
+                            {% endblock %}
+
+
+
+
+
+
+                    <p style="visibility: hidden; height: 0px"><span class="lead">Current Course:</span>
+                        <span id="plan_name_dom"
+                              data-plan-name=  {% if request.session.current_user_plan_name %}
+                                  {{ request.session.current_user_plan_name|add_hyphen }}
+
+                              {% else %}
+                                  {{ user_filter_plans.last.plan_name|add_hyphen }}
+                              {% endif %}
+
+
+                        >
+                        {#                    if user has not chosen a plan, it defaults to the last plan created#}
+                            {% if request.session.current_user_plan_name %}
+                                {{ request.session.current_user_plan_name }}
+                            {% else %}
+                                {{ user_filter_plans.last }}
+                            {% endif %}
+                    </span>
+                    </p>
+
+
+
+            </div>
+        {% endif %}
+
+        <div class="d-flex" id="wrapper">
+
+            {#left navigation bar#}
+
+            {% if user.is_authenticated %}
+                <div class="border-end bg-white" id="sidebar-wrapper">
+
+                    <div class="list-group list-group-flush">
+
+
+                        <div class="list-group-item list-group-item-action list-group-item-light p-3">
+                            <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-0">
+                                {% csrf_token %}
+                                {{ plan_form.plan_name }}
+                                <input type="submit" name="Submit" value="Add new course"
+                                       class="btn btn-primary menu-btn my-3 px-3">
+                            </form>
+
+                        </div>
+
+
+                        <!--        Nav bar items -->
+
+                        {# user_filter_plans return from context processor#}
+                        {% for p in user_filter_plans reversed %}
+                            {#                            when user clicks on the button the associated node is shown#}
+
+
+
+                            <div class="d-flex flex-row h-100">
+                                <button class="list-group-item list-group-item-action list-group-item-light p-3 all-plan-sidebar {{ p }} "
+                                        data-bs-target="#{{ p.plan_name |add_hyphen }}"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        aria-expanded="false"
+                                        aria-controls="{{ p.plan_name |add_hyphen }}"
+                                        id="plan-side-bar-{{ p.plan_name |add_hyphen }}"
+                                >
+                                    {{ p.plan_name }}
+
+
+                                </button>
+
+                                <div class="align-self-end align-self-stretch">
+
+                                    <button href="{% url 'delete_plan' p.pk %}" class="h-100"
+                                            data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
+                                            onclick="delete_plan(this)"><i class="bi bi-trash"></i></button>
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class=" container collapse plan-collapse" id="{{ p.plan_name |add_hyphen }}"
+                                 data-plan-id="{{ p.pk }}">
+
+
+                                {% for c_name, c_url, c_next in category_objects %}
+                                    <p>
+                                        <span class="badge text-dark">
+                                            <input type="checkbox" class="checkbox-sidebar {{ p.pk }}block"
+                                                   id="{{ c_url }}{{ p.pk }}">
+                                        </span>
+                                        <a href="{% url 'show_block' c_url c_next %}"
+                                           class="link-no-decoration text-dark"> {{ c_name }}</a>
+
+                                    </p>
+
+                                {% endfor %}
+
+                                <div class="d-flex justify-content-end my-md-3">
+                                    <div>
+                                        <a href="{% url 'checklist' %}" class="btn btn-primary">View checklist</a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+            {% endif %}
+            <!-- Page content-->
+            <div class="container-fluid">
+
+                <!-- Messages-->
+
+                <section class="messages-js">
+
+                    {% if messages %}
+                        {% for msg in messages %}
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">&times;
+                                </button>
+                                {{ msg }}
+
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+
+                </section>
+
+                {% block building_block_idea %}
+
+                {% endblock %}
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    {{ category_urls|json_script:"category-urls" }}
+    <script src="{% static 'plan/js/menu_bar.js' %}"></script>
+
+
+
+
+{% endblock %}
+
+

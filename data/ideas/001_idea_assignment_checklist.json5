@@ -1,0 +1,20 @@
+//Idea Assignment checklist
+
+{
+
+idea_name: "Assignment Checklist",
+  idea_id: "001-idea-ac",
+brief_description: "Students need clear directions for the work they are tasked with, especially in remote settings. The checklist lists the (thinking) skills that you expect to see *proof of*. \nFurther, the checklist identifies what you accept *as proof*. Giving students clear criteria that they can check off helps them to be more confident in what they do \nand how they study. Basically, the assignment checklist lists all criteria that you would evaluate for grading. ",
+technology: "- Use the syllabus (Link to syllabus teaching tool)\n- <a href=\"https://hilfe.studip.de/help/4.6/en/Basis/CoursewareBloeckeBestaetigung\" target=\"_blank\">Confirmation block</a> in courseware \n ",
+implementation_steps:"Some advice on checklists\n- Confirm everything on the list is tangible. It needs to be immediately clear to the students whether they have reached the goal or not. \n- Don’t worry about stating the obvious, the list needs to be complete, no matter how trivial things may seem. \n- Be transparent and precise about what you want. \n- Keep the items short and align them with the learning objectives. ",
+teacher_effort: "You have to write your expectations down and be very clear about what submissions you *do accept* and *which ones not*. Make sure, students would consider the checkpoints you define as clear and understandable, too! \nIf you yet have to gain that clarity, you will need about 30 min. / assignment",
+recommendations: "- Create an overarching checklist for similar assignment types (e.g. video assignment) with some specificities for particular assignment types (e.g. explainer, demonstration, or discussion video)\n- \"Consider questions like these when developing directions for assignments and tasks: \n    - What exactly do you want students to do?\n    - What is the purpose and audience for their work? What products and/or performances should they create? \n    - What should the work include? \n    - What elements are required? … optional? \n    - How will their work be judged? \n    - What qualities are expected? \n    - How good is “good enough?\"  (McTighe &Martin-Kniep Seven strategies for supporting student learning in a remote environment, 2020)",
+supplementary_material: "- The tables <a href=\"/static/tbcore/support_documents/Kognitive_Prozesse_Wissendimensionen.pdf\" target=\"_blank\">Kognitive Prozesse und Wissensdimensionen</a> (German)  or the tables \n<a href=\"https://www.celt.iastate.edu/wp-content/uploads/2015/09/RevisedBloomsHandout-1.pdf \" target=\"_blank\">Knowledge Dimension and Thinking Skills</a> \n(English) help to gain clarity that students would also consider as a clear instruction. \n- An example can be found here: <a href=\" /static/tbcore/support_documents/Video_assignment_checklist.pdf \" target=\"_blank\">video assignment checklist</a>\n\nOnline resources:\n- <a href=\"https://lciltd.org/resources/criteria-for-quality-checklists\" target=\"_blank\">Tool: Criteria for Quality Checklists</a>\n- <a href=\"https://lciltd.org/resources/tips-for-writing-quality-rubrics-and-checklists\" target=\"_blank\">Tips for writing quality rubrics and checklists</a>\n",
+testimony: '“Overall, the assignment submissions show less variance and less individuality, but almost all of the submissions were exceptionally high quality and only very few students missed the basic requirements for a good explainer video.“  (Laura Krieger)',
+use_cases: "- For complex assignments where students have to analyse, evaluate, create, or develop something on their own. \n- When students work independently and with little contact with you or little to no feedback loops.",
+references: "McTighe &Martin-Kniep *Seven strategies for supporting student learning in a remote environment* 2020",
+reusable: "yes",
+task_complexity: "2",
+  category: 'assessment',
+}
+

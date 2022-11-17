@@ -1,0 +1,19 @@
+{
+
+
+idea_name:"Hall of Fame (and Lies)" ,
+idea_id: "013-idea-hf",
+brief_description: "This is a gamified approach! Everyone shares two truths and one lie about themselves. Students can write anything about their background or even come up with a funny story about themselves that mustn't be true. \nAlternatively, they write a short introduction/ description about themselves. Topic and focus are free for them to choose, so they can write anything but authentic about themselves - and - with which they feel comfortable sharing. This way, course participants get a feel for who else is in the course and what they are interested in. The point is to make the course human, so students can write anything that shows they are not an AI ;)  \n",
+technology: "-  <a href=\"https://hilfe.studip.de/help/5.0/de/Basis/Forum\" target=\"_blank\">Forum</a>: students can react to each other's posts via the comment function. \n-  <a href=\"https://hilfe.studip.de/help/5.0/en/Basis/CoursewareSeite\" target=\"_blank\">Courseware</a> : create a  <a href=\"/static/tbcore/support_documents/Granting_Editing_Rights_for_Courseware_Pages.pdf\" target=\"_blank\">page that everybody can edit</a>  or a page for every individual. Comments on blocks are possible and have to be opened manually via the three dots (only visible in *edit mode*. To that end, everybody needs editing rights).\n- <a href=\"https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/instant-messenger-element-vorher-riot/\" target=\"_blank\">Element</a>: everyone can respond to each other's posts and the mobile app supports quick reactions from students. \n",
+  implementation_steps: "1.\tInform students where and by what time the game two truths and one lie is on. \n2.\tEncourage students to be creative and allow to post pictures, a small poster, a text, a comic, a song, basically any form that they are inspired to.\n3.\tSet a word limit, e.g. 200 words/ 3 sentences. \n4.\tStudents should to react to at least one other post by commenting, forming groups, finding two persons with the same interest, or figure out the lie.",
+teacher_effort: "It's fun to read the student posts!",
+recommendations: "You might want to give some prompts for students which stimulates their creativity: \n- Academic interest\n- Opinion about university/ technology/teamwork of the future\n- Hobbies\n- A quirky routine \n- Favourite course + why (also from their Bachelor)",
+supplementary_material: "",
+testimony: "",
+use_cases: "- Suitable in all courses to get to know each other.",
+references: "",
+reusable: "yes",
+task_complexity: "1",
+category: 'human_touch',
+
+}
