@@ -7,10 +7,20 @@
     <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
 {% endblock %}
 
+{% block plan_name_checklist %}
+
+    <div class="col text-center">
+ <h3 class="text-center my-0 py-0">Checklist: {{ current_plan.plan_name }}</h3>
+    </div>
+
+{% endblock %}
+
+
+
 {% block building_block_idea %}
 
     <section>
-        <h1 class="text-center mb-md-5 mb-sm-2 py-md-3 py-sm-1 mb-sm-2 text-primary">Checklist: {{ current_plan.plan_name }}</h1>
+{#        <h1 class="text-center mb-md-5 mb-sm-2 py-md-3 py-sm-1 mb-sm-2 text-primary">Checklist: {{ current_plan.plan_name }}</h1>#}
 
 
 
@@ -22,7 +32,7 @@
 
                 <th scope="col">Done</th>
                 <th scope="col">Building Block</th>
-                <th scope="col">Idea</th>
+                <th scope="col">Teaching Tool</th>
                 <th scope="col">Note</th>
                 <th scope="col">Complexity</th>
                 <th scope="col">Delete</th>

@@ -1,4 +1,5 @@
 {% extends 'tbcore/base_core.html' %}
+{% load crispy_forms_tags %}
 {% load toolbox_custom_tags %}
 
 {% block specific_css %}
@@ -47,6 +48,11 @@
 
                             {% endblock %}
 
+            {% block plan_name_checklist %}
+
+
+            {% endblock %}
+
 
 
 
@@ -87,12 +93,13 @@
                     <div class="list-group list-group-flush">
 
 
-                        <div class="list-group-item list-group-item-action list-group-item-light p-3">
+                        <div class="list-group-item list-group-item-action list-group-item-light">
                             <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-0">
                                 {% csrf_token %}
-                                {{ plan_form.plan_name }}
+                                {% crispy plan_form%}
+{#                                {{ plan_form.plan_name }}#}
                                 <input type="submit" name="Submit" value="Add new course"
-                                       class="btn btn-primary menu-btn my-3 px-3">
+                                       class="btn btn-primary menu-btn my-0 mb-3">
                             </form>
 
                         </div>
