@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from crispy_forms.helper import FormHelper
 
 class NotesForm(forms.Form):
-    note_content = forms.CharField(max_length=500, widget=forms.Textarea(attrs={'name':'notes-detail-page', 'rows':'7', 'cols':'50','placeholder': 'This is space is for you to take notes.'}))
+    note_content = forms.CharField(max_length=500, widget=forms.Textarea(attrs={'name':'notes-detail-page', 'rows':'7', 'cols':'50','placeholder': 'Please describe your teaching idea in a few words for your online course checklist.'}))
 
     def __init__(self, *args, **kwargs):
         super(NotesForm, self).__init__(*args, **kwargs)
