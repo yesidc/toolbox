@@ -4,6 +4,15 @@ const plan_name_dom = document.getElementById('plan_name_dom')
 
 
 
+function open_internal_link(internal_url){
+
+    //var link_internal = window.location.host + internal_url
+    window.open(internal_url)
+
+}
+
+
+
 if(plan_name_dom){
 
     console.log(plan_name_dom.dataset.planName)
@@ -16,6 +25,12 @@ if(plan_name_dom){
 
 function add_hyphen(plan){
     return plan.replaceAll(' ', '-');
+}
+
+function set_plan_collapse_color (){
+    for(p of plan_collapse){
+        p.style.backgroundColor='white'
+    }
 }
 
 function set_menu_color(){
@@ -42,6 +57,7 @@ for (i of plan_collapse) {
                     $('#plan_name_dom').text(response.plan_name_ajax)
                     // plan's name color
                     set_menu_color()
+                    set_plan_collapse_color()
                     console.log(add_hyphen(response.plan_name_ajax))
                     // sets the color of the plan's name on the sidebar
                     document.getElementById('plan-side-bar-'+add_hyphen(response.plan_name_ajax)).style.backgroundColor='#e6e6ff'

@@ -322,4 +322,5 @@ def test_code(request):
     # pdf = render_to_pdf('plan/checklist_pdf.html',context)
     # return HttpResponse(pdf, content_type='application/pdf')
     # # return render(request,'plan/checklist_pdf.html', locals())
+
     return render(request,'plan/test_code.html', locals())
