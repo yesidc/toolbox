@@ -9,8 +9,8 @@
         <div class="col-9">
             <p>{% if idea_property %}
                 {% md_to_html idea_property as idea_html %}
-                {{ idea_html|truncatewords_html:10|safe }}{% else %}
-                {{ 'No data' }}{% endif %}</p>
+                {{ idea_html|truncatewords_html:10|safe }}
+                {% endif %}</p>
         </div>
     </div>
 </div>
