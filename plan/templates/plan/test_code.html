@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>hi</h1>
-</body>
-</html>
+{% extends 'tbcore/base_core.html' %}
+{% load crispy_forms_tags %}
+{% load toolbox_custom_tags %}
+
+{% block specific_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<a href="" onclick="open_internal_link('/category/human_touch/teaching_material')">test link</a>
+
+    <script src="{% static 'plan/js/utils.js' %}"></script>
+
+{% endblock %}

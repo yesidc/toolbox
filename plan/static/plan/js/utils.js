@@ -4,11 +4,20 @@ const plan_name_dom = document.getElementById('plan_name_dom')
 
 
 
+function open_internal_link(internal_url){
+
+    //var link_internal = window.location.host + internal_url
+    window.open(internal_url)
+
+}
+
+
+
 if(plan_name_dom){
 
     console.log(plan_name_dom.dataset.planName)
 
-    document.getElementById('plan-side-bar-'+add_hyphen(plan_name_dom.dataset.planName)).style.backgroundColor='#ADD8E6'
+    document.getElementById('plan-side-bar-'+add_hyphen(plan_name_dom.dataset.planName)).style.backgroundColor='#e6e6ff'
 }
 
 
@@ -16,6 +25,12 @@ if(plan_name_dom){
 
 function add_hyphen(plan){
     return plan.replaceAll(' ', '-');
+}
+
+function set_plan_collapse_color (){
+    for(p of plan_collapse){
+        p.style.backgroundColor='white'
+    }
 }
 
 function set_menu_color(){
@@ -29,7 +44,7 @@ for (i of plan_collapse) {
     i.addEventListener('show.bs.collapse', event => {
         // subsequently handled by django select_plan view
 
-        //i.style.backgroundColor = 'red'
+
         $.ajax(
             {
                 type: 'GET',
@@ -42,8 +57,12 @@ for (i of plan_collapse) {
                     $('#plan_name_dom').text(response.plan_name_ajax)
                     // plan's name color
                     set_menu_color()
+                    set_plan_collapse_color()
                     console.log(add_hyphen(response.plan_name_ajax))
-                    document.getElementById('plan-side-bar-'+add_hyphen(response.plan_name_ajax)).style.backgroundColor='#ADD8E6'
+                    // sets the color of the plan's name on the sidebar
+                    document.getElementById('plan-side-bar-'+add_hyphen(response.plan_name_ajax)).style.backgroundColor='#e6e6ff'
+                    // sets the color of the drop-down menu on the sidebar
+                    document.getElementById(add_hyphen(response.plan_name_ajax)).style.backgroundColor='#e6e6ff'
 
                     for (const c_done of response.category_ready){
                         //ticks off the (sidebar)checkbox if user has already selected at least one idea for any given category
