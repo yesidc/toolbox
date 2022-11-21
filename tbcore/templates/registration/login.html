@@ -1,7 +1,68 @@
 <!-- templates/registration/login.html -->
-<h2>Log In</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log In</button>
-</form>
+
+{% extends 'tbcore/base_core.html' %}
+{% load crispy_forms_tags %}
+{% load toolbox_custom_tags %}
+
+{% block specific_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
+
+    <style>
+        footer {
+            position: fixed;
+            background-color: #6a1a21;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        body{
+            background-color: ghostwhite;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="container-fluid h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+
+
+            <div class="col-md-3">
+
+
+                <div class="card mt-md-5">
+                    <div class="card-body">
+
+
+                        <h5 class="card-title pd-md-y-3 my-md-2">Welcome to the Toolbox</h5>
+                        <p class="card-text lead">Opening on-site courses for online learning.</p>
+
+                        <form method="post" id="log-in-form">
+                            {% csrf_token %}
+
+                            {% crispy form %}
+
+                            <button type="submit" class="btn btn-primary" form="log-in-form">Log In</button>
+                        </form>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+
+
+
+
