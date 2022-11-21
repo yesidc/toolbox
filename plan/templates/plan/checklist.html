@@ -7,40 +7,45 @@
     <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
 {% endblock %}
 
+{% block plan_name_checklist %}
+
+    <div class="col text-center">
+        <h3 class="text-center my-0 py-0">Checklist: {{ current_plan.plan_name }}</h3>
+    </div>
+
+{% endblock %}
+
+
+
 {% block building_block_idea %}
 
     <section>
-        <h1 class="text-center mb-md-5 mb-sm-2 py-md-3 py-sm-1 mb-sm-2 text-primary">Checklist: {{ current_plan.plan_name }}</h1>
-
+        {#        <h1 class="text-center mb-md-5 mb-sm-2 py-md-3 py-sm-1 mb-sm-2 text-primary">Checklist: {{ current_plan.plan_name }}</h1>#}
 
 
         {#Summary Table#}
 
-        <table class="table table-hover align-middle table-responsive">
+        <table class="table table-hover align-middle table-responsive mt-3">
             <thead>
             <tr>
 
                 <th scope="col">Done</th>
-                <th scope="col">Building Block</th>
-                <th scope="col">Idea</th>
+                <th scope="col"></th>
+                <th scope="col">Teaching Tool</th>
                 <th scope="col">Note</th>
                 <th scope="col">Complexity</th>
-                <th scope="col">Delete</th>
+                <th scope="col" class="mx-0">Delete</th>
 
             </tr>
             </thead>
 
-            {#Todo add conditional, if user has not added any ideas this loop should not be executed#}
 
             {% for c_done, idea_ins in context_summary %}
-                <tr>
+                <tr class="tr-main-table">
 
-                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox" class="checklist_checkbox"></td>
 
-                    <td class="vertical">{{ c_done }}</td>
-
-
-
+                    <td class="vertical px-md-3">{{ c_done }}</td>
 
 
                     {#     ideas #}
@@ -65,10 +70,6 @@
                     </td>
 
 
-
-
-
-
                     {#        notes#}
 
                     <td>
@@ -83,28 +84,24 @@
                     </td>
 
 
-
-       {#        task complexity#}
+                    {#        task complexity#}
 
                     <td>
-                        <table class="nested-table-checklist">
+                        <table class="nested-table-checklist mx-0">
                             {% for idea_name, pcoi_instance_id, _,complexity in idea_ins %}
                                 <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows">
-                                {% task_complexity_to_int complexity as task_complexity %}
+                                    {% task_complexity_to_int complexity as task_complexity %}
 
                                     {% if task_complexity == 'no-data' %}
                                         no-data
-                                {% else %}
+                                    {% else %}
 
 
                                         {% for i in task_complexity %}
-                                        <td><i class="bi bi-star-fill"></i></td>
-                                    {% endfor %}
+                                            <td class="mx-0"><i class="bi bi-star-fill"></i></td>
+                                        {% endfor %}
 
-                                {% endif %}
-
-
-
+                                    {% endif %}
 
 
                                 </tr>
@@ -114,14 +111,17 @@
                     </td>
 
 
-
                     {#        delete#}
 
                     <td>
                         <table class="nested-table-checklist">
                             {% for idea_name, pcoi_instance_id, _,_ in idea_ins %}
                                 <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows">
-                                    <td><button onclick="add_delete_idea_checklist(this.id)" id="pcoi-instance-{{ pcoi_instance_id }}"><i class="bi bi-trash"></i></button></td>
+                                    <td>
+                                        <button onclick="add_delete_idea_checklist(this.id)"
+                                                id="pcoi-instance-{{ pcoi_instance_id }}"><i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             {% endfor %}
 
@@ -132,10 +132,7 @@
             {% endfor %}
 
 
-
         </table>
-
-
 
 
     </section>
@@ -143,26 +140,27 @@
 
     <section class="bg-light text-dark p-md-5 p-sm-2 mb-md-2 mb-sm-1">
         {% remaining_categories as category_left %}
-        {% if category_left%}
-            <p class="lead">You have not selected any online ideas from the building blocks:</p>
+        {% if category_left %}
+            <p class="lead">You have not selected any teaching tools for the building blocks:</p>
 
-        <ul>
-              {% for c_name, c_url,c_next in category_objects %}
-                {% if c_name in category_left %}
-                         <li><a href="{% url 'show_block' c_url c_next %}" class="link-info">{{ c_name }}</a></li>
-                {% endif %}
+            <ul>
+                {% for c_name, c_url,c_next in category_objects %}
+                    {% if c_name in category_left %}
+                        <li><a href="{% url 'show_block' c_url c_next %}" class="link-info">{{ c_name }}</a></li>
+                    {% endif %}
 
-            {% endfor %}
+                {% endfor %}
 
-        </ul>
+            </ul>
         {% else %}
             <p class="lead">Well done! you have successfully selected ideas for all building blocks</p>
 
         {% endif %}
 
-            <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end">
             <div>
-                <a href="{% url 'checklist'  %}?crate_pdf={{ True }} " class="btn btn-primary p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
+                <a href="{% url 'checklist' %}?crate_pdf={{ True }} "
+                   class="btn btn-primary p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
             </div>
         </div>
     </section>

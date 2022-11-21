@@ -1,16 +1,25 @@
 
 {% load toolbox_custom_tags %}
 
+{% block specific_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
+
+{% endblock %}
+
 <div class="container mt-3">
     <div class="row ideas-b-property">
-        <div class="col-3">
+        <div class="col-md-4">
             <h4>{{ property_name }}</h4>
         </div>
-        <div class="col-9">
-            <p>{% if idea_property %}
+        <div class="col-md-8 no-indent">
+
+
+                {% if idea_property %}
                 {% md_to_html idea_property as idea_html %}
-                {{ idea_html|truncatewords_html:10|safe }}{% else %}
-                {{ 'No data' }}{% endif %}</p>
+                {{ idea_html|truncatewords_html:10|safe }}
+                {% endif %}
+
         </div>
     </div>
 </div>
