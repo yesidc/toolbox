@@ -12,13 +12,6 @@ from .forms import NotesForm, PlanForm
 from tbcore.utils.create_pdf import render_pdf
 
 
-
-
-# todo optimize database queries,ex. create 500 users and evaluate performance
-
-
-# todo use get_object_or_404() function with all the category_block_name variable
-
 def show_block(request, category_url, next_page):
     """
     Manages the content for all building blocks/categories.
@@ -32,12 +25,11 @@ def show_block(request, category_url, next_page):
         ideas_list = None
 
     category = Category.objects.get(category_url=category_url)
-    ideas = OnlineIdea.objects.prefetch_related('category').filter(category__category_url=category_url) # these are the ideas displayed by default
+    ideas = OnlineIdea.objects.prefetch_related('category').filter(
+        category__category_url=category_url)  # these are the ideas displayed by default
     next_page = next_page
     current_category = category_url
-    plan_form= PlanForm()  # User utilizes this form to create new plans/courses. Form available in all block pages.
-
-
+    plan_form = PlanForm()  # User utilizes this form to create new plans/courses. Form available in all block pages.
 
     if 'mode' in request.GET:
         return render(request, 'plan/update_ideas.html', context=locals())
@@ -45,12 +37,11 @@ def show_block(request, category_url, next_page):
         return render(request, 'plan/block_content.html', context=locals())
 
 
-
 def idea_overview_detail(request, category_name, idea_id, detailed_view):
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
     # This idea id is used when saving the idea to a PlanCategoryOnlineIdea Object
     request.session['current_idea'] = current_idea.pk
-    request.session['current_category']= category_name
+    request.session['current_category'] = category_name
 
     note_form = NotesForm()
     try:
@@ -107,20 +98,17 @@ def checklist(request):
         context = {
             'context_summary': c_s,
             'category_done_summary': c_d,
-            'current_plan':current_user_plan,
+            'current_plan': current_user_plan,
             'plan_form': PlanForm()
         }
         if 'crate_pdf' in request.GET:
             context.update({'category_objects': Category.objects.values_list('category_name', 'category_url',
                                                                              'next_page')})
 
-
-
-
             pdf = render_pdf('plan/checklist_pdf.html', context)
             return HttpResponse(pdf, content_type='application/pdf')
 
-            #return render(request, 'plan/checklist_pdf.html', context=context)
+            # return render(request, 'plan/checklist_pdf.html', context=context)
         else:
 
             return render(request, 'plan/checklist.html', context=context)
@@ -226,7 +214,6 @@ def use_idea(request, save_note=None):
     else:
         # prevents user from saving the same ideas twice for the same course plan.
 
-
         try:
             PlanCategoryOnlineIdea.objects.create(
                 plan=Plan.objects.get(pk=request.session['current_user_plan']),
@@ -253,6 +240,7 @@ def use_idea(request, save_note=None):
         return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
 
 
+@login_required()
 def delete_pcoi_checklist(request):
     """
     Manages all related to deleting PlanCategoryOnlineIdea objects when users interact with the checklist page
@@ -262,6 +250,7 @@ def delete_pcoi_checklist(request):
     return JsonResponse({}, status=200)
 
 
+@login_required()
 def select_plan(request):
     """
     Triggered when user chooses to work on a different plan. User can switch to a
@@ -286,23 +275,20 @@ def select_plan(request):
     return JsonResponse(response_dict)
 
 
-
-
-def delete_plan (request, plan_id):
+@login_required()
+def delete_plan(request, plan_id):
     Plan.objects.get(pk=plan_id).delete()
     messages.add_message(request, messages.INFO, 'Your course plan was deleted.')
     # if user deletes current plan (the plan she is working on)
     if str(plan_id) == request.session['current_user_plan']:
-        p= Plan.objects.get_user_plans(request.user).last()
+        p = Plan.objects.get_user_plans(request.user).last()
 
         if p is not None:
-            request.session['current_user_plan'] =p.pk
-            request.session['current_user_plan_name']= p.plan_name
+            request.session['current_user_plan'] = p.pk
+            request.session['current_user_plan_name'] = p.plan_name
         return redirect('show_block', 'human_touch', 'teaching_material')
     else:
         return redirect(request.META.get('HTTP_REFERER'))
-
-
 
 
 # todo delete
@@ -323,4 +309,4 @@ def test_code(request):
     # return HttpResponse(pdf, content_type='application/pdf')
     # # return render(request,'plan/checklist_pdf.html', locals())
 
-    return render(request,'plan/test_code.html', locals())
+    return render(request, 'plan/test_code.html', locals())

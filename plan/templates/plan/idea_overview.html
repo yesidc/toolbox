@@ -18,14 +18,24 @@
 {% block building_block_idea %}
 
 
+
+
     <div class=" container">
 
+        {% if request.user.is_anonymous %}
+            <section>
+                <h3>{{ idea.idea_name }}</h3></section>
+
+
+        {% endif %}
 
         <section class="p-1 mt-1">
             <div class="container">
                 <div class="row">
                     <div class="col">
+
                         {#                   Brief description#}
+
                         <h5>Description</h5>
                         <p class="lead">
                             {% if idea.brief_description %}{% md_to_html idea.brief_description as bd_html %}
@@ -34,6 +44,8 @@
                     </div>
                     <div class="col">
                         {% if idea.use_cases %}
+
+
                             <h5>Use cases</h5>
                             <p class="lead">{% md_to_html idea.use_cases as ea_html %}
                                 {{ ea_html|safe }}
