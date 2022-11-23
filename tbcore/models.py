@@ -168,8 +168,8 @@ class OnlineIdea(models.Model):
 
 class PlanCategoryOnlineIdea(models.Model):
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE, related_name='plan_category_onlide_idea_plan')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='plan_category_onlide_idea_category')
-    idea = models.ForeignKey(OnlineIdea, on_delete=models.CASCADE, null=True,
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='plan_category_onlide_idea_category')
+    idea = models.ForeignKey(OnlineIdea, on_delete=models.PROTECT, null=True,
                              related_name='plan_category_onlide_idea_i')
     notes = models.TextField(max_length=500, null=True)  # todo delete the null this is mandatory
     objects = PlanCategoryOnlineIdeaManager()

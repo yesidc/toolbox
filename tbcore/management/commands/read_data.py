@@ -1,7 +1,8 @@
 from django.core.management.base import BaseCommand, CommandError
 import glob
 from tbcore.models import PlanCategoryOnlineIdea, OnlineIdea, Category
-from tbcore.utils.base import Json5ParseException,InvalidDataException
+from tbcore.utils.base import Json5ParseException, InvalidDataException, CategoryDoesNotExist
+
 
 # todo raise InvalidDataException if the directory (ideas or categories) contains no data
 class Command(BaseCommand):
@@ -43,7 +44,10 @@ class Command(BaseCommand):
                     raise InvalidDataException("Data {} invalid. Error message: \n{}".format(filename, e))
 
                 if mode == 'ideas':
-                    OnlineIdea.create_from_json5(data_json5)
+                    if Category.objects.all():
+                        OnlineIdea.create_from_json5(data_json5)
+                    else:
+                        raise CategoryDoesNotExist("First save the categories to the database. Use read_data --save_category")
                 else:
                     Category.create_from_json5(data_json5)
                 num_items_created += 1
