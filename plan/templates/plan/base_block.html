@@ -94,12 +94,12 @@
 
 
                         <div class="list-group-item list-group-item-action list-group-item-light">
-                            <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-0">
+                            <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-0" id="add_new_course_form">
                                 {% csrf_token %}
                                 {% crispy plan_form%}
 {#                                {{ plan_form.plan_name }}#}
                                 <input type="submit" name="Submit" value="Add new course"
-                                       class="btn btn-primary menu-btn my-0 mb-3">
+                                       class="btn btn-primary menu-btn my-0 mb-3" form="add_new_course_form">
                             </form>
 
                         </div>
