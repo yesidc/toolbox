@@ -4,3 +4,7 @@ class Json5ParseException(Exception):
 
 class InvalidDataException(Exception):
     pass
+
+
+class CategoryDoesNotExist(Exception):
+    pass
