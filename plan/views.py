@@ -38,6 +38,9 @@ def show_block(request, category_url, next_page):
 
 
 def idea_overview_detail(request, category_name, idea_id, detailed_view):
+    """
+    Implements all the logic related to showing an overview or detailed view of the teaching tools.
+    """
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
     # This idea id is used when saving the idea to a PlanCategoryOnlineIdea Object
     request.session['current_idea'] = current_idea.pk
@@ -126,7 +129,9 @@ def create_plan(request, start_add):
     """
     form = PlanForm()
     context = {
-        'form': form
+        'form': form,
+        'num_plans': Plan.objects.filter(user=request.user).count()
+
     }
 
     def plan_to_database():
@@ -165,7 +170,7 @@ def create_plan(request, start_add):
             # notes.
             request.session['current_user_plan'] = None
 
-        return render(request, 'plan/course_name.html', context=context)
+        return render(request, 'plan/start_course_login.html', context=context)
     elif start_add == 'add_new_plan':
         if request.method == "POST":
             plan_to_database()
@@ -175,8 +180,11 @@ def create_plan(request, start_add):
 
 @login_required
 def use_idea(request, save_note=None):
-    # todo this should be into a try method, or return and 404 error. IF the server is reloaed the GLOBAL_CONTEXT IS LOST AND the OBJECT below cannot be created
-    # todo there should not be repeated objects, use Unique.
+
+    """
+    Saves or deletes idea from an existing course plan.
+    """
+
     # checks if user has already created a plan
     if not has_plan(request):
         return redirect(request.META.get('HTTP_REFERER'))
@@ -277,6 +285,9 @@ def select_plan(request):
 
 @login_required()
 def delete_plan(request, plan_id):
+    """
+    Deletes a course plan and redirects to the previous page.
+    """
     Plan.objects.get(pk=plan_id).delete()
     messages.add_message(request, messages.INFO, 'Your course plan was deleted.')
     # if user deletes current plan (the plan she is working on)
