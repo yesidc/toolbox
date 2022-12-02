@@ -209,9 +209,23 @@
                                 {% else %}
 
 
+
+
+
                                         {% for i in task_complexity %}
                                         <td style="text-align: left"> <img src="tbcore/images/star_fill.png" alt="" style="height: 10px;width: 10px"></td>
                                     {% endfor %}
+
+                                {% sub_task_complexity complexity '3' as remaining_complexity %}
+
+                                        {% for i in remaining_complexity %}
+
+                                        <td style="text-align: left"> <img src="tbcore/images/star.png" alt="" style="height: 10px;width: 10px"></td>
+
+                                    {% endfor %}
+
+
+
 
                                 {% endif %}
 

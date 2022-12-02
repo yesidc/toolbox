@@ -18,6 +18,12 @@ def add_hyphen(value):
     return value.replace(' ', '-')
 
 
+@register.simple_tag
+def sub_task_complexity(complexity,highest_complexity):
+    num_stars= int(highest_complexity) - int(complexity)
+    list_starts_remaining = ['star' for i in range(num_stars)]
+    return list_starts_remaining
+
 @register.simple_tag()
 def get_single_category(value):
     """
