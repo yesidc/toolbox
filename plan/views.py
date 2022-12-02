@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.db.models import Q
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
@@ -42,15 +41,15 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
     """
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
     # This idea id is used when saving the idea to a PlanCategoryOnlineIdea Object
-    request.session['current_idea'] = current_idea.pk
-    request.session['current_category'] = category_name
+    # request.session['current_idea'] = current_idea.pk
+    # request.session['current_category'] = category_name
 
     note_form = NotesForm()
     pcoi_obj = PlanCategoryOnlineIdea.objects.pcoi_obj_exists(request.session['current_user_plan'], category_name,
                                                               idea_id)
+    # loads current note giving the user the possibility to edit it.
     if pcoi_obj:
         note_form = NotesForm(initial={'note_content': pcoi_obj.notes})
-
 
     context = {
         'idea': current_idea,
@@ -189,7 +188,7 @@ def use_idea_overview(request, current_category, idea_id):
 @login_required
 def use_idea(request, save_note=None):
     """
-    Saves or deletes idea from an existing course plan.
+    Saves or deletes ideas from an existing course plan when the user interacts with the checkboxes displayed on the building block page.
     """
 
     # checks if user has already created a plan
@@ -198,30 +197,23 @@ def use_idea(request, save_note=None):
 
     current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
 
-    request.session['current_idea'] = request.GET.get('idea_id') or request.session['current_idea']
-
-    # If there's no plan in the request.session['current_user_plan'] dictionary; grab the plan name from the DOM
-    # request.session['current_user_plan'] = request.session['current_user_plan'] or request.GET.get('plan_name_dom')
-
-    # If the system lost track of the current idea or category e.g., the server crashed; these are extracted from the
-    # current URL
-    # if GLOBAL_CONTEXT['current_idea'] is None:
-    #     GLOBAL_CONTEXT['current_idea'] = request.META.get('HTTP_REFERER').split('/')[4]
-    # elif GLOBAL_CONTEXT['current_category'] is None:
-    #     GLOBAL_CONTEXT['current_category'] = request.META.get('HTTP_REFERER').split('/')[3]
+    # request.session['current_idea'] = request.GET.get('idea_id') or request.session['current_idea']
+    current_idea = request.GET.get('idea_id')
+    current_category = request.GET.get('current_category')
 
     if request.GET.get('delete_idea'):
         # Delete object
-        PlanCategoryOnlineIdea.objects.filter(
-            Q(plan__user=request.user) & Q(plan__pk=request.session['current_user_plan']) & Q(
-                category__category_url=request.session['current_category']) & Q(
-                idea__pk=request.session['current_idea']))[0].delete()
+        obj_delete = PlanCategoryOnlineIdea.objects.get_or_none(request.user, request.session['current_user_plan'],
+                                                                current_category, current_idea)
+        if obj_delete:
+            obj_delete.delete()
+
         # todo add to sessions as this is also computed in select_plan view
         # categories for which user has already selected at least one idea
         category_ready = category_done(current_user_plan)
         json_dic = {
             'category_ready': list(category_ready),
-            "category_id": request.session['current_category'],
+            "category_id": current_category,  # "category_id": request.session['current_category'],
             'plan_id': request.session['current_user_plan']
         }
         return JsonResponse(json_dic)
@@ -229,27 +221,11 @@ def use_idea(request, save_note=None):
 
 
     else:
-        save_pcoi(request, request.session['current_user_plan'], request.session['current_category'],
-                  request.session['current_idea'])
 
-        # # prevents user from saving the same ideas twice for the same course plan.
-        #
-        # try:
-        #     PlanCategoryOnlineIdea.objects.create(
-        #         plan=Plan.objects.get(pk=request.session['current_user_plan']),
-        #         category=Category.objects.get(category_url=request.session['current_category']),
-        #         idea=OnlineIdea.objects.get(pk=request.session['current_idea']),
-        #
-        #     )
-        #
-        #
-        # except IntegrityError:
-        #
-        #     messages.add_message(request, messages.INFO, 'This idea has been already added to you course plan')
-        #     return redirect(request.META.get('HTTP_REFERER'))
+        save_pcoi(request, request.session['current_user_plan'], current_category, current_idea)
 
     json_dic = {
-        "category_id": request.session['current_category'],
+        "category_id": current_category,  # request.session['current_category']
         'plan_id': request.session['current_user_plan']
     }
     # if user has either deleted or added an idea using the checkboxes on the blocks/category page

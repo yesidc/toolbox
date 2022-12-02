@@ -23,7 +23,8 @@ function add_delete_idea() {
                 url: '/use_idea/',
                 data: {
                     idea_id: (event.target.id).split('-')[0], //Online Idea id.
-                    plan_name_dom: document.getElementById('plan_name_dom').innerText
+                    plan_name_dom: document.getElementById('plan_name_dom').innerText,
+                    current_category: document.getElementById('category-url-save-idea').dataset.categoryUrl
 
                 },
                 success: function (response) {
@@ -62,7 +63,8 @@ function add_delete_idea() {
                 data: {
                     idea_id: (event.target.id).split('-')[0],     //Online Idea id.
                     delete_idea: true,
-                    plan_name_dom: document.getElementById('plan_name_dom').innerText
+                    plan_name_dom: document.getElementById('plan_name_dom').innerText,
+                    current_category: document.getElementById('category-url-save-idea').dataset.categoryUrl
                 },
                 success: function (response) {
 

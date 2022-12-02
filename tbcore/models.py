@@ -4,6 +4,8 @@ import json5
 from tbcore.utils.fields import idea_fields, category_fields
 from tbcore.utils.base import Json5ParseException, InconsitentText
 import re
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 
 
 # Create your models here
@@ -30,6 +32,14 @@ class PlanCategoryOnlineIdeaManager(models.Manager):
                 idea=OnlineIdea.objects.get(pk=current_idea),
             )
         except:
+            return None
+
+    def get_or_none(self, user, current_user_plan, current_category, current_idea):
+        try:
+            return self.get_queryset().get(Q(plan__user=user) & Q(plan__pk=current_user_plan) & Q(
+                category__category_url=current_category) & Q(
+                idea__pk=current_idea))
+        except ObjectDoesNotExist:
             return None
 
 
