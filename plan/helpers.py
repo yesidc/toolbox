@@ -1,7 +1,8 @@
 from tbcore.models import Plan, PlanCategoryOnlineIdea, Category, OnlineIdea
 from django.db.models import Q
 from django.contrib import messages
-
+from django.db import IntegrityError
+from django.shortcuts import redirect
 
 
 
@@ -88,5 +89,27 @@ def has_plan(request):
         return False
     else:
         return True
+
+
+def save_pcoi(request, current_user_plan,current_category,current_idea):
+    """
+    Create PlanCategoryOnlineIdea instance.
+    """
+
+    # prevents user from saving the same ideas twice for the same course plan.
+    try:
+        PlanCategoryOnlineIdea.objects.create(
+            plan=Plan.objects.get(pk=current_user_plan),
+            category=Category.objects.get(category_url=current_category),
+            idea=OnlineIdea.objects.get(pk=current_idea),
+
+        )
+
+
+    except IntegrityError:
+
+        messages.add_message(request, messages.INFO, 'This idea has been already added to you course plan')
+        return redirect(request.META.get('HTTP_REFERER'))
+
 
 

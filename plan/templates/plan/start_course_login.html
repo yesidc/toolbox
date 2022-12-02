@@ -20,11 +20,11 @@
                     <input type="submit" name="Submit" form="create-course" value="Start" class="btn btn-primary mx-1 px-2">
                 </div>
 
-                <div>
+            {% if num_plans > 0%}<div>
                     <a href="{% url 'show_block' "human_touch" "teaching_material" %}"
                        class="btn btn-primary mx-1 px-2">Keep working on my courses</a>
 
-                </div>
+                </div>{% endif %}
 
             </div>
         </div>
