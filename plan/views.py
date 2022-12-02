@@ -8,6 +8,7 @@ from .helpers import category_done, is_ajax, context_summary, get_ideas, has_pla
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
 from tbcore.utils.create_pdf import render_pdf
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def show_block(request, category_url, next_page):
@@ -15,8 +16,7 @@ def show_block(request, category_url, next_page):
     Manages the content for all building blocks/categories.
 
     """
-    request.session['current_category'] = category_url
-    request.session['current_next_page'] = next_page
+
     if 'current_user_plan' in request.session:
         ideas_list = get_ideas(request.user, category_url, request.session['current_user_plan'])
     else:
@@ -41,9 +41,6 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
     """
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
     # This idea id is used when saving the idea to a PlanCategoryOnlineIdea Object
-    # request.session['current_idea'] = current_idea.pk
-    # request.session['current_category'] = category_name
-
     note_form = NotesForm()
     pcoi_obj = PlanCategoryOnlineIdea.objects.pcoi_obj_exists(request.session['current_user_plan'], category_name,
                                                               idea_id)
@@ -88,8 +85,17 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
 
 @login_required
 def checklist(request):
+    """
+    Creates a summary that comprises all the teaching tools selected by the user.
+    """
+
     if request.session['current_user_plan'] is not None:
-        current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
+        try:
+            current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
+        except ObjectDoesNotExist:
+            messages.add_message(request, messages.INFO, 'First add a plan to be able to see the checklist page')
+            return redirect(request.META.get('HTTP_REFERER'))
+
         c_s, c_d = context_summary(request.user, current_user_plan)
         context = {
             'context_summary': c_s,
@@ -104,13 +110,9 @@ def checklist(request):
             pdf = render_pdf('plan/checklist_pdf.html', context)
             return HttpResponse(pdf, content_type='application/pdf')
 
-            # return render(request, 'plan/checklist_pdf.html', context=context)
         else:
 
             return render(request, 'plan/checklist.html', context=context)
-    else:
-        messages.add_message(request, messages.INFO, 'First add a plan to be able to see the checklist page')
-        return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
 
 
 @login_required
@@ -197,7 +199,6 @@ def use_idea(request, save_note=None):
 
     current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
 
-    # request.session['current_idea'] = request.GET.get('idea_id') or request.session['current_idea']
     current_idea = request.GET.get('idea_id')
     current_category = request.GET.get('current_category')
 
@@ -213,7 +214,7 @@ def use_idea(request, save_note=None):
         category_ready = category_done(current_user_plan)
         json_dic = {
             'category_ready': list(category_ready),
-            "category_id": current_category,  # "category_id": request.session['current_category'],
+            "category_id": current_category,
             'plan_id': request.session['current_user_plan']
         }
         return JsonResponse(json_dic)
@@ -225,15 +226,15 @@ def use_idea(request, save_note=None):
         save_pcoi(request, request.session['current_user_plan'], current_category, current_idea)
 
     json_dic = {
-        "category_id": current_category,  # request.session['current_category']
+        "category_id": current_category,
         'plan_id': request.session['current_user_plan']
     }
     # if user has either deleted or added an idea using the checkboxes on the blocks/category page
     if is_ajax(request):
         return JsonResponse(json_dic)
-    else:
-        # if user has selected and idea using the buttons provided by both the overview or detail idea page.
-        return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
+    # else:
+    #     # if user has selected and idea using the buttons provided by both the overview or detail idea page.
+    #     return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
 
 
 @login_required()
