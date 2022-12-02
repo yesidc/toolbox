@@ -19,6 +19,19 @@ class PlanCategoryOnlineIdeaManager(models.Manager):
         """
         return self.get_queryset().select_related('plan', 'idea').filter(plan__user=current_user, plan=current_plan)
 
+    def pcoi_obj_exists(self, current_user_plan, current_category, current_idea):
+        """
+        Check if the user has already created a PlanCategoryOnline idea instance.
+        """
+        try:
+            return self.get_queryset().get(
+                plan=Plan.objects.get(pk=current_user_plan),
+                category=Category.objects.get(category_url=current_category),
+                idea=OnlineIdea.objects.get(pk=current_idea),
+            )
+        except:
+            return None
+
 
 class PlanManager(models.Manager):
 

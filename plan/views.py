@@ -1,12 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.db.models import Q, Count
-from django.template import RequestContext
+from django.db.models import Q
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
-from .helpers import category_done, is_ajax, context_summary, get_ideas, has_plan
+from .helpers import category_done, is_ajax, context_summary, get_ideas, has_plan, save_pcoi
 from tbcore.models import *
 from .forms import NotesForm, PlanForm
 from tbcore.utils.create_pdf import render_pdf
@@ -47,16 +46,22 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
     request.session['current_category'] = category_name
 
     note_form = NotesForm()
-    try:
-        pcoi_obj = PlanCategoryOnlineIdea.objects.get(
-            plan=Plan.objects.get(pk=request.session['current_user_plan']),
-            category=Category.objects.get(category_url=request.session['current_category']),
-            idea=OnlineIdea.objects.get(pk=request.session['current_idea']),
-
-        )
+    pcoi_obj = PlanCategoryOnlineIdea.objects.pcoi_obj_exists(request.session['current_user_plan'], category_name,
+                                                              idea_id)
+    if pcoi_obj:
         note_form = NotesForm(initial={'note_content': pcoi_obj.notes})
-    except:
-        pcoi_obj = None
+
+    # try:
+    #
+    #       pcoi_obj = PlanCategoryOnlineIdea.objects.get(
+    #         plan=Plan.objects.get(pk=request.session['current_user_plan']),
+    #         category=Category.objects.get(category_url=request.session['current_category']),
+    #         idea=OnlineIdea.objects.get(pk=request.session['current_idea']),
+    #
+    #     )
+    #     note_form = NotesForm(initial={'note_content': pcoi_obj.notes})
+    # except:
+    #     pcoi_obj = None
 
     context = {
         'idea': current_idea,
@@ -179,8 +184,20 @@ def create_plan(request, start_add):
 
 
 @login_required
-def use_idea(request, save_note=None):
+def use_idea_overview(request, current_category, idea_id):
+    """
+    Saves idea to a current user plan when user interacts with the overview page.
+    """
+    # checks if user has already created a plan
+    if not has_plan(request):
+        return redirect(request.META.get('HTTP_REFERER'))
 
+    save_pcoi(request, request.session['current_user_plan'],current_category,idea_id)
+    return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
+
+
+@login_required
+def use_idea(request, save_note=None):
     """
     Saves or deletes idea from an existing course plan.
     """
@@ -192,6 +209,7 @@ def use_idea(request, save_note=None):
     current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
 
     request.session['current_idea'] = request.GET.get('idea_id') or request.session['current_idea']
+
     # If there's no plan in the request.session['current_user_plan'] dictionary; grab the plan name from the DOM
     # request.session['current_user_plan'] = request.session['current_user_plan'] or request.GET.get('plan_name_dom')
 
@@ -219,22 +237,26 @@ def use_idea(request, save_note=None):
         return JsonResponse(json_dic)
 
 
+
     else:
-        # prevents user from saving the same ideas twice for the same course plan.
+        save_pcoi(request, request.session['current_user_plan'], request.session['current_category'],
+                  request.session['current_idea'])
 
-        try:
-            PlanCategoryOnlineIdea.objects.create(
-                plan=Plan.objects.get(pk=request.session['current_user_plan']),
-                category=Category.objects.get(category_url=request.session['current_category']),
-                idea=OnlineIdea.objects.get(pk=request.session['current_idea']),
-
-            )
-
-
-        except IntegrityError:
-
-            messages.add_message(request, messages.INFO, 'This idea has been already added to you course plan')
-            return redirect(request.META.get('HTTP_REFERER'))
+        # # prevents user from saving the same ideas twice for the same course plan.
+        #
+        # try:
+        #     PlanCategoryOnlineIdea.objects.create(
+        #         plan=Plan.objects.get(pk=request.session['current_user_plan']),
+        #         category=Category.objects.get(category_url=request.session['current_category']),
+        #         idea=OnlineIdea.objects.get(pk=request.session['current_idea']),
+        #
+        #     )
+        #
+        #
+        # except IntegrityError:
+        #
+        #     messages.add_message(request, messages.INFO, 'This idea has been already added to you course plan')
+        #     return redirect(request.META.get('HTTP_REFERER'))
 
     json_dic = {
         "category_id": request.session['current_category'],
