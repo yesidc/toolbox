@@ -15,8 +15,6 @@ function open_internal_link(internal_url){
 
 if(plan_name_dom){
 
-    console.log(plan_name_dom.dataset.planName)
-
     document.getElementById('plan-side-bar-'+add_hyphen(plan_name_dom.dataset.planName)).style.backgroundColor='#e6e6ff'
 }
 
@@ -58,7 +56,7 @@ for (i of plan_collapse) {
                     // plan's name color
                     set_menu_color()
                     set_plan_collapse_color()
-                    console.log(add_hyphen(response.plan_name_ajax))
+
                     // sets the color of the plan's name on the sidebar
                     document.getElementById('plan-side-bar-'+add_hyphen(response.plan_name_ajax)).style.backgroundColor='#e6e6ff'
                     // sets the color of the drop-down menu on the sidebar
@@ -105,7 +103,7 @@ function delete_plan(obj) {
     if (ask){
         document.location.href = "/delete_plan"+ "/"+plan_id+"/"
         //document.location.href = "{% url 'delete_plan'%}"+ "/"+plan_id
-        console.log("{% url 'delete_plan'%}"+ "/"+plan_id)
+
     }
 }
 
