@@ -51,17 +51,6 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
     if pcoi_obj:
         note_form = NotesForm(initial={'note_content': pcoi_obj.notes})
 
-    # try:
-    #
-    #       pcoi_obj = PlanCategoryOnlineIdea.objects.get(
-    #         plan=Plan.objects.get(pk=request.session['current_user_plan']),
-    #         category=Category.objects.get(category_url=request.session['current_category']),
-    #         idea=OnlineIdea.objects.get(pk=request.session['current_idea']),
-    #
-    #     )
-    #     note_form = NotesForm(initial={'note_content': pcoi_obj.notes})
-    # except:
-    #     pcoi_obj = None
 
     context = {
         'idea': current_idea,
@@ -70,7 +59,7 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
         'plan_form': PlanForm()
     }
 
-    # handles all logic when user adds idea or/and note from the idea_detail page
+    # handles all logic when user adds/updates idea or/and note from the idea_detail page
     if request.method == "POST":
         # checks if user has already created a plan
         if not has_plan(request):
@@ -80,15 +69,15 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
             if pcoi_obj is None:
                 pcoi_obj = PlanCategoryOnlineIdea.objects.create(
                     plan=Plan.objects.get(pk=request.session['current_user_plan']),
-                    category=Category.objects.get(category_url=request.session['current_category']),
-                    idea=OnlineIdea.objects.get(pk=request.session['current_idea']),
+                    category=Category.objects.get(category_url=category_name),
+                    idea=OnlineIdea.objects.get(pk=idea_id),
 
                 )
 
             pcoi_obj.notes = note_form.cleaned_data['note_content']
             pcoi_obj.save()
 
-        return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
+        return redirect('show_block', category_name, Category.objects.get(category_url=category_name).next_page)
 
     # manages get request
     if detailed_view == 'detailed_view':
@@ -192,8 +181,9 @@ def use_idea_overview(request, current_category, idea_id):
     if not has_plan(request):
         return redirect(request.META.get('HTTP_REFERER'))
 
-    save_pcoi(request, request.session['current_user_plan'],current_category,idea_id)
-    return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
+    save_pcoi(request, request.session['current_user_plan'], current_category, idea_id)
+
+    return redirect('show_block', current_category, Category.objects.get(category_url=current_category).next_page)
 
 
 @login_required
