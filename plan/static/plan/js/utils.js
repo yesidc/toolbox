@@ -12,11 +12,17 @@ function open_internal_link(internal_url){
 }
 
 
-
-if(plan_name_dom){
-
+try{
     document.getElementById('plan-side-bar-'+add_hyphen(plan_name_dom.dataset.planName)).style.backgroundColor='#e6e6ff'
+}catch (error){
+
 }
+
+
+// if(plan_name_dom !== null){
+//
+//
+// }
 
 
 
@@ -109,6 +115,6 @@ function delete_plan(obj) {
 
 
 // closes the messages
-$('.alert').alert()
+// $('.alert').alert()
 
 
