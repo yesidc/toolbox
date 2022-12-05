@@ -1,9 +1,8 @@
 from tbcore.models import Plan, PlanCategoryOnlineIdea, Category, OnlineIdea
 from django.db.models import Q
 from django.contrib import messages
-
-
-
+from django.db import IntegrityError
+from django.shortcuts import redirect
 
 
 # todo DELETE FUNCTION, function implemented as class method. take a look at the Plan's model
@@ -54,14 +53,12 @@ def context_summary(user, current_plan):
             # this id used to delete the pcoi object from checklist page
             pcoi_instance_id = pcoi_instance.pk
             pcoi_instance_note = pcoi_instance.notes
-            pcoi_instance_complexity= pcoi_instance.idea.task_complexity
-            info_idea.append((idea_name, pcoi_instance_id,pcoi_instance_note, pcoi_instance_complexity))
+            pcoi_instance_complexity = pcoi_instance.idea.task_complexity
+            info_idea.append((idea_name, pcoi_instance_id, pcoi_instance_note, pcoi_instance_complexity))
 
         category_idea_checklist.append((c, info_idea))
         info_idea = []
     return category_idea_checklist, category_done_summary
-
-
 
 
 def get_ideas(user, category_url, current_user_plan_id):
@@ -90,3 +87,22 @@ def has_plan(request):
         return True
 
 
+def save_pcoi(request, current_user_plan, current_category, current_idea):
+    """
+    Create PlanCategoryOnlineIdea instance.
+    """
+
+    # prevents user from saving the same ideas twice for the same course plan.
+    try:
+        PlanCategoryOnlineIdea.objects.create(
+            plan=Plan.objects.get(pk=current_user_plan),
+            category=Category.objects.get(category_url=current_category),
+            idea=OnlineIdea.objects.get(pk=current_idea),
+
+        )
+        return True
+
+
+    except IntegrityError:
+
+        return False

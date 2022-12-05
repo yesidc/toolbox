@@ -8,3 +8,7 @@ class InvalidDataException(Exception):
 
 class CategoryDoesNotExist(Exception):
     pass
+
+
+class InconsitentText(Exception):
+    pass

@@ -100,8 +100,8 @@
                     {#            {% if  user.is_authenticated and request.session.current_user_plan%}<div class="d-flex justify-content-end">#}
                     <div>
 
-                        <a href="{% url 'use_idea' %}" class="btn btn-primary active m-4 pb-3" aria-current="page"
-                           id="save_idea_overview">Use this online recommendation in my
+                        <a href="{% url 'use_idea_overview' current_category idea.id  %}" class="btn btn-primary active m-4 pb-3" aria-current="page"
+                           id="save_idea_overview">Use this teaching tool in my
                             course</a>
 
                     </div>

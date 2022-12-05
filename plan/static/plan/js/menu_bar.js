@@ -44,12 +44,13 @@ function get_current_category(link){
     for(var i=0; i<category_urls.length;i++){
         if(link.includes(category_urls[i])){
             c=category_urls[i]
-            console.log(category_urls[i])
+
             break;
         }
     }
     return c
 }
+
 
 // underlines active menus on top nav bar.
    $(document).ready(function () {

@@ -101,6 +101,11 @@
                                             <td class="mx-0"><i class="bi bi-star-fill"></i></td>
                                         {% endfor %}
 
+                                        {% sub_task_complexity complexity '3' as remaining_complexity %}
+                                           {% for i in remaining_complexity%}
+                                            <td class="mx-0"><i class="bi bi-star"></i></td>
+                                        {% endfor %}
+
                                     {% endif %}
 
 
