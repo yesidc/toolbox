@@ -37,7 +37,7 @@ def show_block(request, category_url, next_page):
 
 def idea_overview_detail(request, category_name, idea_id, detailed_view):
     """
-    Implements all the logic related to showing an overview or detailed view of the teaching tools.
+    Implements all the logic related to showing an overview or detailed view of a teaching tool.
     """
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
     # This idea id is used when saving the idea to a PlanCategoryOnlineIdea Object
@@ -72,7 +72,7 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
 
             pcoi_obj.notes = note_form.cleaned_data['note_content']
             pcoi_obj.save()
-
+        messages.add_message(request, messages.INFO, 'Idea successfully added to your plan')
         return redirect('show_block', category_name, Category.objects.get(category_url=category_name).next_page)
 
     # manages get request
@@ -183,6 +183,7 @@ def use_idea_overview(request, current_category, idea_id):
         return redirect(request.META.get('HTTP_REFERER'))
 
     save_pcoi(request, request.session['current_user_plan'], current_category, idea_id)
+    messages.add_message(request, messages.INFO, 'Idea successfully added to your plan')
 
     return redirect('show_block', current_category, Category.objects.get(category_url=current_category).next_page)
 

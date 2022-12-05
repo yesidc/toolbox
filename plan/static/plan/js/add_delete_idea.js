@@ -9,7 +9,7 @@ function add_delete_idea() {
            var message_idea_added = '     <div class="alert alert-info alert-dismissible fade show" role="alert">\n' +
             '                                <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">&times;\n' +
             '                                </button>\n' +
-            '                                Idea succesfully added to your plan\n' +
+            '                                Idea successfully added to your plan\n' +
             '\n' +
             '                            </div>'
 
