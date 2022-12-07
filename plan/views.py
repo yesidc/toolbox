@@ -113,7 +113,8 @@ def checklist(request):
     Creates a summary that comprises all the teaching tools selected by the user.
     """
 
-    if request.session['current_user_plan'] is not None:
+    # if request.session['current_user_plan'] is not None:
+    if 'current_user_plan' in request.session:
         try:
             current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
         except ObjectDoesNotExist:
@@ -137,6 +138,8 @@ def checklist(request):
         else:
 
             return render(request, 'plan/checklist.html', context=context)
+    else:
+        return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -267,7 +270,7 @@ def select_plan(request):
     different plan using the navigation bar on the left.
     """
     # update current_user_plan stored in sessions.
-    request.session['current_user_plan'] = request.GET.get('plan_id')
+    request.session['current_user_plan'] = int(request.GET.get('plan_id'))
 
     current_user_plan = Plan.objects.get(pk=request.GET.get('plan_id'))
     request.session['current_user_plan_name'] = current_user_plan.plan_name
@@ -293,7 +296,8 @@ def delete_plan(request, plan_id):
     Plan.objects.get(pk=plan_id).delete()
     messages.add_message(request, messages.INFO, 'Your course plan was deleted.')
     # if user deletes current plan (the plan she is working on)
-    if str(plan_id) == request.session['current_user_plan']:
+
+    if plan_id == request.session['current_user_plan']:
         p = Plan.objects.get_user_plans(request.user).last()
 
         if p is not None:
@@ -301,6 +305,7 @@ def delete_plan(request, plan_id):
             request.session['current_user_plan_name'] = p.plan_name
         return redirect('show_block', 'human_touch', 'teaching_material')
     else:
+
         return redirect(request.META.get('HTTP_REFERER'))
 
 
