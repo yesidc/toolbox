@@ -66,7 +66,7 @@ def get_ideas(user, category_url, current_user_plan_id):
     Fetches all ideas that belong to a particular user, plan and category from PlanCategoryOnlineIdea object.
     """
 
-    if user.is_anonymous:
+    if user.is_anonymous or current_user_plan_id is None:
         return None
     else:
         idea_list = [i.idea.id for i in PlanCategoryOnlineIdea.objects.filter(
