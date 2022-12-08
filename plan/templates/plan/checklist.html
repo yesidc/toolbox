@@ -41,7 +41,8 @@
 
 
             {% for c_done, idea_ins in context_summary %}
-                <tr class="tr-main-table">
+
+                <tr class="tr-main-table" id="{{ c_done|add_hyphen }}">
 
                     <td><input type="checkbox" class="checklist_checkbox"></td>
 
