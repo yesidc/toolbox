@@ -3,7 +3,7 @@ function add_delete_idea() {
  * Triggered when user interacts with any checkbox on the block_content page.
  * Manages all functionality related to either adding or deleting ideas from the current plan/course
     */
-
+    let id_ = null
 
     if (event.currentTarget.checked) {
            var message_idea_added = '     <div class="alert alert-info alert-dismissible fade show" role="alert">\n' +
@@ -29,13 +29,19 @@ function add_delete_idea() {
                 },
                 success: function (response) {
 
-                    id_ = response.category_id + response.plan_id
-                    // if there is no plan id, ask user to create or select a plan.
-                    if(document.getElementById(id_) == null){
+
+                    try {
+                        id_ = response.category_id + response.plan_id
+
+                        // if there is no plan id, ask user to create or select a plan.
+                        if (document.getElementById(id_) == null) {
                             alert('First create a plan to be able to save your progress.')
-                    }else{
-                          document.getElementById(id_).checked = true;
-                          $('.messages-js').append(message_idea_added)
+                        } else {
+                            document.getElementById(id_).checked = true;
+                            $('.messages-js').append(message_idea_added)
+                        }
+                    } catch (e) {
+                        console.log('Error caught successfully: ', e.message)
                     }
 
 
@@ -68,22 +74,33 @@ function add_delete_idea() {
                 },
                 success: function (response) {
 
-                    // if there is no plan id, ask user to create or select a plan.
-                    if (document.getElementById(id_) !== null) {
-                        $('.messages-js').append(message_delete)
-                        let category_ready = []
-                        // creates an array that contains the id for each of the (sidebar) category checkboxes that belong to plan
-                        response.category_ready.forEach(function (c) {
-                            category_ready.push(c + response.plan_id)
-                        })
-                        // if the checkbox' id is in the category_ready array; the checkbox is checked (it means the user has chosen at least one idea for that specific category).
-                        // otherwise, checkbox is unchecked
-                        $('.' + response.plan_id + 'block').each(function (i, obj) {
 
-                            obj.checked = category_ready.includes(obj.id);
+                    try {
+                        id_ = response.category_id + response.plan_id
 
-                        });
+                        // if there is no plan id, ask user to create or select a plan.
+                        if (document.getElementById(id_) !== null) {
+                            $('.messages-js').append(message_delete)
+                            let category_ready = []
+                            // creates an array that contains the id for each of the (sidebar) category checkboxes that belong to plan
+                            response.category_ready.forEach(function (c) {
+                                category_ready.push(c + response.plan_id)
+                            })
+                            // if the checkbox' id is in the category_ready array; the checkbox is checked (it means the user has chosen at least one idea for that specific category).
+                            // otherwise, checkbox is unchecked
+                            $('.' + response.plan_id + 'block').each(function (i, obj) {
+
+                                obj.checked = category_ready.includes(obj.id);
+
+                            });
+                        }
+                    } catch (e) {
+                        console.log('Error caught successfully: ', e.message)
                     }
+
+
+
+
 
                 }
             }
