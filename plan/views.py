@@ -258,9 +258,20 @@ def delete_pcoi_checklist(request):
     """
     Manages all related to deleting PlanCategoryOnlineIdea objects when users interact with the checklist page
     """
+    pcoi_delete = PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id'))
+    pcoi_category = pcoi_delete.category.category_name
+    pcoi_delete.delete()
+    remaining_ideas = PlanCategoryOnlineIdea.objects.select_related('plan__user', 'category').filter(
+        Q(plan__user=request.user)& Q(plan=request.session['current_user_plan'])&Q(category__category_name=pcoi_category)).count()
+    if remaining_ideas >0:
+        delete_block= False
 
-    PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id')).delete()
-    return JsonResponse({}, status=200)
+    else:
+        delete_block = True
+
+
+    # PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id')).delete()
+    return JsonResponse({'delete_block':delete_block, 'pcoi_category': pcoi_category.replace(' ', '-')}, status=200)
 
 
 @login_required()
