@@ -85,7 +85,7 @@ for (i of plan_collapse) {
 
 
                     } catch (error) {
-                        console.log('Error caught successfully')
+                        console.log('Error caught successfully:', error.message)
                     }
 
 
