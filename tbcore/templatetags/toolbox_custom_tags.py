@@ -89,6 +89,7 @@ def show_ideas(context,user_authenticated):
         'current_category': context['current_category'],
         'ideas_list':context['ideas_list'],
         'user_authenticated':user_authenticated,
+        'category': context['category']
     }
 
 

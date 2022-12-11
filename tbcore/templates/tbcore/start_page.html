@@ -51,6 +51,14 @@
                                 <div>
                                     <a href="{% url 'show_block' "human_touch" "teaching_material" %}" class="btn btn-primary mx-5">Browse without log-in</a>
                                 </div>
+
+                                {% else %}
+
+                                <div>
+                                    <a href="{% url 'show_block' "human_touch" "teaching_material" %}"
+                                      class="btn btn-primary mx-1 px-2">Keep working on my courses</a>
+                                </div>
+
                             {% endif %}
 
                         </div>{% endblock %}
