@@ -7,6 +7,33 @@
     <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
 {% endblock %}
 
+
+
+{% block top_nav_bar %}
+
+    <div class="col-12 top-nav">
+        <ul class="navbar-nav float-none float-md-end ">
+
+            {% for c_name, c_url,next_page in category_objects %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'show_block' c_url next_page %}">{{ c_name }}</a>
+                </li>
+            {% endfor %}
+
+
+        </ul>
+    </div>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
 {% block content %}
 
 
@@ -21,57 +48,54 @@
             <div class="row p-0 m-0">
 
 
-                    <!-- Icon sidebar -->
-                
-                        <div class="col-2">
-                            <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i> My
-                                course Plans
-                            </button>
-                        </div>
+                <!-- Icon sidebar -->
 
-                        {#                        <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i></button>#}
-                        {#                        My course Plans#}
-
-                        {% block idea_name_overview %}
+                <div class="col-2">
+                    <button class="btn btn-primary menu-btn" id="sidebarToggle"><i class="bi bi-list"></i> My
+                        course Plans
+                    </button>
+                </div>
 
 
-                        {% endblock %}
+
+                {% block idea_name_overview %}
 
 
-                            {% block idea_name_detail %}
+                {% endblock %}
 
 
-                            {% endblock %}
-
-              {% block category_name %}
+                {% block idea_name_detail %}
 
 
-                            {% endblock %}
+                {% endblock %}
 
-            {% block plan_name_checklist %}
+                {% block category_name %}
 
 
-            {% endblock %}
+                {% endblock %}
 
+                {% block plan_name_checklist %}
+
+
+                {% endblock %}
 
 
 
 
 
 
-                        <span id="plan_name_dom" style="visibility: hidden; height: 0"
-                              data-plan-name=  {% if request.session.current_user_plan_name %}
-                                  {{ request.session.current_user_plan_name|add_hyphen }}
 
-                              {% else %}
-                                  {{ user_filter_plans.last.plan_name|add_hyphen }}
-                              {% endif %}
+                <span id="plan_name_dom" style="visibility: hidden; height: 0"
+                      data-plan-name=  {% if request.session.current_user_plan_name %}
+                          {{ request.session.current_user_plan_name|add_hyphen }}
+
+                      {% else %}
+                          {{ user_filter_plans.last.plan_name|add_hyphen }}
+                      {% endif %}
 
 
-                        >
+                >
                     </span>
-
-
 
 
             </div>
@@ -88,10 +112,11 @@
 
 
                         <div class="list-group-item list-group-item-action list-group-item-light">
-                            <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-0" id="add_new_course_form">
+                            <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-0"
+                                  id="add_new_course_form">
                                 {% csrf_token %}
-                                {% crispy plan_form%}
-{#                                {{ plan_form.plan_name }}#}
+                                {% crispy plan_form %}
+                                {#                                {{ plan_form.plan_name }}#}
                                 <input type="submit" name="Submit" value="Add new course"
                                        class="btn btn-primary menu-btn my-0 mb-3" form="add_new_course_form">
                             </form>

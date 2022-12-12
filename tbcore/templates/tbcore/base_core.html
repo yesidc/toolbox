@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
     {# Load CSS and JavaScript #}
     {% bootstrap_css %}
     <!-- Bootstrap Font Icon CSS -->
@@ -46,17 +47,14 @@
                     class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div id="navcol-1" class="collapse navbar-collapse">
                 <div class="row ms-auto ">
-                    <div class="col-12 top-nav">
-                        <ul class="navbar-nav float-none float-md-end mt-lg-5">
 
-                            {% for c_name, c_url,next_page in category_objects%}
-                                <li class="nav-item"><a class="nav-link" href="{% url 'show_block' c_url next_page  %}">{{ c_name }}</a></li>
-                            {% endfor %}
+                {% block top_nav_bar %}
+
+                {% endblock %}
 
 
 
-                        </ul>
-                    </div>
+
                     <!-- username and logout navbar  -->
                     <div class="col-12 order-md-first">
                         <ul class="navbar-nav float-none float-md-end">

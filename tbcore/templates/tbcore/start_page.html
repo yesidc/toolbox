@@ -23,14 +23,14 @@
                             <li class="lead">Find teaching tools and technology to open your courses for online learning
                             </li>
                             <li class="lead">Assess the effort</li>
-                            <li class="lead">Create your personal checklist with notes and ideas on the teaching tools you select (sign in)
+                            <li class="lead">Create your personal checklist with notes and ideas on the teaching tools
+                                you select (sign in)
                             </li>
 
                         </ul>
 
 
                     </div>
-
 
 
                 </div>
@@ -41,19 +41,28 @@
 
             <div class="row m-0 p-0">
 
-                    {% block create_course %}
-                        <div class="d-flex">
+                {% block create_course %}
+                    <div class="d-flex">
 
-                            {% if not user.is_authenticated %}
-                                <div>
-                                    <a href="{% url 'login' %}" class="btn btn-primary mx-5">Start course revision</a>
-                                </div>
-                                <div>
-                                    <a href="{% url 'show_block' "human_touch" "teaching_material" %}" class="btn btn-primary mx-5">Browse without log-in</a>
-                                </div>
-                            {% endif %}
+                        {% if not user.is_authenticated %}
+                            <div>
+                                <a href="{% url 'login' %}" class="btn btn-primary mx-5">Start course revision</a>
+                            </div>
+                            <div>
+                                <a href="{% url 'show_block' "human_touch" "teaching_material" %}"
+                                   class="btn btn-primary mx-5">Browse without log-in</a>
+                            </div>
 
-                        </div>{% endblock %}
+                        {% else %}
+
+                            <div>
+                                <a href="{% url 'show_block' "human_touch" "teaching_material" %}"
+                                   class="btn btn-primary mx-1 px-2">Keep working on my courses</a>
+                            </div>
+
+                        {% endif %}
+
+                    </div>{% endblock %}
 
             </div>
 
@@ -62,19 +71,88 @@
 
     <section class="bg-body">
         <div class="container">
+
             <div class="row">
-                <div class="col-md-8 my-2 py-5">
-                    <h4>How to use the tool box</h4>
-                    <p>
-                      This tool box walks you through 8 building blocks of a sound online course. Per building block, different teaching tools and technologies are suggested to meet the minimum requirements for online courses. The details of each teaching tool help you to estimate the effort you have to make, and you can take notes which will be saved to a personalized checklist which you can use for course preparation.
-                    </p>
-                </div>
-                <div class="col-md-4 my-2 py-5">
-                    <img class="img-fluid" src="{% static '/tbcore/images/start_page.png' %}" alt="">
+                <h2 class="text-center p-2">Quick start.</h2>
+            </div>
+            <div class="row">
+
+                <div class="col-md-8 mx-auto">
+                    <!-- Carousel -->
+                    <div id="instructions" class="carousel slide" data-bs-ride="carousel">
+
+                        <!-- Indicators/dots -->
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#instructions" data-bs-slide-to="0"
+                                    class="active"></button>
+                            <button type="button" data-bs-target="#instructions" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#instructions" data-bs-slide-to="2"></button>
+                        </div>
+
+                        <!-- The slideshow/carousel -->
+                        <div class="carousel-inner ">
+                            <div
+                                    class="carousel-item active image-instructions"
+                                    style='background-image: url("{% static '/tbcore/images/uos_logo.png' %}")'
+
+
+                            >
+
+                                <div class="color-overlay d-flex justify-content-center align-items-center">
+                                    some text 1
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="carousel-item image-instructions"
+                                 style='background-image: url("{% static '/tbcore/images/uos_logo.png' %}")'
+                            >
+                                <div class="color-overlay d-flex justify-content-center align-items-center">
+                                    some text 2
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="carousel-item image-instructions"
+                                 style='background-image: url("{% static '/tbcore/images/uos_logo.png' %}")'
+                            >
+                                <div class="color-overlay d-flex justify-content-center align-items-center">
+                                    some text 3
+                                </div>
+
+
+                            </div>
+
+
+
+
+
+
+                        </div>
+
+                        <!-- Left and right controls/icons -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#instructions"
+                                data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#instructions"
+                                data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+
 
                 </div>
+
+
             </div>
         </div>
+
+
     </section>
 
 
@@ -85,16 +163,20 @@
                 <div class="col-8">
                     <div class="row">
                         <p>
-                     Further general teaching tips, news and updates about technology supported by VirtUOS are published on the Digitale Lehre Portal. Additionally, all (topic-related) walk-in hours and meetings about trending topics from the didactical colloquium "Lehrkolleg" are announced there.
+                            Further general teaching tips, news and updates about technology supported by VirtUOS are
+                            published on the Digitale Lehre Portal. Additionally, all (topic-related) walk-in hours and
+                            meetings about trending topics from the didactical colloquium "Lehrkolleg" are announced
+                            there.
                         </p>
 
 
                     </div>
 
                 </div>
-                   <div class="col-4">
-                     <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/ " class="btn btn-primary" target="_blank">Teaching Tips to improve your class</a>
-                    </div>
+                <div class="col-4">
+                    <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/ " class="btn btn-primary"
+                       target="_blank">Teaching Tips to improve your class</a>
+                </div>
             </div>
         </div>
     </section>

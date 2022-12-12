@@ -16,8 +16,22 @@
 /*!
 Toolbox
 
+
+
 */
  /*deletes indentation*/
+
+.image-instructions{
+  background-size: cover;
+  min-height: 60vh;
+  position: relative;
+}
+.color-overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+}
  div.no-indent ul {
            margin-left: -17px;
        }
