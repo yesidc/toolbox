@@ -21,6 +21,14 @@ Toolbox
 */
  /*deletes indentation*/
 
+.image-banner{
+    background-size: cover;
+  min-height: 90vh;
+  position: relative;
+
+}
+
+
 .image-instructions{
   background-size: cover;
   min-height: 60vh;

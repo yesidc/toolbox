@@ -52,7 +52,7 @@
 
     <!-- Block introductory text -->
 
-    <section class="p-0 mt-0">
+    <section class="p-0 mt-0 mx-md-5">
         <div class="container">
 
             <p class="text-start">
@@ -74,7 +74,7 @@
     {% get_accordion_content category.titles_accordion category.content_accordion as show_content %}
     {% if show_content.len_content > 0 %}
 
-        <section class="p-5">
+        <section class="p-5 mx-md-5">
             <div class="accordion">
                 {% for acc_id,t,c in show_content.content_accordion %}
                     <div class="accordion bg-info" id="accordionInfo">

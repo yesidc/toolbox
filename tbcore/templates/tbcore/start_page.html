@@ -12,18 +12,27 @@
 
     {#Showcase#}
 
-    <section class="bg-light text-dark p-3 mt-0">
+    <section class="bg-light text-dark p-0  mt-md-0">
         <div class="container">
 
-            <div class="row">
-                <h1 class="mb-3">Opening on-site courses for online learning.</h1>
+            <div
+                    class="row image-banner"
+                    style='background-image: url("{% static '/tbcore/images/toolbox_banner.png' %}")'
+
+
+            >
+
+                <h1 class="mt-md-3 text-center">Opening on-site courses for online learning</h1>
                 <div class="col-md-8">
-                    <div class="d-flex align-items-center my-3 py-1">
+                    <div class="d-flex align-items-center my-5 py-1 ">
                         <ul>
-                            <li class="lead">Find teaching tools and technology to open your courses for online learning
+                            <li class="lead">Find teaching tools and technology to <br>open your courses
+                                for online learning
                             </li>
-                            <li class="lead">Assess the effort</li>
-                            <li class="lead">Create your personal checklist with notes and ideas on the teaching tools
+                            <br>
+                            <li class="lead">Assess the preparation effort</li>
+                            <br>
+                            <li class="lead">Create your personal checklist with notes and ideas <br> on the teaching tools
                                 you select (sign in)
                             </li>
 
@@ -34,12 +43,13 @@
 
 
                 </div>
-                <div class="col-md-4">
-                    <img class="img-fluid my-1 py-1" src="{% static '/tbcore/images/start_page.png' %}" alt="">
-                </div>
-            </div>
 
-            <div class="row m-0 p-0">
+
+
+
+
+
+            <div class="row mt-5 p-0">
 
                 {% block create_course %}
                     <div class="d-flex">
@@ -65,6 +75,22 @@
                     </div>{% endblock %}
 
             </div>
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
 
         </div>
     </section>
@@ -126,10 +152,6 @@
 
 
                             </div>
-
-
-
-
 
 
                         </div>
