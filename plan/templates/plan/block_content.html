@@ -28,14 +28,11 @@
         <section class="bg-light text-dark p-3 mt-1">
             <div class="container">
                 <div class="d-flex flex-column ">
-                    {#                <div class="text-center">#}
-                    {#                    <h4>Online Ideas</h4>#}
-                    {#                #}
-                    {#                </div>#}
+
                     <div>
 
                         <p class="lead">You are browsing without log-in. For generating a personal checklist with your own ideas about how you want to use the tools, please sign in.</p>
-                        <a class="btn btn-primary button-touch" href="{% url 'login' %}">Start personal checklist</a>
+                        <a class="btn btn-toolbox-color text-light button-touch" href="{% url 'login' %}">Start personal checklist</a>
                     </div>
 
 
@@ -52,18 +49,18 @@
 
     <!-- Block introductory text -->
 
-    <section class="p-0 mt-0 mx-md-5">
+    <section class="p-0  mx-md-5">
         <div class="container">
 
-            <p class="text-start">
-
-
+            <div class="container">
+                <div class="mx-md-5"><p class="text-start mx-md-5 px-md-5">
 
 
                     {% md_to_html category.short_description as short_d_html %}{{ short_d_html|safe }}
 
 
-            </p>
+                </p></div>
+            </div>
 
         </div>
     </section>
@@ -77,11 +74,11 @@
         <section class="p-5 mx-md-5">
             <div class="accordion">
                 {% for acc_id,t,c in show_content.content_accordion %}
-                    <div class="accordion bg-info" id="accordionInfo">
+                    <div class="accordion " id="accordionInfo">
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapse{{ acc_id }}" aria-expanded="false"
                                         aria-controls="collapseTwo">
                                     {% md_to_html t as title_html %}{{ title_html|safe }}
@@ -123,14 +120,14 @@
             <div>
 
                 {% if user.is_authenticated %}
-                    <a href="{% url 'checklist' %}" class="btn btn-primary active m-4" aria-current="page">View checklist</a>{% endif %}
+                    <a href="{% url 'checklist' %}" class="btn btn-toolbox-color text-light active m-4" aria-current="page">View checklist</a>{% endif %}
 
             </div>
             <div>
 
                 {% if category.category_name != 'Rules & Regulations' %}
                     {% get_name_next_category next_page as c_next_button %}
-                    <a href="{% url  'show_block' next_page c_next_button.c_next %}" class="btn btn-primary active m-4"
+                    <a href="{% url  'show_block' next_page c_next_button.c_next %}" class="btn btn-toolbox-color text-light active m-4"
                        aria-current="page"> Next building block: {{ c_next_button.c_name }} </a>
                 {% endif %}
 
