@@ -15,7 +15,7 @@
         <ul class="navbar-nav float-none float-md-end ">
 
             {% for c_name, c_url,next_page in category_objects %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'show_block' c_url next_page %}"><span class="text-light">{{ c_name }}</span></a>
+                <li class="nav-item"><a class="nav-link" href="{% url 'show_block' c_url next_page %}"><span class="text-light univers-con-no-bold">{{ c_name }}</span></a>
                 </li>
             {% endfor %}
 
@@ -101,12 +101,12 @@
             </div>
         {% endif %}
 
-        <div class="d-flex" id="wrapper">
+        <div class="d-flex" id="wrapper" >
 
             {#left navigation bar#}
 
             {% if user.is_authenticated %}
-                <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="border-end bg-white " id="sidebar-wrapper" >
 
                     <div class="list-group list-group-flush">
 
@@ -141,7 +141,7 @@
                                         aria-controls="{{ p.plan_name |add_hyphen }}"
                                         id="plan-side-bar-{{ p.plan_name |add_hyphen }}"
                                 >
-                                    {{ p.plan_name }}
+                                   <span class="adobe-garamond-p"> {{ p.plan_name }}</span>
 
 
                                 </button>
