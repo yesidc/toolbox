@@ -11,17 +11,18 @@ function open_internal_link(internal_url) {
 }
 
 function set_menu_color() {
-    // set the color of all the course plans shown on the side nav bar.
+    // set the color of EVERY  course plan shown on the side nav bar.
     for (i of all_plans) {
-        i.style.backgroundColor = '6db784'
+        i.style.backgroundColor = '#ededd1'
     }
 }
 
 
 set_menu_color()
 
+// sets the color of ACTIVE the nav bar plan  when the user accesses a different building block
 try {
-    document.getElementById('plan-side-bar-' + add_hyphen(plan_name_dom.dataset.planName)).style.backgroundColor = 'rgba(163,217,234,0.40)'
+    document.getElementById('plan-side-bar-' + add_hyphen(plan_name_dom.dataset.planName)).style.backgroundColor = '#6db784'
 } catch (error) {
 
 }
