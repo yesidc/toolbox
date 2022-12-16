@@ -12,7 +12,7 @@
   {% block category_name %}
 
 <div class="col text-center">
-     <h3 class="text-center" id="category-url-save-idea" data-category-url="{{ category.category_url }}">{{ category.category_name }}</h3>
+     <h2 class="text-center paragraph" id="category-url-save-idea" data-category-url="{{ category.category_url }}">{{ category.category_name }}</h2>
 </div>
 
                             {% endblock %}
@@ -71,17 +71,20 @@
     {% get_accordion_content category.titles_accordion category.content_accordion as show_content %}
     {% if show_content.len_content > 0 %}
 
-        <section class="p-5 mx-md-5">
+        <section class="p-5 mx-md-5 ">
             <div class="accordion">
                 {% for acc_id,t,c in show_content.content_accordion %}
-                    <div class="accordion " id="accordionInfo">
+                    <div class="accordion" id="accordionInfo">
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse"
+{#                                todo change accordion color here (the button)#}
+                                <button class="accordion-button collapsed bg-info" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapse{{ acc_id }}" aria-expanded="false"
                                         aria-controls="collapseTwo">
-                                    {% md_to_html t as title_html %}{{ title_html|safe }}
+{#todo add univers condense here#}
+                                   <h3 class="paragraph"> {% md_to_html t as title_html %}{{ title_html|safe }}</h3>
+
                                 </button>
                             </h2>
                             <div id="collapse{{ acc_id }}" class="accordion-collapse collapse"

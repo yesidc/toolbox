@@ -6,8 +6,8 @@
 
         <section class="p-1 mx-md-5">
             <div class="container">
-                <h3 class="text-center mb-md-0"> Discover the Teaching Tools for </h3>
-            <h3 class="text-center mb-md-5">{{ category.category_name }}</h3>
+                <h3 class="text-center mb-md-0 paragraph"> Discover the Teaching Tools for </h3>
+            <h3 class="text-center mb-md-5 paragraph">{{ category.category_name }}</h3>
 
 
                 {#online_idea is M2M field#}
@@ -25,7 +25,7 @@
                                 <div class="card card-rcorner shadow-lg">
 
                                     {% if user_authenticated %}
-                                        <div class=" py-0 my-0">
+                                        <div class=" py-0 my-0 card-color ">
 
                                             <input type="checkbox" class="idea-checkbox" id="{{ idea.id }}-idea"
                                                    onclick="add_delete_idea()"
@@ -41,12 +41,11 @@
                                     <div class=" card-body text-center card-color text-black flex-fill">
 
                                         <a
-                                                href="{% url 'idea_overview_detail' current_category idea.id 'overview' %}"
+                                                href="{% url 'idea_overview_detail' current_category idea.id %}"
                                                 class="btn">
 
 
-                                            <h5 class="mb-3">{{ idea.idea_name }}</h5>
-
+                                            <h4 class="mb-3 adobe-garamond-p">{{ idea.idea_name }}</h4>
 
                                         </a>
                                     </div>

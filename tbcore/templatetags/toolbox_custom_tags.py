@@ -94,19 +94,15 @@ def show_ideas(context,user_authenticated):
 
 
 @register.inclusion_tag('plan/show_idea_property.html')
-def show_idea_property(idea_property,property_name):
+def show_idea_property(idea_property,property_name, show):
     return {
         'idea_property': idea_property,
-        'property_name': property_name
+        'property_name': property_name,
+        'show': show
     }
 
 
-@register.inclusion_tag('plan/show_idea_property_overview.html')
-def show_idea_property_overview(idea_property, property_name):
-    return {
-        'idea_property': idea_property,
-        'property_name': property_name
-    }
+
 
 @register.simple_tag()
 def md_to_html(value):

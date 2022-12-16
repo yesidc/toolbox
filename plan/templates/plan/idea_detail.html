@@ -5,79 +5,133 @@
 
 
 {% block idea_name_detail %}
-     <div class="col text-center">
-    <h3>{{ idea.idea_name }}</h3>
-       </div>
+    <div class="col text-center">
+        <h3>{{ idea.idea_name }}</h3>
+    </div>
 
 {% endblock %}
 
 {% block building_block_idea %}
+    <section>
 
 
-    {% if request.user.is_anonymous %}
-        <section class="bg-light"><h3>{{ idea.idea_name }}</h3></section>
-    {% endif %}
+        <div class="container-fluid">
+            <div class="row">
 
-    {% if user.is_authenticated %}{#    User's notes/comments#}
-
-
-
-        <section class="bg-body mt-1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="d-flex h-100"><h3 class="align-self-center">Note</h3></div>
+                {% if user.is_authenticated %}
+                    <div class="col-md-6">
+                        {% show_idea_property idea.brief_description 'Description' 'show_in_section' %}
                     </div>
-                    <div class="col-md-9 pt-1">
-                        <form action="" method="POST" id="notes-form">
-                            {% csrf_token %}
-{#                            {{ note_form.note_content }}#}
-                            {% crispy note_form  %}
-                        </form>
+
+                    <div class="col-md-6">
+
+
+                        <div class="container">
+
+
+                            <div class="row">
+                                <div class="d-flex h-100"><h5 class="align-self-center">Note</h5></div>
+                            </div>
+                            <div class="row">
+                                <form action="" method="POST" id="notes-form">
+                                    {% csrf_token %}
+
+                                    {% crispy note_form %}
+                                </form>
+                            </div>
+
+
+                        </div>
+
                     </div>
-                </div>
+
+
+                {% else %}
+
+
+                    {% show_idea_property idea.brief_description 'Description' 'show_in_section' %}
+
+
+                {% endif %}
+
             </div>
-        </section>
-    {% endif %}
+
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    {% if idea.use_cases %}
+
+                        {% show_idea_property idea.use_cases 'Use cases' 'show_in_section' %}
+
+                    {% endif %}
+
+
+                </div>
+
+                <div class="col-md-6">
+
+
+                    {% if user.is_authenticated %}
+
+                        <div class="d-flex justify-content-end">
+                            <div>
+
+
+                                <button type="submit" form="notes-form" value="Submit"
+                                        class="btn btn-primary active m-4 pb-3">Use
+                                    this online recommendation in my course
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    {% endif %}
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </section>
+
+
+    {#Accordion#}
 
 
 
+    <div class="accordion accordion-flush my-md-4" id="accordionFlushIdea">
 
-    <section class="bg-light text-dark mb-3">
 
-        {% show_idea_property idea.brief_description 'Description' %}
+        {% show_idea_property idea.technology 'Technology' 'show_in_accordion' %}
 
-        {% if idea.use_cases %}
-
-            {% show_idea_property idea.use_cases 'Use cases' %}
-
-        {% endif %}
-        {% show_idea_property idea.technology 'Technology' %}
-
-        {% show_idea_property idea.teacher_effort 'Teacher Effort' %}
+        {% show_idea_property idea.teacher_effort 'Teacher Effort' 'show_in_accordion' %}
 
 
 
 
         {% if idea.implementation_steps %}
-            {% show_idea_property idea.implementation_steps 'Implementation Steps' %}
+            {% show_idea_property idea.implementation_steps 'Implementation Steps' 'show_in_accordion' %}
 
         {% endif %}
 
 
-        {% show_idea_property idea.recommendations 'Recommendations' %}
+        {% show_idea_property idea.recommendations 'Recommendations' 'show_in_accordion' %}
 
 
         {% if idea.supplementary_material %}
 
-            {% show_idea_property idea.supplementary_material 'Supplementary Material' %}
+            {% show_idea_property idea.supplementary_material 'Supplementary Material' 'show_in_accordion' %}
 
         {% endif %}
 
 
 
         {% if idea.reusable %}
-            {% show_idea_property idea.reusable 'Reusable' %}
+            {% show_idea_property idea.reusable 'Reusable' 'show_in_accordion' %}
 
         {% endif %}
 
@@ -85,33 +139,50 @@
 
         {% if idea.references %}
 
-            {% show_idea_property idea.references 'References' %}
+            {% show_idea_property idea.references 'References' 'show_in_accordion' %}
 
 
         {% endif %}
 
-    </section>
+
+
+    </div>
 
 
 
-    {% if user.is_authenticated %}
-        <section class="bg-light text-dark mb-4">
+            {% if idea.testimony %}
+            <section class="bg-light mt-4 p-5 mb-4">
+                <div class="container">
 
-            <div class="d-flex justify-content-end">
-                <div>
+                    <h3 class="text-center">Testimony</h3>
 
+                    <p>{% md_to_html idea.testimony as testimony_html %}{{ testimony_html|safe }}</p>
 
-                    <button type="submit" form="notes-form" value="Submit" class="btn btn-primary active m-4 pb-3">Use
-                        this online recommendation in my course
-                    </button>
 
                 </div>
+            </section>{% endif %}
 
-            </div>
-        </section>{% endif %}
 
-    <script src="{% static 'plan/js/utils.js' %}"></script>
-    <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
+
+
+        {#    {% if user.is_authenticated %}#}
+        {#        <section class="bg-light text-dark mb-4">#}
+        {##}
+        {#            <div class="d-flex justify-content-end">#}
+        {#                <div>#}
+        {##}
+        {##}
+        {#                    <button type="submit" form="notes-form" value="Submit" class="btn btn-primary active m-4 pb-3">Use#}
+        {#                        this online recommendation in my course#}
+        {#                    </button>#}
+        {##}
+        {#                </div>#}
+        {##}
+        {#            </div>#}
+        {#        </section>{% endif %}#}
+
+        <script src="{% static 'plan/js/utils.js' %}"></script>
+        <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
 
 
 {% endblock %}

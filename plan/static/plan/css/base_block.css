@@ -33,36 +33,99 @@ Toolbox
       OR
       <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a>
 */
-@font-face {font-family: "Univers";
-    src: url("http://db.onlinewebfonts.com/t/10bae0c1ca71c8bca604cf63b7731533.eot"); /* IE9*/
-    src: url("http://db.onlinewebfonts.com/t/10bae0c1ca71c8bca604cf63b7731533.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("http://db.onlinewebfonts.com/t/10bae0c1ca71c8bca604cf63b7731533.woff2") format("woff2"), /* chrome firefox */
-    url("http://db.onlinewebfonts.com/t/10bae0c1ca71c8bca604cf63b7731533.woff") format("woff"), /* chrome firefox */
-    url("http://db.onlinewebfonts.com/t/10bae0c1ca71c8bca604cf63b7731533.ttf") format("truetype"), /* chrome firefox opera Safari, Android, iOS 4.2+*/
-    url("http://db.onlinewebfonts.com/t/10bae0c1ca71c8bca604cf63b7731533.svg#Univers") format("svg"); /* iOS 4.1- */
+/*@font-face {font-family: "Univers";*/
+/*    src: url("http://db.onlinewebfonts.com/t/10bae0c1ca71c8bca604cf63b7731533.eot"); !* IE9*!*/
+/*    src: url("http://db.onlinewebfonts.com/t/10bae0c1ca71c8bca604cf63b7731533.eot?#iefix") format("embedded-opentype"), !* IE6-IE8 *!*/
+/*    url("http://db.onlinewebfonts.com/t/10bae0c1ca71c8bca604cf63b7731533.woff2") format("woff2"), !* chrome firefox *!*/
+/*    url("http://db.onlinewebfonts.com/t/10bae0c1ca71c8bca604cf63b7731533.woff") format("woff"), !* chrome firefox *!*/
+/*    url("http://db.onlinewebfonts.com/t/10bae0c1ca71c8bca604cf63b7731533.ttf") format("truetype"), !* chrome firefox opera Safari, Android, iOS 4.2+*!*/
+/*    url("http://db.onlinewebfonts.com/t/10bae0c1ca71c8bca604cf63b7731533.svg#Univers") format("svg"); !* iOS 4.1- *!*/
+/*}*/
+
+
+/*@font-face {font-family: "Univers 67 Condensed Bold";*/
+/*  src: url("/@font-face/10bae0c1ca71c8bca604cf63b7731533.eot"); !* IE9*!*/
+/*  src: url("/@font-face/10bae0c1ca71c8bca604cf63b7731533.eot?#iefix") format("embedded-opentype"), !* IE6-IE8 *!*/
+/*  url("/@font-face/10bae0c1ca71c8bca604cf63b7731533.woff2") format("woff2"), !* chrome、firefox *!*/
+/*  url("/@font-face/10bae0c1ca71c8bca604cf63b7731533.woff") format("woff"), !* chrome、firefox *!*/
+/*  url("/@font-face/10bae0c1ca71c8bca604cf63b7731533.ttf") format("truetype"), !* chrome、firefox、opera、Safari, Android, iOS 4.2+*!*/
+/*  url("/@font-face/10bae0c1ca71c8bca604cf63b7731533.svg#Univers 67 Condensed Bold") format("svg"); !* iOS 4.1- *!*/
+/*}*/
+
+@font-face {font-family: "Univers Condensed 57";
+    src: url("http://db.onlinewebfonts.com/t/7d10e4da91ecdcf3e9e69cfe1de97f77.eot"); /* IE9*/
+    src: url("http://db.onlinewebfonts.com/t/7d10e4da91ecdcf3e9e69cfe1de97f77.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("http://db.onlinewebfonts.com/t/7d10e4da91ecdcf3e9e69cfe1de97f77.woff2") format("woff2"), /* chrome firefox */
+    url("http://db.onlinewebfonts.com/t/7d10e4da91ecdcf3e9e69cfe1de97f77.woff") format("woff"), /* chrome firefox */
+    url("http://db.onlinewebfonts.com/t/7d10e4da91ecdcf3e9e69cfe1de97f77.ttf") format("truetype"), /* chrome firefox opera Safari, Android, iOS 4.2+*/
+    url("http://db.onlinewebfonts.com/t/7d10e4da91ecdcf3e9e69cfe1de97f77.svg#Univers Condensed BQ") format("svg"); /* iOS 4.1- */
 }
 
+.body {
+  margin: 0;
+background-color: rgba(209,242,249,0.4);
+
+
+
+  line-height: var(--bs-body-line-height);
+  color: var(--bs-body-color);
+
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 
 
 .paragraph{
-  font-family: "Univers", serif;
+  font-family: "Univers 67 Condensed Bold", serif !important;
+   font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 
 
-.color-accordion-button{
-  background-color: #0A1F40;
+
+.adobe-garamond-p{
+    font-family: adobe-garamond-pro, serif, Arial;
+
+font-weight: 400;
+
+font-style: normal;
+
+}
+.univers-con-no-bold{
+    font-family: "Univers Condensed 57", serif !important;
+   font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+
 }
 
+.p{
+    font-family: adobe-garamond-pro, serif, Arial;
+
+font-weight: 400;
+
+font-style: normal;
+}
+
+/*this color is also used for the buttons*/
 .color-nav-bar {
 
-  /*background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(21,89,142,1) 35%, rgba(0,212,255,1) 100%);*/
+
   background-color: #0A1F40;
-  /*background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(19,38,141,1) 100%);*/
+
 
 }
 .btn-toolbox-color{
   background-color: #0A1F40;
+    font-family: adobe-garamond-pro, serif, Arial;
+
+font-weight: 400;
+
+font-style: normal;
 
 }
 
@@ -72,6 +135,7 @@ Toolbox
   min-height: 90vh;
   max-width: 100%;
   position: relative;
+
 
 }
 
@@ -252,18 +316,7 @@ Toolbox
   }
 }
 
-body {
-  margin: 0;
-  font-family: var(--bs-body-font-family);
-  font-size: var(--bs-body-font-size);
-  font-weight: var(--bs-body-font-weight);
-  line-height: var(--bs-body-line-height);
-  color: var(--bs-body-color);
-  text-align: var(--bs-body-text-align);
-  background-color: var(--bs-body-bg);
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
+
 
 hr {
   margin: 1rem 0;
@@ -286,7 +339,7 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
 
 h1, .h1 {
   font-size: calc(1.375rem + 1.5vw);
-  font-family: 'Univers', serif;
+
 }
 @media (min-width: 1200px) {
   h1, .h1 {
@@ -332,6 +385,9 @@ h6, .h6 {
 p {
   margin-top: 0;
   margin-bottom: 1rem;
+  font-family: adobe-garamond-pro, serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 abbr[title],
@@ -803,19 +859,7 @@ progress {
   color: #6c757d;
 }
 
-.container,
-.container-fluid,
-.container-xxl,
-.container-xl,
-.container-lg,
-.container-md,
-.container-sm {
-  width: 100%;
-  padding-right: var(--bs-gutter-x, 0.75rem);
-  padding-left: var(--bs-gutter-x, 0.75rem);
-  margin-right: auto;
-  margin-left: auto;
-}
+
 
 @media (min-width: 576px) {
   .container-sm, .container {
@@ -4205,14 +4249,7 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: space-between;
 }
-.navbar-brand {
-  padding-top: 0.3125rem;
-  padding-bottom: 0.3125rem;
-  margin-right: 1rem;
-  font-size: 1.25rem;
-  text-decoration: none;
-  white-space: nowrap;
-}
+
 .navbar-nav {
   display: flex;
   flex-direction: column;
@@ -11445,6 +11482,7 @@ textarea.form-control-lg {
 }
 #wrapper {
   overflow-x: hidden;
+  background-color: rgba(209,242,249,0.4);
 }
 
 #sidebar-wrapper {
@@ -11464,6 +11502,7 @@ textarea.form-control-lg {
 
 #page-content-wrapper {
   min-width: 100vw;
+
 }
 
 body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
