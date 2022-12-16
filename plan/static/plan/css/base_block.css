@@ -61,7 +61,18 @@ Toolbox
     url("http://db.onlinewebfonts.com/t/7d10e4da91ecdcf3e9e69cfe1de97f77.svg#Univers Condensed BQ") format("svg"); /* iOS 4.1- */
 }
 
+.body {
+  margin: 0;
+background-color: rgba(209,242,249,0.4);
 
+
+
+  line-height: var(--bs-body-line-height);
+  color: var(--bs-body-color);
+
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 
 
 .paragraph{
@@ -100,15 +111,12 @@ font-weight: 400;
 font-style: normal;
 }
 
-.color-accordion-button{
-  background-color: #0A1F40;
-}
-
+/*this color is also used for the buttons*/
 .color-nav-bar {
 
-  /*background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(21,89,142,1) 35%, rgba(0,212,255,1) 100%);*/
+
   background-color: #0A1F40;
-  /*background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(19,38,141,1) 100%);*/
+
 
 }
 .btn-toolbox-color{
@@ -308,18 +316,7 @@ font-style: normal;
   }
 }
 
-body {
-  margin: 0;
 
-
-
-
-  line-height: var(--bs-body-line-height);
-  color: var(--bs-body-color);
-
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
 
 hr {
   margin: 1rem 0;
@@ -862,19 +859,7 @@ progress {
   color: #6c757d;
 }
 
-.container,
-.container-fluid,
-.container-xxl,
-.container-xl,
-.container-lg,
-.container-md,
-.container-sm {
-  width: 100%;
-  padding-right: var(--bs-gutter-x, 0.75rem);
-  padding-left: var(--bs-gutter-x, 0.75rem);
-  margin-right: auto;
-  margin-left: auto;
-}
+
 
 @media (min-width: 576px) {
   .container-sm, .container {
@@ -4264,14 +4249,7 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: space-between;
 }
-.navbar-brand {
-  padding-top: 0.3125rem;
-  padding-bottom: 0.3125rem;
-  margin-right: 1rem;
-  font-size: 1.25rem;
-  text-decoration: none;
-  white-space: nowrap;
-}
+
 .navbar-nav {
   display: flex;
   flex-direction: column;
@@ -11504,6 +11482,7 @@ textarea.form-control-lg {
 }
 #wrapper {
   overflow-x: hidden;
+  background-color: rgba(209,242,249,0.4);
 }
 
 #sidebar-wrapper {
@@ -11523,6 +11502,7 @@ textarea.form-control-lg {
 
 #page-content-wrapper {
   min-width: 100vw;
+
 }
 
 body.sb-sidenav-toggled #wrapper #sidebar-wrapper {

@@ -71,14 +71,15 @@
     {% get_accordion_content category.titles_accordion category.content_accordion as show_content %}
     {% if show_content.len_content > 0 %}
 
-        <section class="p-5 mx-md-5">
+        <section class="p-5 mx-md-5 ">
             <div class="accordion">
                 {% for acc_id,t,c in show_content.content_accordion %}
-                    <div class="accordion " id="accordionInfo">
+                    <div class="accordion" id="accordionInfo">
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse"
+{#                                todo change accordion color here (the button)#}
+                                <button class="accordion-button collapsed bg-info" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapse{{ acc_id }}" aria-expanded="false"
                                         aria-controls="collapseTwo">
 {#todo add univers condense here#}
