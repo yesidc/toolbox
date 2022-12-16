@@ -35,9 +35,9 @@ def show_block(request, category_url, next_page):
         return render(request, 'plan/block_content.html', context=locals())
 
 
-def idea_overview_detail(request, category_name, idea_id, detailed_view):
+def idea_overview_detail(request, category_name, idea_id):
     """
-    Implements all the logic related to showing an overview or detailed view of a teaching tool.
+    Implements all the logic related to showing an teaching tool detailed view.
     """
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
 
@@ -80,31 +80,10 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
         return redirect('show_block', category_name, Category.objects.get(category_url=category_name).next_page)
 
     # manages get request
-    if detailed_view == 'detailed_view':
-
-        return render(request, 'plan/idea_detail.html', context=context)
-    else:
-        return render(request, 'plan/idea_overview.html', context=context)
 
 
-@login_required
-def use_idea_overview(request, current_category, idea_id):
-    """
-    Saves idea to a current user plan when user interacts with the overview page.
-    """
-    # checks if user has already created a plan
-    if not has_plan(request):
-        return redirect(request.META.get('HTTP_REFERER'))
+    return render(request, 'plan/idea_detail.html', context=context)
 
-    saved = save_pcoi(request, request.session['current_user_plan'], current_category, idea_id)
-
-    if saved:
-        messages.add_message(request, messages.INFO, 'Idea successfully added to your plan')
-
-        return redirect('show_block', current_category, Category.objects.get(category_url=current_category).next_page)
-    else:
-        messages.add_message(request, messages.INFO, 'This idea has been already added to you course plan')
-        return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -198,9 +177,6 @@ def create_plan(request, start_add):
             plan_to_database()
             # user redirected to previous page
             return redirect(request.META.get('HTTP_REFERER'))
-
-
-
 
 
 @login_required
