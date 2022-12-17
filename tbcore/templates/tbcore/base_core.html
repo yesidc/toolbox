@@ -11,15 +11,9 @@
     <link rel="icon" href="data:;base64,=">
     {#  page title: displayed in browser bar #}
     <title>{% block title %}ToolBox{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'tbcore/css/toolbox_fonts.css' %}">
     <link rel="stylesheet" href="https://use.typekit.net/izv7zyo.css">
-    <link href="//db.onlinewebfonts.com/c/10bae0c1ca71c8bca604cf63b7731533?family=Univers+67+Condensed+Bold"
-          rel="stylesheet" type="text/css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-          rel="stylesheet">
-
     {# Load CSS and JavaScript #}
     {% bootstrap_css %}
     <!-- Bootstrap Font Icon CSS -->
@@ -31,6 +25,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     {% block specific_css %} {% endblock %}
+
 </head>
 {#rgba(209,242,249,0.4)#}
 <body style="background-color: rgba(209,242,249,0.4)">
@@ -44,11 +39,10 @@
     <div class="container-fluid">
 
 
-
         <!-- Brand -->
         <a class="navbar-brand" style="width: 10%" href="{% url 'start-page' %}">
 
-            <img src="{% static '/tbcore/images/logo.PNG' %}" alt=""  class="m-0 w-50 h-25">
+            <img src="{% static '/tbcore/images/logo.PNG' %}" alt="" class="m-0 w-50 h-25">
 
 
         </a>
@@ -70,10 +64,12 @@
                         {% if user.is_authenticated %}
                             <li class="nav-item"><a class="nav-link" href="#"><span
                                     class="text-light adobe-garamond-p">{{ user.username }}</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><span class="text-light adobe-garamond-p">Log out</span></a>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><span
+                                    class="text-light adobe-garamond-p">Log out</span></a>
                             </li>
                         {% else %}
-                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><span class="text-light adobe-garamond-p" >Log in</span></a>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><span
+                                    class="text-light adobe-garamond-p">Log in</span></a>
                             </li>
                         {% endif %}
 
@@ -92,28 +88,17 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <footer class="bg-light text-start text-lg-start p-3">
 
     <div class="container-fluid">
 
         <i class="bi bi-send"></i>
-        <p class="text-center">We are happy to help! For help and support please contact the Cosmos team via
+        <p class="text-center univers-condensed-bold">We are happy to help! For help and support please contact the
+            Cosmos team via
             os-cosmos@uni-osnabrueck.de</p>
 
     </div>
+
 
 </footer>
 

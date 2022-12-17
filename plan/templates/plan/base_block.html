@@ -4,7 +4,9 @@
 
 {% block specific_css %}
     {% load static %}
+
     <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
+
 {% endblock %}
 
 
@@ -14,11 +16,11 @@
     <div class="col-12 top-nav ">
 
 
-            <ul class="navbar-nav float-none float-md-end mb-md-0 ">
+            <ul class="navbar-nav float-none univers-con-regular float-md-end mb-md-0 ">
 
                 {% for c_name, c_url,next_page in category_objects %}
                     <li class="nav-item px-md-3"><a class="nav-link" href="{% url 'show_block' c_url next_page %}"><span
-                            class="text-light univers-con-no-bold">{{ c_name }}</span></a>
+                            class="text-light " style="font-size: 17px">{{ c_name }}</span></a>
                     </li>
                 {% endfor %}
 
@@ -56,7 +58,7 @@
                 <!-- Icon sidebar -->
 
                 <div class="col-2">
-                    <button class="btn btn-toolbox-color text-light menu-btn" id="sidebarToggle"><i class="bi bi-list"></i> My
+                    <button class="btn btn-toolbox text-light menu-btn" id="sidebarToggle"><i class="bi bi-list"></i> My
                         course Plans
                     </button>
                 </div>
@@ -124,7 +126,7 @@
                                 {% crispy plan_form %}
                                 {#                                {{ plan_form.plan_name }}#}
                                 <input type="submit" name="Submit" value="Add new course"
-                                       class="btn btn-toolbox-color text-light menu-btn my-0 mb-3" form="add_new_course_form">
+                                       class="btn btn-toolbox text-light menu-btn my-0 mb-3" form="add_new_course_form">
                             </form>
 
                         </div>
@@ -184,7 +186,7 @@
 
                                 <div class="d-flex justify-content-end my-md-3">
                                     <div>
-                                        <a href="{% url 'checklist' %}" class="btn btn-toolbox-color text-light">View checklist</a>
+                                        <a href="{% url 'checklist' %}" class=" btn btn-toolbox text-light">View checklist</a>
                                     </div>
                                 </div>
 

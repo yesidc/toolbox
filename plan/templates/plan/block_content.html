@@ -32,7 +32,7 @@
                     <div>
 
                         <p class="lead">You are browsing without log-in. For generating a personal checklist with your own ideas about how you want to use the tools, please sign in.</p>
-                        <a class="btn btn-toolbox-color text-light button-touch" href="{% url 'login' %}">Start personal checklist</a>
+                        <a class="btn btn-toolbox text-light button-touch" href="{% url 'login' %}">Start personal checklist</a>
                     </div>
 
 
@@ -42,9 +42,6 @@
 
         </section>
     {% endif %}
-
-
-
 
 
     <!-- Block introductory text -->
@@ -123,14 +120,14 @@
             <div>
 
                 {% if user.is_authenticated %}
-                    <a href="{% url 'checklist' %}" class="btn btn-toolbox-color text-light active m-4" aria-current="page">View checklist</a>{% endif %}
+                    <a href="{% url 'checklist' %}" class="btn btn-toolbox text-light m-4" aria-current="page">View checklist</a>{% endif %}
 
             </div>
             <div>
 
                 {% if category.category_name != 'Rules & Regulations' %}
                     {% get_name_next_category next_page as c_next_button %}
-                    <a href="{% url  'show_block' next_page c_next_button.c_next %}" class="btn btn-toolbox-color text-light active m-4"
+                    <a href="{% url  'show_block' next_page c_next_button.c_next %}" class="btn btn-toolbox text-light m-4"
                        aria-current="page"> Next building block: {{ c_next_button.c_name }} </a>
                 {% endif %}
 
