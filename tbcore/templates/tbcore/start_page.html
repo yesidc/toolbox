@@ -6,6 +6,9 @@
 {% block specific_css %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
+    <link rel="stylesheet" href="{% static 'tbcore/css/toolbox_fonts.css' %}">
+
+
 {% endblock %}
 
 {% block content %}
@@ -19,10 +22,10 @@
 
             <div class="row ">
 
-                <h1 class="mt-md-3 text-center paragraph heading-banner">Opening on-site courses for online learning</h1>
+                <h1 class="my-md-3 text-center heading-banner">Opening on-site courses for online learning</h1>
                 <div class="col-md-8">
-                    <div class="d-flex align-items-center my-5 py-1 paragraph">
-                        <ul>
+                    <div class="d-flex align-items-center  my-5 py-1 ">
+                        <ul class="univers-con-regular">
                             <li class="lead">Find teaching tools and technology to <br>open your courses
                                 for online learning
                             </li>
@@ -49,18 +52,18 @@
 
                         {% if not user.is_authenticated %}
                             <div>
-                                <a href="{% url 'login' %}" class="btn btn-toolbox-color text-light mx-5">Start course revision</a>
+                                <a href="{% url 'login' %}" class="btn btn-toolbox text-light mx-5">Start course revision</a>
                             </div>
                             <div>
                                 <a href="{% url 'show_block' "human_touch" "teaching_material" %}"
-                                   class="btn btn-toolbox-color text-light mx-5">Browse without log-in</a>
+                                   class="btn btn-toolbox text-light mx-5">Browse without log-in</a>
                             </div>
 
                         {% else %}
 
                             <div>
                                 <a href="{% url 'show_block' "human_touch" "teaching_material" %}"
-                                   class="btn btn-toolbox-color text-light mx-1 px-2" >Keep working on my courses</a>
+                                   class="btn btn-toolbox text-light mx-1 px-2" >Keep working on my courses</a>
                             </div>
 
                         {% endif %}
@@ -189,7 +192,7 @@
 
                 </div>
                 <div class="col-4">
-                    <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/ " class="btn btn-primary"
+                    <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/ " class="btn btn-toolbox text-light"
                        target="_blank">Teaching Tips to improve your class</a>
                 </div>
             </div>

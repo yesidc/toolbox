@@ -1,0 +1,34 @@
+@font-face {
+    font-family: "Univers Condensed 57 Regular";
+    src: url("../font/@font-face-57/7d10e4da91ecdcf3e9e69cfe1de97f77.eot"); /* IE9*/
+    src: url("../font/@font-face-57/7d10e4da91ecdcf3e9e69cfe1de97f77.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */ url("../font/@font-face-57/7d10e4da91ecdcf3e9e69cfe1de97f77.woff2") format("woff2"), /* chrome、firefox */ url("7d10e4da91ecdcf3e9e69cfe1de97f77.woff") format("woff"), /* chrome、firefox */ url("../font/@font-face-57/7d10e4da91ecdcf3e9e69cfe1de97f77.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url("7d10e4da91ecdcf3e9e69cfe1de97f77.svg#Univers Condensed 57 Regular") format("svg"); /* iOS 4.1- */
+}
+
+@font-face {
+    font-family: "Univers 67 Condensed Bold";
+    src: url("../font/@font-face/10bae0c1ca71c8bca604cf63b7731533.eot"); /* IE9*/
+    src: url("../font/@font-face/10bae0c1ca71c8bca604cf63b7731533.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */ url("../font/@font-face/10bae0c1ca71c8bca604cf63b7731533.woff2") format("woff2"), /* chrome、firefox */ url("10bae0c1ca71c8bca604cf63b7731533.woff") format("woff"), /* chrome、firefox */ url("../font/@font-face/10bae0c1ca71c8bca604cf63b7731533.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url("10bae0c1ca71c8bca604cf63b7731533.svg#Univers 67 Condensed Bold") format("svg"); /* iOS 4.1- */
+}
+
+.univers-bold {
+    color: #000;
+    line-height: 1.2em;
+    font-family: "Univers 67 Condensed Bold", "Arial Black" !important;
+
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+}
+
+.univers-con-regular {
+
+    line-height: 1.2em;
+    font-weight: normal;
+    font-family: "Univers Condensed 57 Regular", "Arial Black" !important;
+    font-size: 22px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+}

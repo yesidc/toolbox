@@ -1,15 +1,21 @@
-{% extends 'tbcore/base_core.html' %}
+{#{% extends 'tbcore/base_core.html' %}#}
+{% extends 'tbcore/../../../tbcore/static/tbcore/css/Demo.html' %}
 {% load crispy_forms_tags %}
 {% load toolbox_custom_tags %}
 
-{% block specific_css %}
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
-{% endblock %}
+{#{% block specific_css %}#}
+{#    {% load static %}#}
+{#    <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">#}
+{#{% endblock %}#}
+{##}
+{#{% block content %}#}
+{##}
+{#    <h1 class="paragraph">heading</h1>#}
+{#<p class="paragraph">some long test to tesho asfaho asdfhoh sfahoh asdhoiwohefr as;ohiashfd sahfoashfd asfho;ahsfasjdhfa;hsfljajfl  a;osdfj</p>#}
+{##}
+{#{% endblock %}#}
 
-{% block content %}
 
-    <h1 class="paragraph">heading</h1>
-<p class="paragraph">some long test to tesho asfaho asdfhoh sfahoh asdhoiwohefr as;ohiashfd sahfoashfd asfho;ahsfasjdhfa;hsfljajfl  a;osdfj</p>
-
+{% block test %}
+   <h1 class="demo">testing font</h1>
 {% endblock %}
