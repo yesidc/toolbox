@@ -40,12 +40,15 @@
 
 
         <!-- Brand -->
-        <a class="navbar-brand" style="width: 10%" href="{% url 'start-page' %}">
+        <div class="nav-bar-container"><a class="navbar-brand" href="{% url 'start-page' %}">
 
-            <img src="{% static '/tbcore/images/logo.PNG' %}" alt="" class="m-0 w-50 h-25">
+            <img src="{% static '/tbcore/images/logo.PNG' %}" alt="" class="m-0  w-25 h-25">
 
 
         </a>
+
+        </div>
+    
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span
                 class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div id="navcol-1" class="collapse navbar-collapse">
@@ -60,7 +63,7 @@
 
                 <!-- username and logout navbar  -->
                 <div class="col-12 order-md-first">
-                    <ul class="navbar-nav float-none float-md-end">
+                    <ul class="navbar-nav float-md-end">
                         {% if user.is_authenticated %}
                             <li class="nav-item"><a class="nav-link" href="#"><span
                                     class="text-light adobe-garamond-p">{{ user.username }}</span></a></li>
