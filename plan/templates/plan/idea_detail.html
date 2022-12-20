@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block building_block_idea %}
-    <section>
+    <section class="pt-4">
 
 
         <div class="container-fluid">
@@ -48,9 +48,21 @@
 
                 {% else %}
 
+                    <div class="w-75 mx-auto">
 
-                    {% show_idea_property idea.brief_description 'Description' 'show_in_section' %}
+                        <div class="col text-center">
+                            <h3>{{ idea.idea_name }}</h3>
+                        </div>
 
+                        {% show_idea_property idea.brief_description 'Description' 'show_in_section' %}
+
+                        {% if idea.use_cases %}
+
+                        {% show_idea_property idea.use_cases 'Use cases' 'show_in_section' %}
+
+                    {% endif %}
+
+                    </div>
 
                 {% endif %}
 
@@ -58,9 +70,10 @@
 
 
             <div class="row">
+                {% if user.is_authenticated %}
                 <div class="col-md-6">
 
-                    {% if idea.use_cases %}
+                   {% if idea.use_cases %}
 
                         {% show_idea_property idea.use_cases 'Use cases' 'show_in_section' %}
 
@@ -68,7 +81,7 @@
 
 
                 </div>
-
+{% endif %}
                 <div class="col-md-6">
 
 
@@ -79,8 +92,8 @@
 
 
                                 <button type="submit" form="notes-form" value="Submit"
-                                        class="btn btn-toolbox text-light m-4 pb-3">Use
-                                    this online recommendation in my course
+                                        class="btn btn-toolbox shadow-lg text-light m-4 pb-3">Use
+                                    Teaching Tool
                                 </button>
 
                             </div>
@@ -103,86 +116,63 @@
 
 
 
-    <div class="accordion accordion-flush mx-md-auto w-75 " id="accordionFlushIdea">
+    <div class="accordion accordion-flush mx-md-auto w-75 py-5 " id="accordionFlushIdea">
+        <div class="shadow-lg">
+
+            {% show_idea_property idea.technology 'Technology' 'show_in_accordion' %}
+
+            {% show_idea_property idea.teacher_effort 'Teacher Effort' 'show_in_accordion' %}
 
 
-        {% show_idea_property idea.technology 'Technology' 'show_in_accordion' %}
-
-        {% show_idea_property idea.teacher_effort 'Teacher Effort' 'show_in_accordion' %}
 
 
+            {% if idea.implementation_steps %}
+                {% show_idea_property idea.implementation_steps 'Implementation Steps' 'show_in_accordion' %}
+
+            {% endif %}
 
 
-        {% if idea.implementation_steps %}
-            {% show_idea_property idea.implementation_steps 'Implementation Steps' 'show_in_accordion' %}
-
-        {% endif %}
+            {% show_idea_property idea.recommendations 'Recommendations' 'show_in_accordion' %}
 
 
-        {% show_idea_property idea.recommendations 'Recommendations' 'show_in_accordion' %}
+            {% if idea.supplementary_material %}
+
+                {% show_idea_property idea.supplementary_material 'Supplementary Material' 'show_in_accordion' %}
+
+            {% endif %}
 
 
-        {% if idea.supplementary_material %}
-
-            {% show_idea_property idea.supplementary_material 'Supplementary Material' 'show_in_accordion' %}
-
-        {% endif %}
 
 
-{##}
-{#        {% if idea.reusable %}#}
-{#            {% show_idea_property idea.reusable 'Reusable' 'show_in_accordion' %}#}
-{##}
-{#        {% endif %}#}
-{##}
+            {% if idea.references %}
+
+                {% show_idea_property idea.references 'References' 'show_in_accordion' %}
 
 
-        {% if idea.references %}
+            {% endif %}
 
-            {% show_idea_property idea.references 'References' 'show_in_accordion' %}
-
-
-        {% endif %}
-
-
+        </div>
 
     </div>
 
 
 
-            {% if idea.testimony %}
-            <section class="bg-light mt-4 p-5 mb-4">
-                <div class="container">
+    {% if idea.testimony %}
+        <section class="bg-light mt-4 p-5 mb-4">
+            <div class="container">
 
-                    <h3 class="text-center">Testimony</h3>
+                <h3 class="text-center">Testimony</h3>
 
-                    <p>{% md_to_html idea.testimony as testimony_html %}{{ testimony_html|safe }}</p>
-
-
-                </div>
-            </section>{% endif %}
+                <p>{% md_to_html idea.testimony as testimony_html %}{{ testimony_html|safe }}</p>
 
 
+            </div>
+        </section>{% endif %}
 
 
-        {#    {% if user.is_authenticated %}#}
-        {#        <section class="bg-light text-dark mb-4">#}
-        {##}
-        {#            <div class="d-flex justify-content-end">#}
-        {#                <div>#}
-        {##}
-        {##}
-        {#                    <button type="submit" form="notes-form" value="Submit" class="btn btn-primary active m-4 pb-3">Use#}
-        {#                        this online recommendation in my course#}
-        {#                    </button>#}
-        {##}
-        {#                </div>#}
-        {##}
-        {#            </div>#}
-        {#        </section>{% endif %}#}
 
-        <script src="{% static 'plan/js/utils.js' %}"></script>
-        <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
+    <script src="{% static 'plan/js/utils.js' %}"></script>
+    <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
 
 
 {% endblock %}

@@ -15,7 +15,7 @@ Toolbox
 
 .body, body {
     margin: 0;
-    background-color: rgba(209, 242, 249, 0.4);
+    background-color: rgba(209, 242, 249, 0.1);
     font-family: adobe-garamond-pro, serif, Arial;
 
     font-weight: 400;
@@ -57,7 +57,7 @@ Toolbox
     min-height: 90vh;
     max-width: 100%;
     position: relative;
-    background-color: rgba(209, 242, 249, 0.9);
+    /*background-color: rgba(209, 242, 249, 0.9);*/
 
 
 }
@@ -84,11 +84,11 @@ div.no-indent ol {
 
 
 .tr-main-table:nth-of-type(even) {
-    background-color: #ccffff;
+    background-color: #f2f2f2;
 }
 
 .tr-main-table:nth-of-type(odd) {
-    background-color: #e6ffff;
+    background-color: #f2f2f2;
 }
 
 .checklist_checkbox {
@@ -1101,7 +1101,7 @@ ul {
 
 #wrapper {
     overflow-x: hidden;
-    background-color: rgba(209, 242, 249, 0.4);
+
 }
 
 #sidebar-wrapper {

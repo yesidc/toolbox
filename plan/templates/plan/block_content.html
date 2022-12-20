@@ -25,14 +25,23 @@
 
 
     {% if not user.is_authenticated %}
-        <section class="bg-light text-dark p-3 mt-1">
-            <div class="container">
+
+
+
+             <div class="text-center">
+     <h2 class="text-center paragraph" id="category-url-save-idea" data-category-url="{{ category.category_url }}">{{ category.category_name }}</h2>
+</div>
+        <section class=" bg-light text-dark p-3 mt-1">
+
+
+
+            <div class="container w-75 mx-auto">
                 <div class="d-flex flex-column ">
 
                     <div>
 
-                        <p class="lead">You are browsing without log-in. For generating a personal checklist with your own ideas about how you want to use the tools, please sign in.</p>
-                        <a class="btn btn-toolbox text-light button-touch" href="{% url 'login' %}">Start personal checklist</a>
+                        <p class="lead">You are browsing without log-in. To create a personal checklist please sign in.</p>
+                        <a class="btn btn-toolbox text-light button-touch" href="{% url 'login' %}">Start course revision</a>
                     </div>
 
 
@@ -41,16 +50,20 @@
             </div>
 
         </section>
+
+
+
+
     {% endif %}
 
 
     <!-- Block introductory text -->
 
-    <section class="p-0  mx-md-5">
+    <section class="w-75 mx-auto pb-md-5 pb-sm-3">
         <div class="container">
 
             <div class="container">
-                <div class="mx-md-5"><p class="text-start mx-md-5 px-md-5">
+                <div class=""><p class="text-start mx-md-5 px-md-5">
 
 
                     {% md_to_html category.short_description as short_d_html %}{{ short_d_html|safe }}
@@ -68,17 +81,17 @@
     {% get_accordion_content category.titles_accordion category.content_accordion as show_content %}
     {% if show_content.len_content > 0 %}
 
-        <section class="p-5 mx-md-5 ">
-            <div class="accordion">
+        <section class=" w-75 mx-auto">
+            <div class="accordion shadow-lg">
                 {% for acc_id,t,c in show_content.content_accordion %}
                     <div class="accordion" id="accordionInfo">
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
 {#                                todo change accordion color here (the button)#}
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapse{{ acc_id }}" aria-expanded="false"
-                                        aria-controls="collapseTwo" style="background-color: rgba(209, 242, 249, 0.6)">
+                                        aria-controls="collapseTwo" >
 
                                    <h3 class="paragraph"> {% md_to_html t as title_html %}{{ title_html|safe }}</h3>
 
