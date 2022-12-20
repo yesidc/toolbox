@@ -76,10 +76,10 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
 {#                                todo change accordion color here (the button)#}
-                                <button class="accordion-button collapsed bg-info" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapse{{ acc_id }}" aria-expanded="false"
-                                        aria-controls="collapseTwo">
-{#todo add univers condense here#}
+                                        aria-controls="collapseTwo" style="background-color: rgba(209, 242, 249, 0.6)">
+
                                    <h3 class="paragraph"> {% md_to_html t as title_html %}{{ title_html|safe }}</h3>
 
                                 </button>

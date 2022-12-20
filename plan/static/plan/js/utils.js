@@ -13,7 +13,7 @@ function open_internal_link(internal_url) {
 function set_menu_color() {
     // set the color of EVERY  course plan shown on the side nav bar.
     for (i of all_plans) {
-        i.style.backgroundColor = '#ededd1'
+        i.style.backgroundColor = 'rgba(209, 242, 249, 0.9)'
     }
 }
 
@@ -22,7 +22,7 @@ set_menu_color()
 
 // sets the color of ACTIVE the nav bar plan  when the user accesses a different building block
 try {
-    document.getElementById('plan-side-bar-' + add_hyphen(plan_name_dom.dataset.planName)).style.backgroundColor = '#6db784'
+    document.getElementById('plan-side-bar-' + add_hyphen(plan_name_dom.dataset.planName)).style.backgroundColor = '#e99f4c'
 } catch (error) {
 
 }
@@ -60,10 +60,10 @@ for (i of plan_collapse) {
                         set_menu_color()
                         set_plan_collapse_color()
                         //'rgba(163,217,234,0.5)'
-                        // sets the color of the plan's name on the sidebar
-                        document.getElementById('plan-side-bar-' + add_hyphen(response.plan_name_ajax)).style.backgroundColor = '#6db784'
+                        // sets the color of the ACTIVE plan's name on the sidebar
+                        document.getElementById('plan-side-bar-' + add_hyphen(response.plan_name_ajax)).style.backgroundColor = '#e99f4c'
                         // sets the color of the drop-down menu on the sidebar
-                        document.getElementById(add_hyphen(response.plan_name_ajax)).style.backgroundColor = '#6db784'
+                        document.getElementById(add_hyphen(response.plan_name_ajax)).style.backgroundColor = '#ededd1'
 
                         for (const c_done of response.category_ready) {
                             //ticks off the (sidebar)checkbox if user has already selected at least one idea for any given category
