@@ -2,6 +2,7 @@ from django import template
 from tbcore.models import Category, OnlineIdea
 import markdown
 from django.db.models import Count
+from django.template.defaultfilters import slugify
 register = template.Library()
 
 
@@ -15,7 +16,7 @@ def add_hyphen(value):
         value: string
     """
 
-    return value.replace(' ', '-')
+    return slugify(value)
 
 
 @register.simple_tag
@@ -27,7 +28,8 @@ def sub_task_complexity(complexity,highest_complexity):
 @register.simple_tag()
 def get_single_category(value):
     """
-    Takes as an argument a queryset and returns a single object Category instance
+    Takes as an argument a queryset and returns a single object of type Category.
+
     """
     return  value[0]
 

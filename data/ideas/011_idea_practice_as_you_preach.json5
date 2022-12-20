@@ -14,6 +14,6 @@ use_cases: "In every course with an interactive element",
 references: "",
 reusable: "Students get used to your teaching approach and usually adapt themselves to it.",
 task_complexity: "1",
-category: 'discussion',
+category: 'Discussion',
 
 }

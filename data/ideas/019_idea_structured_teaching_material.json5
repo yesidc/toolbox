@@ -14,6 +14,6 @@ use_cases: "Suitable in any course that has online material.",
 references: "",
 reusable: "Yes, for the same course.",
 task_complexity: "2",
-category: 'organization',
+category: 'Organization',
 
 }

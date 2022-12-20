@@ -10,6 +10,17 @@ function open_internal_link(internal_url) {
 
 }
 
+function slugify(str_slug){
+
+    str_slug=str_slug.toLowerCase()
+    str_slug=str_slug.trim()
+    str_slug=str_slug.replace(/[^\w\s-]/g, '')
+    str_slug=str_slug.replace(/[\s_-]+/g, '-')
+    str_slug=str_slug.replace(/^-+|-+$/g, '');
+    return str_slug;
+}
+
+
 function set_menu_color() {
     // set the color of EVERY  course plan shown on the side nav bar.
     for (i of all_plans) {
@@ -22,15 +33,13 @@ set_menu_color()
 
 // sets the color of ACTIVE the nav bar plan  when the user accesses a different building block
 try {
-    document.getElementById('plan-side-bar-' + add_hyphen(plan_name_dom.dataset.planName)).style.backgroundColor = '#e99f4c'
+    document.getElementById('plan-side-bar-' + slugify(plan_name_dom.dataset.planName)).style.backgroundColor = '#e99f4c'
 } catch (error) {
 
 }
 
 
-function add_hyphen(plan) {
-    return plan.replaceAll(' ', '-');
-}
+
 
 function set_plan_collapse_color() {
     for (p of plan_collapse) {
@@ -59,11 +68,11 @@ for (i of plan_collapse) {
                         // plan's name color
                         set_menu_color()
                         set_plan_collapse_color()
-                        //'rgba(163,217,234,0.5)'
+
                         // sets the color of the ACTIVE plan's name on the sidebar
-                        document.getElementById('plan-side-bar-' + add_hyphen(response.plan_name_ajax)).style.backgroundColor = '#e99f4c'
+                        document.getElementById('plan-side-bar-' + slugify(response.plan_name_ajax)).style.backgroundColor = '#e99f4c'
                         // sets the color of the drop-down menu on the sidebar
-                        document.getElementById(add_hyphen(response.plan_name_ajax)).style.backgroundColor = '#ededd1'
+                        document.getElementById(slugify(response.plan_name_ajax)).style.backgroundColor = '#ededd1'
 
                         for (const c_done of response.category_ready) {
                             //ticks off the (sidebar)checkbox if user has already selected at least one idea for any given category

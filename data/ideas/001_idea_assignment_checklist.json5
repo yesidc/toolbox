@@ -15,7 +15,7 @@ use_cases: "- For complex assignments where students have to analyse, evaluate, 
 references: "McTighe &Martin-Kniep *Seven strategies for supporting student learning in a remote environment* 2020",
 reusable: "yes",
 task_complexity: "2",
-  category: 'assessment',
+  category: 'Assessment',
 }
 
 
