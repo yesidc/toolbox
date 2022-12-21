@@ -4,8 +4,7 @@ const plan_name_dom = document.getElementById('plan_name_dom')
 
 
 function open_internal_link(internal_url) {
-
-    //var link_internal = window.location.host + internal_url
+// Open internal links (specified in the json5 files)
     window.open(internal_url)
 
 }
@@ -39,14 +38,11 @@ try {
 }
 
 
-
-
 function set_plan_collapse_color() {
     for (p of plan_collapse) {
         p.style.backgroundColor = 'rgba(163,217,234,0.2)'
     }
 }
-
 
 
 for (i of plan_collapse) {
