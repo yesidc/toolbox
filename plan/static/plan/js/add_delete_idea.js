@@ -128,6 +128,10 @@ function add_delete_idea_checklist(btn_id){
             },
             success:function (response){
                  $('.'+ btn_id).remove()     // deletes the idea, note and delete button from the checklist page
+                if (response.delete_block){
+                    $('#'+response.pcoi_category).remove() // deletes the entire building block from the checklist.
+                }
+
             }
         }
     )

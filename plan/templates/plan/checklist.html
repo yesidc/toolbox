@@ -20,10 +20,7 @@
 {% block building_block_idea %}
 
     <section>
-        {#        <h1 class="text-center mb-md-5 mb-sm-2 py-md-3 py-sm-1 mb-sm-2 text-primary">Checklist: {{ current_plan.plan_name }}</h1>#}
 
-
-        {#Summary Table#}
 
         <table class="table table-hover align-middle table-responsive mt-3">
             <thead>
@@ -41,7 +38,8 @@
 
 
             {% for c_done, idea_ins in context_summary %}
-                <tr class="tr-main-table">
+
+                <tr class="tr-main-table" id="{{ c_done|add_hyphen }}">
 
                     <td><input type="checkbox" class="checklist_checkbox"></td>
 
@@ -124,7 +122,7 @@
                                 <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows">
                                     <td>
                                         <button onclick="add_delete_idea_checklist(this.id)"
-                                                id="pcoi-instance-{{ pcoi_instance_id }}"><i class="bi bi-trash"></i>
+                                                id="pcoi-instance-{{ pcoi_instance_id }}" class="btn-toolbox text-light"><i class="bi bi-trash"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -165,7 +163,7 @@
         <div class="d-flex justify-content-end">
             <div>
                 <a href="{% url 'checklist' %}?crate_pdf={{ True }} "
-                   class="btn btn-primary p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
+                   class="btn btn-toolbox text-light p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
             </div>
         </div>
     </section>

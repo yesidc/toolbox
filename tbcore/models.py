@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 import json5
+from django.db.models.signals import pre_save, post_save
 from tbcore.utils.fields import idea_fields, category_fields
-from tbcore.utils.base import Json5ParseException, InconsitentText
+from tbcore.utils.base import Json5ParseException, InconsistentText
 import re
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
-
-
+from django.template.defaultfilters import slugify
 
 
 class PlanCategoryOnlineIdeaManager(models.Manager):
@@ -98,11 +98,17 @@ class Category(models.Model):
     titles_accordion = models.TextField(null=True)  # accordion info
     content_accordion = models.TextField(null=True)  # requirements --> added to the accordion (building block page)
     references = models.TextField(null=True)
-    category_url = models.CharField(max_length=50)
-    next_page = models.CharField(max_length=100, null=True)
+    category_url = models.SlugField(blank=True, null=True)
+    next_page = models.SlugField(null=True)
 
     def __str__(self):
         return self.category_name
+
+    def save(self, *args, **kwargs):
+        if self.category_url is None:
+
+            self.category_url = slugify(self.category_name)
+        return super().save(*args, **kwargs)
 
     class Meta:
         ordering = ('category_id',)
@@ -154,12 +160,12 @@ class OnlineIdea(models.Model):
         if isinstance(idea_category, list):
             for c in idea_category:
                 try:
-                    obj.category.add(Category.objects.get(category_url=c))
+                    obj.category.add(Category.objects.get(category_url=slugify(c)))
                 except Category.DoesNotExist:
                     print(f'this category does not exist: {c}')
         else:
             try:
-                obj.category.add(Category.objects.get(category_url=idea_category))
+                obj.category.add(Category.objects.get(category_url=slugify(idea_category)))
             except Category.DoesNotExist:
                 print(f'this category does not exist: {idea_category}')
 
@@ -207,7 +213,7 @@ class PlanCategoryOnlineIdea(models.Model):
         To create sections/paragraphs you must add the special token '[SPLIT]'. Each section requires a title or heading.
         """
         if len(re.findall(r"\[SPLIT]", headings)) != len(re.findall(r"\[SPLIT]", text)):
-            raise InconsitentText('The number of headings and paragraphs must be the same. ')
+            raise InconsistentText('The number of headings and paragraphs must be the same. ')
 
     @staticmethod
     def check_json5(data_json5, mode):
@@ -234,7 +240,7 @@ class PlanCategoryOnlineIdea(models.Model):
             # these fields are not mandatory
             if field not in ['testimony', 'next_page', 'references', 'supplementary_material', 'reusable',
                              'implementation_steps',
-                             'use_cases', 'titles_accordion', 'content_accordion']:
+                             'use_cases', 'titles_accordion', 'content_accordion', 'category_url']:
                 if field not in d_json5:
                     raise Json5ParseException('Field "{}" is missing'.format(field))
                 if not d_json5[field]:

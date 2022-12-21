@@ -35,9 +35,9 @@ def show_block(request, category_url, next_page):
         return render(request, 'plan/block_content.html', context=locals())
 
 
-def idea_overview_detail(request, category_name, idea_id, detailed_view):
+def idea_overview_detail(request, category_name, idea_id):
     """
-    Implements all the logic related to showing an overview or detailed view of a teaching tool.
+    Implements all the logic related to showing an teaching tool detailed view.
     """
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
 
@@ -80,31 +80,10 @@ def idea_overview_detail(request, category_name, idea_id, detailed_view):
         return redirect('show_block', category_name, Category.objects.get(category_url=category_name).next_page)
 
     # manages get request
-    if detailed_view == 'detailed_view':
-
-        return render(request, 'plan/idea_detail.html', context=context)
-    else:
-        return render(request, 'plan/idea_overview.html', context=context)
 
 
-@login_required
-def use_idea_overview(request, current_category, idea_id):
-    """
-    Saves idea to a current user plan when user interacts with the overview page.
-    """
-    # checks if user has already created a plan
-    if not has_plan(request):
-        return redirect(request.META.get('HTTP_REFERER'))
+    return render(request, 'plan/idea_detail.html', context=context)
 
-    saved = save_pcoi(request, request.session['current_user_plan'], current_category, idea_id)
-
-    if saved:
-        messages.add_message(request, messages.INFO, 'Idea successfully added to your plan')
-
-        return redirect('show_block', current_category, Category.objects.get(category_url=current_category).next_page)
-    else:
-        messages.add_message(request, messages.INFO, 'This idea has been already added to you course plan')
-        return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -180,7 +159,7 @@ def create_plan(request, start_add):
         if request.method == "POST":
             plan_to_database()
 
-            return redirect('show_block', 'human_touch', 'teaching_material')
+            return redirect('show_block', 'human-touch', 'teaching-material')
 
         try:
             # if user does not fill out the form to create a new course/plan, the current plan/course
@@ -198,9 +177,6 @@ def create_plan(request, start_add):
             plan_to_database()
             # user redirected to previous page
             return redirect(request.META.get('HTTP_REFERER'))
-
-
-
 
 
 @login_required
@@ -258,9 +234,20 @@ def delete_pcoi_checklist(request):
     """
     Manages all related to deleting PlanCategoryOnlineIdea objects when users interact with the checklist page
     """
+    pcoi_delete = PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id'))
+    pcoi_category = pcoi_delete.category.category_name
+    pcoi_delete.delete()
+    remaining_ideas = PlanCategoryOnlineIdea.objects.select_related('plan__user', 'category').filter(
+        Q(plan__user=request.user)& Q(plan=request.session['current_user_plan'])&Q(category__category_name=pcoi_category)).count()
+    if remaining_ideas >0:
+        delete_block= False
 
-    PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id')).delete()
-    return JsonResponse({}, status=200)
+    else:
+        delete_block = True
+
+
+    # PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id')).delete()
+    return JsonResponse({'delete_block':delete_block, 'pcoi_category': slugify(pcoi_category)}, status=200)
 
 
 @login_required()
@@ -303,7 +290,7 @@ def delete_plan(request, plan_id):
         if p is not None:
             request.session['current_user_plan'] = p.pk
             request.session['current_user_plan_name'] = p.plan_name
-        return redirect('show_block', 'human_touch', 'teaching_material')
+        return redirect('show_block', 'human-touch', 'teaching-material')
     else:
 
         return redirect(request.META.get('HTTP_REFERER'))

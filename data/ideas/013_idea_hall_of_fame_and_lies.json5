@@ -14,6 +14,6 @@ use_cases: "- Suitable in all courses to get to know each other.",
 references: "",
 reusable: "yes",
 task_complexity: "1",
-category: 'human_touch',
+category: 'Human Touch',
 
 }

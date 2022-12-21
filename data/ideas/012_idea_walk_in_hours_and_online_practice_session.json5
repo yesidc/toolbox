@@ -14,6 +14,6 @@ use_cases: "- Tutorials that are not teacher-centered",
 references: "",
 reusable: "no",
 task_complexity: "1",
-category: 'discussion',
+category: 'Discussion',
 
 }

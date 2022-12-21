@@ -6,7 +6,7 @@
     titles_accordion: "Online Course Requirements",
     content_accordion: "- There must be opportunities to be assessed online. If necessary, offer individual arrangements.\n- Synchronous assessments must be possible to be attended by COSMOS students in their local time zone from 8:00 to 20:00.",
     references : "no-data",
-    category_url : "assessment",
-    next_page : "rules_regulations",
+
+    next_page : "rules-regulations",
 
 }

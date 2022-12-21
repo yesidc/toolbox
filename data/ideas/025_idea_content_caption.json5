@@ -14,5 +14,5 @@ use_cases: "- To introduce a new topic\n- To summarize the most important topics
 references: "„Content captions make the courseware more appealing, and seem to help online students a lot when studying for organizing, focussing and staying motivated, probably because these texts with a few sentences compensate context that on-site students have.  \nLutter et al. GMW conference 2022 ",
 reusable: "yes",
 task_complexity: "1",
-category: 'teaching_material',
+category: 'Teaching Material',
 }

@@ -6,24 +6,35 @@
 {% block specific_css %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
+    <link rel="stylesheet" href="{% static 'tbcore/css/toolbox_fonts.css' %}">
+
+
 {% endblock %}
 
 {% block content %}
 
     {#Showcase#}
 
-    <section class="bg-light text-dark p-3 mt-0">
-        <div class="container">
+    <section class="bg-light text-dark mx-md-4 mx-sm-2">
+        <div class="container-fluid image-banner mx-md-5 mx-sm-2 px-md-2"
+             style='background-image: url("{% static '/tbcore/images/toolbox_banner.PNG' %}")'
+        >
 
-            <div class="row">
-                <h1 class="mb-3">Opening on-site courses for online learning.</h1>
+            <div class="row ">
+
+                <h1 class="my-md-3 text-center heading-banner">Opening on-site courses for online learning</h1>
                 <div class="col-md-8">
-                    <div class="d-flex align-items-center my-3 py-1">
-                        <ul>
-                            <li class="lead">Find teaching tools and technology to open your courses for online learning
+                    <div class="d-flex align-items-center  my-5 py-1 ">
+                        <ul class="univers-con-regular">
+                            <li class="lead">Find teaching tools and technology to <br>open your courses
+                                for online learning
                             </li>
-                            <li class="lead">Assess the effort</li>
-                            <li class="lead">Create your personal checklist with notes and ideas on the teaching tools you select (sign in)
+                            <br>
+                            <li class="lead">Assess the preparation effort</li>
+                            <br>
+                            <li class="lead">Create your personal checklist with notes and ideas <br> on the teaching
+                                tools
+                                you select (sign in)
                             </li>
 
                         </ul>
@@ -32,69 +43,225 @@
                     </div>
 
 
-
                 </div>
-                <div class="col-md-4">
-                    <img class="img-fluid my-1 py-1" src="{% static '/tbcore/images/start_page.png' %}" alt="">
-                </div>
-            </div>
 
-            <div class="row m-0 p-0">
+
+                <div class="row mt-md-5 p-md-5">
 
                     {% block create_course %}
-                        <div class="d-flex">
+                        <div class="d-flex mt-md-5">
 
                             {% if not user.is_authenticated %}
                                 <div>
-                                    <a href="{% url 'login' %}" class="btn btn-primary mx-5">Start course revision</a>
+                                    <a href="{% url 'login' %}" class="btn btn-toolbox text-light mx-5">Start course
+                                        revision</a>
                                 </div>
                                 <div>
-                                    <a href="{% url 'show_block' "human_touch" "teaching_material" %}" class="btn btn-primary mx-5">Browse without log-in</a>
+                                    <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
+                                       class="btn btn-toolbox text-light mx-5">Browse without log-in</a>
                                 </div>
+
+                            {% else %}
+
+                                <div>
+                                    <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
+                                       class="btn btn-toolbox text-light mx-1 px-2">Keep working on my courses</a>
+                                </div>
+
                             {% endif %}
 
                         </div>{% endblock %}
 
+                </div>
+
+
             </div>
+
 
         </div>
     </section>
 
-    <section class="bg-body">
+    {#    Slides#}
+
+    <section class=" pb-5" style="background-color: rgba(209, 242, 249, 0.3)">
         <div class="container">
+
             <div class="row">
-                <div class="col-md-8 my-2 py-5">
-                    <h4>How to use the tool box</h4>
-                    <p>
-                      This tool box walks you through 8 building blocks of a sound online course. Per building block, different teaching tools and technologies are suggested to meet the minimum requirements for online courses. The details of each teaching tool help you to estimate the effort you have to make, and you can take notes which will be saved to a personalized checklist which you can use for course preparation.
-                    </p>
-                </div>
-                <div class="col-md-4 my-2 py-5">
-                    <img class="img-fluid" src="{% static '/tbcore/images/start_page.png' %}" alt="">
+                <h2 class="text-center p-2">Quick start</h2>
+            </div>
+            <div class="row">
+
+                <div class="col-md-8 mx-auto">
+                    <!-- Carousel -->
+                    <div id="instructions" class="carousel slide" data-bs-ride="carousel">
+
+                        <!-- Indicators/dots -->
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#instructions" data-bs-slide-to="0"
+                                    class="active"></button>
+                            <button type="button" data-bs-target="#instructions" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#instructions" data-bs-slide-to="2"></button>
+                        </div>
+
+                        <!-- The slideshow/carousel -->
+
+
+                        <div class="carousel-inner " style="background-color: rgb(172,6,52)">
+                            {#                        First slide#}
+
+                            <div class="carousel-item active slide-size">
+
+                                <div class="row">
+                                        <h2 class="text-center pt-5">Work through the teaching building blocks in your online course:</h2>
+
+
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-6">
+
+
+                                        <div class="container-fluid pt-5">
+
+
+
+                                            <ul class="text-slide mx-md-4">
+                                                <li>Human Touch</li>
+                                                <li>Teaching Material</li>
+                                                <li>Organization</li>
+                                                <li>Discussion</li>
+                                                <li>Assignments</li>
+                                                <li>Student Engagement</li>
+                                                <li>Assessment</li>
+                                                <li>Rules & Regulations</li>
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-6">
+
+                                        <img src="{% static '/tbcore/images/building_blocks.PNG' %}" alt=""
+                                             class="d-block w-100  ">
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+{#                  Second Slide    #}
+
+
+
+
+
+
+                            <div class="carousel-item">
+                                <div class="container-fluid">
+                                    <div class="row">
+
+                                        <h2 class="text-center py-5 ">Choose Teaching Tools for each building block.</h2>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <img src="{% static '/tbcore/images/cards_slide.png' %}" alt=""
+                                             class="d-block w-75 h-75 pb-3  mx-auto">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+{#                            Third Slide#}
+
+
+
+
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-5">
+
+                                    <h3 class="text-center p-5">Get a checklist with a summary of your notes to start course digitalization.</h3>
+
+
+                                    </div>
+
+
+                                    <div class="col-7">
+
+                                        <img src="{% static '/tbcore/images/checklist_slide.png' %}" alt=""
+                                             class=" d-block w-100  image-instructions">
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+
+
+                        </div>
+
+                        <!-- Left and right controls/icons -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#instructions"
+                                data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#instructions"
+                                data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+
 
                 </div>
+
+
             </div>
         </div>
+
+
     </section>
 
 
 
-    <section class="bg-light text-dark py-5 my-3">
+    <section class=" text-dark py-5" style="background-color: rgba(209, 242, 249, 0.6)">
         <div class="container">
             <div class="row">
                 <div class="col-8">
                     <div class="row">
                         <p>
-                     Further general teaching tips, news and updates about technology supported by VirtUOS are published on the Digitale Lehre Portal. Additionally, all (topic-related) walk-in hours and meetings about trending topics from the didactical colloquium "Lehrkolleg" are announced there.
+                            Further general teaching tips, news and updates about technology supported by VirtUOS are
+                            published on the Digitale Lehre Portal. Additionally, all (topic-related) walk-in hours and
+                            meetings about trending topics from the didactical colloquium "Lehrkolleg" are announced
+                            there.
                         </p>
 
 
                     </div>
 
                 </div>
-                   <div class="col-4">
-                     <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/ " class="btn btn-primary" target="_blank">Teaching Tips to improve your class</a>
-                    </div>
+                <div class="col-4">
+                    <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/ " class="btn btn-toolbox text-light"
+                       target="_blank">Teaching Tips to improve your class</a>
+                </div>
             </div>
         </div>
     </section>

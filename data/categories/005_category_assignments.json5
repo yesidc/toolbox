@@ -6,7 +6,7 @@
     titles_accordion: "Some example sources for common misunderstandings",
     content_accordion: "- Give clear instructions to students and draw out what students should learn\n- How are the assignments embedded in the course, how do they help learning the course material?\n- Is there a specific structure in which the assignments are worked off? E.g. feedback loops, building up on each other\n- Clarify deadlines and how you handle late submissions. If you prefer no deadlines, state which submissions are accepted.\n- Do students have to present something and how do you envision a presentation? \n- How do they find out when their presentation is due? \n- Do students have to form groups? Is there a process? Tips or help for finding group mates?\n- Specify How can students demonstrate that they master the topic in the assignments.\n- What are the important criteria for the assessment?\n- Clarify expectations\n",
     references : "no-data",
-    category_url : "assignment",
-    next_page : "student_engagement",
+
+    next_page : "student-engagement",
 
 }
