@@ -13,6 +13,13 @@ Toolbox
 */
 
 
+
+
+.carousel-inner{
+  width:100%;
+  min-height: 500px !important;
+}
+
 .body, body {
     margin: 0;
     background-color: rgba(209, 242, 249, 0.1);
@@ -55,6 +62,7 @@ Toolbox
     font-size: 20px;
     font-family: "Univers 67 Condensed Bold","Arial Black";
 
+
 }
 
 .image-banner {
@@ -63,18 +71,10 @@ Toolbox
     min-height: 90vh;
     max-width: 100%;
     position: relative;
-    /*background-color: rgba(209, 242, 249, 0.9);*/
-
-
-}
-.slide-size{
 
 }
 
-.image-instructions {
 
-    position: relative;
-}
 
 .color-overlay {
     position: absolute;
