@@ -15,9 +15,9 @@
 
     {#Showcase#}
 
-    <section class="bg-light text-dark p-0  mt-md-0">
-        <div class="container-fluid image-banner"
-            style='background-image: url("{% static '/tbcore/images/toolbox_banner.PNG' %}")'
+    <section class="bg-light text-dark mx-md-4 mx-sm-2">
+        <div class="container-fluid image-banner mx-md-5 mx-sm-2 px-md-2"
+             style='background-image: url("{% static '/tbcore/images/toolbox_banner.PNG' %}")'
         >
 
             <div class="row ">
@@ -32,7 +32,8 @@
                             <br>
                             <li class="lead">Assess the preparation effort</li>
                             <br>
-                            <li class="lead">Create your personal checklist with notes and ideas <br> on the teaching tools
+                            <li class="lead">Create your personal checklist with notes and ideas <br> on the teaching
+                                tools
                                 you select (sign in)
                             </li>
 
@@ -45,51 +46,42 @@
                 </div>
 
 
-            <div class="row mt-md-5 p-md-5">
+                <div class="row mt-md-5 p-md-5">
 
-                {% block create_course %}
-                    <div class="d-flex mt-md-5">
+                    {% block create_course %}
+                        <div class="d-flex mt-md-5">
 
-                        {% if not user.is_authenticated %}
-                            <div>
-                                <a href="{% url 'login' %}" class="btn btn-toolbox text-light mx-5">Start course revision</a>
-                            </div>
-                            <div>
-                                <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
-                                   class="btn btn-toolbox text-light mx-5">Browse without log-in</a>
-                            </div>
+                            {% if not user.is_authenticated %}
+                                <div>
+                                    <a href="{% url 'login' %}" class="btn btn-toolbox text-light mx-5">Start course
+                                        revision</a>
+                                </div>
+                                <div>
+                                    <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
+                                       class="btn btn-toolbox text-light mx-5">Browse without log-in</a>
+                                </div>
 
-                        {% else %}
+                            {% else %}
 
-                            <div>
-                                <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
-                                   class="btn btn-toolbox text-light mx-1 px-2" >Keep working on my courses</a>
-                            </div>
+                                <div>
+                                    <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
+                                       class="btn btn-toolbox text-light mx-1 px-2">Keep working on my courses</a>
+                                </div>
 
-                        {% endif %}
+                            {% endif %}
 
-                    </div>{% endblock %}
+                        </div>{% endblock %}
 
-            </div>
-
-
-
-
-
-
-
-
+                </div>
 
 
             </div>
-
-
-
-
 
 
         </div>
     </section>
+
+    {#    Slides#}
 
     <section class=" pb-5" style="background-color: rgba(209, 242, 249, 0.3)">
         <div class="container">
@@ -112,42 +104,159 @@
                         </div>
 
                         <!-- The slideshow/carousel -->
-                        <div class="carousel-inner ">
-                            <div
-                                    class="carousel-item active image-instructions"
-                                    style='background-image: url("{% static '/tbcore/images/uos_logo.png' %}")'
 
 
-                            >
+                        <div class="carousel-inner " style="background-color: rgb(172,6,52)">
+                            {#                        First slide#}
 
-                                <div class="color-overlay d-flex justify-content-center align-items-center">
-                                    some text 1
+                            <div class="carousel-item active slide-size">
+
+                                <div class="row">
+                                        <h2 class="text-center pt-5">Work through the teaching building blocks in your online course:</h2>
+
+
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-6">
+
+
+                                        <div class="container pt-5">
+
+
+
+                                            <ul class="text-slide mx-5">
+                                                <li>Human Touch</li>
+                                                <li>Teaching Material</li>
+                                                <li>Organization</li>
+                                                <li>Discussion</li>
+                                                <li>Assignments</li>
+                                                <li>Student Engagement</li>
+                                                <li>Assessment</li>
+                                                <li>Rules & Regulations</li>
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-6">
+
+                                        <img src="{% static '/tbcore/images/building_blocks.PNG' %}" alt=""
+                                             class="d-block w-100  image-instructions">
+
+                                    </div>
+
                                 </div>
 
 
                             </div>
 
 
-                            <div class="carousel-item image-instructions"
-                                 style='background-image: url("{% static '/tbcore/images/uos_logo.png' %}")'
-                            >
-                                <div class="color-overlay d-flex justify-content-center align-items-center">
-                                    some text 2
+{#                  Second Slide    #}
+
+
+
+
+
+
+                            <div class="carousel-item">
+                                <div class="container-fluid">
+                                    <div class="row">
+
+                                        <h2 class="text-center py-5 ">Choose Teaching Tools for each building block.</h2>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <img src="{% static '/tbcore/images/cards_slide.png' %}" alt=""
+                                             class="d-block w-100 h-75 pb-3 image-instructions mx-auto">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+{#                            Third Slide#}
+
+
+
+
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-5">
+
+                                    <h3 class="text-center p-5">Get a checklist with a summary of your notes to start course digitalization.</h3>
+
+
+                                    </div>
+
+
+                                    <div class="col-7">
+
+                                        <img src="{% static '/tbcore/images/checklist_slide.png' %}" alt=""
+                                             class=" d-block w-100  image-instructions">
+
+                                    </div>
+
                                 </div>
 
 
                             </div>
 
 
-                            <div class="carousel-item image-instructions"
-                                 style='background-image: url("{% static '/tbcore/images/uos_logo.png' %}")'
-                            >
-                                <div class="color-overlay d-flex justify-content-center align-items-center">
-                                    some text 3
-                                </div>
 
 
-                            </div>
+
+
+
+
+
+
+
+
+{#                            <div class="carousel-item image-instructions"#}
+                                    {#                                 style='background-image: url("{% static '/tbcore/images/uos_logo.png' %}")'#}
+{#                            >#}
+{#                                <div class="color-overlay d-flex justify-content-center align-items-center">#}
+{#                                    some text 2#}
+{#                                </div>#}
+{##}
+{##}
+{#                            </div>#}
+
+
+
+
+
+
+
+
+
+{#                            <div class="carousel-item image-instructions"#}
+{#                                 style='background-image: url("{% static '/tbcore/images/uos_logo.png' %}")'#}
+{#                            >#}
+{#                                <div class="color-overlay d-flex justify-content-center align-items-center">#}
+{#                                    some text 3#}
+{#                                </div>#}
+{##}
+{##}
+{#                            </div>#}
+{#                            #}
+
+
+
+
 
 
                         </div>

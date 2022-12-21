@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 import json5
+from django.db.models.signals import pre_save, post_save
 from tbcore.utils.fields import idea_fields, category_fields
-from tbcore.utils.base import Json5ParseException, InconsitentText
+from tbcore.utils.base import Json5ParseException, InconsistentText
 import re
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
@@ -105,7 +106,7 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         if self.category_url is None:
-            print('it is none')
+
             self.category_url = slugify(self.category_name)
         return super().save(*args, **kwargs)
 
@@ -212,7 +213,7 @@ class PlanCategoryOnlineIdea(models.Model):
         To create sections/paragraphs you must add the special token '[SPLIT]'. Each section requires a title or heading.
         """
         if len(re.findall(r"\[SPLIT]", headings)) != len(re.findall(r"\[SPLIT]", text)):
-            raise InconsitentText('The number of headings and paragraphs must be the same. ')
+            raise InconsistentText('The number of headings and paragraphs must be the same. ')
 
     @staticmethod
     def check_json5(data_json5, mode):

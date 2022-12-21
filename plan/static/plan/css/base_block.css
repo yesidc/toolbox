@@ -51,6 +51,12 @@ Toolbox
 
 }
 
+.text-slide{
+    font-size: 20px;
+    font-family: "Univers 67 Condensed Bold","Arial Black";
+
+}
+
 .image-banner {
     background-size: cover;
     background-position: center center;
@@ -61,9 +67,12 @@ Toolbox
 
 
 }
+.slide-size{
+
+}
+
 .image-instructions {
-    background-size: cover;
-    min-height: 60vh;
+
     position: relative;
 }
 

@@ -10,5 +10,5 @@ class CategoryDoesNotExist(Exception):
     pass
 
 
-class InconsitentText(Exception):
+class InconsistentText(Exception):
     pass
