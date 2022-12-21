@@ -6,7 +6,7 @@
     titles_accordion: "Online Course Requirements",
     content_accordion: "1. Online students must have an opportunity to ask questions and have a clear and reliable \nexpectation about when and how to get an answer.\n2. If you do synchronous sessions, you must allow online participation. Synchronous sessions \nalways exclude some students. Alternative time slots are optimal and you should expect the study \ncommission to ask you to move to a different time slot.\n3. It must be possible for online students to work in a group with on-site students if there \nare group assignments.",
     references : "- Anderson, Terry; Rourke, Liam; Garrison, Randy & Archer, Walter (2001). ASSESSING TEACHING PRESENCE IN A COMPUTER CONFERENCING CONTEXT. Online Learning, 5 (2), 1-17. doi: 10.24059/olj.v5i2.1875.\n",
-    category_url : "discussion",
-    next_page : "assignment",
+
+    next_page : "assignments",
 
 }

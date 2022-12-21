@@ -159,7 +159,7 @@ def create_plan(request, start_add):
         if request.method == "POST":
             plan_to_database()
 
-            return redirect('show_block', 'human_touch', 'teaching_material')
+            return redirect('show_block', 'human-touch', 'teaching-material')
 
         try:
             # if user does not fill out the form to create a new course/plan, the current plan/course
@@ -247,7 +247,7 @@ def delete_pcoi_checklist(request):
 
 
     # PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id')).delete()
-    return JsonResponse({'delete_block':delete_block, 'pcoi_category': pcoi_category.replace(' ', '-')}, status=200)
+    return JsonResponse({'delete_block':delete_block, 'pcoi_category': slugify(pcoi_category)}, status=200)
 
 
 @login_required()
@@ -290,7 +290,7 @@ def delete_plan(request, plan_id):
         if p is not None:
             request.session['current_user_plan'] = p.pk
             request.session['current_user_plan_name'] = p.plan_name
-        return redirect('show_block', 'human_touch', 'teaching_material')
+        return redirect('show_block', 'human-touch', 'teaching-material')
     else:
 
         return redirect(request.META.get('HTTP_REFERER'))

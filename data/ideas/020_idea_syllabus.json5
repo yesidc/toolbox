@@ -14,6 +14,6 @@ use_cases: "",
 references: "",
 reusable: "If you give the same course again, you only need to change the dates. Large parts  can be reused in other courses as well. \n\t\n[//]:<> (## Testimony \"the syllabus is a huge planning document with which I can easily organize and plan my semester\", Peter König \n- Ask Peter)",
 task_complexity: "3",
-category: 'organization',
+category: 'Organization',
 
 }

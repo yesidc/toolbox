@@ -16,5 +16,5 @@ use_cases: "Especially useful for project work, essays, and presentations but al
 references: "\n<a href=\"https://lciltd.org/uploads/dab12011-cf99-4150-894f-66ffb67d018d-Seven%20strategies%20for%20supporting%20student%20learning%20in%20a%20remote%20environment%20-%20ASCD%20Inservice.pdf\" target=\"_blank\">Seven strategies for supporting student learning in a remote environment</a>",
 reusable: "yes",
 task_complexity: "1",
-  category: 'assessment',
+  category: 'Assessment',
 }

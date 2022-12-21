@@ -15,5 +15,5 @@ use_cases:"- For exams in which you want to evaluate more general and profession
 references: "",
 reusable: "yes",
 task_complexity: "1",
-  category: 'assessment',
+  category: 'Assessment',
 }

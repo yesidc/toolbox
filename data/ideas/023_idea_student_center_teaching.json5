@@ -14,5 +14,5 @@ use_cases: "- To activate students \n- When you feel the course participants are
 references: "",
 reusable: "yes",
 task_complexity: "1",
-category: 'student_engagement',
+category: 'Student Engagement',
 }

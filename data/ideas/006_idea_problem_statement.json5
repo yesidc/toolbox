@@ -16,6 +16,6 @@ use_cases: "- Suitable as a prerequisite for a final paper",
 references: "",
 reusable: "yes",
 task_complexity: "1",
-category: 'assignment',
+category: 'Assignments',
 
 }
