@@ -1,5 +1,5 @@
 
-# todo do not hard code this, user the __dict__ of the class
+
 
 def idea_fields():
     return ["idea_name", "idea_id", "brief_description", "technology", "implementation_steps", "teacher_effort",

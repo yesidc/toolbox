@@ -96,10 +96,10 @@ class Category(models.Model):
     category_id = models.SlugField(max_length=70, unique=True)  # internal id
     short_description = models.TextField()
     titles_accordion = models.TextField(null=True)  # accordion info
-    content_accordion = models.TextField(null=True)  # requirements --> added to the accordion (building block page)
+    content_accordion = models.TextField(null=True)
     references = models.TextField(null=True)
     category_url = models.SlugField(blank=True, null=True)
-    next_page = models.SlugField(null=True)
+    next_page = models.SlugField(null=True) # specify which building block/category must be shown after
 
     def __str__(self):
         return self.category_name
@@ -197,7 +197,7 @@ class PlanCategoryOnlineIdea(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='plan_category_onlide_idea_category')
     idea = models.ForeignKey(OnlineIdea, on_delete=models.PROTECT, null=True,
                              related_name='plan_category_onlide_idea_i')
-    notes = models.TextField(max_length=500, null=True)  # todo delete the null this is mandatory
+    notes = models.TextField(max_length=500, null=True)
     objects = PlanCategoryOnlineIdeaManager()
 
     class Meta:

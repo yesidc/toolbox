@@ -115,11 +115,11 @@
 
             {% if user.is_authenticated %}
 
-{#                todo change color of nav bar#}
+{#                 change color of nav bar#}
                 <div class="border-end   " id="sidebar-wrapper"  style="background-color: rgba(209, 242, 249, 0.1)">
 
                     <div class="list-group list-group-flush">
-{#    todo change color of side nav bar, change bg-info class#}
+{#    change color of side nav bar, change bg-info class#}
 
                         <div class="list-group-item list-group-item-action" style="background-color: rgba(209, 242, 249, 0.1)">
                             <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-0"
@@ -157,7 +157,7 @@
                                 </button>
 
                                 <div class="align-self-end align-self-stretch">
-{#                                    todo change the color of delete buttons side-nav bar here#}
+{#                                     change the color of delete buttons side-nav bar here#}
 
                                     <button href="{% url 'delete_plan' p.pk %}" class="h-100 btn-toolbox text-light"
                                             data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
