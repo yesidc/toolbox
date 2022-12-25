@@ -1,3 +1,9 @@
+// The fields titles_accordion and content_accordion are designed for you to provide additional information about a category/building block
+// You can have as many paragraphs/sections as you wish. Every section must be accompanied by a heading. To create
+//several sections you must use the special charters [SPLIT]. See example below:
+// titles_accordion: 'HeadingSection1[SPLIT]HeadingSection2'
+// content_accordion: 'Content1[SPLIT]Content2'
+// The content above is displayed using accordions, but you can easily change the html code for it to be displayed differently (e.g. you can use lists, paragraphs etc.)
 
 {
 
