@@ -197,7 +197,7 @@ class PlanCategoryOnlineIdea(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='plan_category_onlide_idea_category')
     idea = models.ForeignKey(OnlineIdea, on_delete=models.PROTECT, null=True,
                              related_name='plan_category_onlide_idea_i')
-    notes = models.TextField(max_length=500, null=True)  # todo delete the null this is mandatory
+    notes = models.TextField(max_length=500, null=True)
     objects = PlanCategoryOnlineIdeaManager()
 
     class Meta:
