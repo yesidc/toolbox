@@ -201,7 +201,7 @@ def use_idea(request, save_note=None):
         if obj_delete:
             obj_delete.delete()
 
-        # todo add to sessions as this is also computed in select_plan view
+
         # categories for which user has already selected at least one idea
         category_ready = category_done(current_user_plan)
         json_dic = {
@@ -296,22 +296,3 @@ def delete_plan(request, plan_id):
         return redirect(request.META.get('HTTP_REFERER'))
 
 
-# todo delete
-def test_code(request):
-    # current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
-    # c_s, c_d = context_summary(request.user, current_user_plan)
-    # request_context = RequestContext (request)
-    # category_obj =request_context.get('category_objects')
-    #
-    # context = {
-    #     'context_summary': c_s,
-    #     'category_done_summary': c_d,
-    #     'current_plan': current_user_plan,
-    #     'plan_form': PlanForm(),
-    #     'category_objects': Category.objects.values_list('category_name', 'category_url', 'next_page')
-    # }
-    # pdf = render_to_pdf('plan/checklist_pdf.html',context)
-    # return HttpResponse(pdf, content_type='application/pdf')
-    # # return render(request,'plan/checklist_pdf.html', locals())
-
-    return render(request, 'plan/test_code.html', locals())

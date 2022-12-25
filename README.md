@@ -18,7 +18,7 @@ This application helps instructors transform their courses/lectures so that thes
 ### Database
 
 These are the models implemented throughout the development of the project:
-- Category: Every instance (data point) contains information about a single building block (e.g., category_name, [short_description etc.)
+- Category: Every instance (data point) contains information about a single building block (e.g., category_name, short_description etc.)
 - OnlineIdea: Every instance (data point) contains information about a single teaching tool (e.g., idea_name, implementation_steps etc. )
 - Plan: used to store information about user's course plans. 
 - PlanCategoryOnlineIdea: establishes ForeignKey relationships to the `Category`, `OnlineIdea` and `Plan` models. It also used to manage the user's notes.

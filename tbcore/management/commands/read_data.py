@@ -4,7 +4,7 @@ from tbcore.models import PlanCategoryOnlineIdea, OnlineIdea, Category
 from tbcore.utils.base import Json5ParseException, InvalidDataException, CategoryDoesNotExist
 
 
-# todo raise InvalidDataException if the directory (ideas or categories) contains no data
+
 class Command(BaseCommand):
     help = "Reads json5 file and saves either ideas or categories/building blocks to the database"
 
