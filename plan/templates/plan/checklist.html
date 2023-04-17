@@ -74,7 +74,18 @@
                         <table class="nested-table-checklist">
                             {% for idea_name, pcoi_instance_id, pcoi_instance_note,_ in idea_ins %}
                                 <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows">
-                                    <td>{{ pcoi_instance_note }}</td>
+                                    {#                                   ADD NOTE JS FUNCTION HERE#}
+                                    <td>
+                                        <p id="pcoi-note-id-{{ pcoi_instance_id }}"
+                                           onclick="editNote('{{ pcoi_instance_id }}')"> {{ pcoi_instance_note }} </p>
+
+                                        <form id="note-form-{{ pcoi_instance_id }}"  method="post">
+                                            {% csrf_token %}
+{#                                            <input type="hidden" name="pcoi_id" value="{{ pcoi_instance_id }}">#}
+                                            <input type="text" id="note-input-{{ pcoi_instance_id }}" style="display: none;">
+                                        </form>
+
+                                    </td>
                                 </tr>
                             {% endfor %}
 
@@ -100,7 +111,7 @@
                                         {% endfor %}
 
                                         {% sub_task_complexity complexity '3' as remaining_complexity %}
-                                           {% for i in remaining_complexity%}
+                                        {% for i in remaining_complexity %}
                                             <td class="mx-0"><i class="bi bi-star"></i></td>
                                         {% endfor %}
 
@@ -122,7 +133,8 @@
                                 <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows">
                                     <td>
                                         <button onclick="add_delete_idea_checklist(this.id)"
-                                                id="pcoi-instance-{{ pcoi_instance_id }}" class="btn-toolbox text-light"><i class="bi bi-trash"></i>
+                                                id="pcoi-instance-{{ pcoi_instance_id }}"
+                                                class="btn-toolbox text-light"><i class="bi bi-trash"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -177,5 +189,6 @@
 
     <script src="{% static 'plan/js/utils.js' %}"></script>
     <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
+    <script src="{% static 'plan/js/edit_note.js' %}"></script>
 
 {% endblock %}

@@ -38,6 +38,7 @@ def context_summary(user, current_plan):
         category_idea_checklist: List whose elements are tuples with the following structure: (category_name, [idea_name, pcoi_instance_id,pcoi_instance_note,pcoi_instance_complexity])
         category_done_summary: Set containing categories for which the user has selected at least one idea.
     """
+    # all pcoi objects related to a current logged user and a current plan
     pcoi = PlanCategoryOnlineIdea.objects.get_pcoi(user, current_plan)
 
     category_idea_checklist = []
