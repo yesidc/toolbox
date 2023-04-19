@@ -5,7 +5,7 @@ This application helps instructors transform their courses/lectures so that thes
 ### Install packages and save Categories/Building Blocks and online ideas to the Database
 1. To install the packages needed for the application to run, please refer to `requeriments.txt`
 2. Create  `json5` representations of both the building blocks and teaching tools/ideas. 
-3. Store these files (generated in step 2) in `data/categories` or `data/ideas` directory respectively.
+3. Store these files (generated in step 2) in `data/categories` and `data/ideas` directory respectively.
 4. Execute `python manage.py read_data --save_category` and `python manage.py read_data --save_idea` to store the information into the database.
 
 ## Architecture
