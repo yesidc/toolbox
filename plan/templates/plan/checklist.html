@@ -73,17 +73,53 @@
                     <td>
                         <table class="nested-table-checklist">
                             {% for idea_name, pcoi_instance_id, pcoi_instance_note,_ in idea_ins %}
-                                <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows">
-                                    {#                                   ADD NOTE JS FUNCTION HERE#}
+                                <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows row-note">
                                     <td>
-                                        <p id="pcoi-note-id-{{ pcoi_instance_id }}"
-                                           onclick="editNote('{{ pcoi_instance_id }}')"> {{ pcoi_instance_note }} </p>
+                                        {#                                        <p id="pcoi-note-id-{{ pcoi_instance_id }}"#}
+                                        {#                                           onclick="editNote('{{ pcoi_instance_id }}')"> {{ pcoi_instance_note }} </p>#}
+                                        <div class="edit-note-checklist" tabindex="0">
 
-                                        <form id="note-form-{{ pcoi_instance_id }}"  method="post">
-                                            {% csrf_token %}
-{#                                            <input type="hidden" name="pcoi_id" value="{{ pcoi_instance_id }}">#}
-                                            <input type="text" id="note-input-{{ pcoi_instance_id }}" style="display: none;">
-                                        </form>
+                                            <form id="note-form-{{ pcoi_instance_id }}"
+                                                  method="post"
+
+                                            >
+                                                {% csrf_token %}
+                                                <textarea id="note-input-{{ pcoi_instance_id }}"
+                                                          class="text-area-note no-border"
+                                                          style="width: 500px"
+
+                                                          onclick="editNote('{{ pcoi_instance_id }}')"
+                                                >
+                                                {{ pcoi_instance_note }}
+
+                                            </textarea>
+
+                                               <div class="d-flex">
+
+                                                    <button type="submit"
+                                                            class="btn btn-toolbox text-light px-md-3 px-sm-2 my-1 save-note-button hidden"
+                                                            aria-current="page"
+
+                                                            id="note-submit-{{ pcoi_instance_id }}"
+                                                            onclick="saveNote('{{ pcoi_instance_id }}')"
+                                                    >
+                                                        Save
+                                                    </button>
+                                                    <button
+                                                     class="btn btn-toolbox text-light mx-2 px-md-3 px-sm-1 my-md-1  hidden"
+                                                            aria-current="page"
+
+                                                            id="note-cancel-{{ pcoi_instance_id }}"
+                                                            onclick="cancelEdit('{{ pcoi_instance_id }}', '{{ pcoi_instance_note }}')"
+                                                    >
+                                                        Cancel
+                                                    </button>
+
+                                               </div>
+
+
+                                            </form>
+                                        </div>
 
                                     </td>
                                 </tr>

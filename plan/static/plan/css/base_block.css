@@ -13,6 +13,24 @@ Toolbox
 */
 
 
+.text-area-note {
+    cursor: pointer;
+}
+.hidden {
+  display: none;
+}
+
+.no-border {
+
+    border: none;
+background-color: transparent;
+}
+
+
+.text-area-note.editing {
+    border: 1px solid black;
+    padding: 5px;
+}
 
 
 .carousel-inner{

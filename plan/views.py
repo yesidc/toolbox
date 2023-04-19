@@ -120,15 +120,19 @@ def checklist(request):
     else:
         return redirect(request.META.get('HTTP_REFERER'))
 
-def update_note_checklist(request, pcoi_id):
+def update_note_checklist(request):
     """
     Updates the note for a given teaching tool from the checklist page.
     """
-    poci_obj = get_object_or_404(PlanCategoryOnlineIdea, pk=pcoi_id)
+    poci_obj = get_object_or_404(PlanCategoryOnlineIdea, pk=request.POST['pcoiId'])
     if request.method == 'POST':
         poci_obj.notes = request.POST['note']
         poci_obj.save()
-        return JsonResponse({'status': True})
+
+
+        return JsonResponse({},  status=200)
+    else:
+        return render(request, 'plan/checklist.html')
 
 @login_required
 def create_plan(request, start_add):
