@@ -19,6 +19,7 @@ def add_hyphen(value):
     return slugify(value)
 
 
+
 @register.simple_tag
 def sub_task_complexity(complexity,highest_complexity):
     num_stars= int(highest_complexity) - int(complexity)

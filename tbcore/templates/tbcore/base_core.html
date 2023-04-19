@@ -65,8 +65,22 @@
                 <div class="col-12 order-md-first">
                     <ul class="navbar-nav float-md-end">
                         {% if user.is_authenticated %}
-                            <li class="nav-item"><a class="nav-link" href="#"><span
-                                    class="text-light adobe-garamond-p">{{ user.username }}</span></a></li>
+
+                            {% for i in category_objects %}
+                                {% if forloop.counter == 1 %}
+{#                                    When user clicks on the username is redirected to the building block page#}
+                                         <li class="nav-item"><a class="nav-link" href="{% url 'show_block' i.1 i.2  %}"><span
+                                        class="text-light adobe-garamond-p">{{ user.username }}</span></a></li>
+
+
+                                {% endif %}
+
+
+
+                            {% endfor %}
+
+{#                            <li class="nav-item"><a class="nav-link" href="{% url 'show_block'   %}"><span#}
+{#                                    class="text-light adobe-garamond-p">{{ user.username }}</span></a></li>#}
                             <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><span
                                     class="text-light adobe-garamond-p">Log out</span></a>
                             </li>
