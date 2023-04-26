@@ -1,10 +1,13 @@
 // handles the edit note functionality from the checklist page
-let noteForm;
 const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-let noteParagraph;
-let noteInput;
-let pcoiId;
 let width;
+
+function autoResize(text_are_id) {
+    // textarea auto resizes when user is editing the note
+  var textarea = document.getElementById(text_are_id);
+  textarea.style.height = 'auto';
+  textarea.style.height = textarea.scrollHeight + 'px';
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,14 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         element.value = element.textContent.trim()
         }
     )
-//     document.querySelectorAll('.edit-note-checklist').forEach((element) => {
-//     element.addEventListener('blur', () => {
-//         console.log('blur triggered');
-//         document.querySelectorAll('.save-note-button').forEach((element) => {
-//             element.style.display = 'none';
-//         });
-//     });
-// });
 });
 
 
@@ -31,14 +26,11 @@ function cancelEdit(pcoi_instance_id, pcoi_instance_note) {
     var cancel_note_button = document.getElementById('note-cancel-'+pcoi_instance_id);
     save_note_button.classList.add('hidden');
     cancel_note_button.classList.add('hidden');
-    // console.log('note_input.value:', note_input.value);
-    // console.log('note_input.textContent:', note_input.textContent);
+
     note_input.value = pcoi_instance_note;
 
     note_input.classList.remove('editing');
-    // note_input.removeEventListener('blur', () => {
-    //         note_input.classList.remove('editing');
-    //     });
+
 }
 
 function editNote(pcoi_instance_id) {
@@ -55,20 +47,6 @@ function editNote(pcoi_instance_id) {
 
         });
 }
-
-// let save_note_button = document.querySelectorAll('.save-note-button');
-// document.querySelectorAll('.text-area-note').forEach((element) => {
-//     element.addEventListener('click', () => {
-//
-//         element.addEventListener('blur', () => {
-//             element.classList.remove('editing');
-//
-//             save_note_button.forEach(function (element) {
-//                 element.style.display = 'block';
-//             });
-//         });
-//     });
-// });
 
 
 function adjustWidth() {
@@ -118,62 +96,3 @@ function saveNote(pcoi_instance_id) {
 
     }
 
-// const elements = document.querySelectorAll('.text-area-note');
-// for (let i = 0; i < elements.length; i++) {
-//   elements[i].style.width = '300px';
-//   // do something with the element
-// }
-//
-//   window.addEventListener('resize', function() {
-//     width = 0
-//   var myElement = document.getElementsByClassName('row-note')[0];
-//   width = myElement.offsetWidth;
-//   for (let i = 0; i < elements.length; i++) {
-//   elements[i].style.width = width.toString() + 'px';
-//   // do something with the element
-// }
-//   console.log('Element width:', width);
-// });
-
-
-//
-//
-//
-//
-//
-//
-// function editNote(pcoi_instance_id) {
-//     noteParagraph = document.getElementById('pcoi-note-id-' + pcoi_instance_id);
-//     noteInput = document.getElementById('note-input-' + pcoi_instance_id);
-//     noteForm = document.getElementById('note-form-' + pcoi_instance_id );
-//     pcoiId = pcoi_instance_id;
-//     noteInput.addEventListener('blur', saveNote);
-//     noteInput.addEventListener('keydown', handleEnter);
-//    console.log(width)
-//     noteInput.style.width = width + 'px';
-//      noteInput.setAttribute('rows', 5)
-//     noteParagraph.style.display = 'none';
-//     noteInput.style.display = '';
-//     noteInput.value = noteParagraph.textContent;
-//     noteInput.focus();
-//     noteInput.select();
-// }
-//
-
-
-    // }
-    // else {
-//         noteParagraph.style.display = '';
-//         noteInput.style.display = 'none';
-//
-//     }
-//
-//
-// }
-//   function handleEnter(event) {
-//         if (event.keyCode === 13) {
-//             event.preventDefault();
-//             // noteForm.submit();
-//             saveNote();
-//         }
-//     }
