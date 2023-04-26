@@ -86,7 +86,7 @@
                                                 {% csrf_token %}
                                                 <textarea id="note-input-{{ pcoi_instance_id }}"
                                                           class="text-area-note no-border"
-                                                          style="width: 500px; "
+                                                          style="width: 500px; height: auto; overflow: hidden; resize: none;"
 
                                                           onclick="editNote('{{ pcoi_instance_id }}')"
                                                           oninput="autoResize(this.id)"

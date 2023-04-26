@@ -4,16 +4,19 @@ let width;
 
 function autoResize(text_are_id) {
     // textarea auto resizes when user is editing the note
-  var textarea = document.getElementById(text_are_id);
-  textarea.style.height = 'auto';
-  textarea.style.height = textarea.scrollHeight + 'px';
+    var textarea = document.getElementById(text_are_id);
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
 }
 
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.text-area-note').forEach(
         (element) => {
-        element.value = element.textContent.trim()
+            // height of the textarea is set to the scrollHeight of the textarea.
+            element.style.height = 'auto';
+            element.style.height = element.scrollHeight + 'px';
+            element.value = element.textContent.trim()
         }
     )
 });
@@ -21,9 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function cancelEdit(pcoi_instance_id, pcoi_instance_note) {
     event.preventDefault(); // prevent form from submitting
-    var save_note_button = document.getElementById('note-submit-'+pcoi_instance_id);
-    var note_input = document.getElementById('note-input-'+pcoi_instance_id);
-    var cancel_note_button = document.getElementById('note-cancel-'+pcoi_instance_id);
+    var save_note_button = document.getElementById('note-submit-' + pcoi_instance_id);
+    var note_input = document.getElementById('note-input-' + pcoi_instance_id);
+    var cancel_note_button = document.getElementById('note-cancel-' + pcoi_instance_id);
     save_note_button.classList.add('hidden');
     cancel_note_button.classList.add('hidden');
 
@@ -34,22 +37,23 @@ function cancelEdit(pcoi_instance_id, pcoi_instance_note) {
 }
 
 function editNote(pcoi_instance_id) {
-  var save_note_button = document.getElementById('note-submit-'+pcoi_instance_id);
-  var note_input = document.getElementById('note-input-'+pcoi_instance_id);
-  var cancel_note_button = document.getElementById('note-cancel-'+pcoi_instance_id);
-  save_note_button.classList.remove('hidden');
-  cancel_note_button.classList.remove('hidden');
+    var save_note_button = document.getElementById('note-submit-' + pcoi_instance_id);
+    var note_input = document.getElementById('note-input-' + pcoi_instance_id);
+    var cancel_note_button = document.getElementById('note-cancel-' + pcoi_instance_id);
+    save_note_button.classList.remove('hidden');
+    cancel_note_button.classList.remove('hidden');
 
-  note_input.classList.add('editing');
-  note_input.addEventListener('blur', () => {
-            note_input.classList.remove('editing');
+    note_input.classList.add('editing');
+    note_input.addEventListener('blur', () => {
+        note_input.classList.remove('editing');
 
 
-        });
+    });
 }
 
 
 function adjustWidth() {
+    // handles the width of the textarea when the screen size changes
     var screenWidth = window.innerWidth;
     var elements = document.querySelectorAll('.text-area-note');
 
@@ -68,31 +72,28 @@ window.addEventListener('resize', adjustWidth);
 
 function saveNote(pcoi_instance_id) {
 
-    console.log('Saving note...')
-    const updatedNote = document.getElementById('note-input-'+pcoi_instance_id).value.trim();
+    const updatedNote = document.getElementById('note-input-' + pcoi_instance_id).value.trim();
 
-    console.log('Updated note:', updatedNote);
+    // Move the media file to the album
+    $.ajax(
+        {
+            url: '/update_note_checklist/',
+            type: 'POST',
+            data: {
+                'note': updatedNote,
+                'pcoiId': pcoi_instance_id,
+                'csrfmiddlewaretoken': csrfToken
+            },
+            success: function (response) {
+                console.log('Response:', response)
+                console.log('Note updated successfully!')
+                // Redirect
+                window.location.href = '/checklist/';
+            },
+            error: function (xhr, status, error) {
+                console.log('Error: ' + error);
+            }
+        });
 
-        // Move the media file to the album
-        $.ajax(
-            {
-                url: '/update_note_checklist/',
-                type: 'POST',
-                data: {
-                    'note': updatedNote,
-                    'pcoiId': pcoi_instance_id,
-                    'csrfmiddlewaretoken': csrfToken
-                },
-                success: function (response) {
-                    console.log('Response:', response)
-                    console.log('Note updated successfully!')
-                    // Redirect
-                    window.location.href = '/checklist/';
-                },
-                error: function (xhr, status, error) {
-                    console.log('Error: ' + error);
-                }
-            });
-
-    }
+}
 
