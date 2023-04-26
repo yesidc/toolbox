@@ -16,16 +16,16 @@
     <div class="col-12 top-nav ">
 
 
-            <ul class="navbar-nav float-none univers-con-regular float-md-end mb-md-0 ">
+        <ul class="navbar-nav float-none univers-con-regular float-md-end mb-md-0 ">
 
-                {% for c_name, c_url,next_page in category_objects %}
-                    <li class="nav-item px-md-3"><a class="nav-link" href="{% url 'show_block' c_url next_page %}"><span
-                            class="text-light " style="font-size: 17px">{{ c_name }}</span></a>
-                    </li>
-                {% endfor %}
+            {% for c_name, c_url,next_page in category_objects %}
+                <li class="nav-item px-md-3"><a class="nav-link" href="{% url 'show_block' c_url next_page %}"><span
+                        class="text-light " style="font-size: 17px">{{ c_name }}</span></a>
+                </li>
+            {% endfor %}
 
 
-            </ul>
+        </ul>
 
 
     </div>
@@ -48,7 +48,7 @@
     <!-- Sidebar-->
 
     <!-- Page content wrapper-->
-    <div id="page-content-wrapper " >
+    <div id="page-content-wrapper ">
         {% if user.is_authenticated %}
 
             <!-- Top navigation-->
@@ -109,19 +109,20 @@
         {% endif %}
 
 
-        <div class="d-flex" id="wrapper" >
+        <div class="d-flex" id="wrapper">
 
             {#left navigation bar#}
 
             {% if user.is_authenticated %}
 
-{#                 change color of nav bar#}
-                <div class="border-end   " id="sidebar-wrapper"  style="background-color: rgba(209, 242, 249, 0.1)">
+                {#                 change color of nav bar#}
+                <div class="border-end   " id="sidebar-wrapper" style="background-color: rgba(209, 242, 249, 0.1)">
 
                     <div class="list-group list-group-flush">
-{#    change color of side nav bar, change bg-info class#}
+                        {#    change color of side nav bar, change bg-info class#}
 
-                        <div class="list-group-item list-group-item-action" style="background-color: rgba(209, 242, 249, 0.1)">
+                        <div class="list-group-item list-group-item-action"
+                             style="background-color: rgba(209, 242, 249, 0.1)">
                             <form action="{% url 'create_plan' 'add_new_plan' %}" method="POST" class="mx-0"
                                   id="add_new_course_form">
                                 {% csrf_token %}
@@ -143,21 +144,22 @@
 
 
                             <div class="d-flex flex-row h-100">
-                                <button class="list-group-item list-group-item-action list-group-item-light p-3 all-plan-sidebar {{ p }} "
+                                <button class="list-group-item list-group-item-action list-group-item-light p-3 keep-state-button all-plan-sidebar {{ p }} "
                                         data-bs-target="#{{ p.plan_name |add_hyphen }}"
                                         type="button"
                                         data-bs-toggle="collapse"
                                         aria-expanded="false"
                                         aria-controls="{{ p.plan_name |add_hyphen }}"
                                         id="plan-side-bar-{{ p.plan_name |add_hyphen }}"
+                                        onclick="toggleButtonState(this.id)"
                                 >
-                                   <span class="adobe-garamond-p"> {{ p.plan_name }}</span>
+                                    <span class="adobe-garamond-p"> {{ p.plan_name }}</span>
 
 
                                 </button>
 
                                 <div class="align-self-end align-self-stretch">
-{#                                     change the color of delete buttons side-nav bar here#}
+                                    {#                                     change the color of delete buttons side-nav bar here#}
 
                                     <button href="{% url 'delete_plan' p.pk %}" class="h-100 btn-toolbox text-light"
                                             data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
@@ -188,7 +190,8 @@
 
                                 <div class="d-flex justify-content-end my-md-3">
                                     <div>
-                                        <a href="{% url 'checklist' %}" class=" btn btn-toolbox text-light">View checklist</a>
+                                        <a href="{% url 'checklist' %}" class=" btn btn-toolbox text-light">View
+                                            checklist</a>
                                     </div>
                                 </div>
 
@@ -236,7 +239,7 @@
 
     {{ category_urls|json_script:"category-urls" }}
     <script src="{% static 'plan/js/menu_bar.js' %}"></script>
-
+    <script src="{% static 'plan/js/keep_button_state.js' %}"></script>
 
 
 
