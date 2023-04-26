@@ -1,3 +1,4 @@
+// preserve button state (buttons on the sidebar) on page reload (using local storage)
 // Read and set initial state for each button on page load
 window.onload = function ()  {
     var buttons = document.querySelectorAll('.keep-state-button');

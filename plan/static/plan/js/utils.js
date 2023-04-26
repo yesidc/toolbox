@@ -114,6 +114,8 @@ for (i of plan_collapse) {
 function delete_plan(obj) {
     let plan_name = obj.getAttribute('data-object-name');
     let plan_id = obj.getAttribute('data-object-id');
+    localStorage.removeItem( 'button-state-plan-side-bar-'+slugify(plan_name))
+    console.log('deleted from localstorage','plan-side-bar-'+slugify(plan_name))
     const ask = confirm('Do you want to delete: ' + plan_name);
     if (ask) {
         document.location.href = "/delete_plan" + "/" + plan_id + "/"
