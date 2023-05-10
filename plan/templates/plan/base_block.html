@@ -1,7 +1,7 @@
 {% extends 'tbcore/base_core.html' %}
 {% load crispy_forms_tags %}
 {% load toolbox_custom_tags %}
-
+{% load static %}
 {% block specific_css %}
     {% load static %}
 
@@ -208,21 +208,7 @@
 
                 <!-- Messages-->
 
-                <section class="messages-js">
-
-                    {% if messages %}
-                        {% for msg in messages %}
-                            <div class="alert alert-info alert-dismissible fade show" role="alert">
-                                <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">&times;
-                                </button>
-                                {{ msg }}
-
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-
-
-                </section>
+                {% include "partials/messages.html" %}
 
                 {% block building_block_idea %}
 
