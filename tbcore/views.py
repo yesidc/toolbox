@@ -28,5 +28,8 @@ class ToolBoxLogingView(LoginView):
             # get the url for the idea_overview_detail view
             url = f"{reverse('idea_overview_detail', kwargs={'category_name': category_name, 'idea_id': idea_id})}?{urlencode({'preserve_note': 'True'})}"
             return url
+        # if user logs in from building block page, redirect to building block page user was on
+        if 'category_url' in self.request.GET and 'next_page' in self.request.GET:
+            return reverse('show_block', kwargs={'category_url': self.request.GET['category_url'], 'next_page': self.request.GET['next_page']})
 
         return reverse_lazy('start-page')
