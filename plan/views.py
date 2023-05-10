@@ -37,7 +37,7 @@ def show_block(request, category_url, next_page):
 
 def idea_overview_detail(request, category_name, idea_id):
     """
-    Implements all the logic related to showing an teaching tool detailed view.
+    Implements all the logic related to showing a teaching tool detailed view.
     """
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
 
@@ -62,8 +62,13 @@ def idea_overview_detail(request, category_name, idea_id):
     # handles all logic when user adds/updates idea or/and note from the idea_detail page
     if request.method == "POST":
         # checks if user has already created a plan
+        if not request.user.is_authenticated:
+            # todo fix messages, it should be shown on login page
+            messages.add_message(request, messages.INFO, 'First login to be able to save your notes')
+            return redirect('login')
         if not has_plan(request):
             return redirect(request.META.get('HTTP_REFERER'))
+
         note_form = NotesForm(request.POST)
         if note_form.is_valid():
             if pcoi_obj is None:
