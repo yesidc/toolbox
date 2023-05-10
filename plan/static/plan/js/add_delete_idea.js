@@ -36,7 +36,7 @@ function add_delete_idea() {
 
                         // if there is no plan id, ask user to create or select a plan.
                         if (document.getElementById(id_) == null) {
-                            alert('First create a plan to be able to save your progress.')
+                            alert('First create or select a plan to be able to save your progress.')
                         } else {
                             document.getElementById(id_).checked = true;
                             $('.messages-js').append(message_idea_added)

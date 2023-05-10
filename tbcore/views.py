@@ -1,13 +1,12 @@
 from urllib.parse import urlencode
 
-import requests
+
 from django.shortcuts import render,  reverse
-from django.contrib.auth.models import User
 # Create your views here.
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
-
-
+from plan.helpers import has_plan
+from .models import Plan
 def start_page(request):
     context = {
 
@@ -18,9 +17,16 @@ def start_page(request):
 
 class ToolBoxLogingView(LoginView):
 
-    def get_success_url(self):
-        # check if category_name and idea_id are in the url
 
+    def get_success_url(self):
+
+        # loads a users plan if they have one
+        if has_plan(self.request):
+            plan= Plan.objects.get_user_plans(self.request.user)[0]
+            self.request.session['current_user_plan'] = plan.pk
+            self.request.session['current_user_plan_name'] = plan.plan_name
+
+        # check if category_name and idea_id are in the url
         if 'category_name' in self.request.GET and 'idea_id' in self.request.GET:
             # get the category_name and idea_id from the url
             category_name = self.request.GET['category_name']

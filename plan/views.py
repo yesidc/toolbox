@@ -223,7 +223,12 @@ def use_idea(request, save_note=None):
     if not has_plan(request):
         return redirect(request.META.get('HTTP_REFERER'))
 
-    current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
+    if 'current_user_plan' in request.session:
+        current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
+    else:
+
+        return redirect(request.META.get('HTTP_REFERER'))
+
 
     current_idea = request.GET.get('idea_id')
     current_category = request.GET.get('current_category')
