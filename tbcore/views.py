@@ -1,6 +1,6 @@
 from urllib.parse import urlencode
 
-
+from django.contrib import messages
 from django.shortcuts import render,  reverse
 # Create your views here.
 from django.contrib.auth.views import LoginView
@@ -25,6 +25,18 @@ class ToolBoxLogingView(LoginView):
             plan= Plan.objects.get_user_plans(self.request.user)[0]
             self.request.session['current_user_plan'] = plan.pk
             self.request.session['current_user_plan_name'] = plan.plan_name
+            messages.success(self.request, f'Welcome back {self.request.user.username}! We have automatically loaded '
+                                           f'"{plan.plan_name}" for you to continue working on it.')
+        else:
+            # create a plan for the user and add it to the session
+            plan = Plan.objects.create(user=self.request.user,
+                                       plan_name='My Plan')
+            self.request.session['current_user_plan'] = plan.pk
+            self.request.session['current_user_plan_name'] = plan.plan_name
+            messages.success(self.request, f'Welcome {self.request.user.username}! We have automatically crated a plan '
+                                           f'for you to get started right away!. Click on the plan (on the left)  to change '
+                                           f'its name.')
+
 
         # check if category_name and idea_id are in the url
         if 'category_name' in self.request.GET and 'idea_id' in self.request.GET:
