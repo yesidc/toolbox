@@ -1,8 +1,10 @@
 from django.contrib import admin
 from django.urls import include, path, re_path
 from . import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path ('', views.start_page, name = 'start-page'),
-    path("accounts/", include("django.contrib.auth.urls")),
+    path("login/", views.ToolBoxLogingView.as_view(), name="login"),
+    path('logout/', LogoutView.as_view(next_page='start-page'),name='logout'),
 ]

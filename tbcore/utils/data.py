@@ -5,11 +5,11 @@ from tbcore.models import *
 
 def create_random_data (n):
     """
-    creates n number of random users along with their corresponding course plans. This function also populates each
+    creates n number of random registration along with their corresponding course plans. This function also populates each
     course plan with up to 27 ideas.
     """
     for i in range(n):
-        # create random users
+        # create random registration
         user = User.objects.create_user('tluser'+str(i), f'email{str(i)}@uni.com', '123'+str(i))
 
         plans = Plan.objects.bulk_create([

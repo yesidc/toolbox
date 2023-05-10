@@ -11,6 +11,8 @@ from tbcore.utils.create_pdf import render_pdf
 from django.core.exceptions import ObjectDoesNotExist
 
 
+
+
 def show_block(request, category_url, next_page):
     """
     Manages the content for all building blocks/categories.
@@ -33,6 +35,7 @@ def show_block(request, category_url, next_page):
         return render(request, 'plan/update_ideas.html', context=locals())
     else:
         return render(request, 'plan/block_content.html', context=locals())
+
 
 
 def idea_overview_detail(request, category_name, idea_id):
@@ -64,6 +67,10 @@ def idea_overview_detail(request, category_name, idea_id):
         # checks if user has already created a plan
         if not request.user.is_authenticated:
             # todo fix messages, it should be shown on login page
+
+            # cache note content in session
+            request.session['note_content'] = request.POST['note_content']
+
             messages.add_message(request, messages.INFO, 'First login to be able to save your notes')
             return redirect('login')
         if not has_plan(request):
@@ -250,7 +257,7 @@ def use_idea(request, save_note=None):
 @login_required()
 def delete_pcoi_checklist(request):
     """
-    Manages all related to deleting PlanCategoryOnlineIdea objects when users interact with the checklist page
+    Manages all related to deleting PlanCategoryOnlineIdea objects when registration interact with the checklist page
     """
     pcoi_delete = PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id'))
     pcoi_category = pcoi_delete.category.category_name

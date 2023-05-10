@@ -146,9 +146,9 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 #Login and logout rederict
-LOGIN_REDIRECT_URL = "/create_plan/get_started"
-LOGOUT_REDIRECT_URL = "/"
-
+# LOGIN_REDIRECT_URL = "/create_plan/get_started"
+# LOGOUT_REDIRECT_URL = "/"
+LOGIN_URL = 'login'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
