@@ -43,8 +43,17 @@ def idea_overview_detail(request, category_name, idea_id):
     Implements all the logic related to showing a teaching tool detailed view.
     """
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
-
+    # if the user created a note without login, the note content is cached in the session and loaded in the note form
     note_form = NotesForm()
+    if 'preserve_note' in request.GET:
+        if 'note_content' in request.session:
+            note_content = request.session['note_content']
+            del request.session['note_content']
+            note_form = NotesForm(initial={'note_content': note_content})
+    else:
+        if 'note_content' in request.session:
+            del request.session['note_content']
+
     if 'current_user_plan' in request.session:
         pcoi_obj = PlanCategoryOnlineIdea.objects.pcoi_obj_exists(request.session['current_user_plan'], category_name,
                                                               idea_id)
@@ -72,7 +81,7 @@ def idea_overview_detail(request, category_name, idea_id):
             request.session['note_content'] = request.POST['note_content']
 
             messages.add_message(request, messages.INFO, 'First login to be able to save your notes')
-            return redirect('login')
+            return redirect(f'/login/?category_name={category_name}&idea_id={idea_id}')
         if not has_plan(request):
             return redirect(request.META.get('HTTP_REFERER'))
 
