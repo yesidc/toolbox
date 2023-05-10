@@ -58,9 +58,9 @@
 
                         {% if idea.use_cases %}
 
-                        {% show_idea_property idea.use_cases 'Use cases' 'show_in_section' %}
+                            {% show_idea_property idea.use_cases 'Use cases' 'show_in_section' %}
 
-                    {% endif %}
+                        {% endif %}
 
                     </div>
 
@@ -71,17 +71,17 @@
 
             <div class="row">
                 {% if user.is_authenticated %}
-                <div class="col-md-6">
+                    <div class="col-md-6">
 
-                   {% if idea.use_cases %}
+                        {% if idea.use_cases %}
 
-                        {% show_idea_property idea.use_cases 'Use cases' 'show_in_section' %}
+                            {% show_idea_property idea.use_cases 'Use cases' 'show_in_section' %}
 
-                    {% endif %}
+                        {% endif %}
 
 
-                </div>
-{% endif %}
+                    </div>
+                {% endif %}
                 <div class="col-md-6">
 
 
