@@ -18,74 +18,53 @@
         <div class="container-fluid">
             <div class="row">
 
-                {% if user.is_authenticated %}
-                    <div class="col-md-6">
-                        {% show_idea_property idea.brief_description 'Description' 'show_in_section' %}
-                    </div>
 
-                    <div class="col-md-6">
+                <div class="col-md-6">
+                    {% show_idea_property idea.brief_description 'Description' 'show_in_section' %}
+                </div>
 
-
-                        <div class="container">
+                <div class="col-md-6">
 
 
-                            <div class="row">
-                                <div class="d-flex h-100"><h5 class="align-self-center">Note</h5></div>
-                            </div>
-                            <div class="row">
-                                <form action="" method="POST" id="notes-form">
-                                    {% csrf_token %}
-
-                                    {% crispy note_form %}
-                                </form>
-                            </div>
+                    <div class="container">
 
 
+                        <div class="row">
+                            <div class="d-flex h-100"><h5 class="align-self-center">Note</h5></div>
+                        </div>
+                        <div class="row">
+                            <form action="" method="POST" id="notes-form">
+                                {% csrf_token %}
+
+                                {% crispy note_form %}
+                            </form>
                         </div>
 
-                    </div>
-
-
-                {% else %}
-
-                    <div class="w-75 mx-auto">
-
-                        <div class="col text-center">
-                            <h3>{{ idea.idea_name }}</h3>
-                        </div>
-
-                        {% show_idea_property idea.brief_description 'Description' 'show_in_section' %}
-
-                        {% if idea.use_cases %}
-
-                            {% show_idea_property idea.use_cases 'Use cases' 'show_in_section' %}
-
-                        {% endif %}
 
                     </div>
 
-                {% endif %}
+                </div>
+
 
             </div>
 
 
             <div class="row">
-                {% if user.is_authenticated %}
-                    <div class="col-md-6">
 
-                        {% if idea.use_cases %}
+                <div class="col-md-6">
 
-                            {% show_idea_property idea.use_cases 'Use cases' 'show_in_section' %}
+                    {% if idea.use_cases %}
 
-                        {% endif %}
+                        {% show_idea_property idea.use_cases 'Use cases' 'show_in_section' %}
+
+                    {% endif %}
 
 
-                    </div>
-                {% endif %}
+                </div>
+
                 <div class="col-md-6">
 
 
-                    {% if user.is_authenticated %}
 
                         <div class="d-flex justify-content-end">
                             <div>
@@ -100,7 +79,7 @@
 
                         </div>
 
-                    {% endif %}
+
 
 
                 </div>
