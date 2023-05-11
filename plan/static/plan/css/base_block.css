@@ -11,7 +11,9 @@ Toolbox
       OR
       <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a>
 */
-
+.hint-color {
+    background-color: beige;
+}
 
 .text-area-note {
     cursor: pointer;
