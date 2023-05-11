@@ -17,16 +17,24 @@
 
 
         <div class="container-fluid">
-            <div class="row">
+
+            {% if user.is_anonymous %}
 
 
-                      <p class="lead text-center hint-color">Hint: You are browsing without login. To
-                    save your notes please <a href="{% url 'login' %}">log in</a>.
-
-                      </p>
+                <div class="row">
 
 
-            </div>
+                    <p class="lead text-center hint-color">Hint: You are browsing without login. To
+                        save your notes please <a href="{% url 'login' %}">log in</a>.
+
+                    </p>
+
+
+                </div>
+
+
+            {% endif %}
+
 
             <div class="row">
 
