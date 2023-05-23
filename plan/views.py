@@ -212,60 +212,61 @@ def create_plan(request, start_add):
             # user redirected to previous page
             return redirect(request.META.get('HTTP_REFERER'))
 
-
-@login_required
-def use_idea(request, save_note=None):
-    """
-    Saves or deletes ideas from an existing course plan when the user interacts with the checkboxes displayed on the building block page.
-    """
-
-    # checks if user has already created a plan
-    if not has_plan(request):
-        return redirect(request.META.get('HTTP_REFERER'))
-
-    if 'current_user_plan' in request.session:
-        current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
-    else:
-
-        return redirect(request.META.get('HTTP_REFERER'))
-
-
-    current_idea = request.GET.get('idea_id')
-    current_category = request.GET.get('current_category')
-
-    if request.GET.get('delete_idea'):
-        # Delete object
-        obj_delete = PlanCategoryOnlineIdea.objects.get_or_none(request.user, request.session['current_user_plan'],
-                                                                current_category, current_idea)
-        if obj_delete:
-            obj_delete.delete()
-
-
-        # categories for which user has already selected at least one idea
-        category_ready = category_done(current_user_plan)
-        json_dic = {
-            'category_ready': list(category_ready),
-            "category_id": current_category,
-            'plan_id': request.session['current_user_plan']
-        }
-        return JsonResponse(json_dic)
-
-
-
-    else:
-
-        save_pcoi(request, request.session['current_user_plan'], current_category, current_idea)
-
-    json_dic = {
-        "category_id": current_category,
-        'plan_id': request.session['current_user_plan']
-    }
-    # if user has either deleted or added an idea using the checkboxes on the blocks/category page
-    if is_ajax(request):
-        return JsonResponse(json_dic)
-    # else:
-    #     # if user has selected and idea using the buttons provided by both the overview or detail idea page.
-    #     return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
+# todo delete this function, it was used to handle the checkboxes on the building block page.
+# @login_required
+# def use_idea(request, save_note=None):
+#     """
+#     Saves or deletes ideas from an existing course plan when the user interacts with the checkboxes displayed on the
+#     building block page.
+#     """
+#
+#     # checks if user has already created a plan
+#     if not has_plan(request):
+#         return redirect(request.META.get('HTTP_REFERER'))
+#
+#     if 'current_user_plan' in request.session:
+#         current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
+#     else:
+#
+#         return redirect(request.META.get('HTTP_REFERER'))
+#
+#
+#     current_idea = request.GET.get('idea_id')
+#     current_category = request.GET.get('current_category')
+#
+#     if request.GET.get('delete_idea'):
+#         # Delete object
+#         obj_delete = PlanCategoryOnlineIdea.objects.get_or_none(request.user, request.session['current_user_plan'],
+#                                                                 current_category, current_idea)
+#         if obj_delete:
+#             obj_delete.delete()
+#
+#
+#         # categories for which user has already selected at least one idea
+#         category_ready = category_done(current_user_plan)
+#         json_dic = {
+#             'category_ready': list(category_ready),
+#             "category_id": current_category,
+#             'plan_id': request.session['current_user_plan']
+#         }
+#         return JsonResponse(json_dic)
+#
+#
+#
+#     else:
+#
+#         save_pcoi(request, request.session['current_user_plan'], current_category, current_idea)
+#
+#     json_dic = {
+#         "category_id": current_category,
+#         'plan_id': request.session['current_user_plan']
+#     }
+#     # if user has either deleted or added an idea using the checkboxes on the blocks/category page
+#     if is_ajax(request):
+#         return JsonResponse(json_dic)
+#     # else:
+#     #     # if user has selected and idea using the buttons provided by both the overview or detail idea page.
+#     #     return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
 
 
 @login_required()
