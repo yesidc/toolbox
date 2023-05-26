@@ -3,7 +3,16 @@ from django.db.models import Q
 from django.contrib import messages
 from django.db import IntegrityError
 from django.shortcuts import redirect
+import re
 
+
+
+def slugify(s):
+  s = s.lower().strip()
+  s = re.sub(r'[^\w\s-]', '', s)
+  s = re.sub(r'[\s_-]+', '-', s)
+  s = re.sub(r'^-+|-+$', '', s)
+  return s
 
 
 def category_done(curret_user_plan):

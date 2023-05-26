@@ -30,9 +30,9 @@ function set_menu_color() {
 
 set_menu_color()
 
-// sets the color of ACTIVE the nav bar plan  when the user accesses a different building block
+// sets the color of the ACTIVE  nav bar plan  when the user accesses a different building block
 try {
-    document.getElementById('plan-side-bar-' + slugify(plan_name_dom.dataset.planName)).style.backgroundColor = '#e99f4c'
+    document.getElementById('plan-side-bar-' + slugify(plan_name_dom.dataset.planName)).style.backgroundColor = '#4D1FAF'
 } catch (error) {
 
 }
@@ -66,7 +66,7 @@ for (i of plan_collapse) {
                         set_plan_collapse_color()
 
                         // sets the color of the ACTIVE plan's name on the sidebar
-                        document.getElementById('plan-side-bar-' + slugify(response.plan_name_ajax)).style.backgroundColor = '#e99f4c'
+                        document.getElementById('plan-side-bar-' + slugify(response.plan_name_ajax)).style.backgroundColor = '#4D1FAF'
                         // sets the color of the drop-down menu on the sidebar
                         document.getElementById(slugify(response.plan_name_ajax)).style.backgroundColor = '#ededd1'
 

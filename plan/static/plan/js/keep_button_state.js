@@ -1,6 +1,6 @@
 // preserve button state (buttons on the sidebar) on page reload (using local storage)
 // Read and set initial state for each button on page load
-window.onload = function ()  {
+window.onload = function () {
     var buttons = document.querySelectorAll('.keep-state-button');
     buttons.forEach(function (button) {
         var buttonId = button.getAttribute("id");
@@ -34,6 +34,19 @@ window.onload = function ()  {
 // todo remove button from the local storage when the plan is deleted.
 // Function to toggle and store button state
 function toggleButtonState(buttonID) {
+    var buttons = document.querySelectorAll('.keep-state-button');
+    buttons.forEach(function (button) {
+        var buttonId = button.getAttribute("id");
+        // set the button state to closed
+        try {
+            localStorage.setItem("button-state-" + buttonId, "closed");
+
+        } catch (error) {
+            console.log('Error caught successfully:', error.message)
+        }
+    })
+
+
     var button = document.getElementById(buttonID);
     var currentState = button.getAttribute("aria-expanded");
     // if the button is open, close it and store the state

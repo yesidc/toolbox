@@ -21,6 +21,7 @@ def show_block(request, category_url, next_page):
 
     if 'current_user_plan' in request.session:
         ideas_list = get_ideas(request.user, category_url, request.session['current_user_plan'])
+        active_user_plan = 'button-state-plan-side-bar-' + slugify(request.session['current_user_plan_name'])
     else:
         ideas_list = None
 
@@ -42,6 +43,7 @@ def idea_overview_detail(request, category_name, idea_id):
     """
     Implements all the logic related to showing a teaching tool detailed view.
     """
+    context = {}
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
     # if the user created a note without login, the note content is cached in the session and loaded in the note form
     note_form = NotesForm()
@@ -55,6 +57,9 @@ def idea_overview_detail(request, category_name, idea_id):
             del request.session['note_content']
 
     if 'current_user_plan' in request.session:
+
+        active_user_plan = 'button-state-plan-side-bar-' + slugify(request.session['current_user_plan_name'])
+        context.update({'active_user_plan': active_user_plan})
         pcoi_obj = PlanCategoryOnlineIdea.objects.pcoi_obj_exists(request.session['current_user_plan'], category_name,
                                                               idea_id)
         # loads current note giving the user the possibility to edit it.

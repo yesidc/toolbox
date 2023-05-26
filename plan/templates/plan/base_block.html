@@ -223,6 +223,14 @@
 
 
     {{ category_urls|json_script:"category-urls" }}
+    <script>
+
+        var active_user_plan = "{{ active_user_plan }}";
+        if (active_user_plan) {
+            localStorage.setItem(active_user_plan, "open");
+        }
+
+    </script>
     <script src="{% static 'plan/js/menu_bar.js' %}"></script>
     <script src="{% static 'plan/js/keep_button_state.js' %}"></script>
 

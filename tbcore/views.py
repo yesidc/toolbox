@@ -1,28 +1,47 @@
 from urllib.parse import urlencode
-
 from django.contrib import messages
 from django.shortcuts import render,  reverse
 # Create your views here.
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
-from plan.helpers import has_plan
+from plan.helpers import has_plan, slugify
 from .models import Plan
-def start_page(request):
-    context = {
 
-    }
+
+
+
+def start_page(request):
+    context = { }
+    #
+    # if request.user.is_authenticated:
+    #
+    #     plan = Plan.objects.get_user_plans(request.user).last()
+    #     active_user_plan = 'button-state-plan-side-bar-' + slugify(plan.plan_name)
+    #     context.update(
+    #         {'active_user_plan': active_user_plan}
+    #     )
+
 
     return render(request, 'tbcore/start_page.html', context=context)
 
 
+class ToolBoxLogoutView(LogoutView):
+    next_page = reverse_lazy('start-page')
+    def dispatch(self, request, *args, **kwargs):
+        # Clear local storage
+
+        return super().dispatch(request, *args, **kwargs)
+
+
 class ToolBoxLogingView(LoginView):
+
 
 
     def get_success_url(self):
 
         # loads a users plan if they have one
         if has_plan(self.request):
-            plan= Plan.objects.get_user_plans(self.request.user)[0]
+            plan= Plan.objects.get_user_plans(self.request.user).last()
             self.request.session['current_user_plan'] = plan.pk
             self.request.session['current_user_plan_name'] = plan.plan_name
             messages.success(self.request, f'Welcome back {self.request.user.username}! We have automatically loaded '
