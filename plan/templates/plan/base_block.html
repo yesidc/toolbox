@@ -142,29 +142,39 @@
 
 
 
-                            <div class="d-flex flex-row h-100">
-                                <button class="list-group-item list-group-item-action list-group-item-light p-3 keep-state-button all-plan-sidebar {{ p }} "
-                                        data-bs-target="#{{ p.plan_name |add_hyphen }}"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        aria-expanded="false"
-                                        aria-controls="{{ p.plan_name |add_hyphen }}"
-                                        id="plan-side-bar-{{ p.plan_name |add_hyphen }}"
-                                        onclick="toggleButtonState(this.id)"
+                            <div class="d-flex flex-row h-100 flex-single-course-plan">
+                                <a class="btn border-0 list-group-item list-group-item-action list-group-item-light p-3 keep-state-button all-plan-sidebar {{ p }} "
+                                   data-bs-target="#{{ p.plan_name |add_hyphen }}"
+                                   type="button"
+                                   data-bs-toggle="collapse"
+                                   aria-expanded="false"
+                                   aria-controls="{{ p.plan_name |add_hyphen }}"
+                                   id="plan-side-bar-{{ p.plan_name |add_hyphen }}"
+                                   onclick="toggleButtonState(this.id)"
                                 >
                                     <span class="adobe-garamond-p"> {{ p.plan_name }}</span>
 
 
-                                </button>
+                                </a>
 
-                                <div class="align-self-end align-self-stretch">
-                                    {#                                     change the color of delete buttons side-nav bar here#}
+                                <div class="align-self-end align-self-stretch all-plan-sidebar align-icon-vertically">
 
-                                    <button href="{% url 'delete_plan' p.pk %}" class="h-100 btn-toolbox text-light"
-                                            data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
-                                            onclick="delete_plan(this)"><i class="bi bi-trash"></i></button>
+                                    <a href="#" class=" "
+                                       data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
+                                      ><i class="bi bi-pencil-square"></i></a>
 
                                 </div>
+
+                                <div class="align-self-end align-self-stretch all-plan-sidebar align-icon-vertically">
+                                    {#                                     change the color of delete buttons side-nav bar here#}
+
+                                    <a href="{% url 'delete_plan' p.pk %}" class=" "
+                                       data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
+                                       onclick="delete_plan(this)"><i class="bi bi-trash"></i></a>
+
+                                </div>
+
+
                             </div>
 
 
