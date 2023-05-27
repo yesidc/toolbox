@@ -156,12 +156,12 @@
 
 
                                 </a>
-{#                                Edit plan name#}
+                                {#                                Edit plan name#}
                                 <div class="align-self-end align-self-stretch all-plan-sidebar align-icon-vertically">
 
                                     <a href="#" class=" "
                                        data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
-                                      ><i class="bi bi-pencil-square"></i></a>
+                                    ><i class="bi bi-pencil-square"></i></a>
 
                                 </div>
 
@@ -185,28 +185,41 @@
 
 
                                 {% for c_name, c_url, c_next in category_objects %}
-                                    <p>
-                                        <span class="badge text-dark">
+                                    <div class="container">
 
-                                            <i class="bi bi-check-circle hide-check-icon "
-                                            id="{{ c_url }}{{ p.pk }}"
-                                            ></i>
+                                        <div class="d-flex">
 
-{#                                            <input type="checkbox" class="checkbox-sidebar {{ p.pk }}block"#}
-{#                                                   id="{{ c_url }}{{ p.pk }}">#}
+                                            <div>
+                                                <i class="bi bi-check-circle hide-check-icon "
+                                                   id="{{ c_url }}{{ p.pk }}"
+                                                ></i>
 
-                                        </span>
-                                        <a href="{% url 'show_block' c_url c_next %}"
-                                           class="link-no-decoration text-dark"> {{ c_name }}</a>
 
-                                    </p>
+                                            </div>
+
+                                            <div>
+                                                <a href="{% url 'show_block' c_url c_next %}"
+                                                   class="link-no-decoration text-dark"> {{ c_name }}</a>
+
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="row">
+                                            <p style="margin-left: 60px">something</p>
+
+                                        </div>
+
+
+                                    </div>
 
                                 {% endfor %}
 
                                 <div class="d-flex justify-content-end my-md-3">
                                     <div>
                                         <a href="{% url 'checklist' %}" class=" btn btn-toolbox text-light">View
-                                            checklist</a>
+                                            details</a>
                                     </div>
                                 </div>
 

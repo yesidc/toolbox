@@ -308,7 +308,7 @@ def select_plan(request):
     request.session['current_user_plan_name'] = current_user_plan.plan_name
     # categories for which user has already selected at least one idea
     category_ready = category_done(current_user_plan)
-
+    # category_idea_checklist,category_done_summary = context_summary(request.user, request.session['current_user_plan'],summary_checklist=False)
     response_dict = {
         'category_ready': list(category_ready),
         # this is the name that is shown on the top right (Name is changed dynamically through the DOM)

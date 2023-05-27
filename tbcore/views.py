@@ -4,7 +4,7 @@ from django.shortcuts import render,  reverse
 # Create your views here.
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
-from plan.helpers import has_plan, slugify
+from plan.helpers import has_plan
 from .models import Plan
 
 
@@ -12,14 +12,6 @@ from .models import Plan
 
 def start_page(request):
     context = { }
-    #
-    # if request.user.is_authenticated:
-    #
-    #     plan = Plan.objects.get_user_plans(request.user).last()
-    #     active_user_plan = 'button-state-plan-side-bar-' + slugify(plan.plan_name)
-    #     context.update(
-    #         {'active_user_plan': active_user_plan}
-    #     )
 
 
     return render(request, 'tbcore/start_page.html', context=context)

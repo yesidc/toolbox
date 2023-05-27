@@ -40,7 +40,7 @@ try {
 
 function set_plan_collapse_color() {
     for (p of plan_collapse) {
-        p.style.backgroundColor = 'rgba(163,217,234,0.2)'
+        p.style.backgroundColor = '#4786FF3D'
     }
 }
 
@@ -68,10 +68,10 @@ for (i of plan_collapse) {
                         // sets the color of the ACTIVE plan's name on the sidebar
                         document.getElementById('plan-side-bar-' + slugify(response.plan_name_ajax)).style.backgroundColor = '#4D1FAF'
                         // sets the color of the drop-down menu on the sidebar
-                        document.getElementById(slugify(response.plan_name_ajax)).style.backgroundColor = '#ededd1'
+                        document.getElementById(slugify(response.plan_name_ajax)).style.backgroundColor = '#4786FF3D'
 
                         for (const c_done of response.category_ready) {
-                            //ticks off the (sidebar)checkbox if user has already selected at least one idea for any given category
+                            //shows (sidebar)check icon if user has already selected at least one idea for any given category
 
                             document.getElementById(c_done + response.plan_id_response).style.visibility = 'visible'
                         }
