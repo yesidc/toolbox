@@ -126,6 +126,20 @@ div.no-indent ol {
 
   }
 
+
+ .hide-check-icon {
+    visibility: hidden;
+     font-size: 1.5rem; /* Increase the font size to make it bigger */
+      background-color: green; /* Set the background color to green */
+      padding: 2px;
+      color: white;
+     border-radius: 50%;
+      display: inline-flex; /* Ensure proper alignment */
+      align-items: center; /* Ensure proper alignment */
+      justify-content: center; /* Ensure proper alignment */
+
+    }
+
 .tr-main-table:nth-of-type(even) {
     background-color: #f2f2f2;
 }

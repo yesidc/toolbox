@@ -72,7 +72,8 @@ for (i of plan_collapse) {
 
                         for (const c_done of response.category_ready) {
                             //ticks off the (sidebar)checkbox if user has already selected at least one idea for any given category
-                            document.getElementById(c_done + response.plan_id_response).checked = true
+
+                            document.getElementById(c_done + response.plan_id_response).style.visibility = 'visible'
                         }
 
                         // when the user selects a plan (using the left-navigation bar); the checkboxes on the block_content page are updated accordingly/dynamically
