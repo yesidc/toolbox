@@ -31,7 +31,7 @@ def is_ajax(request):
     return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 
-def context_summary(user, current_plan):
+def context_summary(user, current_plan, checklist=True):
     """
     Summarizes user's progress
     Args:
@@ -46,19 +46,28 @@ def context_summary(user, current_plan):
 
     category_idea_checklist = []
     info_idea = []
-    category_done_summary = current_plan.category_done(mode='category_name')
+    if checklist:
+        category_done_summary = current_plan.category_done(mode='category_name')
+    else:
+        category_done_summary = current_plan.category_done(mode='url')
 
     for c in category_done_summary:
         # all these pcoi objects are related to a single category for which user already chose at least one idea
+        if checklist:
+            query_category = pcoi.filter(category__category_name=c)
+        else:
+            query_category = pcoi.filter(category__category_url=c)
 
-        query_category = pcoi.filter(category__category_name=c)
         for pcoi_instance in query_category:
             idea_name = pcoi_instance.idea.idea_name
-            # this id used to delete the pcoi object from checklist page
-            pcoi_instance_id = pcoi_instance.pk
-            pcoi_instance_note = pcoi_instance.notes
-            pcoi_instance_complexity = pcoi_instance.idea.task_complexity
-            info_idea.append((idea_name, pcoi_instance_id, pcoi_instance_note, pcoi_instance_complexity))
+            if checklist:
+                # this id used to delete the pcoi object from checklist page
+                pcoi_instance_id = pcoi_instance.pk
+                pcoi_instance_note = pcoi_instance.notes
+                pcoi_instance_complexity = pcoi_instance.idea.task_complexity
+                info_idea.append((idea_name, pcoi_instance_id, pcoi_instance_note, pcoi_instance_complexity))
+            else:
+                info_idea.append(idea_name)
 
         category_idea_checklist.append((c, info_idea))
         info_idea = []

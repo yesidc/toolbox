@@ -308,9 +308,14 @@ def select_plan(request):
     request.session['current_user_plan_name'] = current_user_plan.plan_name
     # categories for which user has already selected at least one idea
     category_ready = category_done(current_user_plan)
-    # category_idea_checklist,category_done_summary = context_summary(request.user, request.session['current_user_plan'],summary_checklist=False)
+    # category_idea_checklist is a list that contains a tuple whose items are the name of the building block and a list of all ideas
+    # category_done_summary is a set that contains the name of the building block
+    category_idea_checklist,category_done_summary = context_summary(request.user,
+                                                                    Plan.objects.get(pk=request.session['current_user_plan']),
+                                                                    checklist=False)
     response_dict = {
-        'category_ready': list(category_ready),
+        #'category_ready': list(category_ready),
+        'category_ready':category_idea_checklist,
         # this is the name that is shown on the top right (Name is changed dynamically through the DOM)
         'plan_name_ajax': request.session['current_user_plan_name'],
         # this is the id assigned to the div element that contains all blocks/categories on the sidebar

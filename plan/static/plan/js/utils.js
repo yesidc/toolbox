@@ -73,7 +73,17 @@ for (i of plan_collapse) {
                         for (const c_done of response.category_ready) {
                             //shows (sidebar)check icon if user has already selected at least one idea for any given category
 
-                            document.getElementById(c_done + response.plan_id_response).style.visibility = 'visible'
+                            document.getElementById(c_done[0] + response.plan_id_response).style.visibility = 'visible'
+                            const idea_container =   document.getElementById('idea-'+c_done[0]+response.plan_id_response)
+                            idea_container.innerHTML = ''
+                            for(const idea of c_done[1]){
+                                var idea_paragraph = document.createElement('p')
+                                idea_paragraph.textContent = idea
+                                // add idea to idea_container
+                                idea_container.appendChild(idea_paragraph)
+
+
+                            }
                         }
 
                         // when the user selects a plan (using the left-navigation bar); the checkboxes on the block_content page are updated accordingly/dynamically
