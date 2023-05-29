@@ -79,6 +79,7 @@ for (i of plan_collapse) {
                             for(const idea of c_done[1]){
                                 var idea_paragraph = document.createElement('p')
                                 idea_paragraph.textContent = idea
+                                idea_paragraph.classList.add('p-teaching-tool-sidebar')
                                 // add idea to idea_container
                                 idea_container.appendChild(idea_paragraph)
 

@@ -152,7 +152,7 @@
                                    id="plan-side-bar-{{ p.plan_name |add_hyphen }}"
                                    onclick="toggleButtonState(this.id)"
                                 >
-                                    <span class="adobe-garamond-p"> {{ p.plan_name }}</span>
+                                    <span class="adobe-garamond-p course-name-sidebar"> {{ p.plan_name }}</span>
 
 
                                 </a>
@@ -188,13 +188,11 @@
                                     <div class="container">
 
                                         <div class="d-flex">
-
-                                            <div>
+                                            {#Checkmark#}
+                                            <div class="mx-1">
                                                 <i class="bi bi-check-circle hide-check-icon "
                                                    id="{{ c_url }}{{ p.pk }}"
                                                 ></i>
-
-
                                             </div>
 
                                             <div>
@@ -205,10 +203,9 @@
 
 
                                         </div>
-
-                                        <div class="row"
-                                        id="idea-{{ c_url }}{{ p.pk }}">
-{#                                            <p style="margin-left: 60px">something</p>#}
+                                        {#Teaching tools sidebar#}
+                                        <div class="row container-teaching-tools-sidebar"
+                                             id="idea-{{ c_url }}{{ p.pk }}">
 
                                         </div>
 
