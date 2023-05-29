@@ -23,7 +23,7 @@ function slugify(str_slug){
 function set_menu_color() {
     // set the color of EVERY  course plan shown on the side nav bar.
     for (i of all_plans) {
-        i.style.backgroundColor = 'rgba(209, 242, 249, 0.9)'
+        i.style.backgroundColor = '#4D1FAF'
     }
 }
 
@@ -39,6 +39,7 @@ try {
 
 
 function set_plan_collapse_color() {
+    // set the background color of the building block/teaching tools container
     for (p of plan_collapse) {
         p.style.backgroundColor = '#4786FF3D'
     }
@@ -62,8 +63,8 @@ for (i of plan_collapse) {
                     try {
                         $('#plan_name_dom').text(response.plan_name_ajax)
                         // plan's name color
-                        set_menu_color()
-                        set_plan_collapse_color()
+                        // set_menu_color()
+                        //set_plan_collapse_color()
 
                         // sets the color of the ACTIVE plan's name on the sidebar
                         document.getElementById('plan-side-bar-' + slugify(response.plan_name_ajax)).style.backgroundColor = '#4D1FAF'
