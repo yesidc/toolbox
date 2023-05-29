@@ -161,6 +161,33 @@ def update_note_checklist(request):
         return render(request, 'plan/checklist.html')
 
 @login_required
+def edit_plan_title(request):
+    """
+    Updates the title of a plan.
+    """
+    #todo add validation using form validation API
+    # todo update the localStorage plan name
+
+    new_title = request.POST['plan_name']
+    if request.method == 'POST':
+        plan_id = request.POST.get('planId')
+        plan = Plan.objects.get(id=plan_id)
+        form = PlanForm(request.POST)
+        if form.is_valid():
+
+            try:
+
+                plan.plan_name = form.cleaned_data['plan_name']
+                plan.save()
+                return JsonResponse({'success': True})
+            except Plan.DoesNotExist:
+                return JsonResponse({'success': False, 'message': 'Plan not found.'})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
+    else:
+        return JsonResponse({'success': False, 'message': 'Invalid request method or not an AJAX request.'})
+
+@login_required
 def create_plan(request, start_add):
     """
     Triggered when user creates a new Plan

@@ -152,7 +152,9 @@
                                    id="plan-side-bar-{{ p.plan_name |add_hyphen }}"
                                    onclick="toggleButtonState(this.id)"
                                 >
-                                    <span class="adobe-garamond-p course-name-sidebar"> {{ p.plan_name }}</span>
+                                    <span class="adobe-garamond-p course-name-sidebar" id="edit-title-{{ p.pk }}" data-object-id="{{ p.pk }}">
+                                        {{ p.plan_name }}
+                                    </span>
 
 
                                 </a>
@@ -161,14 +163,17 @@
 
                                     <a href="#" class=" "
                                        data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
+                                        onclick="edit_plan_title('{{p.pk }}')"
                                     ><i class="bi bi-pencil-square"></i></a>
 
                                 </div>
 
                                 <div class="align-self-end align-self-stretch all-plan-sidebar align-icon-vertically">
-                                    {#                                     change the color of delete buttons side-nav bar here#}
+                                    {#  delete button#}
 
-                                    <a href="{% url 'delete_plan' p.pk %}" class=" "
+                                    <a href="{% url 'delete_plan' p.pk %}"
+                                       class="delete-plan-button"
+                                       id="delete-sidebar-{{ p.plan_name |add_hyphen }}" style="visibility: hidden"
                                        data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
                                        onclick="delete_plan(this)"><i class="bi bi-trash"></i></a>
 
@@ -268,6 +273,7 @@
 
     </script>
     <script src="{% static 'plan/js/menu_bar.js' %}"></script>
+    <script src="{% static 'plan/js/edit_plan_title.js' %}"></script>
     <script src="{% static 'plan/js/keep_button_state.js' %}"></script>
 
 

@@ -12,6 +12,7 @@ urlpatterns = [
     path('create_plan/<str:start_add>/', views.create_plan, name='create_plan'),
     path('select_plan/', views.select_plan, name='select_plan'),
     path('delete_pcoi_checklist/', views.delete_pcoi_checklist, name='delete_pcoi_checklist'),
+    path('edit_plan_title/', views.edit_plan_title, name='edit_plan_title'),
 
     path('checklist/', views.checklist, name='checklist'),
     path('delete_plan/<int:plan_id>/', views.delete_plan, name='delete_plan'),

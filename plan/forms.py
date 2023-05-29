@@ -4,6 +4,7 @@ from tbcore.models import Plan
 from django.core.exceptions import ValidationError
 from crispy_forms.helper import FormHelper
 
+
 class NotesForm(forms.Form):
     note_content = forms.CharField(max_length=500, widget=forms.Textarea(attrs={'name':'notes-detail-page', 'rows':'7', 'cols':'50','placeholder': 'Please describe your teaching idea in a few words for your online course checklist.'}))
 

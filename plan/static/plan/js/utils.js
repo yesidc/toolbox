@@ -1,7 +1,7 @@
 const plan_collapse = document.getElementsByClassName('plan-collapse')
 const all_plans = document.getElementsByClassName('all-plan-sidebar')
 const plan_name_dom = document.getElementById('plan_name_dom')
-
+const delete_plan_button = document.getElementsByClassName('delete-plan-button')
 
 function open_internal_link(internal_url) {
 // Open internal links (specified in the json5 files)
@@ -9,13 +9,21 @@ function open_internal_link(internal_url) {
 
 }
 
-function slugify(str_slug){
+function hide_delete_button() {
+    // hide the delete button on the sidebar
+    for (i of delete_plan_button) {
+        i.style.visibility = 'hidden'
+    }
 
-    str_slug=str_slug.toLowerCase()
-    str_slug=str_slug.trim()
-    str_slug=str_slug.replace(/[^\w\s-]/g, '')
-    str_slug=str_slug.replace(/[\s_-]+/g, '-')
-    str_slug=str_slug.replace(/^-+|-+$/g, '');
+}
+
+function slugify(str_slug) {
+
+    str_slug = str_slug.toLowerCase()
+    str_slug = str_slug.trim()
+    str_slug = str_slug.replace(/[^\w\s-]/g, '')
+    str_slug = str_slug.replace(/[\s_-]+/g, '-')
+    str_slug = str_slug.replace(/^-+|-+$/g, '');
     return str_slug;
 }
 
@@ -68,6 +76,10 @@ for (i of plan_collapse) {
 
                         // sets the color of the ACTIVE plan's name on the sidebar
                         document.getElementById('plan-side-bar-' + slugify(response.plan_name_ajax)).style.backgroundColor = '#4D1FAF'
+                        // hide all delete buttons
+                        hide_delete_button()
+                        // make delete button visible
+                        document.getElementById('delete-sidebar-' + slugify(response.plan_name_ajax)).style.visibility = 'visible'
                         // sets the color of the drop-down menu on the sidebar
                         document.getElementById(slugify(response.plan_name_ajax)).style.backgroundColor = '#4786FF3D'
 
@@ -75,9 +87,9 @@ for (i of plan_collapse) {
                             //shows (sidebar)check icon if user has already selected at least one idea for any given category
 
                             document.getElementById(c_done[0] + response.plan_id_response).style.visibility = 'visible'
-                            const idea_container =   document.getElementById('idea-'+c_done[0]+response.plan_id_response)
+                            const idea_container = document.getElementById('idea-' + c_done[0] + response.plan_id_response)
                             idea_container.innerHTML = ''
-                            for(const idea of c_done[1]){
+                            for (const idea of c_done[1]) {
                                 var idea_paragraph = document.createElement('p')
                                 idea_paragraph.textContent = idea
                                 idea_paragraph.classList.add('p-teaching-tool-sidebar')
@@ -127,8 +139,8 @@ for (i of plan_collapse) {
 function delete_plan(obj) {
     let plan_name = obj.getAttribute('data-object-name');
     let plan_id = obj.getAttribute('data-object-id');
-    localStorage.removeItem( 'button-state-plan-side-bar-'+slugify(plan_name))
-    console.log('deleted from localstorage','plan-side-bar-'+slugify(plan_name))
+    localStorage.removeItem('button-state-plan-side-bar-' + slugify(plan_name))
+    console.log('deleted from localstorage', 'plan-side-bar-' + slugify(plan_name))
     const ask = confirm('Do you want to delete: ' + plan_name);
     if (ask) {
         document.location.href = "/delete_plan" + "/" + plan_id + "/"
