@@ -1,5 +1,5 @@
-const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-const course_titles = document.querySelectorAll('.course-name-sidebar');
+var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+var course_titles = document.querySelectorAll('.course-name-sidebar');
 
 function edit_plan_title(plan_id) {
     // when user clicks on the edit icon, the title becomes editable
@@ -30,8 +30,6 @@ course_titles.forEach(function (course_title) {
                         var button_state = localStorage.getItem('button-state-plan-side-bar-'+ response.previous_name);
                         localStorage.setItem('button-state-plan-side-bar-'+ response.updated_name, button_state);
                         localStorage.removeItem('button-state-plan-side-bar-'+ response.previous_name);
-                        console.log('Response:', response)
-
 
                     },
                     error: function (xhr, status, error) {

@@ -152,11 +152,17 @@ def update_note_checklist(request):
     """
     poci_obj = get_object_or_404(PlanCategoryOnlineIdea, pk=request.POST['pcoiId'])
     if request.method == 'POST':
-        poci_obj.notes = request.POST['note']
-        poci_obj.save()
+        form = NotesForm(request.POST)
+        if form.is_valid():
+            poci_obj.notes = form.cleaned_data['note_content']
+            poci_obj.save()
 
-
-        return JsonResponse({},  status=200)
+        # poci_obj.notes = request.POST['note_content']
+        # poci_obj.save()
+            return JsonResponse({},  status=200)
+        else:
+            messages.add_message(request, messages.INFO, 'Something went wrong, please try again')
+            return JsonResponse({'success': False})
     else:
         return render(request, 'plan/checklist.html')
 
@@ -165,9 +171,6 @@ def edit_plan_title(request):
     """
     Updates the title of a plan.
     """
-    #todo add validation using form validation API
-    # todo update the localStorage plan name
-    # todo update sessions plan name
     # todo while editing the collapsible should be closed
 
     if request.method == 'POST':
