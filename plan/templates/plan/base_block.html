@@ -160,11 +160,13 @@
                                 </a>
                                 {#                                Edit plan name#}
                                 <div class="align-self-end align-self-stretch all-plan-sidebar align-icon-vertically">
-
-                                    <a href="#" class=" "
+{##}
+                                    <a href="#"
                                        data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
                                         onclick="edit_plan_title('{{p.pk }}')"
                                     ><i class="bi bi-pencil-square"></i></a>
+
+
 
                                 </div>
 
@@ -201,7 +203,7 @@
 {#                                                ></i>#}
 
                                                 <div class="hide-check-icon"
-{#                                                   id="{{ c_url }}{{ p.pk }}">
+                                                 id="{{ c_url }}{{ p.pk }}">
 
 
                                                 </div>

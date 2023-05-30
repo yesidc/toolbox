@@ -167,19 +167,25 @@ def edit_plan_title(request):
     """
     #todo add validation using form validation API
     # todo update the localStorage plan name
+    # todo update sessions plan name
+    # todo while editing the collapsible should be closed
 
-    new_title = request.POST['plan_name']
     if request.method == 'POST':
         plan_id = request.POST.get('planId')
         plan = Plan.objects.get(id=plan_id)
+        previous_name = slugify(plan.plan_name)
         form = PlanForm(request.POST)
         if form.is_valid():
 
             try:
 
-                plan.plan_name = form.cleaned_data['plan_name']
+                updated_plan_name = form.cleaned_data['plan_name']
+                plan.plan_name = updated_plan_name
                 plan.save()
-                return JsonResponse({'success': True})
+                request.session['current_user_plan_name'] = updated_plan_name
+                return JsonResponse({'success': True,
+                                     'previous_name': previous_name,
+                                     'updated_name': slugify(updated_plan_name)})
             except Plan.DoesNotExist:
                 return JsonResponse({'success': False, 'message': 'Plan not found.'})
         else:

@@ -2,33 +2,14 @@ const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 const course_titles = document.querySelectorAll('.course-name-sidebar');
 
 function edit_plan_title(plan_id) {
-
+    // when user clicks on the edit icon, the title becomes editable
     const update_title = document.getElementById('edit-title-' + plan_id);
     update_title.contentEditable = true;
     update_title.focus();
 
-    // // Move the media file to the album
-    // $.ajax(
-    //     {
-    //         url: '/edit_plan_title/',
-    //         type: 'POST',
-    //         data: {
-    //             'planId': plan_id,
-    //             'csrfmiddlewaretoken': csrfToken
-    //         },
-    //         success: function (response) {
-    //             console.log('Response:', response)
-    //             console.log('Note updated successfully!')
-    //             // Redirect
-    //             window.location.href = '/checklist/';
-    //         },
-    //         error: function (xhr, status, error) {
-    //             console.log('Error: ' + error);
-    //         }
-    //     });
-
 }
 
+// handles the edit of the plan title
 course_titles.forEach(function (course_title) {
     course_title.addEventListener('keydown', function (event) {
         if (event.keyCode === 13) {
@@ -45,8 +26,12 @@ course_titles.forEach(function (course_title) {
                         'csrfmiddlewaretoken': csrfToken
                     },
                     success: function (response) {
+                        // 'button-state-plan-side-bar-
+                        var button_state = localStorage.getItem('button-state-plan-side-bar-'+ response.previous_name);
+                        localStorage.setItem('button-state-plan-side-bar-'+ response.updated_name, button_state);
+                        localStorage.removeItem('button-state-plan-side-bar-'+ response.previous_name);
                         console.log('Response:', response)
-                        console.log('Title updated !')
+
 
                     },
                     error: function (xhr, status, error) {
