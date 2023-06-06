@@ -146,6 +146,7 @@ def checklist(request):
     else:
         return redirect(request.META.get('HTTP_REFERER'))
 
+# todo checklist page should be reload when user edits the plan title
 def update_note_checklist(request):
     """
     Updates the note for a given teaching tool from the checklist page.
