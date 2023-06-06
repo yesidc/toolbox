@@ -3,10 +3,11 @@ from django.contrib import messages
 from django.shortcuts import render,  reverse
 # Create your views here.
 from django.contrib.auth.views import LoginView, LogoutView
+from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from plan.helpers import has_plan
 from .models import Plan
-
+from .forms import SignUpForm
 
 
 
@@ -16,6 +17,23 @@ def start_page(request):
 
     return render(request, 'tbcore/start_page.html', context=context)
 
+
+class SignUpView(CreateView):
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('login')
+    form_class = SignUpForm
+
+    def form_valid(self, form):
+        # Perform additional actions here
+        # For example, send a welcome email to the user
+
+        # Call the parent class's form_valid() method
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Sign Up'
+        return context
 
 class ToolBoxLogoutView(LogoutView):
     next_page = reverse_lazy('start-page')
