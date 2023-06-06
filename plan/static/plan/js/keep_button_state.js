@@ -49,49 +49,22 @@ function toggleButtonState(buttonID) {
                     toggle: false
                 })
                 toggle.hide();
+
+                // in local storage, set the state buttons to closed
+                try {
+                    localStorage.setItem("button-state-" + buttons[i].getAttribute("id"), "closed");
+
+                } catch (error) {
+                    console.log('Error caught successfully:', error.message)
+                }
             }
         }
+        var target_clicked_button = button.dataset.bsTarget;
+        var toggle_clicked_button = new bootstrap.Collapse(document.querySelector(target_clicked_button), {
+            toggle: true
+        })
+        toggle_clicked_button.show();
+        // save to the localStorage the state of the button being clicked
+        localStorage.setItem("button-state-" + buttonID, "open");
 
-
-
-
-    // // save the state of the button being clicked
-    // var button = document.getElementById(buttonID);
-    // var currentState = button.getAttribute("aria-expanded");
-    //
-    // var buttons = document.querySelectorAll('.keep-state-button');
-    //
-    //     buttons.forEach(function (button) {
-    //     button.setAttribute("aria-expanded", "false");
-    // });
-    //
-    // buttons.forEach(function (button) {
-    //     var buttonId = button.getAttribute("id");
-    //     // close all buttons
-    //     //button.setAttribute("aria-expanded", "false");
-    //     // in local storage, set the state of all buttons to closed
-    //     try {
-    //         localStorage.setItem("button-state-" + buttonId, "closed");
-    //
-    //     } catch (error) {
-    //         console.log('Error caught successfully:', error.message)
-    //     }
-    // })
-    //
-    // // if the button was initially closed, open it and store the state in local storage
-    // if (currentState === "true") {
-    //     button.setAttribute("aria-expanded", "true");
-    //     localStorage.setItem("button-state-" + buttonID, "open");
-    //
-    // }
-    //
-    // // if the button is open, close it and store the state
-    // if (currentState === "true") {
-    //     //button.setAttribute("aria-expanded", "false");
-    //     localStorage.setItem("button-state-" + buttonID, "open");
-    //     // if the button is closed, open it and store the state
-    // } else {
-    //     //button.setAttribute("aria-expanded", "true");
-    //     localStorage.setItem("button-state-" + buttonID, "closed");
-    // }
 }
