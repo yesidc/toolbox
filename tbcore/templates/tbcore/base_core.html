@@ -88,9 +88,14 @@
                                     class="text-light adobe-garamond-p">Log out</span></a>
                             </li>
                         {% else %}
+
                             <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><span
                                     class="text-light adobe-garamond-p">Log in</span></a>
                             </li>
+                             <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}"><span
+                                    class="text-light adobe-garamond-p">Sign up</span></a>
+                            </li>
+
                         {% endif %}
 
                     </ul>
