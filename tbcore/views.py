@@ -3,17 +3,18 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render,  reverse, redirect
 from django.contrib.auth import get_user_model
-from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetConfirmView
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, View
 from django.utils.encoding import force_bytes, force_str
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.html import strip_tags
 from plan.helpers import has_plan
 from .models import Plan
+from .tokens import account_activation_token
 from .forms import SignUpForm
 
 
@@ -46,7 +47,7 @@ class SignUpView(CreateView):
 
     def send_activation_email(self, user):
         # Generate the token for activation
-        token = default_token_generator.make_token(user)
+        token = account_activation_token.make_token(user)
 
         # Build the activation URL
         # encode the user's primary key
@@ -69,32 +70,61 @@ class SignUpView(CreateView):
         email.send()
 
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Sign Up'
-        return context
+class ActivateAccountView(View):
+
+    def send_signup_email(self, user):
+        subject = 'Welcome to YourSite'
+        html_message = render_to_string('registration/signup_welcome_email.html', {'user': user})
+        plain_message = strip_tags(html_message)
+        from_email = 'noreply@toolbox.com'
+        to_email = user.email
+
+        email = EmailMessage(subject, plain_message, from_email, [to_email])
+
+        email.send()
+
+    def get(self, request, uidb64, token):
+        User = get_user_model()
+        # decode the user's primary key from the url and get the user
+        try:
+            uid = force_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            # no user was found given the decoded id
+            user = None
+
+        if user is not None and account_activation_token.check_token(user, token):
+            user.is_active = True
+            user.save()
+            self.send_signup_email(user)
+            return redirect('start-page')
+        else:
+            # Handle invalid activation link
+            # todo delete user if activation link is invalid or resend activation email
+            return HttpResponse('Activation link is invalid!')
 
 
 
-
-def activate_account(request, uidb64, token):
-    User = get_user_model()
-    # decode the user's primary key from the url and get the user
-    try:
-        uid = force_str(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-        # no user was found given the decoded id
-        user = None
-
-    if user is not None and default_token_generator.check_token(user, token):
-        user.is_active = True
-        user.save()
-        return redirect('login')
-    else:
-        # Handle invalid activation link
-        return HttpResponse('Activation link is invalid!')
-
+# def activate_account(request, uidb64, token):
+#     User = get_user_model()
+#     # decode the user's primary key from the url and get the user
+#     try:
+#         uid = force_str(urlsafe_base64_decode(uidb64))
+#         user = User.objects.get(pk=uid)
+#     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+#         # no user was found given the decoded id
+#         user = None
+#
+#     if user is not None and account_activation_token.check_token(user, token):
+#         user.is_active = True
+#         user.save()
+#
+#         return redirect('start-page')
+#     else:
+#         # Handle invalid activation link
+#         # todo delete user if activation link is invalid
+#         return HttpResponse('Activation link is invalid!')
+#
 
 
 
