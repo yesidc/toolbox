@@ -19,7 +19,7 @@
         <ul class="navbar-nav float-none univers-con-regular float-md-end mb-md-0 ">
 
             {% for c_name, c_url,next_page in category_objects %}
-                <li class="nav-item px-md-3"><a class="nav-link" href="{% url 'show_block' c_url next_page %}"><span
+                <li class="nav-item px-md-2"><a class="nav-link" href="{% url 'show_block' c_url next_page %}"><span
                         class="text-light " style="font-size: 17px">{{ c_name }}</span></a>
                 </li>
             {% endfor %}

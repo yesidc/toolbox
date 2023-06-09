@@ -34,7 +34,7 @@
 {#  Top nav menu#}
 
 
-<nav class="navbar color-nav-bar  navbar-expand-lg sticky-top border border-bottom-4 mb-3">
+<nav class="navbar color-nav-bar  navbar-expand-lg sticky-top border border-bottom-2 mb-1">
 
     <div class="container-fluid">
 
@@ -42,10 +42,12 @@
         <!-- Brand -->
         <div class="nav-bar-container"><a class="navbar-brand" href="{% url 'start-page' %}">
 
-            <img src="{% static '/tbcore/images/logo.PNG' %}" alt="" class="m-0  w-50 h-25 py-2">
-
+{#            <img src="{% static '/tbcore/images/logo.PNG' %}" alt="" class="m-0  w-50 h-25 py-2">#}
+            <div class="brand-name mb-1">To<span style="color: #FFC745">o</span>lbox</div>
+            <p class="text-light">Your Guide For Digitalizing Your Courses</p>
 
         </a>
+
 
         </div>
 
