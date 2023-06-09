@@ -48,7 +48,7 @@
         </a>
 
         </div>
-    
+
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span
                 class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div id="navcol-1" class="collapse navbar-collapse">
@@ -68,9 +68,9 @@
 
                             {% for i in category_objects %}
                                 {% if forloop.counter == 1 %}
-{#                                    When user clicks on the username is redirected to the building block page#}
-                                         <li class="nav-item"><a class="nav-link" href="{% url 'show_block' i.1 i.2  %}"><span
-                                        class="text-light adobe-garamond-p">{{ user.username }}</span></a></li>
+                                    {#                                    When user clicks on the username is redirected to the building block page#}
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'show_block' i.1 i.2 %}"><span
+                                            class="text-light adobe-garamond-p">{{ user.username }}</span></a></li>
 
 
                                 {% endif %}
@@ -79,8 +79,8 @@
 
                             {% endfor %}
 
-{#                            <li class="nav-item"><a class="nav-link" href="{% url 'show_block'   %}"><span#}
-{#                                    class="text-light adobe-garamond-p">{{ user.username }}</span></a></li>#}
+                            {#                            <li class="nav-item"><a class="nav-link" href="{% url 'show_block'   %}"><span#}
+                            {#                                    class="text-light adobe-garamond-p">{{ user.username }}</span></a></li>#}
                             <li class="nav-item"><a class="nav-link"
                                                     href="{% url 'logout' %}"
                                                     onclick="clearLocalStorage()"
@@ -92,7 +92,7 @@
                             <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><span
                                     class="text-light adobe-garamond-p">Log in</span></a>
                             </li>
-                             <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}"><span
+                            <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}"><span
                                     class="text-light adobe-garamond-p">Sign up</span></a>
                             </li>
 
@@ -113,17 +113,49 @@
 
 
 
-<footer class="bg-light text-start text-lg-start p-3">
+<footer class=" text-start text-lg-start p-3">
 
     <div class="container-fluid">
 
         <i class="bi bi-send"></i>
-        <p class="text-center univers-condensed-bold">We are happy to help! For help and support please contact the
-            Cosmos team via
-            os-cosmos@uni-osnabrueck.de</p>
+        <p class="text-center univers-condensed-bold" style="color: #FFFFFF; font-weight: 500; font-size: 24px">We are
+            happy to help! Please contact us at: virtuos@uos.de </p>
+
+        <div class="row mx-md-5">
+
+            <div class="col">
+                <h6 class="footer-header">Help desk</h6>
+                <p class="footer-text">virtuos@uos.de</p>
+            </div>
+
+
+            <div class="col">
+                <h6 class="footer-header">Resources</h6>
+                <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/uos-digilab/" class="footer-text"><p>DigiLab</p></a>
+                <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/" class="footer-text">Lehre Portal UOS</a>
+
+            </div>
+
+            <div class="col">
+
+                <h6 class="footer-header">About us</h6>
+                <p class="footer-text">Team</p>
+                <a href="https://virtuos.uni-osnabrueck.de/" class="footer-text"><p>VirtUOS</p></a>
+                <a href="https://www.uni-osnabrueck.de/startseite/" class="footer-text">Universität Osnabrück</a>
+            </div>
+
+
+            <div class="col">
+
+                <h6 class="footer-header">Impressum</h6>
+                <p class="footer-text">Datenschutz</p>
+
+            </div>
+
+
+        </div>
 
     </div>
-
 
 
 </footer>
@@ -134,7 +166,7 @@
         crossorigin="anonymous"></script>
 
 <script>
- function clearLocalStorage() {
+    function clearLocalStorage() {
         localStorage.clear();
     }
 

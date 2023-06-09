@@ -71,6 +71,41 @@ Toolbox
 }
 
 
+/*footer*/
+footer {
+    background-color: #4D1FAF;
+    height: 226px;
+
+}
+
+.footer-header {
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+    /* identical to box height, or 160% */
+
+    letter-spacing: -0.015em;
+
+    color: #FFFFFF;
+}
+
+.footer-text {
+
+   font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 24px;
+/* or 160% */
+
+letter-spacing: -0.015em;
+
+
+    color: #FFFFFF;
+}
+
+
 /*this color is also used for the buttons*/
 .color-nav-bar {
 
@@ -144,9 +179,9 @@ div.no-indent ol {
 .hide-check-icon {
     visibility: hidden;
     width: 30px;
-height: 30px;
+    height: 30px;
 
-background: url('../icons/checkmark_icon.png');
+    background: url('../icons/checkmark_icon.png');
 
     /*font-size: 1.5rem; !* Increase the font size to make it bigger *!*/
     /*background-color: green; !* Set the background color to green *!*/
