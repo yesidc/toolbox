@@ -52,7 +52,7 @@
         </div>
 
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span
-                class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"><i class="bi bi-list fs-4"></i></span></button>
         <div id="navcol-1" class="collapse navbar-collapse">
             <div class="row ms-auto ">
 
@@ -81,8 +81,6 @@
 
                             {% endfor %}
 
-                            {#                            <li class="nav-item"><a class="nav-link" href="{% url 'show_block'   %}"><span#}
-                            {#                                    class="text-light adobe-garamond-p">{{ user.username }}</span></a></li>#}
                             <li class="nav-item"><a class="nav-link"
                                                     href="{% url 'logout' %}"
                                                     onclick="clearLocalStorage()"
@@ -117,13 +115,13 @@
 
 <footer class=" text-start text-lg-start">
 
-    <div class="container-fluid pb-2">
+    <div class="container-fluid">
 
         <i class="bi bi-send"></i>
         <p class="text-center univers-condensed-bold" style="color: #FFFFFF; font-weight: 500; font-size: 24px">We are
             happy to help! Please contact us at: virtuos@uos.de </p>
 
-        <div class="row mx-md-5 pb-3 mb-2">
+        <div class="row mx-md-5 mb-2">
 
             <div class="col">
                 <h6 class="footer-header">Help desk</h6>

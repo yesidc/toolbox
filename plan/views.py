@@ -160,7 +160,8 @@ def update_note_checklist(request):
 
         # poci_obj.notes = request.POST['note_content']
         # poci_obj.save()
-            return JsonResponse({},  status=200)
+            return JsonResponse({'success': True,
+                                 'note_content': poci_obj.notes,})
         else:
             messages.add_message(request, messages.INFO, 'Something went wrong, please try again')
             return JsonResponse({'success': False})
