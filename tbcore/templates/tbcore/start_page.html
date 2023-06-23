@@ -22,25 +22,57 @@
 
             <div class="row ">
 
-                <h1 class="my-md-3 text-center heading-banner">Opening on-site courses for online learning</h1>
+                <h1 class="my-md-3 text-center heading-banner">Your Toolbox For Better Courses</h1>
+
                 <div class="col-md-8">
-                    <div class="d-flex align-items-center  my-5 py-1 ">
-                        <ul class="univers-con-regular">
-                            <li class="lead">Find teaching tools and technology to <br>open your courses
-                                for online learning
+
+
+                    <div class="card text-dark bg-warning mb-3" style="max-width: 25rem;">
+
+                        <div class="card-body">
+                            <h5 class="card-title">Plan your course</h5>
+
+
+                              <ul class="univers-con-regular">
+                            <li class="lead">Find teaching tips and tools</li>
+
+
+                            <li class="lead">Take notes for putting things into practice</li>
+
+                            <li class="lead">Assess remaining workload
                             </li>
-                            <br>
-                            <li class="lead">Assess the preparation effort</li>
-                            <br>
-                            <li class="lead">Create your personal checklist with notes and ideas <br> on the teaching
-                                tools
-                                you select (sign in)
+                            <li class="lead">
+                                Get a checklist for course preparation
                             </li>
 
                         </ul>
 
 
+                        </div>
                     </div>
+
+
+{#                    <div class="d-flex align-items-center  my-5 py-1 ">#}
+{#                        <div class="row">#}
+{##}
+{#                        </div>#}
+{##}
+{#                        <ul class="univers-con-regular">#}
+{#                            <li class="lead">Find teaching tips and tools</li>#}
+{##}
+{##}
+{#                            <li class="lead">Take notes for putting things into practice</li>#}
+{##}
+{#                            <li class="lead">Assess remaining workload#}
+{#                            </li>#}
+{#                            <li class="lead">#}
+{#                                Get a checklist for course preparation#}
+{#                            </li>#}
+{##}
+{#                        </ul>#}
+{##}
+{##}
+{#                    </div>#}
 
 
                 </div>
@@ -53,12 +85,8 @@
 
                             {% if not user.is_authenticated %}
                                 <div>
-                                    <a href="{% url 'login' %}" class="btn btn-toolbox text-light mx-5">Start course
-                                        revision</a>
-                                </div>
-                                <div>
                                     <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
-                                       class="btn btn-toolbox text-light mx-5">Browse without log-in</a>
+                                       class="btn btn-toolbox text-light mx-5">Open my courses</a>
                                 </div>
 
                             {% else %}
@@ -112,11 +140,11 @@
                             <div class="carousel-item active slide-size">
 
                                 <div class="row">
-                                        <h2 class="text-center pt-5">Work through the teaching building blocks in your online course:</h2>
+                                    <h2 class="text-center pt-5">Work through the teaching building blocks in your
+                                        online course:</h2>
 
 
                                 </div>
-
 
 
                                 <div class="row">
@@ -124,7 +152,6 @@
 
 
                                         <div class="container-fluid pt-5">
-
 
 
                                             <ul class="text-slide mx-md-4">
@@ -156,18 +183,15 @@
                             </div>
 
 
-{#                  Second Slide    #}
-
-
-
-
+                            {#                  Second Slide    #}
 
 
                             <div class="carousel-item">
                                 <div class="container-fluid">
                                     <div class="row">
 
-                                        <h2 class="text-center py-5 ">Choose Teaching Tools for each building block.</h2>
+                                        <h2 class="text-center py-5 ">Choose Teaching Tools for each building
+                                            block.</h2>
 
                                     </div>
 
@@ -182,21 +206,15 @@
                             </div>
 
 
-
-
-
-
-
-{#                            Third Slide#}
-
-
+                            {#                            Third Slide#}
 
 
                             <div class="carousel-item">
                                 <div class="row">
                                     <div class="col-5">
 
-                                    <h3 class="text-center p-5">Get a checklist with a summary of your notes to start course digitalization.</h3>
+                                        <h3 class="text-center p-5">Get a checklist with a summary of your notes to
+                                            start course digitalization.</h3>
 
 
                                     </div>
@@ -213,8 +231,6 @@
 
 
                             </div>
-
-
 
 
                         </div>
@@ -270,11 +286,16 @@
         <div class="d-flex justify-content-end">
 
 
-                 <div>Font made from <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a> is licensed by CC BY 3.0</div>
+            <div>Font made from <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a> is licensed by CC BY 3.0
+            </div>
 
 
-
-    </div>
+        </div>
     </section>
+
+
+
+
+
 
 {% endblock content %}

@@ -52,7 +52,7 @@ class PlanManager(models.Manager):
            """
         return self.get_queryset().select_related('user').filter(user=current_user)
 
-
+# todo order plan by data created
 class Plan(models.Model):
     """
     Contains the user's course plans.

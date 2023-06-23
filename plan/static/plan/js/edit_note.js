@@ -1,5 +1,5 @@
 // handles the edit note functionality from the checklist page
-const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 let width;
 
 function autoResize(text_are_id) {
@@ -80,18 +80,19 @@ function saveNote(pcoi_instance_id) {
             url: '/update_note_checklist/',
             type: 'POST',
             data: {
-                'note': updatedNote,
+                'note_content': updatedNote,
                 'pcoiId': pcoi_instance_id,
                 'csrfmiddlewaretoken': csrfToken
             },
             success: function (response) {
-                console.log('Response:', response)
-                console.log('Note updated successfully!')
+                console.log('note updated');
                 // Redirect
                 window.location.href = '/checklist/';
             },
             error: function (xhr, status, error) {
                 console.log('Error: ' + error);
+                  // Redirect
+                window.location.href = '/checklist/';
             }
         });
 

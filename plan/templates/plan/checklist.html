@@ -28,7 +28,7 @@
 
                 <th scope="col">Done</th>
                 <th scope="col"></th>
-                <th scope="col">Teaching Tool</th>
+                <th scope="col">Teaching Tip</th>
                 <th scope="col">Note</th>
                 <th scope="col">Complexity</th>
                 <th scope="col" class="mx-0">Delete</th>
@@ -92,27 +92,21 @@
                                                 <div class="row">
 
                                                            <textarea id="note-input-{{ pcoi_instance_id }}"
-                                                          class="text-area-note no-border"
-                                                          style="width: 500px; height: auto; overflow: hidden; resize: none;"
+                                                                     class="text-area-note no-border"
+                                                                     style="width: 500px; height: auto; overflow: hidden; resize: none;"
 
-                                                          onclick="editNote('{{ pcoi_instance_id }}')"
-                                                          oninput="autoResize(this.id)"
-                                                >
+                                                                     onclick="editNote('{{ pcoi_instance_id }}')"
+                                                                     oninput="autoResize(this.id)"
+                                                           >
                                                 {{ pcoi_instance_note }}
 
                                             </textarea>
 
 
-
                                                 </div>
 
 
-
-
-
-
-
-                                               <div class="d-flex">
+                                                <div class="d-flex">
 
                                                     <button type="submit"
                                                             class="btn btn-toolbox text-light px-md-3 px-sm-2 my-1 save-note-button hidden"
@@ -124,7 +118,7 @@
                                                         Save
                                                     </button>
                                                     <button
-                                                     class="btn btn-toolbox text-light mx-2 px-md-3 px-sm-1 my-md-1  hidden"
+                                                            class="btn btn-toolbox text-light mx-2 px-md-3 px-sm-1 my-md-1  hidden"
                                                             aria-current="page"
 
                                                             id="note-cancel-{{ pcoi_instance_id }}"
@@ -133,7 +127,7 @@
                                                         Cancel
                                                     </button>
 
-                                               </div>
+                                                </div>
 
 
                                             </form>
@@ -242,6 +236,7 @@
 
 
     <script src="{% static 'plan/js/utils.js' %}"></script>
+    <script src="{% static 'plan/js/edit_plan_title.js' %}"></script>
     <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
     <script src="{% static 'plan/js/edit_note.js' %}"></script>
     <script src="{% static 'plan/js/keep_button_state.js' %}"></script>

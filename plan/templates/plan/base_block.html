@@ -1,7 +1,7 @@
 {% extends 'tbcore/base_core.html' %}
 {% load crispy_forms_tags %}
 {% load toolbox_custom_tags %}
-
+{% load static %}
 {% block specific_css %}
     {% load static %}
 
@@ -19,7 +19,7 @@
         <ul class="navbar-nav float-none univers-con-regular float-md-end mb-md-0 ">
 
             {% for c_name, c_url,next_page in category_objects %}
-                <li class="nav-item px-md-3"><a class="nav-link" href="{% url 'show_block' c_url next_page %}"><span
+                <li class="nav-item px-md-2"><a class="nav-link" href="{% url 'show_block' c_url next_page %}"><span
                         class="text-light " style="font-size: 17px">{{ c_name }}</span></a>
                 </li>
             {% endfor %}
@@ -59,7 +59,7 @@
 
                 <div class="col-2">
                     <button class="btn btn-toolbox text-light menu-btn" id="sidebarToggle"><i class="bi bi-list"></i> My
-                        course Plans
+                        course plans
                     </button>
                 </div>
 
@@ -71,10 +71,7 @@
                 {% endblock %}
 
 
-                {% block idea_name_detail %}
 
-
-                {% endblock %}
 
                 {% block category_name %}
 
@@ -104,10 +101,12 @@
                 >
                     </span>
 
-
             </div>
         {% endif %}
+        {% block idea_name_detail %}
 
+
+        {% endblock %}
 
         <div class="d-flex" id="wrapper">
 
@@ -143,29 +142,46 @@
 
 
 
-                            <div class="d-flex flex-row h-100">
-                                <button class="list-group-item list-group-item-action list-group-item-light p-3 keep-state-button all-plan-sidebar {{ p }} "
-                                        data-bs-target="#{{ p.plan_name |add_hyphen }}"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        aria-expanded="false"
-                                        aria-controls="{{ p.plan_name |add_hyphen }}"
-                                        id="plan-side-bar-{{ p.plan_name |add_hyphen }}"
-                                        onclick="toggleButtonState(this.id)"
+                            <div class="d-flex flex-row h-100 flex-single-course-plan">
+                                <a class="btn border-0 list-group-item list-group-item-action list-group-item-light p-3 keep-state-button all-plan-sidebar {{ p }} "
+                                   data-bs-target="#{{ p.plan_name |add_hyphen }}"
+                                   type="button"
+                                   data-bs-toggle="collapse"
+                                   aria-expanded="false"
+                                   aria-controls="{{ p.plan_name |add_hyphen }}"
+                                   id="plan-side-bar-{{ p.plan_name |add_hyphen }}"
+                                   onclick="toggleButtonState(this.id)"
                                 >
-                                    <span class="adobe-garamond-p"> {{ p.plan_name }}</span>
+                                    <span class="adobe-garamond-p course-name-sidebar" id="edit-title-{{ p.pk }}" data-object-id="{{ p.pk }}">
+                                        {{ p.plan_name }}
+                                    </span>
 
 
-                                </button>
+                                </a>
+                                {#                                Edit plan name#}
+                                <div class="align-self-end align-self-stretch all-plan-sidebar align-icon-vertically">
+{##}
+                                    <a href="#"
+                                       data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
+                                        onclick="edit_plan_title('{{p.pk }}')"
+                                    ><i class="bi bi-pencil-square"></i></a>
 
-                                <div class="align-self-end align-self-stretch">
-                                    {#                                     change the color of delete buttons side-nav bar here#}
 
-                                    <button href="{% url 'delete_plan' p.pk %}" class="h-100 btn-toolbox text-light"
-                                            data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
-                                            onclick="delete_plan(this)"><i class="bi bi-trash"></i></button>
 
                                 </div>
+
+                                <div class="align-self-end align-self-stretch all-plan-sidebar align-icon-vertically">
+                                    {#  delete button#}
+
+                                    <a href="{% url 'delete_plan' p.pk %}"
+                                       class="delete-plan-button"
+                                       id="delete-sidebar-{{ p.plan_name |add_hyphen }}" style="visibility: hidden"
+                                       data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
+                                       onclick="delete_plan(this)"><i class="bi bi-trash"></i></a>
+
+                                </div>
+
+
                             </div>
 
 
@@ -176,22 +192,48 @@
 
 
                                 {% for c_name, c_url, c_next in category_objects %}
-                                    <p>
-                                        <span class="badge text-dark">
-                                            <input type="checkbox" class="checkbox-sidebar {{ p.pk }}block"
-                                                   id="{{ c_url }}{{ p.pk }}">
-                                        </span>
-                                        <a href="{% url 'show_block' c_url c_next %}"
-                                           class="link-no-decoration text-dark"> {{ c_name }}</a>
+                                    <div class="container">
 
-                                    </p>
+                                        <div class="d-flex">
+                                            {#Checkmark#}
+                                            <div class="mx-1">
+
+{#                                                <i class="bi bi-check-circle hide-check-icon "#}
+{#                                                   id="{{ c_url }}{{ p.pk }}"#}
+{#                                                ></i>#}
+
+                                                <div class="hide-check-icon"
+                                                 id="{{ c_url }}{{ p.pk }}">
+
+
+                                                </div>
+
+
+                                            </div>
+
+                                            <div>
+                                                <a href="{% url 'show_block' c_url c_next %}"
+                                                   class="link-no-decoration text-dark"> {{ c_name }}</a>
+
+                                            </div>
+
+
+                                        </div>
+                                        {#Teaching tools sidebar#}
+                                        <div class="row container-teaching-tools-sidebar"
+                                             id="idea-{{ c_url }}{{ p.pk }}">
+
+                                        </div>
+
+
+                                    </div>
 
                                 {% endfor %}
 
                                 <div class="d-flex justify-content-end my-md-3">
                                     <div>
                                         <a href="{% url 'checklist' %}" class=" btn btn-toolbox text-light">View
-                                            checklist</a>
+                                            details</a>
                                     </div>
                                 </div>
 
@@ -209,21 +251,7 @@
 
                 <!-- Messages-->
 
-                <section class="messages-js">
-
-                    {% if messages %}
-                        {% for msg in messages %}
-                            <div class="alert alert-info alert-dismissible fade show" role="alert">
-                                <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">&times;
-                                </button>
-                                {{ msg }}
-
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-
-
-                </section>
+                {% include "partials/messages.html" %}
 
                 {% block building_block_idea %}
 
@@ -238,7 +266,16 @@
 
 
     {{ category_urls|json_script:"category-urls" }}
+    <script>
+
+        var active_user_plan = "{{ active_user_plan }}";
+        if (active_user_plan) {
+            localStorage.setItem(active_user_plan, "open");
+        }
+
+    </script>
     <script src="{% static 'plan/js/menu_bar.js' %}"></script>
+    <script src="{% static 'plan/js/edit_plan_title.js' %}"></script>
     <script src="{% static 'plan/js/keep_button_state.js' %}"></script>
 
 

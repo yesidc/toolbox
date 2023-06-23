@@ -1,0 +1,62 @@
+<!-- templates/registration/login.html -->
+
+{% extends 'tbcore/base_core.html' %}
+{% load crispy_forms_tags %}
+{% load toolbox_custom_tags %}
+
+{% block specific_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
+
+    <style>
+        footer {
+            position: fixed;
+            background-color: #4D1FAF;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    {% include "partials/messages.html" %}
+
+    <div class="container-fluid h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+
+
+            <div class="col-md-5">
+
+
+                <div class="card mt-md-4 mb-md-2">
+                    <div class="card-body">
+
+
+                        <h5 class="card-title pd-md-y-3 my-md-2">Welcome to the Toolbox</h5>
+
+                        {% block registration_authentication %}
+
+                        {% endblock %}
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+
+
+
+

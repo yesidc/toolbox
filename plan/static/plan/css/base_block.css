@@ -13,17 +13,29 @@ Toolbox
 */
 
 
+.align-icon-vertically {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #4D1FAF
+}
+
+.hint-color {
+    background-color: beige;
+}
+
 .text-area-note {
     cursor: pointer;
 }
+
 .hidden {
-  display: none;
+    display: none;
 }
 
 .no-border {
 
     border: none;
-background-color: transparent;
+    background-color: transparent;
 }
 
 
@@ -33,9 +45,9 @@ background-color: transparent;
 }
 
 
-.carousel-inner{
-  width:100%;
-  min-height: 500px !important;
+.carousel-inner {
+    width: 100%;
+    min-height: 500px !important;
 }
 
 .body, body {
@@ -49,8 +61,6 @@ background-color: transparent;
 }
 
 
-
-
 .adobe-garamond-p {
     font-family: adobe-garamond-pro, serif, Arial;
 
@@ -60,11 +70,63 @@ background-color: transparent;
 
 }
 
+.brand-name{
+    padding-top: 4px;
+    width: 110px;
+height: 22px;
+    font-style: normal;
+font-weight: 500;
+font-size: 32px;
+line-height: 16px;
+    text-transform: capitalize;
+
+color: #FFFFFF;
+}
+
+/*footer*/
+footer {
+    background-color: #4D1FAF;
+    height: 180px;
+    padding-top: 10px;
+    margin-top: 5px;
+}
+
+.footer-header {
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+    /* identical to box height, or 160% */
+
+    letter-spacing: -0.015em;
+
+    color: #FFFFFF;
+}
+
+.footer-text {
+
+   font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 24px;
+/* or 160% */
+
+letter-spacing: -0.015em;
+
+
+    color: #FFFFFF;
+}
+
 
 /*this color is also used for the buttons*/
 .color-nav-bar {
 
-    background-color: #0A1F40;
+    background-color: #4D1FAF;
+
+
+
+
 }
 
 .btn-toolbox {
@@ -76,9 +138,9 @@ background-color: transparent;
 
 }
 
-.text-slide{
+.text-slide {
     font-size: 20px;
-    font-family: "Univers 67 Condensed Bold","Arial Black";
+    font-family: "Univers 67 Condensed Bold", "Arial Black";
 
 
 }
@@ -91,7 +153,6 @@ background-color: transparent;
     position: relative;
 
 }
-
 
 
 .color-overlay {
@@ -109,6 +170,46 @@ div.no-indent ol {
     margin-left: -17px;
 }
 
+/*style for the div element that contains the course name and the edit and delete buttons*/
+.flex-single-course-plan {
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+
+
+    padding: 8px 20px;
+    gap: 8px;
+
+
+    height: 40px;
+    left: 1074px;
+    right: 55px;
+    top: 234px;
+
+    background: #4D1FAF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+
+}
+
+
+.hide-check-icon {
+    visibility: hidden;
+    width: 30px;
+    height: 30px;
+
+    background: url('../icons/checkmark_icon.png');
+
+    /*font-size: 1.5rem; !* Increase the font size to make it bigger *!*/
+    /*background-color: green; !* Set the background color to green *!*/
+    /*padding: 2px;*/
+    /*color: white;*/
+    /*border-radius: 50%;*/
+    /*display: inline-flex; !* Ensure proper alignment *!*/
+    /*align-items: center; !* Ensure proper alignment *!*/
+    /*justify-content: center; !* Ensure proper alignment *!*/
+
+}
 
 .tr-main-table:nth-of-type(even) {
     background-color: #f2f2f2;
@@ -157,7 +258,6 @@ div.no-indent ol {
 }
 
 
-
 .nested-table-checklist {
 
     height: 100%;
@@ -168,8 +268,57 @@ div.no-indent ol {
     overflow: hidden;
 }
 
+.container-teaching-tools-sidebar {
+    border-left: 1px solid black;
+    margin-left: 50px;
+}
+
+.p-teaching-tool-sidebar {
+    /*    width: 97px;*/
+    /*height: 16px;*/
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    /* identical to box height, or 100% */
+
+    text-transform: capitalize;
+
+    color: #000000;
+
+}
+
 .link-no-decoration {
     text-decoration: none;
+    width: 99px;
+    height: 16px;
+
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    /* identical to box height, or 100% */
+
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.course-name-sidebar {
+    width: 210px;
+    height: 16px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 16px;
+    /* identical to box height, or 67% */
+
+    text-transform: capitalize;
+
+    color: #FFFFFF;
+
 }
 
 /*Disables checkboxes on the sidebar*/
@@ -178,7 +327,7 @@ div.no-indent ol {
     pointer-events: none;
 }
 
-.nav-bar-container{
+.nav-bar-container {
     width: 70%;
 }
 
@@ -187,11 +336,11 @@ div.no-indent ol {
         margin-left: 30px !important;
     }
 
-    .nav-bar-container{
-    width: 20%;
+    .nav-bar-container {
+        width: 20%;
         padding: 0;
         margin: 0;
-}
+    }
 }
 
 /*border color of ideas property table idea_overview page*/
@@ -227,8 +376,6 @@ div.no-indent ol {
  */
 
 
-
-
 hr {
     margin: 1rem 0;
     color: inherit;
@@ -244,7 +391,7 @@ hr:not([size]) {
 
 h1, .h1 {
     font-size: calc(1.375rem + 1.5vw);
-    font-family: "Univers 67 Condensed Bold","Arial Black";
+    font-family: "Univers 67 Condensed Bold", "Arial Black";
 
 }
 
@@ -265,9 +412,9 @@ h2, .h2 {
     }
 }
 
-h3, .h3, h4, .h4, h5,.h5 {
+h3, .h3, h4, .h4, h5, .h5 {
     font-size: calc(1.3rem + 0.6vw);
-    font-family: "Univers Condensed 57 Regular","Arial Black";
+    font-family: "Univers Condensed 57 Regular", "Arial Black";
 }
 
 @media (min-width: 1200px) {
@@ -295,7 +442,6 @@ h6, .h6 {
 }
 
 
-
 abbr[title],
 abbr[data-bs-original-title] {
     -webkit-text-decoration: underline dotted;
@@ -316,9 +462,6 @@ ul {
     padding-left: 2rem;
     font-family: adobe-garamond-pro, serif, Arial;
 }
-
-
-
 
 
 .btn:hover {
@@ -523,8 +666,8 @@ ul {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+
+
 }
 
 .navbar > .container,
@@ -603,7 +746,6 @@ ul {
     background-position: center;
     background-size: 100%;
 }
-
 
 
 @media (min-width: 576px) {

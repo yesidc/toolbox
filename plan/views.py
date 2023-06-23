@@ -11,6 +11,8 @@ from tbcore.utils.create_pdf import render_pdf
 from django.core.exceptions import ObjectDoesNotExist
 
 
+
+
 def show_block(request, category_url, next_page):
     """
     Manages the content for all building blocks/categories.
@@ -19,6 +21,7 @@ def show_block(request, category_url, next_page):
 
     if 'current_user_plan' in request.session:
         ideas_list = get_ideas(request.user, category_url, request.session['current_user_plan'])
+        active_user_plan = 'button-state-plan-side-bar-' + slugify(request.session['current_user_plan_name'])
     else:
         ideas_list = None
 
@@ -35,14 +38,28 @@ def show_block(request, category_url, next_page):
         return render(request, 'plan/block_content.html', context=locals())
 
 
+
 def idea_overview_detail(request, category_name, idea_id):
     """
-    Implements all the logic related to showing an teaching tool detailed view.
+    Implements all the logic related to showing a teaching tool detailed view.
     """
+    context = {}
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
-
+    # if the user created a note without login, the note content is cached in the session and loaded in the note form
     note_form = NotesForm()
+    if 'preserve_note' in request.GET:
+        if 'note_content' in request.session:
+            note_content = request.session['note_content']
+            del request.session['note_content']
+            note_form = NotesForm(initial={'note_content': note_content})
+    else:
+        if 'note_content' in request.session:
+            del request.session['note_content']
+
     if 'current_user_plan' in request.session:
+
+        active_user_plan = 'button-state-plan-side-bar-' + slugify(request.session['current_user_plan_name'])
+        context.update({'active_user_plan': active_user_plan})
         pcoi_obj = PlanCategoryOnlineIdea.objects.pcoi_obj_exists(request.session['current_user_plan'], category_name,
                                                               idea_id)
         # loads current note giving the user the possibility to edit it.
@@ -62,8 +79,17 @@ def idea_overview_detail(request, category_name, idea_id):
     # handles all logic when user adds/updates idea or/and note from the idea_detail page
     if request.method == "POST":
         # checks if user has already created a plan
+        if not request.user.is_authenticated:
+            # todo fix messages, it should be shown on login page
+
+            # cache note content in session
+            request.session['note_content'] = request.POST['note_content']
+
+            messages.add_message(request, messages.INFO, 'First login to be able to save your notes')
+            return redirect(f'/login/?category_name={category_name}&idea_id={idea_id}')
         if not has_plan(request):
             return redirect(request.META.get('HTTP_REFERER'))
+
         note_form = NotesForm(request.POST)
         if note_form.is_valid():
             if pcoi_obj is None:
@@ -76,7 +102,7 @@ def idea_overview_detail(request, category_name, idea_id):
 
             pcoi_obj.notes = note_form.cleaned_data['note_content']
             pcoi_obj.save()
-        messages.add_message(request, messages.INFO, 'Idea successfully added to your plan')
+        messages.add_message(request, messages.INFO, f"Idea successfully added to your course plan: {request.session['current_user_plan_name']}")
         return redirect('show_block', category_name, Category.objects.get(category_url=category_name).next_page)
 
     # manages get request
@@ -120,19 +146,57 @@ def checklist(request):
     else:
         return redirect(request.META.get('HTTP_REFERER'))
 
+# todo checklist page should be reload when user edits the plan title
 def update_note_checklist(request):
     """
     Updates the note for a given teaching tool from the checklist page.
     """
     poci_obj = get_object_or_404(PlanCategoryOnlineIdea, pk=request.POST['pcoiId'])
     if request.method == 'POST':
-        poci_obj.notes = request.POST['note']
-        poci_obj.save()
+        form = NotesForm(request.POST)
+        if form.is_valid():
+            poci_obj.notes = form.cleaned_data['note_content']
+            poci_obj.save()
 
-
-        return JsonResponse({},  status=200)
+        # poci_obj.notes = request.POST['note_content']
+        # poci_obj.save()
+            return JsonResponse({'success': True,
+                                 'note_content': poci_obj.notes,})
+        else:
+            messages.add_message(request, messages.INFO, 'Something went wrong, please try again')
+            return JsonResponse({'success': False})
     else:
         return render(request, 'plan/checklist.html')
+
+@login_required
+def edit_plan_title(request):
+    """
+    Updates the title of a plan.
+    """
+    # todo while editing the collapsible should be closed
+
+    if request.method == 'POST':
+        plan_id = request.POST.get('planId')
+        plan = Plan.objects.get(id=plan_id)
+        previous_name = slugify(plan.plan_name)
+        form = PlanForm(request.POST)
+        if form.is_valid():
+
+            try:
+
+                updated_plan_name = form.cleaned_data['plan_name']
+                plan.plan_name = updated_plan_name
+                plan.save()
+                request.session['current_user_plan_name'] = updated_plan_name
+                return JsonResponse({'success': True,
+                                     'previous_name': previous_name,
+                                     'updated_name': slugify(updated_plan_name)})
+            except Plan.DoesNotExist:
+                return JsonResponse({'success': False, 'message': 'Plan not found.'})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
+    else:
+        return JsonResponse({'success': False, 'message': 'Invalid request method or not an AJAX request.'})
 
 @login_required
 def create_plan(request, start_add):
@@ -191,61 +255,67 @@ def create_plan(request, start_add):
             # user redirected to previous page
             return redirect(request.META.get('HTTP_REFERER'))
 
-
-@login_required
-def use_idea(request, save_note=None):
-    """
-    Saves or deletes ideas from an existing course plan when the user interacts with the checkboxes displayed on the building block page.
-    """
-
-    # checks if user has already created a plan
-    if not has_plan(request):
-        return redirect(request.META.get('HTTP_REFERER'))
-
-    current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
-
-    current_idea = request.GET.get('idea_id')
-    current_category = request.GET.get('current_category')
-
-    if request.GET.get('delete_idea'):
-        # Delete object
-        obj_delete = PlanCategoryOnlineIdea.objects.get_or_none(request.user, request.session['current_user_plan'],
-                                                                current_category, current_idea)
-        if obj_delete:
-            obj_delete.delete()
-
-
-        # categories for which user has already selected at least one idea
-        category_ready = category_done(current_user_plan)
-        json_dic = {
-            'category_ready': list(category_ready),
-            "category_id": current_category,
-            'plan_id': request.session['current_user_plan']
-        }
-        return JsonResponse(json_dic)
-
-
-
-    else:
-
-        save_pcoi(request, request.session['current_user_plan'], current_category, current_idea)
-
-    json_dic = {
-        "category_id": current_category,
-        'plan_id': request.session['current_user_plan']
-    }
-    # if user has either deleted or added an idea using the checkboxes on the blocks/category page
-    if is_ajax(request):
-        return JsonResponse(json_dic)
-    # else:
-    #     # if user has selected and idea using the buttons provided by both the overview or detail idea page.
-    #     return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
+# todo delete this function, it was used to handle the checkboxes on the building block page.
+# @login_required
+# def use_idea(request, save_note=None):
+#     """
+#     Saves or deletes ideas from an existing course plan when the user interacts with the checkboxes displayed on the
+#     building block page.
+#     """
+#
+#     # checks if user has already created a plan
+#     if not has_plan(request):
+#         return redirect(request.META.get('HTTP_REFERER'))
+#
+#     if 'current_user_plan' in request.session:
+#         current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
+#     else:
+#
+#         return redirect(request.META.get('HTTP_REFERER'))
+#
+#
+#     current_idea = request.GET.get('idea_id')
+#     current_category = request.GET.get('current_category')
+#
+#     if request.GET.get('delete_idea'):
+#         # Delete object
+#         obj_delete = PlanCategoryOnlineIdea.objects.get_or_none(request.user, request.session['current_user_plan'],
+#                                                                 current_category, current_idea)
+#         if obj_delete:
+#             obj_delete.delete()
+#
+#
+#         # categories for which user has already selected at least one idea
+#         category_ready = category_done(current_user_plan)
+#         json_dic = {
+#             'category_ready': list(category_ready),
+#             "category_id": current_category,
+#             'plan_id': request.session['current_user_plan']
+#         }
+#         return JsonResponse(json_dic)
+#
+#
+#
+#     else:
+#
+#         save_pcoi(request, request.session['current_user_plan'], current_category, current_idea)
+#
+#     json_dic = {
+#         "category_id": current_category,
+#         'plan_id': request.session['current_user_plan']
+#     }
+#     # if user has either deleted or added an idea using the checkboxes on the blocks/category page
+#     if is_ajax(request):
+#         return JsonResponse(json_dic)
+#     # else:
+#     #     # if user has selected and idea using the buttons provided by both the overview or detail idea page.
+#     #     return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
 
 
 @login_required()
 def delete_pcoi_checklist(request):
     """
-    Manages all related to deleting PlanCategoryOnlineIdea objects when users interact with the checklist page
+    Manages all related to deleting PlanCategoryOnlineIdea objects when registration interact with the checklist page
     """
     pcoi_delete = PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id'))
     pcoi_category = pcoi_delete.category.category_name
@@ -276,9 +346,14 @@ def select_plan(request):
     request.session['current_user_plan_name'] = current_user_plan.plan_name
     # categories for which user has already selected at least one idea
     category_ready = category_done(current_user_plan)
-
+    # category_idea_checklist is a list that contains a tuple whose items are the name of the building block and a list of all ideas
+    # category_done_summary is a set that contains the name of the building block
+    category_idea_checklist,category_done_summary = context_summary(request.user,
+                                                                    Plan.objects.get(pk=request.session['current_user_plan']),
+                                                                    checklist=False)
     response_dict = {
-        'category_ready': list(category_ready),
+        #'category_ready': list(category_ready),
+        'category_ready':category_idea_checklist,
         # this is the name that is shown on the top right (Name is changed dynamically through the DOM)
         'plan_name_ajax': request.session['current_user_plan_name'],
         # this is the id assigned to the div element that contains all blocks/categories on the sidebar
