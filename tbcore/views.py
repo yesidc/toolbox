@@ -5,7 +5,7 @@ from django.shortcuts import render,  reverse, redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetConfirmView
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, View
 from django.utils.encoding import force_bytes, force_str
@@ -59,7 +59,7 @@ class SignUpView(CreateView):
 
         # Compose the email
         subject = 'Activate Your Account'
-        message = render_to_string('registration/activation_email.html', {
+        html_message = render_to_string('registration/activation_email.html', {
             'user': user,
             'activation_link': activation_link,
         })
@@ -67,21 +67,22 @@ class SignUpView(CreateView):
         to_email = user.email
 
         # Send the email
-        email = EmailMessage(subject, message, from_email, [to_email])
+        email = EmailMultiAlternatives(subject, html_message, from_email, [to_email])
+        email.attach_alternative(html_message, "text/html")
         email.send()
 
 
 class ActivateAccountView(View):
 
     def send_signup_email(self, user):
-        subject = 'Welcome to YourSite'
+        subject = 'Welcome to The Toolbox!'
         html_message = render_to_string('registration/signup_welcome_email.html', {'user': user})
         plain_message = strip_tags(html_message)
         from_email = settings.DEFAULT_FROM_EMAIL
         to_email = user.email
 
-        email = EmailMessage(subject, plain_message, from_email, [to_email])
-
+        email = EmailMultiAlternatives(subject, plain_message, from_email, [to_email])
+        email.attach_alternative(html_message, "text/html")
         email.send()
 
     def get(self, request, uidb64, token):
