@@ -16,6 +16,7 @@ from plan.helpers import has_plan
 from .models import Plan
 from .tokens import account_activation_token
 from .forms import SignUpForm
+import toolbox.settings as settings
 
 
 
@@ -62,7 +63,7 @@ class SignUpView(CreateView):
             'user': user,
             'activation_link': activation_link,
         })
-        from_email = 'noreply@toolbox.com'
+        from_email = settings.DEFAULT_FROM_EMAIL
         to_email = user.email
 
         # Send the email
@@ -76,7 +77,7 @@ class ActivateAccountView(View):
         subject = 'Welcome to YourSite'
         html_message = render_to_string('registration/signup_welcome_email.html', {'user': user})
         plain_message = strip_tags(html_message)
-        from_email = 'noreply@toolbox.com'
+        from_email = settings.DEFAULT_FROM_EMAIL
         to_email = user.email
 
         email = EmailMessage(subject, plain_message, from_email, [to_email])
