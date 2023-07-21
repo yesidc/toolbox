@@ -1,0 +1,60 @@
+{% extends 'tbcore/base_core.html' %}
+{% load crispy_forms_tags %}
+{% load toolbox_custom_tags %}
+
+{% block specific_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
+
+    <style>
+
+        body {
+            background-color: ghostwhite;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+
+        {% include "partials/messages.html" %}
+
+    <div class="container-fluid">
+        <div class="row  justify-content-center align-items-center">
+
+
+            <div class="col-md-6">
+
+
+                <div class="card mt-md-5 mb-md-2">
+                    <div class="card-body">
+
+
+                        <h5 class="card-title pd-md-y-3 my-md-2">Welcome to the Toolbox</h5>
+                        <p class="card-text lead">Opening on-site courses for online learning.</p>
+
+                        <form method="post" id="log-in-form">
+                            {% csrf_token %}
+
+                            {% crispy form %}
+
+                            <button type="submit" class="btn btn-toolbox text-light" form="log-in-form">Sign up</button>
+                        </form>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+{% endblock %}
+

@@ -34,28 +34,37 @@ window.onload = function () {
 // todo remove button from the local storage when the plan is deleted.
 // Function to toggle and store button state
 function toggleButtonState(buttonID) {
-    var buttons = document.querySelectorAll('.keep-state-button');
-    buttons.forEach(function (button) {
-        var buttonId = button.getAttribute("id");
-        // set the button state to closed
-        try {
-            localStorage.setItem("button-state-" + buttonId, "closed");
 
-        } catch (error) {
-            console.log('Error caught successfully:', error.message)
+       var button = document.getElementById(buttonID);
+
+        // Get all the collapsible buttons
+        var buttons = document.getElementsByClassName('keep-state-button');
+
+        // Collapse all other buttons except the clicked one
+        for (var i = 0; i < buttons.length; i++) {
+            if (buttons[i] !== button) {
+                buttons[i].setAttribute('aria-expanded', 'false');
+                var target = buttons[i].dataset.bsTarget;
+                var toggle = new bootstrap.Collapse(document.querySelector(target), {
+                    toggle: false
+                })
+                toggle.hide();
+
+                // in local storage, set the state buttons to closed
+                try {
+                    localStorage.setItem("button-state-" + buttons[i].getAttribute("id"), "closed");
+
+                } catch (error) {
+                    console.log('Error caught successfully:', error.message)
+                }
+            }
         }
-    })
-
-
-    var button = document.getElementById(buttonID);
-    var currentState = button.getAttribute("aria-expanded");
-    // if the button is open, close it and store the state
-    if (currentState === "true") {
-        //button.setAttribute("aria-expanded", "false");
+        var target_clicked_button = button.dataset.bsTarget;
+        var toggle_clicked_button = new bootstrap.Collapse(document.querySelector(target_clicked_button), {
+            toggle: true
+        })
+        toggle_clicked_button.show();
+        // save to the localStorage the state of the button being clicked
         localStorage.setItem("button-state-" + buttonID, "open");
-        // if the button is closed, open it and store the state
-    } else {
-        //button.setAttribute("aria-expanded", "true");
-        localStorage.setItem("button-state-" + buttonID, "closed");
-    }
+
 }

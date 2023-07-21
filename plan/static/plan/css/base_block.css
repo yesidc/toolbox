@@ -70,11 +70,63 @@ Toolbox
 
 }
 
+.brand-name{
+    padding-top: 4px;
+    width: 110px;
+height: 22px;
+    font-style: normal;
+font-weight: 500;
+font-size: 32px;
+line-height: 16px;
+    text-transform: capitalize;
+
+color: #FFFFFF;
+}
+
+/*footer*/
+footer {
+    background-color: #4D1FAF;
+    height: 180px;
+    padding-top: 10px;
+    margin-top: 5px;
+}
+
+.footer-header {
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+    /* identical to box height, or 160% */
+
+    letter-spacing: -0.015em;
+
+    color: #FFFFFF;
+}
+
+.footer-text {
+
+   font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 24px;
+/* or 160% */
+
+letter-spacing: -0.015em;
+
+
+    color: #FFFFFF;
+}
+
 
 /*this color is also used for the buttons*/
 .color-nav-bar {
 
-    background-color: #0A1F40;
+    background-color: #4D1FAF;
+
+
+
+
 }
 
 .btn-toolbox {
@@ -144,9 +196,9 @@ div.no-indent ol {
 .hide-check-icon {
     visibility: hidden;
     width: 30px;
-height: 30px;
+    height: 30px;
 
-background: url('../icons/checkmark_icon.png');
+    background: url('../icons/checkmark_icon.png');
 
     /*font-size: 1.5rem; !* Increase the font size to make it bigger *!*/
     /*background-color: green; !* Set the background color to green *!*/
@@ -614,8 +666,8 @@ ul {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+
+
 }
 
 .navbar > .container,
