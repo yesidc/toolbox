@@ -52,6 +52,7 @@ class PlanManager(models.Manager):
            """
         return self.get_queryset().select_related('user').filter(user=current_user)
 
+
 # todo order plan by data created
 class Plan(models.Model):
     """
@@ -94,19 +95,19 @@ class Category(models.Model):
     category_name = models.CharField(
         max_length=100)  # there are a total of 8 categories: human touch, organization etc.
     category_id = models.SlugField(max_length=70, unique=True)  # internal id
-    short_description = models.TextField()
+    description_1 = models.TextField()
+    description_2 = models.TextField(null=True)
     titles_accordion = models.TextField(null=True)  # accordion info
     content_accordion = models.TextField(null=True)
     references = models.TextField(null=True)
     category_url = models.SlugField(blank=True, null=True)
-    next_page = models.SlugField(null=True) # specify which building block/category must be shown after
+    next_page = models.SlugField(null=True)  # specify which building block/category must be shown after
 
     def __str__(self):
         return self.category_name
 
     def save(self, *args, **kwargs):
         if self.category_url is None:
-
             self.category_url = slugify(self.category_name)
         return super().save(*args, **kwargs)
 
@@ -206,14 +207,17 @@ class PlanCategoryOnlineIdea(models.Model):
         ]
 
     @staticmethod
-    def check_accordion_content(text, headings):
+    def check_accordion_content(text, headings, file):
         """
         The building block page offers the possibility to add extra information (that is displayed using an
         accordion). This can be done through the titles_accordion and content_accordion fields of the Category model.
         To create sections/paragraphs you must add the special token '[SPLIT]'. Each section requires a title or heading.
         """
-        if len(re.findall(r"\[SPLIT]", headings)) != len(re.findall(r"\[SPLIT]", text)):
-            raise InconsistentText('The number of headings and paragraphs must be the same. ')
+        num_headings = len(re.findall(r"\[SPLIT]", headings))
+        num_text = len(re.findall(r"\[SPLIT]", text))
+        if num_headings != num_text:
+            raise InconsistentText(
+                f'The number of headings and paragraphs must be the same. Number of headings: {num_headings}, Number of texts: {num_text} . File: {file}')
 
     @staticmethod
     def check_json5(data_json5, mode):
@@ -249,6 +253,7 @@ class PlanCategoryOnlineIdea(models.Model):
         # check accordion data
 
         if mode == 'categories':
-            PlanCategoryOnlineIdea.check_accordion_content(d_json5['content_accordion'], d_json5['titles_accordion'])
+            PlanCategoryOnlineIdea.check_accordion_content(d_json5['content_accordion'], d_json5['titles_accordion'],
+                                                           data_json5)
 
         return True
