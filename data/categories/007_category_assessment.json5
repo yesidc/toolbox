@@ -9,8 +9,8 @@
 
   category_name: "Assessment",
     category_id: "007-category-a"  ,
-    description_1: "Online assessment is ideal for checking metacognition incrementally, such as in (reflection) portfolios. Pairing continuous and process-oriented assessment with questioning the students' decision-making process may help to detect AI-generated results. \nThere is no remedy against cheating, but you can support your students by developing course goals together with your students and emphasizing the importance of self-directed learning. \nIf you provide clear learning goals students can use them to check their profress and focus on acquiring the skills and knowledge covered in your course. ",
-  description_2: "### What do I have to take into account?  \n\n- There must be opportunities to be assessed online.\n- International students (like in the COSMOS program) can reside in different time zones. \n- Synchronous assessments must be possible to be attended by students in their local time zone from 8:00 to 20:00.",
+    description_1: "### WHat about assessing online? \nOnline assessment is ideal for checking metacognition incrementally, such as in (reflection) portfolios. Pairing continuous and process-oriented assessment with questioning the students' decision-making process may help to detect AI-generated results. \nThere is no remedy against cheating, but you can support your students by developing course goals together with your students and emphasizing the importance of self-directed learning. \nIf you provide clear learning goals students can use them to check their profress and focus on acquiring the skills and knowledge covered in your course. ",
+  description_2: "### What do I have to take into account?  \n- There must be opportunities to be assessed online.\n- International students (like in the COSMOS program) can reside in different time zones. \n- Synchronous assessments must be possible to be attended by students in their local time zone from 8:00 to 20:00.",
   titles_accordion: "",
     content_accordion: "",
   references : "no-data",
