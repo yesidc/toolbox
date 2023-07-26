@@ -44,7 +44,9 @@
 
                         <p class="lead">You are browsing without log-in. To create a personal checklist please sign
                             in.</p>
-                        <a class="btn btn-toolbox text-light button-touch" href="{% url 'login' %}?category_url={{ current_category }}&next_page={{ next_page }}">Start course
+                        <a class="btn btn-toolbox text-light button-touch"
+                           href="{% url 'login' %}?category_url={{ current_category }}&next_page={{ next_page }}">Start
+                            course
                             revision</a>
                     </div>
 
@@ -66,15 +68,38 @@
     <section class="w-75 mx-auto pb-md-5 pb-sm-3">
         <div class="container">
 
-            <div class="container">
-                <div class=""><p class="text-start mx-md-5 px-md-5">
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class=""><p class="text-start mx-md-5 px-md-5">
 
 
-                    {% md_to_html category.short_description as short_d_html %}{{ short_d_html|safe }}
+                        {% md_to_html category.description_1 as short_d_first_html %}{{ short_d_first_html|safe }}
 
 
-                </p></div>
+                    </p></div>
+
+
+                </div>
+
+
+                <div class="col-md-6">
+
+
+                    <div class=""><p class="text-start mx-md-5 px-md-5">
+
+
+                        {% md_to_html category.description_2 as short_d_second_html %}{{ short_d_second_html|safe }}
+
+
+                    </p></div>
+
+                </div>
+
+
             </div>
+
 
         </div>
     </section>

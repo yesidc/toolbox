@@ -14,7 +14,7 @@ recommendations: "- Introduce the topic generally and minimize (but not complete
 supplementary_material: "",
 testimony: "",
 use_cases: "- To introduce a new topic\n- To summarize the most important topics in a micro lecture \n- To tell students what they will learn in a video \n- To activate prior knowledge needed for understanding the video \n- To give recommendations as to where to brush up some prerequisites for understanding the material \n- To provide extra information and further explanation of the topic / material \n- To recap previous units and to transition to the next topic ",
-references: "„Content captions make the courseware more appealing, and seem to help online students a lot when studying for organizing, focussing and staying motivated, probably because these texts with a few sentences compensate context that on-site students have.  \nLutter et al. GMW conference 2022 ",
+references: " „Content captions make the courseware more appealing, and seem to help online students a lot when studying for organizing, focussing and staying motivated, probably because these texts with a few sentences compensate context that on-site students have.\" \\n \nLutter,Frohn, Cruz, Thelen (2022). *Förderung von Kursverständnis, Fokus, Organisation und Motivation bei\ninternationalen Online-Studierenden in asynchronen Lernsettings. In: Bernhard Standl (Ed.) *Digitale lehre nachhaltig gestalten.* Münster, Waxmann Verlag GmbH\n ",
 reusable: "yes",
 task_complexity: "1",
 category: 'Teaching Material',

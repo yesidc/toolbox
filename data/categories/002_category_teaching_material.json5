@@ -9,9 +9,10 @@
 
   category_name: "Teaching Material",
     category_id: "002-category-tm"  ,
-    short_description: "Since the COSMOS-program opened the Cognitive Science Master for online students from \nany time zone, any single and synchronous time slot would exclude one of the students. \n\n- For online students, all presentation material must be available asynchronously and online \n(this includes lecture recordings, which are uploaded afterwards) and\n- instructors must make sure \nthat all students have access to the required readings.",
-    titles_accordion : "",
-    content_accordion : "",
+    description_1: "### What counts as Teaching Material? \n\n- presentations\n- readings\n- files\n- programs\n- videos\n- software\n\nFor Online students all teaching material must be available asynchronously and online \n(this includes lecture recordings, which are uploaded afterwards) and you have to make sure \nthat all students have access to the required readings. \nMake sure to check the accessibility GDPR-compliance of software you want to utilize in your course in all countries your students reside in. ",
+    description_2: "### Why does it matter? \nSince you don't know  your students' study circumstances, it is best to enable your students to study in their own pace and daytime. ",
+    titles_accordion : "### Cosmos-Master-Program in Cognitive Science",
+    content_accordion : "Since the COSMOS-program opened the Cognitive Science Master for online students from any time zone, any single and synchronous time slot would exclude one of the students. \n\nSome countries do not have access to certain widely used services and many educational tools are hosted in non-EU countries. Please check the GDPR-compliance or use suggestions in this toolbox or on <a> https://digitale-lehre.virtuos.uni-osnabrueck.de/</a>",
     references : "",
 
     next_page : "organization",
