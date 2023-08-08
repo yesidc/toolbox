@@ -149,8 +149,8 @@ class ToolBoxLogingView(LoginView):
             plan= Plan.objects.get_user_plans(self.request.user).last()
             self.request.session['current_user_plan'] = plan.pk
             self.request.session['current_user_plan_name'] = plan.plan_name
-            messages.success(self.request, f'Welcome back {self.request.user.username}! We have automatically loaded '
-                                           f'"{plan.plan_name}" course plan for you to continue working on it.')
+            messages.success(self.request, f'Welcome back! We loaded your course plan'
+                                           f'"{plan.plan_name}" for you to pick up where you left off.')
         else:
             # create a plan for the user and add it to the session
             plan = Plan.objects.create(user=self.request.user,
