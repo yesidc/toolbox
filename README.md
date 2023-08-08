@@ -31,3 +31,17 @@ The content of this website can be easily modified by making changes to the json
 Take these into consideration when making changes:
 - The content is written in Markdown.
 - Execute `python manage.py read_data --save_category` or `python manage.py read_data --save_idea` to save changes to the database.
+
+#### Static files (``json5``)
+
+The supporting documents and images used throughout the ``json5`` files are stored in the `tbcore/static` directory:
+- **support_documents:** this directory contains supporting documents (e.g.,``pdf`` files).
+- **images:** this directory contains the images used in the ``json`` files.
+
+#### How to update the Support documents or images:
+1. Make changes to the files stored in the `support_documents` or `images` directory.
+2. Update the `json` files with the new information.
+   1. For example, to add the image `human_touch.png`, you can use the following code snippet (style it as desired): ``<img src=\"/static/tbcore/images/human_touch.png\" alt=\"Human Touch\" width=\"40%\" height=\"50%\" class=\"rounded mx-auto d-block\">"``
+   2. To add a support document called `How_to_add_task_plugIn_to_Stud.Ip_course.pdf`, you can use the following code snippet (style it as desired): ``<a href="/static/tbcore/support_documents/How_to_add_task_plugIn_to_Stud.Ip_course.pdf" target="_blank">Tasks (reflection) Plug-In</a>``
+   3. Execute `python manage.py read_data --save_category` or `python manage.py read_data --save_idea` to save changes to the database.
+
