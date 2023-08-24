@@ -70,17 +70,17 @@ Toolbox
 
 }
 
-.brand-name{
+.brand-name {
     padding-top: 4px;
     width: 110px;
-height: 22px;
+    height: 22px;
     font-style: normal;
-font-weight: 500;
-font-size: 32px;
-line-height: 16px;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 16px;
     text-transform: capitalize;
 
-color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 /*footer*/
@@ -106,13 +106,13 @@ footer {
 
 .footer-text {
 
-   font-style: normal;
-font-weight: 600;
-font-size: 15px;
-line-height: 24px;
-/* or 160% */
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 24px;
+    /* or 160% */
 
-letter-spacing: -0.015em;
+    letter-spacing: -0.015em;
 
 
     color: #FFFFFF;
@@ -123,8 +123,6 @@ letter-spacing: -0.015em;
 .color-nav-bar {
 
     background-color: #4D1FAF;
-
-
 
 
 }
