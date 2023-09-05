@@ -30,7 +30,7 @@
                     <div class="card text-dark bg-warning mb-3" style="max-width: 25rem;">
 
                         <div class="card-body">
-                            <h5 class="card-title">Plan your course</h5>
+                            <h5 class="card-title">Plan how to adapt your course to online learning:</h5>
 
 
                               <ul class="univers-con-regular">
@@ -84,9 +84,9 @@
                         <div class="d-flex mt-md-5">
 
                             {% if not user.is_authenticated %}
-                                <div>
+                                <div class="my-md-5">
                                     <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
-                                       class="btn btn-toolbox text-light mx-5">Open my courses</a>
+                                       class="btn btn-toolbox text-light mx-5">Adapt my courses for online learning</a>
                                 </div>
 
                             {% else %}
