@@ -34,7 +34,7 @@
             <h2 class="text-center paragraph" id="category-url-save-idea"
                 data-category-url="{{ category.category_url }}">{{ category.category_name }}</h2>
         </div>
-        <section class="text-dark p-3 mt-1" style="background-color: rgb(215,55,55);opacity: 0.4">
+        <section class="text-dark p-3 mt-1">
 
 
             <div class="container w-75 mx-auto" >
@@ -44,7 +44,9 @@
 
                         <p class="lead">Please sing in to get a checklist for course preparation.</p>
                         <a class="btn btn-toolbox text-light button-touch"
-                           href="{% url 'login' %}?category_url={{ current_category }}&next_page={{ next_page }}">Sign in</a>
+                           href="{% url 'login' %}?category_url={{ current_category }}&next_page={{ next_page }}"
+
+                        > Sign in</a>
                     </div>
 
 
