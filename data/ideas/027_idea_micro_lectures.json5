@@ -13,7 +13,7 @@ recommendations: "- Make the video part of a larger homework assignment because 
 supplementary_material: "- [Guideline for lecture recordings]() (incl. video and [PDF tutorial]() for lecture recordings, list of suitable rooms at UOS)\n- About [Opencast studio](), instructions, tips and examples\n- Borrow a decent microphone, bluetooth pointer mouse (useful for pointing at slides in lecture recordings), or a wacom board for handwriting from the \n[DigiLab](https://digitale-lehre.virtuos.uni-osnabrueck.de/inventar-digilab/)  \n\n[//]: <> (We can link Leihs, the software to borrow equipment from Vortuos and Digilab. The Software is not online yet (27.09.2022, but will be by beginning of October --> Ask Rüdiger Rolf again)\n\n- or the COSMOS Team ([os-cosmos@uni-osnabrueck.de](os-cosmos@uni-osnabrueck.de) )\n- Get help quickly: The VitUOS can help with educational concepts for micro lectures and technical issues in one go. \n- For editing lecture recordings from the lecture hall, please contact VirtUOS if you have questions. \n- [OER music](https://www.orca.nrw/oer-support/oer-tracks) for videos or podcasts ",
 testimony: "",
 use_cases: "In every course with content that you explain.",
-references: "",
+references: "<a href='https://dl.acm.org/doi/abs/10.1145/2556325.2566239?casa_token=fDAdl5DtdJkAAAAA:NgAmhDTyrZ6EXYSQ4_x1D9SyVX1VwbWtYRiWSZBl8lXRYoBHsdWz3NS_qB9ZoS25yOW2Z1Yrw0Y' target='_blank'>How video production affects student engagement: an empirical study of MOOC videos</a>\n",
 reusable: "yes",
 task_complexity: "1",
 category: 'Teaching Material',
