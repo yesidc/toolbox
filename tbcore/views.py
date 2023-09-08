@@ -1,7 +1,7 @@
 from urllib.parse import urlencode
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordResetForm
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,  reverse, redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetConfirmView, UserModel
@@ -27,9 +27,8 @@ def start_page(request):
     return render(request, 'tbcore/start_page.html', context=context)
 
 
-class ToolBoxResetPasswordView(PasswordResetView, PasswordResetForm):
+class ToolBoxResetPasswordView(PasswordResetView,PasswordResetForm):
     template_name = 'password_reset/password_reset.html'
-    email_template_name = 'password_reset/password_reset_email.html'
     success_url = reverse_lazy('password_reset_done')
 
     def send_email(self,
@@ -73,7 +72,7 @@ class ToolBoxResetPasswordView(PasswordResetView, PasswordResetForm):
     def form_valid(self, form):
 
         self.send_email(email=form.cleaned_data["email"])
-        return super().form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
 
 
 
