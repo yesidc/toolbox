@@ -15,66 +15,82 @@
 
     {#Showcase#}
 
-    <section class="bg-light text-dark mx-md-4 mx-sm-2">
-        <div class="container-fluid image-banner mx-md-5 mx-sm-2 px-md-2"
-             style='background-image: url("{% static '/tbcore/images/toolbox_banner.PNG' %}")'
-        >
+    <section class=" text-dark mx-md-4 mx-sm-2">
 
-            <div class="row ">
+        <div class="row">
 
-                <h1 class="my-md-3 text-center heading-banner">Your Toolbox For Better Courses</h1>
-
-                <div class="col-md-8">
+            <div class="col-md-10 mx-auto">
 
 
-                    <div class="card text-dark bg-warning mb-3" style="max-width: 25rem;">
+                <div class="container-fluid image-banner mx-md-5 mx-sm-2 px-md-2"
+                     style='background-image: url("{% static '/tbcore/images/toolbox_banner.PNG' %}")'
+                >
 
-                        <div class="card-body">
-                            <h5 class="card-title">Plan how to adapt your course to online learning:</h5>
+                    <div class="row ">
+
+                        <div class="row">
+                            <h1 class="my-md-3 p-md-5 text-center heading-banner">Your Toolbox For Better Courses</h1>
+                        </div>
 
 
-                            <ul class="univers-con-regular">
-                                <li class="lead">Find teaching tips and tools</li>
+                        <div class="row">
+                            <br>
+
+                            <div class="col-md-8 my-5">
 
 
-                                <li class="lead">Take notes for putting things into practice</li>
+                                <div class="card text-dark bg-warning mb-3" style="max-width: 25rem;">
 
-                                <li class="lead">Assess remaining workload
-                                </li>
-                                <li class="lead">
-                                    Get a checklist for course preparation
-                                </li>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Plan your course:</h5>
 
-                            </ul>
 
+                                        <ul class="univers-con-regular">
+                                            <li class="lead">Find teaching tips and tools</li>
+
+
+                                            <li class="lead">Take notes for putting things into practice</li>
+
+                                            <li class="lead">Assess remaining workload
+                                            </li>
+                                            <li class="lead">
+                                                Get a checklist for course preparation
+                                            </li>
+
+                                        </ul>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
 
                         </div>
+
+
+                        <div class="row">
+
+                            {% block create_course %}
+                                <div class="d-flex ">
+
+                                    {% if  user.is_authenticated %}
+                                        <div>
+                                            <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
+                                               class="btn btn-toolbox text-light mx-1 px-2">Keep working on my
+                                                courses</a>
+                                        </div>
+
+
+
+                                    {% endif %}
+
+                                </div>{% endblock %}
+
+                        </div>
+
+
                     </div>
 
-                </div>
-
-
-                <div class="row mt-md-5 p-md-5">
-
-                    {% block create_course %}
-                        <div class="d-flex mt-md-5">
-
-                            {% if not user.is_authenticated %}
-                                <div class="my-md-5">
-                                    <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
-                                       class="btn btn-toolbox text-light mx-5">Adapt my courses for online learning</a>
-                                </div>
-
-                            {% else %}
-
-                                <div>
-                                    <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
-                                       class="btn btn-toolbox text-light mx-1 px-2">Keep working on my courses</a>
-                                </div>
-
-                            {% endif %}
-
-                        </div>{% endblock %}
 
                 </div>
 
@@ -83,7 +99,11 @@
 
 
         </div>
+
+
     </section>
+
+    <br>
 
     {#    Features and Instructions#}
 
@@ -91,64 +111,77 @@
 
 
         <div class="row">
-            <div class="col-sm-5 m-auto">
-                <div class="card shadow-md" style="background-color: rgba(71, 133, 255, 0.2);">
-                    <div class="card-body">
-                        <h5 class="card-title mx-md-3">Features</h5>
-                        <p class="card-text">
 
-                        <ul class="mx-md-3" style="list-style-type: none;">
-                            <li><i class="bi bi-check-circle"></i> Best practices and recommendations from experienced
-                            </li>
-                            <li><i class="bi bi-check-circle"></i> Estimation of time and/or content preparation effort
-                                per teaching tip
-                            </li>
-                            <li><i class="bi bi-check-circle"></i> Only GDPR-compliant tools</li>
-                            <li><i class="bi bi-check-circle"></i> Teaching tips and tools complement Stud.IP course
-                                creation
-                            </li>
-                            <li><i class="bi bi-check-circle "></i> Technical and Educational Support</li>
-                        </ul>
+            <div class="col-md-10 mx-auto">
 
+                <div class="row">
+                    <div class="col-sm-5 m-auto">
+                        <div class="card shadow-md" style="background-color: rgba(71, 133, 255, 0.2);">
+                            <div class="card-body">
+                                <h5 class="card-title mx-md-3">Features</h5>
+                                <p class="card-text">
 
+                                <ul class="mx-md-2" style="list-style-type: none;">
+                                    <li><i class="bi bi-check-circle"></i> Best practices and recommendations from
+                                        experienced
+                                    </li>
+                                    <li><i class="bi bi-check-circle"></i> Estimation of time and/or content preparation
+                                        effort per teaching tip
+                                    </li>
+                                    <li><i class="bi bi-check-circle"></i> Only GDPR-compliant tools</li>
+                                    <li><i class="bi bi-check-circle"></i> Teaching tips and tools complement Stud.IP
+                                        course
+                                        creation
+                                    </li>
+                                    <li><i class="bi bi-check-circle "></i> Technical and Educational Support</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-5 m-auto">
-                <div class="card shadow-md" style="background-color: rgba(71, 133, 255, 0.2);">
-                    <div class="card-body">
-                        <h5 class="card-title mx-md-3">How to use the Toolbox </h5>
-                        <p class="card-text">
-                        <ol class="mx-md-4">
-                            <li>
-                                Create a plan for the online version of your course.
-                            </li>
 
-                            <li>
-                                Walk through 8 essential elements of online courses.
-                            </li>
+                    <div class="col-sm-5 m-auto">
+                        <div class="card shadow-md" style="background-color: rgba(71, 133, 255, 0.2);">
+                            <div class="card-body">
+                                <h5 class="card-title mx-md-3">How to use the Toolbox </h5>
+                                <p class="card-text">
+                                <ol class="mx-md-4">
+                                    <li>
+                                        Create a plan for the online version of your course.
+                                    </li>
 
-                            <li>
-                                Choose from 4 teaching tips per course element.
-                            </li>
+                                    <li>
+                                        Walk through 8 essential elements of online courses.
+                                    </li>
 
-                            <li>
-                                Get a checklist for digitalizing your course.
-                            </li>
+                                    <li>
+                                        Choose from 4 teaching tips per course element.
+                                    </li>
 
-                            <li>
-                                Keep the overview of course elements you still need to address.
-                            </li>
+                                    <li>
+                                        Get a checklist for digitalizing your course.
+                                    </li>
 
-
-                        </ol>
+                                    <li>
+                                        Keep the overview of course elements you still need to address.
+                                    </li>
 
 
-                        </p>
+                                </ol>
 
+
+                                </p>
+
+                            </div>
+                        </div>
                     </div>
+
+
                 </div>
+
+
             </div>
+
+
         </div>
 
 
@@ -156,27 +189,44 @@
 
 
 
+    {#    Start Button#}
+    <section>
+        <div class="row my-md-3">
+
+            <div class="col-md-5 mx-auto text-center">
 
 
+                {% if not user.is_authenticated %}
+                    <div class=" row my-md-5">
+                        <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
+                           class="btn btn-toolbox text-light mx-5 px-md-5 py-md-3">Start Course Digitalization</a>
+                    </div>
 
+                {% endif %}
+            </div>
 
-
-
-
-
-
-
-
-
-
+        </div>
+    </section>
 
     {#    Slides#}
 
-    <section class=" pb-5" style="background-color: rgba(209, 242, 249, 0.3)">
+    <section class=" pb-5" ">
         <div class="container">
 
+
+        <div class="row">
+
+           <div class="col-md-10 mx-auto">
+
+
+
+
+
+           </div>
+        </div>
+
             <div class="row">
-                <h2 class="text-center p-2">Quick start</h2>
+                <h2 class="text-center p-md-4">Quick start</h2>
             </div>
             <div class="row">
 
@@ -319,10 +369,10 @@
 
 
 
-    <section class=" text-dark py-5" style="background-color: rgba(209, 242, 249, 0.6)">
+    <section class=" text-dark py-5" >
         <div class="container">
             <div class="row">
-                <div class="col-8">
+                <div class="col-6 mx-auto">
                     <div class="row">
                         <p>
                             Further general teaching tips, news and updates about technology supported by VirtUOS are
