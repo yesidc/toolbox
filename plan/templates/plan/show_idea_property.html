@@ -1,6 +1,6 @@
 {% load toolbox_custom_tags %}
 
-{% if show == 'show_in_section'%}<div class="container">
+{% if show == 'show_in_section'%}<div class="">
 
 
         <div class="row">
@@ -8,7 +8,10 @@
             {#Ideas' property#}
 
 
-            <div class="d-flex h-100"><h5 class="align-self-center">{{ property_name }}</h5></div>
+            <div class="d-flex h-100">
+
+                <h5 class="align-self-center ">{{ property_name }}</h5>
+            </div>
 
         </div>
 

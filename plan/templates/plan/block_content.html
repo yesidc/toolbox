@@ -31,22 +31,24 @@
 
         <div class="text-center">
 
-            <h2 class="text-center paragraph" id="category-url-save-idea"
+            <h2 class="text-center paragraph mt-md-5" id="category-url-save-idea"
                 data-category-url="{{ category.category_url }}">{{ category.category_name }}</h2>
         </div>
         <section class="text-dark p-3 mt-1">
 
 
-            <div class="container w-75 mx-auto" >
+            <div class="container w-75 mx-auto">
                 <div class="d-flex flex-column ">
 
-                    <div>
+                    <div class="p-md-2" style="background-color: rgb(71,133,255, 0.2);border-radius: 4px">
 
-                        <p class="lead">Please sing in to get a checklist for course preparation.</p>
-                        <a class="btn btn-toolbox text-light button-touch"
-                           href="{% url 'login' %}?category_url={{ current_category }}&next_page={{ next_page }}"
+                        <p class="lead my-2"> <span class="mx-md-5"> Please sing in to get a checklist for course preparation.</span>
+                            <a class="btn btn-toolbox text-light button-touch"
+                               href="{% url 'login' %}?category_url={{ current_category }}&next_page={{ next_page }}"
 
-                        > Sign in</a>
+                            > Sign in
+                            </a>
+                        </p>
                     </div>
 
 
