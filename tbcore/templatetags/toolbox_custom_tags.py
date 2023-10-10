@@ -45,8 +45,8 @@ def get_accordion_content(title, content):
         return {'len_content': len_content}
     else:
 
-        titles = title.split('[split]')
-        c_accordion = content.split('[split]')
+        titles = title.split('[SPLIT]')
+        c_accordion = content.split('[SPLIT]')  # content for accordion
         len_content = len(titles)
         content_accordion = tuple([*zip([*range(len_content)], titles, c_accordion)])
 
