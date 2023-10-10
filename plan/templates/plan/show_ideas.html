@@ -1,71 +1,58 @@
 {# Some building blocks (e.g., Rules and Regulations) do not contain any ideas#}
 {% if ideas %}
     <section>
-
         <!-- Online Ideas -->
-
-        <section class="w-75 mx-auto pt-md-5 pt-sm-3">
-            <div class="container">
+        <div class="row pt-md-5 pt-sm-3">
+            <div class="col-md-10 mx-auto">
                 <h3 class="text-center mb-md-5 paragraph">Teaching Tips</h3>
-
-
                 {#online_idea is M2M field#}
 
-                <div class="container">
+                <div class="row row-cols-1 row-cols-md-4 row-cols-sm-3 my-flex-card">
+
+                    {% for idea in ideas %}
 
 
-                    <div class="row row-cols-1 row-cols-md-4 row-cols-sm-3 my-flex-card">
+                        <div class="col">
+                            <div class="card card-rcorner shadow-lg ">
+                                {#todo delete, code for checkbox on the building block page#}
+                                {#                                    {% if user_authenticated %}#}
+                                {#                                        <div class=" py-0 my-0 card-color ">#}
+                                {##}
+                                {#                                            <input type="checkbox" class="idea-checkbox" id="{{ idea.id }}-idea"#}
+                                {#                                                   onclick="add_delete_idea()"#}
+                                {#                        The ideas that have been already chosen by registration are ticked off by default#}
+                                {#                                                    {% if idea.id in ideas_list %}#}
+                                {#                                                   checked#}
+                                {#                                                    {% endif %}#}
+                                {#                                            >#}
+                                {##}
+                                {#                                        </div>#}
+                                {#                                    {% endif %}#}
 
-                        {% for idea in ideas %}
+                                <div class=" card-body card-color text-black d-flex flex-column ">
 
+                                    <h4 class="mb-3 adobe-garamond-p text-center">{{ idea.idea_name }}</h4>
 
-                            <div class="col">
-                                <div class="card card-rcorner shadow-lg ">
-                                    {#todo delete, code for checkbox on the building block page#}
-                                    {#                                    {% if user_authenticated %}#}
-                                    {#                                        <div class=" py-0 my-0 card-color ">#}
-                                    {##}
-                                    {#                                            <input type="checkbox" class="idea-checkbox" id="{{ idea.id }}-idea"#}
-                                    {#                                                   onclick="add_delete_idea()"#}
-                                    {#                        The ideas that have been already chosen by registration are ticked off by default#}
-                                    {#                                                    {% if idea.id in ideas_list %}#}
-                                    {#                                                   checked#}
-                                    {#                                                    {% endif %}#}
-                                    {#                                            >#}
-                                    {##}
-                                    {#                                        </div>#}
-                                    {#                                    {% endif %}#}
-
-                                    <div class=" card-body card-color text-black d-flex flex-column ">
-
-                                        <h4 class="mb-3 adobe-garamond-p text-center">{{ idea.idea_name }}</h4>
-
-                                        <div class="mt-auto align-self-end">
+                                    <div class="mt-auto align-self-end">
 
 
-                                            <a
-                                                    href="{% url 'idea_overview_detail' current_category idea.id %}"
-                                                    class="btn btn-toolbox text-light  pb-1">Show more
-                                            </a>
-
-                                        </div>
-
+                                        <a
+                                                href="{% url 'idea_overview_detail' current_category idea.id %}"
+                                                class="btn btn-toolbox text-light  pb-1">Show more
+                                        </a>
 
                                     </div>
 
 
                                 </div>
+
+
                             </div>
-                        {% endfor %}
-
-                    </div>
-
+                        </div>
+                    {% endfor %}
 
                 </div>
-
-
             </div>
-        </section>
-
-
-    </section>{% endif %}
+        </div>
+    </section>
+{% endif %}
