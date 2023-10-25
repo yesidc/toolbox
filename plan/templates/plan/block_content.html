@@ -11,7 +11,7 @@
 
 {% block category_name %}
 
-    <div class="col text-center">
+    <div class="col-md-10 mx-auto text-center">
         <h2 class="text-center paragraph" id="category-url-save-idea"
             data-category-url="{{ category.category_url }}">{{ category.category_name }}</h2>
     </div>
@@ -21,131 +21,94 @@
 
 {% block building_block_idea %}
 
-
     <!-- Showcase-->
-
-
+{#    If the user is not authenticated; provide option to sign in#}
     {% if not user.is_authenticated %}
-
-
-
-        <div class="text-center">
-
-            <h2 class="text-center paragraph" id="category-url-save-idea"
+        <div class="col-md-10 mx-auto">
+            <h2 class="text-center paragraph mt-md-5" id="category-url-save-idea"
                 data-category-url="{{ category.category_url }}">{{ category.category_name }}</h2>
-        </div>
-        <section class=" bg-light text-dark p-3 mt-1">
+            <div class="d-flex flex-column ">
 
+                <div class="p-md-2" style="background-color: rgb(71,133,255, 0.2);border-radius: 4px">
 
-            <div class="container w-75 mx-auto">
-                <div class="d-flex flex-column ">
-
-                    <div>
-
-                        <p class="lead">You are browsing without log-in. To create a personal checklist please sign
-                            in.</p>
+                    <p class="lead my-2"><span class="mx-md-5"> Please sing in to get a checklist for course preparation.</span>
                         <a class="btn btn-toolbox text-light button-touch"
-                           href="{% url 'login' %}?category_url={{ current_category }}&next_page={{ next_page }}">Start
-                            course
-                            revision</a>
-                    </div>
-
-
+                           href="{% url 'login' %}?category_url={{ current_category }}&next_page={{ next_page }}">
+                            Sign in
+                        </a>
+                    </p>
                 </div>
 
             </div>
-
-        </section>
-
-
-
+        </div>
 
     {% endif %}
 
-
     <!-- Block introductory text -->
+    <section class="pb-md-5 pb-sm-3">
+        <div class="row">
+            <div class="col-md-10 mx-auto">
 
-    <section class="w-75 mx-auto pb-md-5 pb-sm-3">
-        <div class="container">
+                <div class="row">
 
-            <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-start  px-md-5">
+                            {% md_to_html category.description_1 as short_d_first_html %}{{ short_d_first_html|safe }}
+                        </p>
+                    </div>
 
-                <div class="col-md-6">
-
-                    <div class=""><p class="text-start mx-md-5 px-md-5">
-
-
-                        {% md_to_html category.description_1 as short_d_first_html %}{{ short_d_first_html|safe }}
-
-
-                    </p></div>
-
-
+                    <div class="col-md-6">
+                        <p class="text-start px-md-5">
+                            {% md_to_html category.description_2 as short_d_second_html %}{{ short_d_second_html|safe }}
+                        </p>
+                    </div>
                 </div>
-
-
-                <div class="col-md-6">
-
-
-                    <div class=""><p class="text-start mx-md-5 px-md-5">
-
-
-                        {% md_to_html category.description_2 as short_d_second_html %}{{ short_d_second_html|safe }}
-
-
-                    </p></div>
-
-                </div>
-
-
             </div>
-
-
         </div>
-    </section>
 
+    </section>
 
     <!-- Accordion Content -->
 
     {% get_accordion_content category.titles_accordion category.content_accordion as show_content %}
     {% if show_content.len_content > 0 %}
+        <div class="row">
+            <div class="col-md-10 mx-auto">
+                <div class="accordion shadow-lg">
+                    {% for acc_id,t,c in show_content.content_accordion %}
+                        <div class="accordion" id="accordionInfo">
 
-        <section class=" w-75 mx-auto">
-            <div class="accordion shadow-lg">
-                {% for acc_id,t,c in show_content.content_accordion %}
-                    <div class="accordion" id="accordionInfo">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    {#                                 change accordion color here (the button)#}
+                                    <button class="accordion-button collapsed bg-light"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapse{{ acc_id }}"
+                                            aria-expanded="false"
+                                            aria-controls="collapse{{ acc_id }}">
 
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                {#                                 change accordion color here (the button)#}
-                                <button class="accordion-button collapsed bg-light" type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#collapse{{ acc_id }}" aria-expanded="false"
-                                        aria-controls="collapseTwo">
+                                        <h3 class="paragraph">
+                                            {% md_to_html t as title_html %}{{ title_html|safe }}</h3>
 
-                                    <h3 class="paragraph"> {% md_to_html t as title_html %}{{ title_html|safe }}</h3>
-
-                                </button>
-                            </h2>
-                            <div id="collapse{{ acc_id }}" class="accordion-collapse collapse"
-                                 aria-labelledby="headingTwo"
-                                 data-bs-parent="#accordionInfo">
-                                <div class="accordion-body">
-                                    {% md_to_html c as accordion_con_html %}{{ accordion_con_html|safe }}
+                                    </button>
+                                </h2>
+                                <div id="collapse{{ acc_id }}" class="accordion-collapse collapse"
+                                     aria-labelledby="heading{{ acc_id }}"
+                                     data-bs-parent="#accordionInfo">
+                                    <div class="accordion-body">
+                                        {% md_to_html c as accordion_con_html %}{{ accordion_con_html|safe }}
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
-
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
-
-        </section>
-
+        </div>
 
     {% endif %}
-
-
 
 
     <!-- Online Ideas -->

@@ -1,6 +1,7 @@
 {% load toolbox_custom_tags %}
 
-{% if show == 'show_in_section'%}<div class="container">
+{% if show == 'show_in_section' %}
+    <div class="">
 
 
         <div class="row">
@@ -8,7 +9,10 @@
             {#Ideas' property#}
 
 
-            <div class="d-flex h-100"><h5 class="align-self-center">{{ property_name }}</h5></div>
+            <div class="d-flex h-100">
+
+                <h5 class="align-self-center ">{{ property_name }}</h5>
+            </div>
 
         </div>
 
@@ -17,26 +21,26 @@
         </div>
 
 
-
-
-
-</div>
-
-
-    {% else %}
-
-
-
-      <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-{{ property_name|add_hyphen }}">
-      <button class="accordion-button collapsed" style="background-color: #f2f2f2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ property_name|add_hyphen }}" aria-expanded="false" aria-controls="flush-collapse{{ property_name|add_hyphen }}">
-     <h4>{{ property_name }}</h4>
-      </button>
-    </h2>
-    <div id="flush-collapse{{ property_name|add_hyphen }}" class="accordion-collapse collapse" aria-labelledby="flush-{{ property_name|add_hyphen }}" data-bs-parent="#accordionFlushIdea">
-      <div class="accordion-body"> <p>{% md_to_html idea_property as idea_html %}{{ idea_html|safe }}</p> </div>
     </div>
-  </div>
+
+
+{% else %}
+
+
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-{{ property_name|add_hyphen }}">
+            <button class="accordion-button collapsed" style="background-color: #f2f2f2" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ property_name|add_hyphen }}"
+                    aria-expanded="false" aria-controls="flush-collapse{{ property_name|add_hyphen }}">
+                <h4>{{ property_name }}</h4>
+            </button>
+        </h2>
+        <div id="flush-collapse{{ property_name|add_hyphen }}" class="accordion-collapse collapse"
+             aria-labelledby="flush-{{ property_name|add_hyphen }}" data-bs-parent="#accordionFlushIdea">
+            <div class="accordion-body"><p>{% md_to_html idea_property as idea_html %}{{ idea_html|safe }}</p></div>
+        </div>
+    </div>
 
 
 {% endif %}

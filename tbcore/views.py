@@ -1,9 +1,10 @@
 from urllib.parse import urlencode
 from django.contrib import messages
-from django.http import HttpResponse
+from django.contrib.auth.forms import PasswordResetForm
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,  reverse, redirect
 from django.contrib.auth import get_user_model
-from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetConfirmView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetConfirmView, UserModel
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.urls import reverse_lazy
@@ -17,14 +18,62 @@ from .models import Plan
 from .tokens import account_activation_token
 from .forms import SignUpForm
 import toolbox.settings as settings
+from django.contrib.auth.tokens import default_token_generator
 
 
 
 def start_page(request):
     context = { }
-
-
     return render(request, 'tbcore/start_page.html', context=context)
+
+
+class ToolBoxResetPasswordView(PasswordResetView,PasswordResetForm):
+    template_name = 'password_reset/password_reset.html'
+    success_url = reverse_lazy('password_reset_done')
+
+    def send_email(self,
+                email,
+                use_https=False,
+                token_generator=default_token_generator,
+                extra_email_context=None,):
+            """
+            Generate a one-use only link for resetting password and send it to the
+            user.
+            """
+            current_site = get_current_site(self.request)
+            site_name = current_site.name
+            domain = current_site.domain
+
+            email_field_name = UserModel.get_email_field_name()
+            for user in self.get_users(email):
+                user_email = getattr(user, email_field_name)
+                context = {
+                    "email": user_email,
+                    "domain": domain,
+                    "site_name": site_name,
+                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                    "user": user,
+                    "token": token_generator.make_token(user),
+                    "protocol": "https" if use_https else "http",
+                    **(extra_email_context or {}),
+                }
+                subject = 'Reset your password'
+                html_message = render_to_string('password_reset/password_reset_email.html', context)
+
+                from_email = settings.DEFAULT_FROM_EMAIL
+                to_email = user_email
+
+                # Send the email
+                email = EmailMultiAlternatives(subject, html_message, from_email, [to_email])
+                email.attach_alternative(html_message, "text/html")
+                email.send()
+
+
+    def form_valid(self, form):
+
+        self.send_email(email=form.cleaned_data["email"])
+        return HttpResponseRedirect(self.get_success_url())
+
 
 
 class SignUpView(CreateView):
@@ -149,8 +198,8 @@ class ToolBoxLogingView(LoginView):
             plan= Plan.objects.get_user_plans(self.request.user).last()
             self.request.session['current_user_plan'] = plan.pk
             self.request.session['current_user_plan_name'] = plan.plan_name
-            messages.success(self.request, f'Welcome back {self.request.user.username}! We have automatically loaded '
-                                           f'"{plan.plan_name}" course plan for you to continue working on it.')
+            messages.success(self.request, f'Welcome back! We loaded your course plan'
+                                           f'"{plan.plan_name}" for you to pick up where you left off.')
         else:
             # create a plan for the user and add it to the session
             plan = Plan.objects.create(user=self.request.user,

@@ -28,132 +28,192 @@
 
 </head>
 {#rgba(209,242,249,0.4)#}
-<body style="background-color: rgba(209,242,249,0.4)">
+<body style="background-color: rgba(209,242,249,0.4); display: flex;flex-direction: column;min-height: 100vh;margin: 0">
 
 
-{#  Top nav menu#}
+<div style="flex-grow: 1">
+
+    {#  Top nav menu#}
+    <nav class="navbar color-nav-bar  navbar-expand-lg sticky-top border">
+
+        <div class="container-fluid">
 
 
-<nav class="navbar color-nav-bar  navbar-expand-lg sticky-top border border-bottom-2 mb-1">
+            <!-- Brand -->
+            <div class="nav-bar-container px-md-3 pt-md-1"><a style="text-decoration: none;" href="{% url 'start-page' %}">
 
-    <div class="container-fluid">
+                {#            <img src="{% static '/tbcore/images/logo.PNG' %}" alt="" class="m-0  w-50 h-25 py-2">#}
+                <div class="brand-name pt-md-1">To<span style="color: #FFC745">o</span>lbox</div>
+                <p class="text-light">Your Courses, Simply Digital.</p>
 
-
-        <!-- Brand -->
-        <div class="nav-bar-container"><a class="navbar-brand" href="{% url 'start-page' %}">
-
-{#            <img src="{% static '/tbcore/images/logo.PNG' %}" alt="" class="m-0  w-50 h-25 py-2">#}
-            <div class="brand-name mb-1">To<span style="color: #FFC745">o</span>lbox</div>
-            <p class="text-light">Your Guide For Digitalizing Your Courses</p>
-
-        </a>
+            </a>
 
 
-        </div>
+            </div>
 
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span
-                class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"><i class="bi bi-list fs-4"></i></span></button>
-        <div id="navcol-1" class="collapse navbar-collapse">
-            <div class="row ms-auto ">
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span
+                    class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"><i
+                    class="bi bi-list fs-4"></i></span></button>
+            <div id="navcol-1" class="collapse navbar-collapse">
+                <div class="row ms-auto ">
 
-                {% block top_nav_bar %}
+                    {% block top_nav_bar %}
 
-                {% endblock %}
-
-
-
-
-                <!-- username and logout navbar  -->
-                <div class="col-12 order-md-first">
-                    <ul class="navbar-nav float-md-end">
-                        {% if user.is_authenticated %}
-
-                            {% for i in category_objects %}
-                                {% if forloop.counter == 1 %}
-                                    {#                                    When user clicks on the username is redirected to the building block page#}
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'show_block' i.1 i.2 %}"><span
-                                            class="text-light adobe-garamond-p">{{ user.username }}</span></a></li>
-
-
-                                {% endif %}
+                    {% endblock %}
 
 
 
-                            {% endfor %}
 
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="{% url 'logout' %}"
-                                                    onclick="clearLocalStorage()"
-                            ><span
-                                    class="text-light adobe-garamond-p">Log out</span></a>
-                            </li>
-                        {% else %}
+                    <!-- username and logout navbar  -->
+                    <div class="col-12 order-md-first">
+                        <ul class="navbar-nav float-md-end">
+                            {% if user.is_authenticated %}
 
-                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><span
-                                    class="text-light adobe-garamond-p">Log in</span></a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}"><span
-                                    class="text-light adobe-garamond-p">Sign up</span></a>
-                            </li>
+                                {% for i in category_objects %}
+                                    {% if forloop.counter == 1 %}
+                                        {#                                    When user clicks on the username is redirected to the building block page#}
+                                        <li class="nav-item"><a class="nav-link"
+                                                                href="{% url 'show_block' i.1 i.2 %}"><span
+                                                class="text-light adobe-garamond-p">{{ user.username }}</span></a></li>
 
-                        {% endif %}
 
-                    </ul>
+                                    {% endif %}
+
+
+
+                                {% endfor %}
+
+                                <li class="nav-item"><a class="nav-link"
+                                                        href="{% url 'logout' %}"
+                                                        onclick="clearLocalStorage()"
+                                ><span
+                                        class="text-light adobe-garamond-p">Log out</span></a>
+                                </li>
+                            {% else %}
+
+                                <li class="nav-item"><a class="btn btn-toolbox" href="{% url 'login' %}"><span
+                                        class="text-light adobe-garamond-p">Log in</span></a>
+                                </li>
+                                <li class="nav-item"><a class="btn btn-toolbox mx-1" href="{% url 'signup' %}"><span
+                                        class="text-light adobe-garamond-p">Sign up</span></a>
+                                </li>
+
+                            {% endif %}
+
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
 
-{% block content %}
+    {% block content %}
 
 
-{% endblock %}
+    {% endblock %}
 
-
+</div>
+{#End div content#}
 
 <footer class=" text-start text-lg-start">
 
-    <div class="container-fluid">
+    <div class="container-fluid text-center">
 
-        <i class="bi bi-send"></i>
-        <p class="text-center univers-condensed-bold" style="color: #FFFFFF; font-weight: 500; font-size: 24px">We are
-            happy to help! Please contact us at: virtuos@uos.de </p>
+        <div class="row">
 
-        <div class="row mx-md-5 mb-2">
-
-            <div class="col">
-                <h6 class="footer-header">Help desk</h6>
-                <p class="footer-text">virtuos@uos.de</p>
-            </div>
+            <div class="col-md-10 m-auto">
 
 
-            <div class="col">
-                <h6 class="footer-header">Resources</h6>
-                <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/uos-digilab/" class="footer-text"><p>DigiLab</p></a>
-                <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/" class="footer-text">Lehre Portal UOS</a>
-
-            </div>
-
-            <div class="col">
-
-                <h6 class="footer-header">About us</h6>
-                <p class="footer-text">Team</p>
-                <a href="https://virtuos.uni-osnabrueck.de/" class="footer-text"><p>VirtUOS</p></a>
-                <a href="https://www.uni-osnabrueck.de/startseite/" class="footer-text">Universität Osnabrück</a>
-            </div>
+                <i class="bi bi-send"></i>
+                <p class="text-center univers-condensed-bold" style="color: #FFFFFF; font-weight: 500; font-size: 20px">
+                    We are
+                    happy to help! Please contact us at: virtuos@uos.de </p>
 
 
-            <div class="col">
+                <div class="row">
 
-                <h6 class="footer-header">Impressum</h6>
-                <p class="footer-text">Datenschutz</p>
+                    <div class="col">
+                        <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/?event=virtuos-offene-online-sprechstunde-5"
+                           target="_blank" class="footer-header">Walk-in hours</a>
+                    </div>
+
+                    <div class="col">
+                        <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/Ideenpool/Ideenpool_Praxistipps_Komplett.pdf"
+                           target="_blank"
+                           class="footer-header"
+                        > Ideenpool (DE)
+                        </a>
+
+
+                    </div>
+
+                    <div class="col">
+                        <a href="https://github.com/yesidc/toolbox" target="_blank" class="footer-text">Team</a>
+                    </div>
+
+                    <div class="col">
+                        <h6 class="footer-header">Impressum</h6>
+                    </div>
+
+
+                </div>
+
+                {#second row#}
+                <div class="row">
+
+                    <div class="col">
+                        <a href="mailto:virtuos@uos.de" class="footer-text">virtuos@uos.de</a>
+                    </div>
+
+                    <div class="col">
+                        <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/uos-digilab/" target="_blank"
+                           class="footer-text"><p>
+                            DigiLab</p></a>
+                    </div>
+
+                    <div class="col">
+                        <a href="https://virtuos.uni-osnabrueck.de/" target="_blank" class="footer-text"><p>VirtUOS</p>
+                        </a>
+                    </div>
+
+                    <div class="col">
+                        <p class="footer-text">Datenschutz</p>
+                    </div>
+
+
+                </div>
+
+                {#third row#}
+                <div class="row">
+
+                    <div class="col">
+
+                    </div>
+
+                    <div class="col">
+                        <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/" target="_blank" class="footer-text">Lehre
+                            Portal UOS</a>
+
+                    </div>
+
+                    <div class="col">
+                        <a href="https://www.uni-osnabrueck.de/startseite/" target="_blank" class="footer-text">Universität
+                            Osnabrück</a>
+                    </div>
+
+                    <div class="col">
+
+                    </div>
+
+                </div>
+
 
             </div>
 
 
         </div>
+
 
     </div>
 

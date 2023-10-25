@@ -13,6 +13,8 @@ Toolbox
 */
 
 
+
+
 .align-icon-vertically {
     display: flex;
     flex-direction: column;
@@ -129,6 +131,7 @@ footer {
 
 .btn-toolbox {
     background-color: #0A1F40;
+    /*background-color: #0A1F40;*/
     font-family: adobe-garamond-pro, serif, Arial;
 
     font-weight: 400;
