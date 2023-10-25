@@ -1,28 +1,34 @@
-# Structured Teaching Material 
+# Courseware Learning Material   
 ## Brief Description
-A clear and easy to navigate structure in courseware organized by topics helps your students find the material, videos, readings, tasks, deadlines and submission folders. 
-A clear structure helps them to revisit sections easily and avoids frustration.  A difficult to follow structure of teaching material often leads to organizational issues. 
+The use of courseware has the advantage that you can create a central, well-structured and attractively designed place for all learning materials for your students. Learners can thus successfully orient 
+themselves in the course and know at all times where to find the relevant learning materials. The integrated progress bar enables learners to keep a close eye on their learning progress. 
+Since you are using a learning environment directly in Stud.IP with the courseware, you do not have to worry about data protection (unless you explicitly integrate external content).
+
+
 
 ## Use Cases 
-Suitable in any course that has online material. 
+The clear and easy to navigate structure of learning material with Courseware organized by topics helps your students find material, videos, readings, tasks, deadlines and submission folders in all courses. 
 
 ## Technology
-- <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/courseware/" target="_blank">Courseware</a> structure: pages, sections and blocks allow 
-learning content to be hierarchically divided as desired. Have a look at this <a href="https://hilfe.studip.de/help/5.0/de/Basis/CoursewareVideotutorials" target="_blank">crash course</a> for guidance. 
-- Content section on the courseware start page.
+- <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/courseware/" target="_blank">Courseware</a>: Pages, sections and blocks allow 
+learning content to be hierarchically divided as desired. 
+- Have a look at the short video tutorial for guidance (Hinweise & Anleitungen zur Bedienung > Erste Schritte).  
+
 
 ## Implementation Steps
-1.	Create structure to sort material meaningfully, e.g. material about one topic should not be spread across several units
-2.	Create pages with sections to implement your content in courseware blocks
-Prerequisite: the material has already been created/ is currently being created 
+1.	Create structure and sort material meaningfully, e.g. material about one topic should not be spread across several units. 
+2.	Create pages with sections to implement your content in courseware blocks. 
+
+Prerequisite: The material has already been created. 
 
 ## Teacher Effort
-~2 hours 
+*MAXI: These tips require more intensive preparation and are more suitable as ideas for future semesters.*
+
+~3 hours 
 
 ## Recommendations 
-•	Remember the structure should be meaningful also on a lower level and serve understanding. 
-•	Use this template the get familiar with levels in courseware. 
-•	Courseware basics <a href="https://hilfe.studip.de/help/5.0/de/Basis/CoursewareVideotutorials" target="_blank">crash course</a> (short!)
+•	Remember the structure should be meaningful and serve understanding.
+•	<a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/courseware/" target="_blank">Courseware basics</a>. 
 
 ## Reusable
 Yes, for the same course. 
@@ -34,4 +40,4 @@ Yes, for the same course.
 [//]: <> (References='emtpy') 
 
 ----
-[//]: <> (task_complexity='2')
+[//]: <> (task_complexity='3')

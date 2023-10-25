@@ -4,19 +4,19 @@
 {
 
 
-idea_name:"Structured Teaching Material" ,
+idea_name:"Courseware Learning Material" ,
 idea_id: "019-idea-stm",
-brief_description: "A clear and easy to navigate structure in courseware organized by topics helps your students find the material, videos, readings, tasks, deadlines and submission folders. \nA clear structure helps them to revisit sections easily and avoids frustration.  A difficult to follow structure of teaching material often leads to organizational issues.",
-technology: "- <a href=\"https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/courseware/\" target=\"_blank\">Courseware</a> structure: pages, sections and blocks allow \nlearning content to be hierarchically divided as desired. Have a look at this <a href=\"https://hilfe.studip.de/help/5.0/de/Basis/CoursewareVideotutorials\" target=\"_blank\">crash course</a> for guidance. \n- Content section on the courseware start page.\n",
-  implementation_steps: "1.\tCreate structure to sort material meaningfully, e.g. material about one topic should not be spread across several units\n2.\tCreate pages with sections to implement your content in courseware blocks\nPrerequsite: the material has already been created/ is currently being created ",
-teacher_effort: "~2 hours ",
-recommendations: "•\tRemember the structure should be meaningful also on a lower level and serve understanding. \n•\tUse this template the get familiar with levels in courseware. \n•\tCourseware basics <a href=\"https://hilfe.studip.de/help/5.0/de/Basis/CoursewareVideotutorials\" target=\"_blank\">crash course</a> (short!)\n",
+brief_description: "The use of courseware has the advantage that you can create a central, well-structured and attractively designed place for all learning materials for your students. Learners can thus successfully orient \nthemselves in the course and know at all times where to find the relevant learning materials. The integrated progress bar enables learners to keep a close eye on their learning progress. \nSince you are using a learning environment directly in Stud.IP with the courseware, you do not have to worry about data protection (unless you explicitly integrate external content).\n",
+technology: "- <a href=\"https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/courseware/\" target=\"_blank\">Courseware</a>: Pages, sections and blocks allow \nlearning content to be hierarchically divided as desired. \n- Have a look at the short video tutorial for guidance (Hinweise & Anleitungen zur Bedienung > Erste Schritte).  \n",
+  implementation_steps: "1.\tCreate structure and sort material meaningfully, e.g. material about one topic should not be spread across several units. \n2.\tCreate pages with sections to implement your content in courseware blocks. \n\nPrerequisite: The material has already been created. ",
+teacher_effort: "*MAXI: These tips require more intensive preparation and are more suitable as ideas for future semesters.*\n\n~3 hours ",
+recommendations: "•\tRemember the structure should be meaningful and serve understanding.\n•\t<a href=\"https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/courseware/\" target=\"_blank\">Courseware basics</a>. \n",
   supplementary_material: "",
 testimony: "",
-use_cases: "Suitable in any course that has online material.",
+use_cases: "The clear and easy to navigate structure of learning material with Courseware organized by topics helps your students find material, videos, readings, tasks, deadlines and submission folders in all courses. \n",
 references: "",
 reusable: "Yes, for the same course.",
-task_complexity: "2",
+task_complexity: "3",
 category: 'Organization',
 
 }
