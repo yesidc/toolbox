@@ -1,4 +1,4 @@
-# Clear Expectations
+# Clarify Expectations
 
 ## Brief description 
 Clear expectations set the tone for communication and interaction between you and the students. The more specific your expectations are, the better students can 
@@ -17,6 +17,7 @@ For every assignment and any moment that you interact with students, e.g. when y
 
 ## Implementation steps (Implementation_steps)
 Communicate:
+
 1.	How do you envision the interaction with your students? What will you do to realize that vision? 
 2.	For this course, what do you accept as evidence for understanding the material? What do you not accept (assessment rubric)?
 3.	What should the students do in order to demonstrate that they have mastered the learning and reached the course goals (Assignment instructions)?
@@ -24,6 +25,7 @@ Communicate:
 
 ## Teacher Effort 
 *MIDI: These tips are also suitable for current teaching situations, but require a little more preparation.*
+
 - The effort depends on how much clarity you have about the learning goals and about what you would accept as evidence of the students' understanding. 
 Since there are plenty of ways to demonstrate mastery of a topic, it is a matter of clarity, i.e. what you 
 accept as a demonstration of mastery and what not and why. 
@@ -40,13 +42,11 @@ because clear expectations can prevent organizational back and forth or grading 
 - Create checklists for students for assignments and units. 
 - Create an assessment rubric for yourself with a continuum between "expected" and "not sufficient". 
 
- 
-    
 Sharing the rubric with your students may help students reflect and assess their own output. 
 
 ## Resources 
-<a href=\"/static/tbcore/support_documents/Problem_statement_checklist.pdf\" target=\"_blank\">Example Problem Statement Checklist</a> \n
-<a href=\"/static/tbcore/support_documents/Evaluation of a Seminar Paper.pdf\" target=\"_blank\">Evaluation of a Seminar Paper (Jens Bonk-Wiltfang)</a> 
+- <a href=\"/static/tbcore/support_documents/Problem_statement_checklist.pdf\" target=\"_blank\">Example Problem Statement Checklist</a> \n
+- <a href=\"/static/tbcore/support_documents/Evaluation of a Seminar Paper.pdf\" target=\"_blank\">Grading Rubric: Evaluation of a Seminar Paper (Jens Bonk-Wiltfang)</a> 
 
 
 ## Reusable
