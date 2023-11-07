@@ -14,7 +14,7 @@ adobe-garamond-pro
 
 
 p, ul, li{
-    font-size: 18px;
+    font-size: 15px;
 
 
 }
@@ -59,8 +59,8 @@ p, ul, li{
 .body, body {
     margin: 0;
     background-color: rgba(209, 242, 249, 0.1);
-    font-family: adobe-garamond-pro, serif, Arial;
-
+    font-family: "Trebuchet MS", Tahoma, sans-serif;
+    /* font-family: adobe-garamond-pro, serif, Arial;*/
     font-weight: 400;
 
     font-style: normal;
@@ -135,7 +135,7 @@ footer {
 .btn-toolbox {
     background-color: #0A1F40;
     /*background-color: #0A1F40;*/
-    font-family: adobe-garamond-pro, serif, Arial;
+    font-family: "Trebuchet MS", Tahoma, sans-serif;
 
     font-weight: 400;
     font-style: normal;
@@ -464,7 +464,7 @@ address {
 ol,
 ul {
     padding-left: 2rem;
-    font-family: adobe-garamond-pro, serif, Arial;
+    font-family: "Trebuchet MS", Tahoma, sans-serif;
 }
 
 
