@@ -3,7 +3,7 @@
 /*!
 Toolbox
 
-
+adobe-garamond-pro
 /*
       www.OnlineWebFonts.Com
       You must credit the author Copy this link on your web
@@ -13,7 +13,11 @@ Toolbox
 */
 
 
+p, ul, li{
+    font-size: 18px;
 
+
+}
 
 .align-icon-vertically {
     display: flex;
@@ -64,7 +68,6 @@ Toolbox
 
 
 .adobe-garamond-p {
-    font-family: adobe-garamond-pro, serif, Arial;
 
     font-weight: 400;
 
