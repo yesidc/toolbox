@@ -11,6 +11,7 @@ For all courses (many universities require a syllabus for a course).
 
 ## Implementation steps 	
 Provide complete and exact information about: 
+
 1.	Course information: Meeting days, time and location, teaching mode, credits and prerequisites 
 2.	Instructor contact information: Sample text *“I prefer communication via e-mail and expect you to check your e-mails at https://sogo.uni-osnabrueck.de/SOGo/ and NOT the messages in Stud.IP. Please make sure that your stud.IP messages are forwarded to your email address, so you don't miss our course announcements."*
 3.	Course description and schedule
@@ -24,6 +25,7 @@ Provide complete and exact information about:
 
 The syllabus ties all links of your course together. **The more precise you list the prerequisites, learning goals, your teaching approach and the resources, the more clarity you and your students will have during the semester.** 
 The most time consuming yet worthwhile parts of writing a syllabus are: 
+
 - Clear learning goals (they help coming up with meaningful assignments) 
 - Clear assignment instructions and expectations
 - Teaching mode / learning scenario (when will you meet in person, what should students prepare, how can students participate online, etc.)
@@ -32,8 +34,8 @@ The most time consuming yet worthwhile parts of writing a syllabus are:
 - Use this  <a href="https://www.purdue.edu/innovativelearning/developing-courses/syllabus-template/" target="_blank">template from Purdue OWL</a> to fill in your course information. Use the prompts and complete the necessary sections including assignment instructions that clearly outline your expectations of the students' output.
 - Give complete and exact information by the start of the semester and always refer to the syllabus section in courseware/ PDF (provide both, a syllabus PDF and a courseware integration of the syllabus).
 - Consider adding some words about: 
-  - Handling incompletes or late work (less for interaction)
-  - Course logistics (less for interaction but organization) 
+    - Handling incompletes or late work (less for interaction)
+    - Course logistics (less for interaction but organization) 
 
 ## Resources
 - <a href="https://www.purdue.edu/innovativelearning/developing-courses/syllabus-template/" target="_blank">Purdue OWL Syllabus template</a>

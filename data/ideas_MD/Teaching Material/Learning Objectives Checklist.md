@@ -1,0 +1,67 @@
+# Learning Objectives Checklist
+## Brief Description 
+A well-phrased learning objective (LO) makes your expectations for student activity and results more transparent (Wunderlich, Szczyrba, 2016).
+In order to enable students to reach the learning and course goals effectively, **learning objectives should indicate which activities students need to engage in**. 
+By doing so, students acquire academic skills and engage in higher-order cognitive processes, allowing them to reach the learning goals (Wunderlich, Szczyrba, 2016; Ollermann, 2020).
+
+## Use Cases 
+Learning objectives provide clarity in every course or assignment and serve as: 
+
+- An introduction to start a unit. 
+- A recap at the end of each unit in form of a checklist. 
+- Checklists for assignments. 
+- Guidance for exam preparation. Students tend to focus on topics and content in exam preparation which stays on an abstract level. A learning objective checklist, can help them refocus on skills and makes knowledge tangible.
+
+## Technology
+- Use <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/courseware/" target="_blank">Courseware</a> and the <a href="https://hilfe.studip.de/help/5.0/de/Basis/CoursewareBloeckeBestaetigung">Courseware Confirmation Block</a> to create a checklist that students need to confirm. 
+- <a href="https://hilfe.studip.de/help/4.3/en/Vips/HomePage" target="_blank">VIPS</a> for self-tests. 
+
+## Implementation Steps 
+*Prerequisite: Learning Objectives have been defined.* --> see resources.
+
+1. Decide whether you want to define learning objectives per course or per unit. 
+2. Write down your learning objectives following the what-methode structure: 
+The students are able to ______________________ by using _______________________ . 
+3. Integrate the learning objectives with <a href="https://hilfe.studip.de/help/5.0/de/Basis/CoursewareBloeckeBestaetigung"> Confirmation Blocks</a> as checklists at the end of a unit in courseware. 
+
+## Teacher Effort 
+*MIDI: These tips are also suitable for current teaching situations, but require a little more preparation.*
+
+There is no big-time investment necessary, if learning objectives have been defined already. For an existing course in retrospect, you have to go through every unit and write the checklist. 
+
+## Recommendations
+The three key aspects of learning objectives are: 
+
+1. **What** 
+	- What **knowldege** should students gain? (Knowledge dimension) E.g. *"I want students to understand that _____________"* 
+	- What **activities** do they have to perform to acquire that knowledge? (Cognitive processes) 
+2. **Method**: Name tools or methods students will use to acquire the terminology/ principles/ etc. (libraries, models, formulas, maps, programs etc.) 
+3. **Purpose**: How do these topics benefit them, why should they learn it? (e.g. within the discipline or modules). 
+You can generate a list of learning objectives including skills and topics from all units with a summative purpose on the course (not unit) level. 
+
+The quality of the checklist depends on the clarity and accuracy of your learning objectives, i.e. the verb 
+*”understand“*should *NOT* appear in any of your learning objectives. 
+Everybody thinks of understanding in a different way, hence students cannot assess their understanding. 
+
+## Resources 
+- <a href="/static/tbcore/support_documents/Phrasing_Learning_Objectives_why_and_what.pdf" target="_blank">Phrasing Learning Objectives why and what</a>
+- <a href="/static/tbcore/support_documents/Learning_Objectives_Guideline.pdf" target="_blank">Learning Objectives Guideline</a>
+- <a href="https://www.celt.iastate.edu/wp-content/uploads/2015/09/RevisedBloomsHandout-1.pdf">Knowledge Dimension and Cognitive Processes Table</a> (Quick start)
+- <a href="https://citl.illinois.edu/citl-101/online-strategy-development/develop-or-revise-an-online-course/online-course-in-a-box/designing-your-course/bigpicture/defining-the-goal">Defining the Goal: Aims, Skills, and Outcomes</a>
+
+
+
+## References
+- <a href="https://bixld.com/Objectives/cognitiveobjs.html" target="_blank">Bixler, B. Key Action Verbs for the Cognitive Domain.</a>
+- <a href="https://citl.illinois.edu/citl-101/online-strategy-development/develop-or-revise-an-online-course/online-course-in-a-box/designing-your-course/bigpicture/defining-the-goal" target="_blank">Center for Innovation in Teaching and Learning, University of Illinois. Guidelines for Writing Learning Objectives.</a>
+- Krathwohl, D. R. (2002). A revision of Bloom's taxonomy: An overview. Theory into practice, 41(4), 212-218.
+- Ollermann, F. (2020). Kurzleitfaden zur Formulierung kompetenzorientierter Lernziele. Unpublished guideline. Universität Osnabrück.
+- <a href="https://www.th-koeln.de/mam/downloads/deutsch/hochschule/profil/lehre/steckbrief_learning_outcomes.pdf" target="_blank"> Wunderlich, A. (2016). Learning-Outcomes „lupenrein “formulieren. Hg. v. Technische Hochschule Köln.</a>
+
+[//]: <> (Reusable='yes') 
+
+[//]: <> (testimony= Sabrina?)
+
+
+----
+[//]: <> (task_complexity='2')
