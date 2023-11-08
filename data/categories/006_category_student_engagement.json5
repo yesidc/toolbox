@@ -10,7 +10,7 @@
 
   category_name: "Student Engagement",
     category_id: "006-category-se"  ,
-    description_1: "### What is Student Engagement? \n\n\"Student engagement refers to the degree of attention, curiosity, interest, optimism, and passion\nthat students show when they are learning or being taught, which extends to the level of motivation they \nhave to learn and progress in their education\" (<a href=\"https://www.edglossary.org/student-engagement/\">Student Engagement,</a> \nlast accesses 19.06.2023).",
+    description_1: "### What is Student Engagement? \n\n\"Student engagement refers to the degree of attention, curiosity, interest, optimism, and passion\nthat students show when they are learning or being taught, which extends to the level of motivation they \nhave to learn and progress in their education\" (<a href=\"https://www.edglossary.org/student-engagement/\">Student Engagement,</a> \nlast accessed 19.06.2023).",
     description_2:   "### Why does it matter? \n\nOnline students are not per se integrated in a study community and need explicit reminders and motivation to keep up with the course. \nCarefully crafted learning activities, interactions and a considerately designed learning environment support students to keep up with the course, when studying remotely can be isolating. \nMake sure you address information explicitly and communicate clearly, even though you would have otherwise relied on students “just knowing”. ",
   titles_accordion : "",
     content_accordion : "",

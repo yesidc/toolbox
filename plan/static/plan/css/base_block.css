@@ -3,7 +3,7 @@
 /*!
 Toolbox
 
-
+adobe-garamond-pro
 /*
       www.OnlineWebFonts.Com
       You must credit the author Copy this link on your web
@@ -12,8 +12,32 @@ Toolbox
       <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a>
 */
 
+.brand-font{
+  font-family: "Univers 67 Condensed Bold", "Arial Black";
+}
+
+.square-card {
+    width: 100%; /* Ensure the width takes the full space */
+    height: 0;
+    padding-top: 100%; /* Maintain 1:1 aspect ratio by setting the padding-top to be the same as width */
+    position: relative;
+    overflow: hidden;
+}
+
+.square-card .card-body {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
 
 
+p, ul, li{
+    font-size: 15px;
+
+
+}
 
 .align-icon-vertically {
     display: flex;
@@ -55,8 +79,8 @@ Toolbox
 .body, body {
     margin: 0;
     background-color: rgba(209, 242, 249, 0.1);
-    font-family: adobe-garamond-pro, serif, Arial;
-
+    font-family: "Trebuchet MS", Tahoma, sans-serif;
+    /* font-family: adobe-garamond-pro, serif, Arial;*/
     font-weight: 400;
 
     font-style: normal;
@@ -64,7 +88,6 @@ Toolbox
 
 
 .adobe-garamond-p {
-    font-family: adobe-garamond-pro, serif, Arial;
 
     font-weight: 400;
 
@@ -129,11 +152,14 @@ footer {
 
 }
 
+/*.btn:hover{*/
+/*    background-color: red;*/
+/*}*/
 .btn-toolbox {
     background-color: #0A1F40;
     /*background-color: #0A1F40;*/
-    font-family: adobe-garamond-pro, serif, Arial;
-
+    /*font-family: "Trebuchet MS", Tahoma, sans-serif;*/
+  font-family: "Univers 67 Condensed Bold", "Arial Black";
     font-weight: 400;
     font-style: normal;
 
@@ -461,11 +487,12 @@ address {
 ol,
 ul {
     padding-left: 2rem;
-    font-family: adobe-garamond-pro, serif, Arial;
+    font-family: "Trebuchet MS", Tahoma, sans-serif;
 }
 
 
 .btn:hover {
+
     color: #212529;
 }
 
@@ -482,7 +509,7 @@ ul {
 
 .btn-toolbox:hover {
     color: #fff;
-    background-color: #0b5ed7;
+    background-color: rgb(76,30,176);
     border-color: #0a58ca;
 }
 
