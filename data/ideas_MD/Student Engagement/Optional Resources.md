@@ -1,0 +1,47 @@
+# Optional Resources
+## Brief Description
+Add optional resources like blog or news articles about current applications, conference posts, 
+YouTube videos of interviews or experiments that ponder the topic, or even in-depth journal articles 
+which invite further exploration to your courseware. 
+Contents hosted on external webservers cannot be an obligatory part of course requirements due to potential 
+legal issues regarding data privacy. (For those of you who are interested, you might want to have a look at 
+the website of the 
+<a href="https://www.uni-osnabrueck.de/universitaet/organisation/zentrale-verwaltung/datenschutz-und-it-sicherheit/">data privacy officer</a>) 
+
+## Technology
+- <a href="https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckeEmbed">Embed Block</a>: With this block, image, audio, video, code (e.g., codepen codesandbox) content from various 
+platforms can be integrated into courseware.
+- <a href="https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckeIFrame">iFrame Block</a>: This block integrates external content from other websites.
+- <a href="https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckeLink">Link Block</a>: With the link block, links can be set to structural elements within courseware and 
+external links can be created.
+- <a href="https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckeDateiordner">File Folder</a>: a folder from the file area of the event can be integrated into courseware.
+- <a href="https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckePDF">PDF Preview Block</a>:  preview PDF files from the file area in courseware for reading and downloading 
+(PDFs will be rendered as images, hence screen readers won’t work) 
+
+## Implementation Steps 
+For learning how to use Courseware, please consult the  <a href="https://hilfe.studip.de/help/5.0/de/Basis/CoursewareVideotutorials" target="_blank">crash course</a>
+
+## Recommendations 
+Make it a habit to note down material that you encounter by chance. 
+
+## Teacher Effort 
+- If you have the additional material at hand and are familiar with courseware, embedding links takes about 5-15 min./ unit., depending on how you imbed the material in courseware.  
+- Check the  <a href="https://hilfe.studip.de/help/5.0/de/Basis/CoursewareVideotutorials" target="_blank">crash course</a> (quick!) which gives you all you need to know for handling courseware smoothly.
+
+## Use cases
+- Suitable for any material that is interesting but not substantial / essential to understand the topic or to pass the course 
+- Integrate (YouTube) videos with the video block, related websites, or podcast episodes about the unit/ to hear how others discuss the issue, etc. 
+
+## Reusable
+(Parts of) your courseware can be copy + pasted to other courses which are about similar topics. 
+
+---
+[//]: <> (Reusable='yes') 
+
+[//]: <> (testimony= Peter? Laura? Tobias?)
+
+
+[//]: <> (References='emtpy') 
+
+----
+[//]: <> (task_complexity='1')
