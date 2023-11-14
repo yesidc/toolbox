@@ -1,0 +1,49 @@
+# Encourage Further Exploration
+
+## Brief Description
+Encourage further exploration by adding optional resources like blog or news articles about current applications, conference posts, 
+YouTube videos of interviews or experiments that ponder the topic, or even in-depth journal articles 
+which invite further exploration to your Courseware material. 
+
+*Contents hosted on external webservers cannot be an obligatory part of course requirements due to potential 
+legal issues regarding data privacy (<a href="https://www.uni-osnabrueck.de/universitaet/organisation/zentrale-verwaltung/datenschutz-und-it-sicherheit/">data privacy officer</a>).*
+
+## Technology
+- <a href="https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckeEmbed">Embed Block</a>: With this block, image, audio, video, code (e.g., codepen codesandbox) content from various 
+platforms can be integrated into courseware.
+- <a href="https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckeIFrame">iFrame Block</a>: This block integrates external content from other websites.
+- <a href="https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckeLink">Link Block</a>: With the link block, links can be set to structural elements within courseware and 
+external links can be created.
+- <a href="https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckeDateiordner">File Folder</a>: A folder from the file area of the event can be integrated into courseware.
+- <a href="https://hilfe.studip.de/help/5.0/en/Basis/CoursewareBloeckePDF">PDF Preview Block</a>:  Preview PDF files from the file area in courseware for reading and downloading 
+(PDFs will be rendered as images, hence screen readers won’t work). 
+
+## Implementation Steps 
+For learning how to use Courseware, please consult <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/courseware/" target="_blank">Courseware Digitale Lehre @UOS</a>
+
+## Recommendations 
+Make it a habit to note down material that you encounter by chance. 
+
+## Teacher Effort 
+*MAXI: These tips require more intensive preparation and are more suitable as ideas for future semesters.*
+
+- If you have the additional material at hand and are familiar with Courseware, embedding links takes about 5-15 min./ unit., depending on how you embed the material in Courseware.  
+- Check <a href="https://digitale-lehre.virtuos.uni-osnabrueck.de/eintrag/courseware/" target="_blank">Courseware Digitale Lehre @UOS</a> which gives you all you need to know for handling courseware smoothly.
+
+## Use cases
+- Suitable for any material that is interesting but not substantial / essential to understand the topic or to pass the course 
+- Integrate (YouTube) videos with the video block, related websites, or podcast episodes about the unit/ to hear how others discuss the issue, etc. 
+
+## Reusable
+(Parts of) your courseware can be copy + pasted to other courses which are about similar topics. 
+
+---
+[//]: <> (Reusable='yes') 
+
+[//]: <> (testimony= Peter? Laura? Tobias?)
+
+
+[//]: <> (References='emtpy') 
+
+----
+[//]: <> (task_complexity='3')
