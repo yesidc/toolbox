@@ -5,7 +5,7 @@
 
 
 {% block idea_name_detail %}
-    <div class="col text-center mt-md-5">
+    <div class="col text-center {% if user.is_anonymous %}mt-md-5{% endif %}">
 
         <h3>{{ idea.idea_name }}</h3>
 
