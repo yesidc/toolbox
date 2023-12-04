@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import ldap
+from django_auth_ldap.config import LDAPSearch
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +29,36 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Application definition
+
+
+
+# LDAP
+
+AUTHENTICATION_BACKENDS = (
+    "django_auth_ldap.backend.LDAPBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
+AUTH_LDAP_SERVER_URI = "ldaps://ldap.uni-osnabrueck.de"
+
+# path to search users on LDAP Directory
+AUTH_LDAP_USER_SEARCH = LDAPSearch("OU=people,DC=uni-osnabrueck,DC=de",
+                                   ldap.SCOPE_SUBTREE,
+                                   "(uid=%(user)s)")
+
+# Mapping to populate Django User model attributes from LDAP directory (mapping from LDAP object -> Django user)
+AUTH_LDAP_USER_ATTR_MAP = {
+    "first_name": "givenName",
+    "last_name": "sn",
+    "email":"mail"
+}
+
+
+
+
+
+
+
 
 INSTALLED_APPS = [
 
