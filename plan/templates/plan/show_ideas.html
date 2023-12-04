@@ -15,19 +15,17 @@
                         <div class="col">
                             <div class="card card-rcorner shadow-lg square-card">
 
-                                <div class=" card-body card-color text-black d-flex flex-column ">
+                                <div class=" card-body card-color text-black d-flex flex-column " style="height: 100%">
 
-                                    <h4 class=" adobe-garamond-p text-center">{{ idea.idea_name }}</h4>
-
-                                    <div class="mt-auto align-self-end">
+                                    <h4 class=" adobe-garamond-p text-center mt-auto">{{ idea.idea_name }}</h4>
 
 
                                         <a
                                                 href="{% url 'idea_overview_detail' current_category idea.id %}"
-                                                class="btn btn-toolbox text-light  pb-1">Show more
+                                                class="btn btn-toolbox mt-auto align-self-end text-light  pb-1">Show more
                                         </a>
 
-                                    </div>
+
 
 
                                 </div>
