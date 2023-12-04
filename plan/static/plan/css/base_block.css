@@ -12,6 +12,13 @@ adobe-garamond-pro
       <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a>
 */
 
+.navbar-toolbox {
+  position: relative;
+  min-height: 30px;
+  margin-bottom: 18px;
+  border: 1px solid transparent;
+}
+
 .brand-font{
   font-family: "Univers 67 Condensed Bold", "Arial Black";
 }
@@ -38,6 +45,14 @@ p, ul, li{
 
 
 }
+/*Used on start page features and how to use toolbox cards*/
+.lead-costum{
+
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
 
 .align-icon-vertically {
     display: flex;
