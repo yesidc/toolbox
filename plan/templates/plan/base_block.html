@@ -42,7 +42,8 @@
                 <!-- Icon sidebar -->
 
                 <div class="col-2">
-                    <button class="btn btn-toolbox text-light menu-btn mt-md-4" id="sidebarToggle"><i class="bi bi-list"></i> My
+                    <button class="btn btn-toolbox text-light menu-btn mt-md-4" id="sidebarToggle"><i
+                            class="bi bi-list"></i> My
                         course plans
                     </button>
                 </div>
@@ -82,6 +83,7 @@
 
         <div class="d-flex" id="wrapper">
 
+        <div id="active-user-plan-data" data-plan="{{ active_user_plan }}" ></div>
             {#left navigation bar#}
 
             {% if user.is_authenticated %}
@@ -122,7 +124,8 @@
                                    id="plan-side-bar-{{ p.plan_name |add_hyphen }}"
                                    onclick="toggleButtonState(this.id)"
                                 >
-                                    <span class="adobe-garamond-p course-name-sidebar" id="edit-title-{{ p.pk }}" data-object-id="{{ p.pk }}">
+                                    <span class="adobe-garamond-p course-name-sidebar" id="edit-title-{{ p.pk }}"
+                                          data-object-id="{{ p.pk }}">
                                         {{ p.plan_name }}
                                     </span>
 
@@ -130,12 +133,11 @@
                                 </a>
                                 {#                                Edit plan name#}
                                 <div class="align-self-end align-self-stretch all-plan-sidebar align-icon-vertically">
-{##}
+                                    {##}
                                     <a href="#"
                                        data-object-id="{{ p.pk }}" data-object-name="{{ p.plan_name }}"
-                                        onclick="edit_plan_title('{{p.pk }}')"
+                                       onclick="edit_plan_title('{{ p.pk }}')"
                                     ><i class="bi bi-pencil-square"></i></a>
-
 
 
                                 </div>
@@ -165,13 +167,13 @@
                                             {#Checkmark#}
                                             <div class="mx-1">
 
-{#                                                <i class="bi bi-check-circle hide-check-icon "#}
-{#                                                   id="{{ c_url }}{{ p.pk }}"#}
-{#                                                ></i>#}
+                                                {#                                                <i class="bi bi-check-circle hide-check-icon "#}
+                                                {#                                                   id="{{ c_url }}{{ p.pk }}"#}
+                                                {#                                                ></i>#}
 
 
                                                 <div class="hide-check-icon"
-                                                 id="{{ c_url }}{{ p.pk }}">
+                                                     id="{{ c_url }}{{ p.pk }}">
 
 
                                                 </div>
@@ -231,14 +233,21 @@
     </div>
 
     {{ category_urls|json_script:"category-urls" }}
-    <script>
-
-        var active_user_plan = "{{ active_user_plan }}";
-        if (active_user_plan) {
-            localStorage.setItem(active_user_plan, "open");
-        }
-
-    </script>
+{#    <script>#}
+{##}
+{#        var active_user_plan = "{{ active_user_plan }}";#}
+{#        // iterate across all items in the local storage and set their value to 'closed'#}
+{#        for (var i = 0; i < localStorage.length; i++) {#}
+{#            var key = localStorage.key(i);#}
+{#            localStorage.setItem(key, "closed");#}
+{#        }#}
+{##}
+{#        // set the active user plan to 'open'#}
+{#        if (active_user_plan) {#}
+{#            localStorage.setItem(active_user_plan, "open");#}
+{#        }#}
+{##}
+{#    </script>#}
     <script src="{% static 'plan/js/menu_bar.js' %}"></script>
     <script src="{% static 'plan/js/edit_plan_title.js' %}"></script>
     <script src="{% static 'plan/js/keep_button_state.js' %}"></script>

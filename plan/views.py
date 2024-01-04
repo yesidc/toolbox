@@ -11,8 +11,6 @@ from tbcore.utils.create_pdf import render_pdf
 from django.core.exceptions import ObjectDoesNotExist
 
 
-
-
 def show_block(request, category_url, next_page):
     """
     Manages the content for all building blocks/categories.
@@ -43,10 +41,18 @@ def idea_overview_detail(request, category_name, idea_id):
     """
     Implements all the logic related to showing a teaching tool detailed view.
     """
-    context = {}
+
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
     # if the user created a note without login, the note content is cached in the session and loaded in the note form
     note_form = NotesForm()
+
+    context = {
+        'idea': current_idea,
+        'note_form': note_form,
+        'current_category': category_name,
+        'plan_form': PlanForm()
+    }
+
     if 'preserve_note' in request.GET:
         if 'note_content' in request.session:
             note_content = request.session['note_content']
@@ -69,12 +75,7 @@ def idea_overview_detail(request, category_name, idea_id):
         pcoi_obj = None
 
 
-    context = {
-        'idea': current_idea,
-        'note_form': note_form,
-        'current_category': category_name,
-        'plan_form': PlanForm()
-    }
+
 
     # handles all logic when user adds/updates idea or/and note from the idea_detail page
     if request.method == "POST":
@@ -109,7 +110,6 @@ def idea_overview_detail(request, category_name, idea_id):
 
 
     return render(request, 'plan/idea_detail.html', context=context)
-
 
 
 @login_required

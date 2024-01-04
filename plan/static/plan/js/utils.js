@@ -1,6 +1,9 @@
+// div that contains the categories names and the (nested) ideas for each category on the sidebar
 const plan_collapse = document.getElementsByClassName('plan-collapse')
+// anchor tag that contains the plan's name on the sidebar
 const all_plans = document.getElementsByClassName('all-plan-sidebar')
 const plan_name_dom = document.getElementById('plan_name_dom')
+// delete button on the sidebar (for each plan)
 const delete_plan_button = document.getElementsByClassName('delete-plan-button')
 
 function open_internal_link(internal_url) {
