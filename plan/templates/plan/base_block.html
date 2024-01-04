@@ -83,7 +83,7 @@
 
         <div class="d-flex" id="wrapper">
 
-        <div id="active-user-plan-data" data-plan="{{ active_user_plan }}" ></div>
+
             {#left navigation bar#}
 
             {% if user.is_authenticated %}
@@ -223,6 +223,7 @@
 
                 {% include "partials/messages.html" %}
 
+                 <div id="active-user-plan-data" data-plan="{{ active_user_plan }}" ></div>
                 {% block building_block_idea %}
 
                 {% endblock %}

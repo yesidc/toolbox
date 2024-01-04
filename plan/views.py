@@ -131,8 +131,11 @@ def checklist(request):
             'context_summary': c_s,
             'category_done_summary': c_d,
             'current_plan': current_user_plan,
+            'active_user_plan':'button-state-plan-side-bar-' + slugify(current_user_plan.plan_name), # used by localStorage to keep track of the active plan
             'plan_form': PlanForm()
         }
+
+
         if 'crate_pdf' in request.GET:
             context.update({'category_objects': Category.objects.values_list('category_name', 'category_url',
                                                                              'next_page')})
