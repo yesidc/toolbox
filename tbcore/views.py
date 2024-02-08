@@ -17,7 +17,7 @@ from plan.helpers import has_plan
 from .models import Plan
 from .tokens import account_activation_token
 from .forms import SignUpForm
-import toolbox.settings as settings
+from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
 
 
