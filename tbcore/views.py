@@ -71,6 +71,14 @@ class ToolBoxResetPasswordView(PasswordResetView,PasswordResetForm):
 
     def form_valid(self, form):
 
+        # if the user has an LDAP account, do not send a password reset email, but display a message
+        
+        ldap_email = ['uos.de', 'uni-osnabrueck.de']
+        domain = form.cleaned_data["email"].split('@')[1]
+        if domain in ldap_email:
+            messages.error(self.request, 'You are using an LDAP account. Please contact your system administrator to reset your password.')
+            return HttpResponseRedirect(reverse_lazy('login'))
+        
         self.send_email(email=form.cleaned_data["email"])
         return HttpResponseRedirect(self.get_success_url())
 
