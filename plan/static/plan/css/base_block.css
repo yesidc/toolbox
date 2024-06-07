@@ -12,6 +12,57 @@ adobe-garamond-pro
       <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a>
 */
 
+
+/* Style start_page.html */
+
+.showcase {
+    background-color: #ffffff;
+    padding: 50px 0;
+  }
+  .card-custom {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .card-title-custom {
+    color: #007bff;
+  }
+  .card-text-custom {
+    color: #333;
+  }
+  .building-blocks {
+    background-color: #f8f9fa;
+    padding: 50px 0;
+  }
+  .instructional-video {
+    background-color: #ffffff;
+    padding: 50px 0;
+  }
+  .what-we-do {
+    background-color: #f8f9fa;
+    padding: 50px 0;
+  }
+  .illusion-card {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .illusion-card h5 {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  .illusion-card p {
+    color: #333;
+  }
+
+
+  /* Style start_page.html */
+
+
 .custom-embed {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 aspect ratio */
