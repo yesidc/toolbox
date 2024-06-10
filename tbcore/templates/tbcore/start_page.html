@@ -39,7 +39,23 @@
       
       <section class="building-blocks">
         <div class="container">
-          <h2 class="text-right mb-5">Building Blocks</h2>
+            <h1 class="text-right">Building Blocks</h1>
+            <div class="row justify-content-between">
+                <div class="col-5">
+                    <p>This is a short explanation of what building blocks are: we provide invaluable tips for effective teaching, including classroom management strategies, 
+                        engaging lesson plans, and innovative teaching methods to enhance student learning.</p>
+                </div>
+                <div class="col-4">
+                    {% if not user.is_authenticated %}
+            
+                    <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
+                       class="btn btn-toolbox text-light px-md-5 py-md-3">Start Course Digitalization</a>
+       
+
+            {% endif %}
+                </div>
+              </div>
+
           <div class="row">
             <!-- Card Template -->
             <!-- Repeated 8 times -->
@@ -130,16 +146,15 @@
       
       <section class="instructional-video">
         <div class="container">
-          <h2 class="text-center mb-5">How to Use Our Website</h2>
+          <h1 class="text-center mb-5">How to Use Our Website</h1>
           <div class="row justify-content-center">
-            <div class="col-md-10 mx-auto text-center">
-
-
-                <div class="custom-embed">
+            <div class="col-md-8 mx-auto text-center">
+              <div class="custom-embed embed-responsive-16by9">
+             
                     <iframe  src="{% static '/tbcore/videos/toolbox_tutorial.mp4' %}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                
 
-
+              </div>
             </div>
           </div>
         </div>
@@ -147,26 +162,26 @@
       
       <section class="what-we-do">
         <div class="container">
-          <h2 class="text-center mb-5">What We Do</h2>
-          <div class="row">
+          <div class="row section-title">
+            <div class="col">
+              <h1>What We Do</h1>
+            </div>
+          </div>
+          <div class="row justify-content-center">
             <!-- Left Column: Teaching Tips -->
-            <div class="col-md-6 mb-4">
-              <div class="illusion-card">
-                <h5>Teaching Tips</h5>
-                <p>We provide invaluable tips for effective teaching, including classroom management strategies, engaging lesson plans, and innovative teaching methods to enhance student learning.</p>
-              </div>
+            <div class="col-md-3 offset-md-1 mb-4">
+              <h5 class="content-title">Teaching Tips</h5>
+              <p class="content-text">We provide invaluable tips for effective teaching, including classroom management strategies, engaging lesson plans, and innovative teaching methods to enhance student learning.</p>
             </div>
             <!-- Right Column: Hybrid Teaching -->
-            <div class="col-md-6 mb-4">
-              <div class="illusion-card">
-                <h5>Hybrid Teaching</h5>
-                <p>Explore our resources on hybrid teaching, which combines in-person and online instruction to offer flexible and effective teaching solutions that cater to diverse student needs.</p>
-              </div>
+            <div class="col-md-3 offset-md-1 mb-4">
+              <h5 class="content-title">Hybrid Teaching</h5>
+              <p class="content-text">Explore our resources on hybrid teaching, which combines in-person and online instruction to offer flexible and effective teaching solutions that cater to diverse student needs.</p>
             </div>
           </div>
         </div>
       </section>
-   
+      
 
     {% comment %} <section>
         <div class="d-flex justify-content-end">

@@ -14,7 +14,6 @@ adobe-garamond-pro
 
 
 /* Style start_page.html */
-
 .showcase {
     background-color: #ffffff;
     padding: 50px 0;
@@ -39,23 +38,35 @@ adobe-garamond-pro
     padding: 50px 0;
   }
   .what-we-do {
-    background-color: #f8f9fa;
+    background-color: #e9ecef;
     padding: 50px 0;
   }
-  .illusion-card {
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  .section-title {
+    text-align: center;
+    margin-bottom: 30px;
   }
-  .illusion-card h5 {
+  .section-title h2 {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  .section-title h2:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 3px;
+    background-color: #007bff;
+  }
+  .content-title {
     color: #007bff;
     border-bottom: 2px solid #007bff;
     padding-bottom: 10px;
     margin-bottom: 20px;
   }
-  .illusion-card p {
+  .content-text {
     color: #333;
   }
 
