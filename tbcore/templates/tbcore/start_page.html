@@ -1,424 +1,151 @@
 {% extends 'tbcore/base_core.html' %}
 
-
 {% load bootstrap5 %}
 
 {% block specific_css %}
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
-    <link rel="stylesheet" href="{% static 'tbcore/css/toolbox_fonts.css' %}">
+{% load static %}
+<link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
+<link rel="stylesheet" href="{% static 'tbcore/css/toolbox_fonts.css' %}">
+<style>
+    .card-custom {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    .card-img-top {
+        width: 100%;
+        height: 200px; /* Set a fixed height for all images */
+        object-fit: cover; /* Ensure the image covers the entire area */
+    }
+    .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .card-body .btn-card-block {
+        align-self: flex-end;
+    }
 
-
+    .card-body .btn-card-showcase {
+        align-self: flex-start;
+    }
+    .showcase .card-img-top {
+        height: auto; /* Allow the image to be taller */
+    }
+</style>
 {% endblock %}
 
 {% block content %}
 
-    {#Showcase#}
-    <section class="showcase">
-        <div class="container">
-          <div class="row align-items-center">
+{# Showcase #}
+<section class="showcase">
+    <div class="container">
+        <div class="row align-items-center">
             <!-- Left Card with Text -->
             <div class="col-md-6">
-              <div class="card mb-4 card-custom">
-                <div class="card-body">
-                  <h5 class="card-title card-title-custom">Welcome to Our Educational Resources</h5>
-                  <p class="card-text card-text-custom">We provide a wide range of materials to assist teachers in preparing for their classes. From lesson plans to interactive activities, we have everything you need to make your teaching experience more effective and enjoyable.</p>
-                  <a href="#" class="btn btn-primary">Learn More</a>
+                <div class="card mb-4 card-custom">
+                    <div class="card-body">
+                        <h1 class="card-title card-title-custom">Welcome to Our Educational Resources</h1>
+                        <p class="card-text card-text-custom mb-md-5">
+                            On this website you will find tips and tricks for hybrid teaching. 
+                            With the toolbox, we would like to support you in efficiently informing yourself about various teaching tips that you can implement both in presence and hybrid. We have put together the appropriate (stud.IP) tools, step-by-step handouts, experiences and an estimate of the effort involved. Additionally, you will find links to additional material and academic articles for further reading on some teaching tips.
+                        </p>
+                        {% if not user.is_authenticated %}
+                        <a href="{% url 'show_block' 'human-touch' 'teaching-material' %}" class="btn btn-toolbox btn-card-showcase text-light  py-md-3">Start Course Digitalization</a>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                        <div>
+                            <a href="{% url 'show_block' 'human-touch' 'teaching-material' %}" class="btn btn-toolbox btn-card-showcase text-light px-md-3 py-md-3">Keep working on my courses</a>
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
-              </div>
             </div>
             <!-- Right Card with Image -->
             <div class="col-md-6">
-              <div class="card mb-4 card-custom">
-                <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="Educational Image">
-              </div>
+                <div class="card mb-4 card-custom">
+                    <img src={% static '/tbcore/images/start_page/human_touch.jpg' %} class="card-img-top" alt="Educational Image">
+                </div>
             </div>
-          </div>
         </div>
-      </section>
-      
-      <section class="building-blocks">
-        <div class="container">
-            <h1 class="text-right">Building Blocks</h1>
-            <div class="row justify-content-between">
-                <div class="col-5">
-                    <p>This is a short explanation of what building blocks are: we provide invaluable tips for effective teaching, including classroom management strategies, 
-                        engaging lesson plans, and innovative teaching methods to enhance student learning.</p>
-                </div>
-                <div class="col-4">
-                    {% if not user.is_authenticated %}
-            
-                    <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
-                       class="btn btn-toolbox text-light px-md-5 py-md-3">Start Course Digitalization</a>
-       
+    </div>
+</section>
 
-            {% endif %}
-                </div>
-              </div>
+<section class="building-blocks">
+    <div class="container">
+        <h1 class="text-right">Eight Didactical Building Blocks</h1>
+        <div class="row justify-content-between">
+            <div class="col-md-8">
+                <p>
+                    These 8 building blocks cover didactically important elements of a hybrid course and form the basis of the teaching tips. Each teaching tip is assigned to one or more didactical building block.
+                    Hence, you can use the didactical building blocks as a rough checklist or grid to obtain practical tips for the course elements of hybrid teaching that are relevant to you. Using the details of the teaching tips, you can then assess the added value of the methods for your class, and the effort and preparation time of your (hybrid) course more precisely.
+                </p>
+            </div>
+            {% comment %} <div class="col-md-4">
+                {% if not user.is_authenticated %}
+                <a href="{% url 'show_block' 'human-touch' 'teaching-material' %}" class="btn btn-toolbox text-light px-md-5 py-md-3">Start Course Digitalization</a>
+                {% endif %}
+            </div> {% endcomment %}
+        </div>
 
-          <div class="row">
+        <div class="row">
             <!-- Card Template -->
             <!-- Repeated 8 times -->
-            <div class="col-md-3 mb-4">
-              <div class="card card-custom">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Block Image">
-                <div class="card-body">
-                  <h5 class="card-title card-title-custom">Card Title</h5>
-                  <p class="card-text card-text-custom">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+            {% for description in start_description %}
+            <div class="col-md-3 mb-4 d-flex">
+                <div class="card card-custom">
+                    <img src="{% static description.3 %}" class="card-img-top" alt="Block Image">
+                    <div class="card-body">
+                        <h5 class="card-title card-title-custom">{{ description.0 }}</h5>
+                        <p class="card-text card-text-custom">{{ description.4 }}</p>
+                        <a href="{% url 'show_block' description.1 description.2 %}" class="btn btn-toolbox text-light btn-card-block">More</a>
+                    </div>
                 </div>
-              </div>
             </div>
-            <!-- Repeat the above Card Template 7 more times -->
-            <div class="col-md-3 mb-4">
-              <div class="card card-custom">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Block Image">
-                <div class="card-body">
-                  <h5 class="card-title card-title-custom">Card Title</h5>
-                  <p class="card-text card-text-custom">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 mb-4">
-              <div class="card card-custom">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Block Image">
-                <div class="card-body">
-                  <h5 class="card-title card-title-custom">Card Title</h5>
-                  <p class="card-text card-text-custom">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 mb-4">
-              <div class="card card-custom">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Block Image">
-                <div class="card-body">
-                  <h5 class="card-title card-title-custom">Card Title</h5>
-                  <p class="card-text card-text-custom">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 mb-4">
-              <div class="card card-custom">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Block Image">
-                <div class="card-body">
-                  <h5 class="card-title card-title-custom">Card Title</h5>
-                  <p class="card-text card-text-custom">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 mb-4">
-              <div class="card card-custom">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Block Image">
-                <div class="card-body">
-                  <h5 class="card-title card-title-custom">Card Title</h5>
-                  <p class="card-text card-text-custom">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 mb-4">
-              <div class="card card-custom">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Block Image">
-                <div class="card-body">
-                  <h5 class="card-title card-title-custom">Card Title</h5>
-                  <p class="card-text card-text-custom">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 mb-4">
-              <div class="card card-custom">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Block Image">
-                <div class="card-body">
-                  <h5 class="card-title card-title-custom">Card Title</h5>
-                  <p class="card-text card-text-custom">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-          </div>
+            {% endfor %}
         </div>
-      </section>
-      
-      <section class="instructional-video">
-        <div class="container">
-          <h1 class="text-center mb-5">How to Use Our Website</h1>
-          <div class="row justify-content-center">
-            <div class="col-md-8 mx-auto text-center">
-              <div class="custom-embed embed-responsive-16by9">
-             
-                    <iframe  src="{% static '/tbcore/videos/toolbox_tutorial.mp4' %}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                
+    </div>
+</section>
 
-              </div>
+<section class="instructional-video">
+    <div class="container">
+        <h1 class="text-center mb-5">How to Use Our Website</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-8 mx-auto text-center">
+                <div class="custom-embed embed-responsive-16by9">
+                    <iframe src="{% static '/tbcore/videos/toolbox_tutorial.mp4' %}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
-      
-      <section class="what-we-do">
-        <div class="container">
-          <div class="row section-title">
+    </div>
+</section>
+
+<section class="what-we-do">
+    <div class="container">
+        <div class="row section-title">
             <div class="col">
-              <h1>What We Do</h1>
+                <h1>What We Do</h1>
             </div>
-          </div>
-          <div class="row justify-content-center">
+        </div>
+        <div class="row justify-content-center">
             <!-- Left Column: Teaching Tips -->
-            <div class="col-md-3 offset-md-1 mb-4">
-              <h5 class="content-title">Teaching Tips</h5>
-              <p class="content-text">We provide invaluable tips for effective teaching, including classroom management strategies, engaging lesson plans, and innovative teaching methods to enhance student learning.</p>
+            <div class="col-md-4 offset-md-1 mb-4">
+                <h3 class="content-title">Why hybrid teaching in the first place?</h3>
+                <p class="content-text">
+                    With hybrid teaching, you can meet the various requirements that a diverse student body brings with it and thus make it easier to combine studying and family life, for example. In view of the different learning habits of students and the limited housing market in Osnabrück or visa processing times, it makes sense to be prepared for hybrid formats in order to be able to react flexibly in new teaching-learning settings.
+                </p>
             </div>
             <!-- Right Column: Hybrid Teaching -->
             <div class="col-md-3 offset-md-1 mb-4">
-              <h5 class="content-title">Hybrid Teaching</h5>
-              <p class="content-text">Explore our resources on hybrid teaching, which combines in-person and online instruction to offer flexible and effective teaching solutions that cater to diverse student needs.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-
-    {% comment %} <section>
-        <div class="d-flex justify-content-end">
-
-
-            <div>Font made from <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a> is licensed by CC BY 3.0
-            </div>
-
-
-        </div>
-    </section>
- {% endcomment %}
-
-
-      
-     
-
-
-    {% comment %} <section class=" text-dark" style="background:linear-gradient(180deg, #4C1EB0 0%, rgba(76, 30, 176, 0.00) 100%);">
-
-        <div class="row">
-
-            <div class="col-md-10 mx-auto">
-
-
-                <div class="container-fluid image-banner mx-md-5 mx-sm-2 px-md-2"
-                     style='background-image: url("{% static '/tbcore/images/toolbox_banner.PNG' %}")'
-                >
-
-                    <div class="row ">
-
-                        <div class="row">
-                            <h1 class="mt-md-3 pt-md-5  heading-banner text-white">Teaching Toolbox</h1>
-                            <h1 class="  heading-banner text-white">Your Guide for Integrating Online Learning</h1>
-
-                        </div>
-
-                        <div class="row my-5">
-                            <br>
-                            <div class="col-md-8 my-5">
-                                <div class="card text-dark mb-3"
-                                     style="max-width: 25rem;background-color: rgb(255,199,69)">
-                                    <div class="card-body">
-                                        {#                                        <h3 class="card-title">Plan your course:</h3>#}
-
-                                        <ul>
-                                            <li class="lead">Find teaching tips and tools</li>
-
-                                            <li class="lead">Take notes for putting things into practice</li>
-
-                                            <li class="lead">Assess remaining workload
-                                            </li>
-                                            <li class="lead">
-                                                Get a checklist for course preparation
-                                            </li>
-
-                                        </ul>
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="row">
-
-                            {% block create_course %}
-                                <div class="d-flex ">
-
-                                    {% if  user.is_authenticated %}
-                                        <div>
-                                            <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
-                                               class="btn btn-toolbox text-light mx-1 px-2">Keep working on my
-                                                courses</a>
-                                        </div>
-
-
-
-                                    {% endif %}
-
-                                </div>
-                            {% endblock %}
-                        </div>
-                    </div>
-                </div>
+                <h3 class="content-title">Digitale Lehre @ UOS</h3>
+                <p class="content-text">
+                    More teaching tips, events about trending topics in education and in AI as well updates about technology supported by VirtUOS are published on the  <a href='https://digitale-lehre.virtuos.uni-osnabrueck.de/' target="_blank"> Digitale Lehre @ UOS</a> website.
+                    Have a look at the events or get in touch in our Lehrkolleg colloquium, Ideenpool or Praxisdialog.
+                </p>
             </div>
         </div>
-    </section> {% endcomment %}
-
-    {#    Features and Instructions#}
-
-
-
-    {% comment %} <section>
-
-
-        <div class="row">
-
-            <div class="col-md-10 mx-auto">
-
-                <div class="row">
-                    <div class="col-md-5 mx-auto  mb-4 ">
-                        <div class="card h-100 shadow-md" style="background-color: rgba(71, 133, 255, 0.2);">
-                            <div class="card-body">
-                                <h4 class="card-title mx-md-3">Features</h4>
-                                <p class="card-text">
-
-                                <ul class="mx-md-2 " style="list-style-type: none;">
-                                    <li class="lead-costum"><i class="bi bi-check-circle"></i> Best practices and
-                                        recommendations from
-                                        experienced teachers
-                                    </li>
-                                    <li class="lead-costum"><i class="bi bi-check-circle "></i> Estimation of time
-                                        and/or content preparation
-                                        effort per teaching tip
-                                    </li>
-                                    <li class="lead-costum"><i class="bi bi-check-circle "></i> Only GDPR-compliant
-                                        tools
-                                    </li>
-                                    <li class="lead-costum"><i class="bi bi-check-circle "></i> Teaching tips and tools
-                                        complement Stud.IP
-                                        course
-                                        creation
-                                    </li>
-                                    <li class="lead-costum"><i class="bi bi-check-circle"></i> Technical and Educational
-                                        Support
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-5  mx-auto mb-4  ">
-                        <div class="card h-100 shadow-md" style="background-color: rgba(71, 133, 255, 0.2);">
-                            <div class="card-body">
-                                <h4 class="card-title mx-md-3">How to use the Toolbox </h4>
-                                <p class="card-text">
-                                <ol class="mx-md-4">
-                                    <li class="lead-costum">
-                                        Create a plan for the online version of your course.
-                                    </li>
-
-                                    <li class="lead-costum">
-                                        Walk through 8 essential elements of online courses.
-                                    </li>
-
-                                    <li class="lead-costum">
-                                        Choose from 4 teaching tips per course element.
-                                    </li>
-
-                                    <li class="lead-costum">
-                                        Get a checklist for digitalizing your course.
-                                    </li>
-
-                                    <li class="lead-costum">
-                                        Keep the overview of course elements you still need to address.
-                                    </li>
-
-
-                                </ol>
-
-
-                                </p>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-
-    </section>
-
-
-
-    {#    Start Button#}
-    <section>
-        <div class="row my-md-5">
-
-            <div class="col-md-6 mx-auto text-center">
-
-
-                {% if not user.is_authenticated %}
-                    <div class=" row my-md-5">
-                        <a href="{% url 'show_block' "human-touch" "teaching-material" %}"
-                           class="btn btn-toolbox text-light px-md-5 py-md-3">Start Course Digitalization</a>
-                    </div>
-
-                {% endif %}
-            </div>
-
-        </div>
-    </section> {% endcomment %}
-
-    {#    Video  Placeholder image#}
-
-
-    {% comment %} <section class="pb-5">
-
-    <div class="container">
-
-         <div class="row">
-
-
-             <div class="col-md-10 mx-auto text-center">
-
-
-                 <div class="custom-embed">
-                     <iframe  src="{% static '/tbcore/videos/toolbox_tutorial.mp4' %}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                 </div>
-
-
-             </div>
-
-
-         </div>
-
-
-
     </div>
-
-    </section> {% endcomment %}
-
-
-
-    
-
-
-
+</section>
 
 {% endblock content %}

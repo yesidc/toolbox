@@ -15,7 +15,9 @@
   titles_accordion : "",
     content_accordion : "",
     references : "no-data",
-
     next_page : "assessment",
+    image: "/tbcore/images/start_page/student_engagement.jpg",
+    description_start_page:"How can we engage students? Student engagement is reflected in behavior, emotional affect, and cognitive engagement: participation in class and discussions; positive relationships with classmates; interest and enjoyment in learning; and is also reflected in the use of effort and strategies to promote deeper understanding and critical thinking.",
+        
 
 }

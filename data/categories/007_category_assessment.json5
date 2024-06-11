@@ -16,5 +16,8 @@
   references : "no-data",
 
     next_page : "rules-regulations",
+    image: "/tbcore/images/start_page/assessment.jpg",
+    description_start_page:"Tips on online assessments, appropriate assessment items and developing assessment standards that are consistent and fair for all learners, regardless of the learning format.",
+        
 
 }

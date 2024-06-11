@@ -17,5 +17,8 @@
   references : "no-data",
 
     next_page : "student-engagement",
+    image: "/tbcore/images/start_page/assignments.jpg",
+        description_start_page:"How can tasks be optimized and what information is needed to check and deepen the understanding and application of what has been learned? ",
+        
 
 }

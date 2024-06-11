@@ -17,5 +17,8 @@
     references : "- Anderson, Terry; Rourke, Liam; Garrison, Randy & Archer, Walter (2001). ASSESSING TEACHING PRESENCE IN A COMPUTER CONFERENCING CONTEXT. Online Learning, 5 (2), 1-17. doi: 10.24059/olj.v5i2.1875.\n",
 
     next_page : "assignments",
+    image: "/tbcore/images/start_page/discussion.jpg",
+    description_start_page:"What interactive methods are there for teachers and learners to talk about a specific topic, exchange opinions and weigh up arguments? After all, this collaborative process encourages the exploration of complex topics from different perspectives, articulating and clarifying thoughts, communicating ideas clearly and convincingly and actively participating.",
+       
 
 }

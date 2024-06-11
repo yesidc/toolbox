@@ -16,5 +16,8 @@
    references : "",
 
     next_page : "organization",
+    image: "/tbcore/images/start_page/teaching_material.jpg",
+    description_start_page:"Teaching material refers to resources and tools used by educators to facilitate learning. This includes textbooks, worksheets, presentations, videos, and educational software, all designed to enhance understanding and provide a structure for learning. ",
+       
 
 }
