@@ -19,12 +19,14 @@ from .tokens import account_activation_token
 from .forms import SignUpForm
 from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
-
+from tbcore.models import Category
 
 
 def start_page(request):
-    context = { }
-    return render(request, 'tbcore/start_page.html', context=context)
+    # [('Human Touch', 'human-touch', 'teaching-material', '/tbcore/images/start_page/human_touch.jpg', "Actually, 'Human touch...fort, support, and a welcoming atmosphere.'),...]
+    start_description = Category.objects.all().values_list('category_name','category_url','next_page', 'image','description_start_page' )
+    
+    return render(request, 'tbcore/start_page.html', context=locals())
 
 
 class ToolBoxResetPasswordView(PasswordResetView,PasswordResetForm):
@@ -76,7 +78,7 @@ class ToolBoxResetPasswordView(PasswordResetView,PasswordResetForm):
         ldap_email = ['uos.de', 'uni-osnabrueck.de']
         domain = form.cleaned_data["email"].split('@')[1]
         if domain in ldap_email:
-            messages.error(self.request, 'You are using an LDAP account. Please contact your system administrator to reset your password.')
+            messages.error(self.request, 'You are using an LDAP account. Please contact your system administrator to reset your LDAP password.')
             return HttpResponseRedirect(reverse_lazy('login'))
         
         self.send_email(email=form.cleaned_data["email"])

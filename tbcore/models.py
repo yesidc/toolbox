@@ -93,7 +93,7 @@ class Plan(models.Model):
 
 class Category(models.Model):
     category_name = models.CharField(
-        max_length=100)  # there are a total of 8 categories: human touch, organization etc.
+    max_length=100)  # there are a total of 8 categories: human touch, organization etc.
     category_id = models.SlugField(max_length=70, unique=True)  # internal id
     description_1 = models.TextField()
     description_2 = models.TextField(null=True)
@@ -102,6 +102,8 @@ class Category(models.Model):
     references = models.TextField(null=True)
     category_url = models.SlugField(blank=True, null=True)
     next_page = models.SlugField(null=True)  # specify which building block/category must be shown after
+    image = models.TextField(null=True)
+    description_start_page = models.TextField(null=True)
 
     def __str__(self):
         return self.category_name
@@ -257,3 +259,20 @@ class PlanCategoryOnlineIdea(models.Model):
                                                            data_json5)
 
         return True
+
+
+class CategoryOnlineIdea(models.Model):
+    """
+    Contains the relationship between a category and an idea.
+"""
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    idea = models.ForeignKey(OnlineIdea, on_delete=models.CASCADE, null=True,)
+    
+    @staticmethod
+    def populate_category_idea():
+        """
+        Populates the CategoryOnlineIdea table with the correct information.
+        """
+        for idea in OnlineIdea.objects.all():
+           for category in idea.category.all():
+               CategoryOnlineIdea.objects.get_or_create(category=category, idea=idea)
