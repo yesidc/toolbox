@@ -165,41 +165,88 @@ def idea_overview_detail(request, category_name, idea_id):
     return render(request, 'plan/idea_detail.html', context=context)
 
 
-@login_required
+
 def checklist(request):
     """
     Creates a summary that comprises all the teaching tools selected by the user.
     """
 
-    # if request.session['current_user_plan'] is not None:
-    if 'current_user_plan' in request.session:
-        try:
-            current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
-        except ObjectDoesNotExist:
-            messages.add_message(request, messages.INFO, 'First add a plan to be able to see the checklist page')
-            return redirect(request.META.get('HTTP_REFERER'))
 
-        c_s, c_d = context_summary(request.user, current_user_plan)
-        context = {
-            'context_summary': c_s,
-            'category_done_summary': c_d,
-            'current_plan': current_user_plan,
-            'active_user_plan':'button-state-plan-side-bar-' + slugify(current_user_plan.plan_name), # used by localStorage to keep track of the active plan
-            'plan_form': PlanForm()
-        }
-
-
-        if 'crate_pdf' in request.GET:
-            context.update({'category_objects': Category.objects.values_list('category_name', 'category_url',
-                                                                             'next_page')})
-
-            pdf = render_pdf('plan/checklist_pdf.html', context)
-            return HttpResponse(pdf, content_type='application/pdf')
-
+    if not request.user.is_authenticated:
+          #List whose elements are tuples with the following structure: [('teaching-material', [(...), (...), (...)]),]), ('human-touch', [...])]
+        # where [idea_name, pcoi_instance_id,pcoi_instance_note,pcoi_instance_complexity]
+        # TODO pcoi_instance_id --> use to delete the pcoi object from checklist page. Also come up with a way to delete the object from the session
+        # TODO pcoi_instance_id --> FIX, now it is just a placeholder
+        # Progress = namedtuple('Progress', ['category', 'idea_name', 'note', 'complexity'])
+        # category online idea object id
+        from collections import defaultdict
+        summary_dict = defaultdict(list)
+        
+        
+        category_idea_checklist =[]
+        category_done_summary = []
+        # check if user has made any selection
+        if 'user_progress' in request.session:
+            for key, value in request.session['user_progress'].items():
+                coi_instance_id = CategoryOnlineIdea.objects.get(pk=int(key))
+                # value = ['category', 'idea_name', 'note', 'complexity']
+                if value[0] not in summary_dict.keys():
+                    summary_dict[value[0]].append((value[1], coi_instance_id.pk, value[2], value[3]))
+                else:
+                    summary_dict[value[0]].append((value[1], coi_instance_id.pk, value[2], value[3]))
+                    
+            for key, value in summary_dict.items():
+                category_idea_checklist.append((key, value))
+                category_done_summary.append(key)
+            
+            context = {
+                    'context_summary': category_idea_checklist,
+                    'category_done_summary': category_done_summary,
+                    'plan_form': PlanForm()
+                }
         else:
+            messages.add_message(request, messages.INFO, 'First select a teaching tool to be able to see the checklist page')
+            return redirect(request.META.get('HTTP_REFERER'))
+        
+        
 
-            return render(request, 'plan/checklist.html', context=context)
+        
+        return render(request, 'plan/checklist.html', context=context)
+    
+    elif request.user.is_authenticated:
+   
+        # if request.session['current_user_plan'] is not None:
+        if 'current_user_plan' in request.session:
+            try:
+                current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
+            except ObjectDoesNotExist:
+                messages.add_message(request, messages.INFO, 'First add a plan to be able to see the checklist page')
+                return redirect(request.META.get('HTTP_REFERER'))
+
+            c_s, c_d = context_summary(request.user, current_user_plan)
+            context = {
+                'context_summary': c_s,
+                'category_done_summary': c_d,
+                'current_plan': current_user_plan,
+                'active_user_plan':'button-state-plan-side-bar-' + slugify(current_user_plan.plan_name), # used by localStorage to keep track of the active plan
+                'plan_form': PlanForm()
+            }
+
+
+            if 'crate_pdf' in request.GET:
+                context.update({'category_objects': Category.objects.values_list('category_name', 'category_url',
+                                                                                'next_page')})
+
+                pdf = render_pdf('plan/checklist_pdf.html', context)
+                return HttpResponse(pdf, content_type='application/pdf')
+
+            else:
+
+                return render(request, 'plan/checklist.html', context=context)
+        else:
+            return redirect(request.META.get('HTTP_REFERER'))
     else:
+        messages.add_message(request, messages.INFO, 'First select a teaching tool to be able to see the checklist page')
         return redirect(request.META.get('HTTP_REFERER'))
 
 # todo checklist page should be reload when user edits the plan title
@@ -207,22 +254,37 @@ def update_note_checklist(request):
     """
     Updates the note for a given teaching tool from the checklist page.
     """
-    poci_obj = get_object_or_404(PlanCategoryOnlineIdea, pk=request.POST['pcoiId'])
-    if request.method == 'POST':
-        form = NotesForm(request.POST)
-        if form.is_valid():
-            poci_obj.notes = form.cleaned_data['note_content']
-            poci_obj.save()
+    
+    if not request.user.is_authenticated:
+        # update note content in the session
+        request.session['user_progress'][request.GET.get('pcoi_id')][2] = request.POST['note_content']
+        request.session.modified = True
+        return JsonResponse({'success': True,
+                                    'note_content': 'Note updated',})
+    
+    
+    elif request.user.is_authenticated:
+    
+    
+        poci_obj = get_object_or_404(PlanCategoryOnlineIdea, pk=request.POST['pcoiId'])
+        if request.method == 'POST':
+            form = NotesForm(request.POST)
+            if form.is_valid():
+                poci_obj.notes = form.cleaned_data['note_content']
+                poci_obj.save()
 
-        # poci_obj.notes = request.POST['note_content']
-        # poci_obj.save()
-            return JsonResponse({'success': True,
-                                 'note_content': poci_obj.notes,})
+            # poci_obj.notes = request.POST['note_content']
+            # poci_obj.save()
+                return JsonResponse({'success': True,
+                                    'note_content': poci_obj.notes,})
+            else:
+                messages.add_message(request, messages.INFO, 'Something went wrong, please try again')
+                return JsonResponse({'success': False})
         else:
-            messages.add_message(request, messages.INFO, 'Something went wrong, please try again')
-            return JsonResponse({'success': False})
+            return render(request, 'plan/checklist.html')
     else:
-        return render(request, 'plan/checklist.html')
+        messages.add_message(request, messages.INFO, 'Your notes could not be saved. Please try again.')
+        return redirect(request.META.get('HTTP_REFERER'))
 
 
 def checklist_cache(request):
@@ -267,7 +329,7 @@ def checklist_cache(request):
     
 
     
-    return render(request, 'plan/checklist_cache.html', context=context)
+    return render(request, 'plan/checklist.html', context=context)
    
 
 @login_required

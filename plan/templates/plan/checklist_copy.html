@@ -1,0 +1,244 @@
+{% extends "plan/base_block.html" %}
+{% load toolbox_custom_tags %}
+
+
+{% block specific_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
+{% endblock %}
+
+{% block plan_name_checklist %}
+
+    <div class="col text-center">
+        <h3 class="text-center my-0 py-md-4">Checklist: {{ current_plan.plan_name }}</h3>
+    </div>
+
+{% endblock %}
+
+
+
+{% block building_block_idea %}
+
+    <section>
+
+
+        <table class="table table-hover align-middle table-responsive mt-3">
+            <thead>
+            <tr>
+
+                <th scope="col">Done</th>
+                <th scope="col"></th>
+                <th scope="col">Teaching Tip</th>
+                <th scope="col">Note</th>
+                <th scope="col">Complexity</th>
+                <th scope="col" class="mx-0">Delete</th>
+
+            </tr>
+            </thead>
+
+
+            {% for c_done, idea_ins in context_summary %}
+
+                <tr class="tr-main-table" id="{{ c_done|add_hyphen }}">
+
+                    <td><input type="checkbox" class="checklist_checkbox"></td>
+
+                    <td class="px-md-3">{{ c_done }}</td>
+
+
+                    {#     ideas #}
+
+                    <td>
+                        <table class="nested-table-checklist">
+
+                            {% for idea_name, pcoi_instance_id,_,_ in idea_ins %}
+                                <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows">
+
+
+                                    <td>{{ idea_name }}</td>
+
+
+                                </tr>
+                            {% endfor %}
+
+
+                        </table>
+
+
+                    </td>
+
+
+                    {#        notes#}
+
+                    <td>
+                        <table class="nested-table-checklist">
+                            {% for idea_name, pcoi_instance_id, pcoi_instance_note,_ in idea_ins %}
+                                <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows row-note">
+                                    <td>
+                                        {#                                        <p id="pcoi-note-id-{{ pcoi_instance_id }}"#}
+                                        {#                                           onclick="editNote('{{ pcoi_instance_id }}')"> {{ pcoi_instance_note }} </p>#}
+                                        <div class="edit-note-checklist" tabindex="0">
+
+                                            <form id="note-form-{{ pcoi_instance_id }}"
+                                                  method="post"
+
+                                            >
+                                                {% csrf_token %}
+                                                <div class="row">
+                                                    <i class="bi bi-pencil-square"></i>
+
+                                                </div>
+
+                                                <div class="row">
+
+                                                           <textarea id="note-input-{{ pcoi_instance_id }}"
+                                                                     class="text-area-note no-border"
+                                                                     style="width: 500px; height: auto; overflow: hidden; resize: none;"
+
+                                                                     onclick="editNote('{{ pcoi_instance_id }}')"
+                                                                     oninput="autoResize(this.id)"
+                                                           >
+                                                {{ pcoi_instance_note }}
+
+                                            </textarea>
+
+
+                                                </div>
+
+
+                                                <div class="d-flex">
+
+                                                    <button type="submit"
+                                                            class="btn btn-toolbox text-light px-md-3 px-sm-2 my-1 save-note-button hidden"
+                                                            aria-current="page"
+
+                                                            id="note-submit-{{ pcoi_instance_id }}"
+                                                            onclick="saveNote('{{ pcoi_instance_id }}')"
+                                                    >
+                                                        Save
+                                                    </button>
+                                                    <button
+                                                            class="btn btn-toolbox text-light mx-2 px-md-3 px-sm-1 my-md-1  hidden"
+                                                            aria-current="page"
+
+                                                            id="note-cancel-{{ pcoi_instance_id }}"
+                                                            onclick="cancelEdit('{{ pcoi_instance_id }}', '{{ pcoi_instance_note }}')"
+                                                    >
+                                                        Cancel
+                                                    </button>
+
+                                                </div>
+
+
+                                            </form>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                        </table>
+                    </td>
+
+
+                    {#        task complexity#}
+
+                    <td>
+                        <table class="nested-table-checklist mx-0">
+                            {% for idea_name, pcoi_instance_id, _,complexity in idea_ins %}
+                                <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows">
+                                    {% task_complexity_to_int complexity as task_complexity %}
+
+                                    {% if task_complexity == 'no-data' %}
+                                        no-data
+                                    {% else %}
+
+
+                                        {% for i in task_complexity %}
+                                            <td class="mx-0"><i class="bi bi-star-fill"></i></td>
+                                        {% endfor %}
+
+                                        {% sub_task_complexity complexity '3' as remaining_complexity %}
+                                        {% for i in remaining_complexity %}
+                                            <td class="mx-0"><i class="bi bi-star"></i></td>
+                                        {% endfor %}
+
+                                    {% endif %}
+
+
+                                </tr>
+                            {% endfor %}
+
+                        </table>
+                    </td>
+
+
+                    {#        delete#}
+
+                    <td>
+                        <table class="nested-table-checklist">
+                            {% for idea_name, pcoi_instance_id, _,_ in idea_ins %}
+                                <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows">
+                                    <td>
+                                        <button onclick="add_delete_idea_checklist(this.id)"
+                                                id="pcoi-instance-{{ pcoi_instance_id }}"
+                                                class="btn-toolbox text-light"><i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                        </table>
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+
+        </table>
+
+
+    </section>
+
+
+    <section class="bg-light text-dark p-md-5 p-sm-2 mb-md-2 mb-sm-1">
+        {% remaining_categories as category_left %}
+        {% if category_left %}
+            <p class="lead">You have not selected any teaching tools for the building blocks:</p>
+
+            <ul>
+                {% for c_name, c_url,c_next in category_objects %}
+                    {% if c_name in category_left %}
+                        <li><a href="{% url 'show_block' c_url c_next %}" class="link-info">{{ c_name }}</a></li>
+                    {% endif %}
+
+                {% endfor %}
+
+            </ul>
+        {% else %}
+            <p class="lead">Well done! you have successfully selected ideas for all building blocks</p>
+
+        {% endif %}
+
+        <div class="d-flex justify-content-end">
+            <div>
+                <a href="{% url 'checklist' %}?crate_pdf={{ True }} "
+                   class="btn btn-toolbox text-light p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <script src="{% static 'plan/js/utils.js' %}"></script>
+    <script src="{% static 'plan/js/edit_plan_title.js' %}"></script>
+    <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
+    <script src="{% static 'plan/js/edit_note.js' %}"></script>
+    <script src="{% static 'plan/js/keep_button_state.js' %}"></script>
+
+{% endblock %}
