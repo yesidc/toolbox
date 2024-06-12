@@ -5,205 +5,210 @@
 
 
 {% block idea_name_detail %}
-    <div class="col text-center {% if user.is_anonymous %}mt-md-5{% endif %}">
-
-        <h3>{{ idea.idea_name }}</h3>
-
-    </div>
+<div class="col text-center {% if user.is_anonymous %}mt-md-5{% endif %}">
+    
+    <h3>{{ idea.idea_name }}</h3>
+    
+</div>
 
 {% endblock %}
 
 
 {% block building_block_idea %}
 
-    <section class="pt-4">
-
-        <div class="row">
-
-            <div class="col-md-10 mx-auto">
-
-
-                <div>
-
-                    {% if user.is_anonymous %}
-
-
-                        <div class="container py-2 my-4"
-                             style="background-color: rgb(176,30,30,0.4);border-radius: 4px">
-
-
-                            <p class="lead text-center my-3">You are browsing without login. To
-                                save your notes please <a href="{% url 'login' %}">log in</a>.
-
-                            </p>
-
-
-                        </div>
-
-
+<section class="pt-4">
+    
+    <div class="row">
+        
+        <div class="col-md-10 mx-auto">
+            
+            
+            <div>
+                
+                {% if user.is_anonymous %}
+                
+                
+                <div class="container py-2 my-4"
+                style="background-color: rgb(176,30,30,0.4);border-radius: 4px">
+                
+                
+                <p class="lead text-center my-3">You are browsing without login. To
+                    save your notes please <a href="{% url 'login' %}">log in</a>.
+                    
+                </p>
+                
+                
+            </div>
+            
+            
+            {% endif %}
+            
+            <div class="row">
+                
+                
+                <div class="col-md-6">
+                    {% show_idea_property idea.brief_description 'Description' 'show_in_section' %}
+                </div>
+                
+                <div class="col-md-6">
+                    
+                    
+                    <div class="row">
+                        <div class="d-flex h-100"><h5 class="align-self-center">Note</h5></div>
+                    </div>
+                    <div class="row">
+                        <form action="" method="POST" id="notes-form">
+                            {% csrf_token %}
+                            
+                            {% crispy note_form %}
+                        </form>
+                    </div>
+                    
+                    
+                </div>
+                
+                
+            </div>
+            
+            
+            <div class="row">
+                
+                <div class="col-md-6">
+                    
+                    {% if idea.use_cases %}
+                    
+                    {% show_idea_property idea.use_cases 'Use cases' 'show_in_section' %}
+                    
                     {% endif %}
-
-                    <div class="row">
-
-
-                        <div class="col-md-6">
-                            {% show_idea_property idea.brief_description 'Description' 'show_in_section' %}
-                        </div>
-
-                        <div class="col-md-6">
-
-
-                                <div class="row">
-                                    <div class="d-flex h-100"><h5 class="align-self-center">Note</h5></div>
-                                </div>
-                                <div class="row">
-                                    <form action="" method="POST" id="notes-form">
-                                        {% csrf_token %}
-
-                                        {% crispy note_form %}
-                                    </form>
-                                </div>
-
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="row">
-
-                        <div class="col-md-6">
-
-                            {% if idea.use_cases %}
-
-                                {% show_idea_property idea.use_cases 'Use cases' 'show_in_section' %}
-
-                            {% endif %}
-
-
-                        </div>
-
-                        <div class="col-md-6">
-
-
-                            <div class="d-flex justify-content-end">
-                                <div>
-
-
-                                    <button type="submit" form="notes-form" value="Submit"
-                                            class="btn btn-toolbox shadow-lg text-light p-3"><span
-                                            class="mx-md-3">Save</span>
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-
-                        </div>
-
-                    </div>
+                    
+                    
                 </div>
+                
+                <div class="col-md-6">
+                    
+                    
+                    <div class="d-flex justify-content-end">
+                        <div>
+                            <a class="btn btn-toolbox shadow-lg text-light p-3"
+                            href="{% url 'checklist_cache' %}">
+                            <span
+                            class="mx-md-3">All notes</span>
+                        </a>
+                            
+                            <button type="submit" form="notes-form" value="Submit"
+                            class="btn btn-toolbox shadow-lg text-light p-3"><span
+                            class="mx-md-3">Save</span>
+                        </button>
+                            
+                    
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        
+    </div>
+</div>
 
 
+</div>
+</div>
+
+
+</section>
+
+
+{#Accordion#}
+
+<section>
+    
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <div class="accordion accordion-flush  py-5 " id="accordionFlushIdea">
+                <div class="shadow-lg">
+                    
+                    {% show_idea_property idea.technology 'Tools' 'show_in_accordion' %}
+                    
+                    {% show_idea_property idea.teacher_effort 'Teacher Effort' 'show_in_accordion' %}
+                    
+                    
+                    
+                    
+                    {% if idea.implementation_steps %}
+                    {% show_idea_property idea.implementation_steps 'Implementation Steps' 'show_in_accordion' %}
+                    
+                    {% endif %}
+                    
+                    
+                    {% show_idea_property idea.recommendations 'Recommendations' 'show_in_accordion' %}
+                    
+                    
+                    {% if idea.supplementary_material %}
+                    
+                    {% show_idea_property idea.supplementary_material 'Supplementary Material' 'show_in_accordion' %}
+                    
+                    {% endif %}
+                    
+                    
+                    
+                    
+                    {% if idea.references %}
+                    
+                    {% show_idea_property idea.references 'References' 'show_in_accordion' %}
+                    
+                    
+                    {% endif %}
+                    
+                </div>
+                
             </div>
         </div>
-
-
-    </section>
-
-
-    {#Accordion#}
-
-    <section>
-
-        <div class="row">
-            <div class="col-md-10 mx-auto">
-                <div class="accordion accordion-flush  py-5 " id="accordionFlushIdea">
-                    <div class="shadow-lg">
-
-                        {% show_idea_property idea.technology 'Tools' 'show_in_accordion' %}
-
-                        {% show_idea_property idea.teacher_effort 'Teacher Effort' 'show_in_accordion' %}
-
-
-
-
-                        {% if idea.implementation_steps %}
-                            {% show_idea_property idea.implementation_steps 'Implementation Steps' 'show_in_accordion' %}
-
-                        {% endif %}
-
-
-                        {% show_idea_property idea.recommendations 'Recommendations' 'show_in_accordion' %}
-
-
-                        {% if idea.supplementary_material %}
-
-                            {% show_idea_property idea.supplementary_material 'Supplementary Material' 'show_in_accordion' %}
-
-                        {% endif %}
-
-
-
-
-                        {% if idea.references %}
-
-                            {% show_idea_property idea.references 'References' 'show_in_accordion' %}
-
-
-                        {% endif %}
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-    </section>
+    </div>
+    
+</section>
 
 
 
 
 
-    {% if idea.testimony %}
-        <section class="bg-light mt-4 p-5 mb-4">
-            <div class="container">
-
-                <h3 class="text-center">Testimony</h3>
-
-                <p>{% md_to_html idea.testimony as testimony_html %}{{ testimony_html|safe }}</p>
-
-
-            </div>
-        </section>
-    {% endif %}
+{% if idea.testimony %}
+<section class="bg-light mt-4 p-5 mb-4">
+    <div class="container">
+        
+        <h3 class="text-center">Testimony</h3>
+        
+        <p>{% md_to_html idea.testimony as testimony_html %}{{ testimony_html|safe }}</p>
+        
+        
+    </div>
+</section>
+{% endif %}
 
 
 {#    <script>#}
-{##}
-{#        // upon login the course plan should be opened (unfolded)#}
-{#        var active_user_plan = "{{ active_user_plan }}";#}
-{#             // iterate across all items in the local storage and set their value to 'closed'#}
-{#        for (var i = 0; i < localStorage.length; i++) {#}
-{#            var key = localStorage.key(i);#}
-{#            localStorage.setItem(key, "closed");#}
-{#        }#}
-{##}
-{#        if (active_user_plan) {#}
-{#            console.log('active_user_plan', active_user_plan);#}
-{#            localStorage.setItem(active_user_plan, "open");#}
-{#        }#}
-{#    </script>#}
+    {##}
+    {#        // upon login the course plan should be opened (unfolded)#}
+    {#        var active_user_plan = "{{ active_user_plan }}";#}
+    {#             // iterate across all items in the local storage and set their value to 'closed'#}
+    {#        for (var i = 0; i < localStorage.length; i++) {#}
+    {#            var key = localStorage.key(i);#}
+    {#            localStorage.setItem(key, "closed");#}
+    {#        }#}
+    {##}
+    {#        if (active_user_plan) {#}
+    {#            console.log('active_user_plan', active_user_plan);#}
+    {#            localStorage.setItem(active_user_plan, "open");#}
+    {#        }#}
+    {#    </script>#}
     <script src="{% static 'plan/js/keep_button_state.js' %}"></script>
     <script src="{% static 'plan/js/utils.js' %}"></script>
     <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
-
+    
     {% if user.is_authenticated %}
-        <script src="{% static 'plan/js/form_alert.js' %}"></script>
+    <script src="{% static 'plan/js/form_alert.js' %}"></script>
     {% endif %}
-
-
-
-{% endblock %}
+    
+    
+    
+    {% endblock %}

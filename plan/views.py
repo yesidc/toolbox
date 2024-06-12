@@ -9,6 +9,13 @@ from tbcore.models import *
 from .forms import NotesForm, PlanForm
 from tbcore.utils.create_pdf import render_pdf
 from django.core.exceptions import ObjectDoesNotExist
+from collections import namedtuple
+
+Progress = namedtuple('Progress', ['category', 'idea_name', 'note', 'complexity'])
+
+
+
+
 
 
 def show_block(request, category_url, next_page):
@@ -84,10 +91,56 @@ def idea_overview_detail(request, category_name, idea_id):
             # todo fix messages, it should be shown on login page
 
             # cache note content in session
-            request.session['note_content'] = request.POST['note_content']
+            # TODO CONTROL WHEN THE SESSION EXPIRE request.session.set_expiry(1800)  # Session will expire in 1800 seconds (30 minutes)
+            # TODO request.session.set_expiry(0) session to expire when the user closes their browser --> settings.py SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+            # namedtuple('Progress', ['category', 'idea_name', 'note', 'complexity'])
+            # List whose elements are tuples with the following structure: [('teaching-material', [(...), (...), (...)]),]), ('human-touch', [...])]
+            # where [idea_name, pcoi_instance_id,pcoi_instance_note,pcoi_instance_complexity]
+            
+            idea_name = OnlineIdea.objects.get(pk=idea_id).idea_name
+            task_complexity = OnlineIdea.objects.get(pk=idea_id).task_complexity
+            # uppercase the first letter of the category name
+            category_name_query = category_name.replace('-', ' ').title()
+            category_idea_obj = CategoryOnlineIdea.objects.filter(category__category_name=category_name_query, idea__idea_name=idea_name)   
+            key_category_idea_obj = str(category_idea_obj[0].pk)
+            
+            if 'user_progress' not in request.session:
+                request.session['user_progress'] = {}
+             
+            
+            if key_category_idea_obj not in request.session['user_progress'].keys():
+                request.session['user_progress'].update({key_category_idea_obj: (Progress(category_name, idea_name, request.POST['note_content'],
+                                                                 task_complexity))})
+                request.session.modified = True
+            
 
-            messages.add_message(request, messages.INFO, 'First login to be able to save your notes')
-            return redirect(f'/login/?category_name={category_name}&idea_id={idea_id}')
+            else:
+                # update the note content
+                request.session['user_progress'].update({key_category_idea_obj: (Progress(category_name, idea_name, request.POST['note_content'],
+                                                                 task_complexity))})
+            
+                request.session.modified = True
+            
+            # if category_name not in request.session:
+            #     request.session[category_name] = {
+            #         'teaching_tool': [idea_id],
+            #         'note_content': [request.POST['note_content']],
+            #         'complexity': [OnlineIdea.objects.get(pk=idea_id).task_complexity]
+            #     }
+            # elif category_name in request.session:
+            #     request.session[category_name]['teaching_tool'].append(idea_id)
+            #     request.session[category_name]['note_content'].append(request.POST['note_content'])
+            #     request.session[category_name]['complexity'].append(OnlineIdea.objects.get(pk=idea_id).task_complexity)
+            
+            # request.session['note_content'] = request.POST['note_content']
+            
+            
+
+            # messages.add_message(request, messages.INFO, 'First login to be able to save your notes')
+            return redirect('idea_overview_detail', category_name, idea_id)
+            # return redirect(f'/login/?category_name={category_name}&idea_id={idea_id}')
+        
+        
         if not has_plan(request):
             return redirect(request.META.get('HTTP_REFERER'))
 
@@ -170,6 +223,52 @@ def update_note_checklist(request):
             return JsonResponse({'success': False})
     else:
         return render(request, 'plan/checklist.html')
+
+
+def checklist_cache(request):
+    """
+    Saves the notes and ideas selected by the user in the session.
+    """
+    #List whose elements are tuples with the following structure: [('teaching-material', [(...), (...), (...)]),]), ('human-touch', [...])]
+    # where [idea_name, pcoi_instance_id,pcoi_instance_note,pcoi_instance_complexity]
+    # TODO pcoi_instance_id --> use to delete the pcoi object from checklist page. Also come up with a way to delete the object from the session
+    # TODO pcoi_instance_id --> FIX, now it is just a placeholder
+    # Progress = namedtuple('Progress', ['category', 'idea_name', 'note', 'complexity'])
+    # category online idea object id
+    from collections import defaultdict
+    summary_dict = defaultdict(list)
+    
+    
+    category_idea_checklist =[]
+    category_done_summary = []
+    # check if user has made any selection
+    if 'user_progress' in request.session:
+        for key, value in request.session['user_progress'].items():
+            coi_instance_id = CategoryOnlineIdea.objects.get(pk=int(key))
+            # value = ['category', 'idea_name', 'note', 'complexity']
+            if value[0] not in summary_dict.keys():
+                summary_dict[value[0]].append((value[1], coi_instance_id.pk, value[2], value[3]))
+            else:
+                summary_dict[value[0]].append((value[1], coi_instance_id.pk, value[2], value[3]))
+                
+        for key, value in summary_dict.items():
+            category_idea_checklist.append((key, value))
+            category_done_summary.append(key)
+        
+        context = {
+                'context_summary': category_idea_checklist,
+                'category_done_summary': category_done_summary,
+                'plan_form': PlanForm()
+            }
+    else:
+        messages.add_message(request, messages.INFO, 'First select a teaching tool to be able to see the checklist page')
+        return redirect(request.META.get('HTTP_REFERER'))
+    
+    
+
+    
+    return render(request, 'plan/checklist_cache.html', context=context)
+   
 
 @login_required
 def edit_plan_title(request):
@@ -315,25 +414,38 @@ def create_plan(request, start_add):
 #     #     return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
 
 
-@login_required()
+
 def delete_pcoi_checklist(request):
     """
     Manages all related to deleting PlanCategoryOnlineIdea objects when registration interact with the checklist page
     """
-    pcoi_delete = PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id'))
-    pcoi_category = pcoi_delete.category.category_name
-    pcoi_delete.delete()
-    remaining_ideas = PlanCategoryOnlineIdea.objects.select_related('plan__user', 'category').filter(
-        Q(plan__user=request.user)& Q(plan=request.session['current_user_plan'])&Q(category__category_name=pcoi_category)).count()
-    if remaining_ideas >0:
-        delete_block= False
+    # if the user is not logged in
+    if not request.user.is_authenticated:
+        # delete the object from the session
+        del request.session['user_progress'][request.GET.get('pcoi_id')]
+        request.session.modified = True
+        return JsonResponse({'delete_block':False, 'session_data': True}, status=200)
+    
+    
+    elif request.user.is_authenticated:
+    
+        pcoi_delete = PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id'))
+        pcoi_category = pcoi_delete.category.category_name
+        pcoi_delete.delete()
+        remaining_ideas = PlanCategoryOnlineIdea.objects.select_related('plan__user', 'category').filter(
+            Q(plan__user=request.user)& Q(plan=request.session['current_user_plan'])&Q(category__category_name=pcoi_category)).count()
+        if remaining_ideas >0:
+            delete_block= False
 
+        else:
+            delete_block = True
+
+
+        # PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id')).delete()
+        return JsonResponse({'delete_block':delete_block, 'pcoi_category': slugify(pcoi_category)}, status=200)
     else:
-        delete_block = True
-
-
-    # PlanCategoryOnlineIdea.objects.get(pk=request.GET.get('pcoi_id')).delete()
-    return JsonResponse({'delete_block':delete_block, 'pcoi_category': slugify(pcoi_category)}, status=200)
+        messages.add_message(request, messages.INFO, 'First save a note to be able to delete it.')
+        return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required()

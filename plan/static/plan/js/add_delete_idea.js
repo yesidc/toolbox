@@ -133,6 +133,10 @@ function add_delete_idea_checklist(btn_id){
                 if (response.delete_block){
                     $('#'+response.pcoi_category).remove() // deletes the entire building block from the checklist.
                 }
+                if (response.session_data){
+                    window.location.reload();  // Force a full-page reload
+
+                }
 
             }
         }
