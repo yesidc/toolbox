@@ -17,6 +17,6 @@ urlpatterns = [
     path('checklist/', views.checklist, name='checklist'),
     path('delete_plan/<int:plan_id>/', views.delete_plan, name='delete_plan'),
     path('update_note_checklist/', views.update_note_checklist, name='update_note_checklist'),
-
+    path('update_note_session_checklist/', views.update_note_session_checklist, name='update_note_session_checklist'),
 
 ]

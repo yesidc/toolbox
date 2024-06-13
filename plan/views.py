@@ -86,6 +86,7 @@ def idea_overview_detail(request, category_name, idea_id):
 
     # handles all logic when user adds/updates idea or/and note from the idea_detail page
     if request.method == "POST":
+        # TODO valid form should be checked before saving the note
         # checks if user has already created a plan
         if not request.user.is_authenticated:
             # todo fix messages, it should be shown on login page
@@ -182,7 +183,7 @@ def checklist(request):
         from collections import defaultdict
         summary_dict = defaultdict(list)
         
-        
+        # [('teaching-material', [...])], where [('idea_name', coi_instance_id, note(str), complexity)]
         category_idea_checklist =[]
         category_done_summary = []
         # check if user has made any selection
@@ -250,41 +251,42 @@ def checklist(request):
         return redirect(request.META.get('HTTP_REFERER'))
 
 # todo checklist page should be reload when user edits the plan title
+
+def update_note_session_checklist(request):
+    
+    if request.method == 'POST':
+        form = NotesForm(request.POST)
+        if form.is_valid():
+            # update note content in the session
+            request.session['user_progress'][request.GET.get('coi_id')][2] = form.cleaned_data['note_content']
+            request.session.modified = True
+    
+    return redirect('checklist')
+
+
+@login_required
 def update_note_checklist(request):
     """
     Updates the note for a given teaching tool from the checklist page.
     """
     
-    if not request.user.is_authenticated:
-        # update note content in the session
-        request.session['user_progress'][request.GET.get('pcoi_id')][2] = request.POST['note_content']
-        request.session.modified = True
-        return JsonResponse({'success': True,
-                                    'note_content': 'Note updated',})
-    
-    
-    elif request.user.is_authenticated:
-    
-    
-        poci_obj = get_object_or_404(PlanCategoryOnlineIdea, pk=request.POST['pcoiId'])
-        if request.method == 'POST':
-            form = NotesForm(request.POST)
-            if form.is_valid():
-                poci_obj.notes = form.cleaned_data['note_content']
-                poci_obj.save()
+    poci_obj = get_object_or_404(PlanCategoryOnlineIdea, pk=request.POST['pcoiId'])
+    if request.method == 'POST':
+        form = NotesForm(request.POST)
+        if form.is_valid():
+            poci_obj.notes = form.cleaned_data['note_content']
+            poci_obj.save()
 
-            # poci_obj.notes = request.POST['note_content']
-            # poci_obj.save()
-                return JsonResponse({'success': True,
-                                    'note_content': poci_obj.notes,})
-            else:
-                messages.add_message(request, messages.INFO, 'Something went wrong, please try again')
-                return JsonResponse({'success': False})
+        # poci_obj.notes = request.POST['note_content']
+        # poci_obj.save()
+            return JsonResponse({'success': True,
+                                'note_content': poci_obj.notes,})
         else:
-            return render(request, 'plan/checklist.html')
+            messages.add_message(request, messages.INFO, 'Something went wrong, please try again')
+            return JsonResponse({'success': False})
     else:
-        messages.add_message(request, messages.INFO, 'Your notes could not be saved. Please try again.')
-        return redirect(request.META.get('HTTP_REFERER'))
+        return render(request, 'plan/checklist.html')
+
 
 
 def checklist_cache(request):
@@ -292,7 +294,7 @@ def checklist_cache(request):
     Saves the notes and ideas selected by the user in the session.
     """
     #List whose elements are tuples with the following structure: [('teaching-material', [(...), (...), (...)]),]), ('human-touch', [...])]
-    # where [idea_name, pcoi_instance_id,pcoi_instance_note,pcoi_instance_complexity]
+    # where [idea_name, coi_instance_id,pcoi_instance_note,pcoi_instance_complexity]
     # TODO pcoi_instance_id --> use to delete the pcoi object from checklist page. Also come up with a way to delete the object from the session
     # TODO pcoi_instance_id --> FIX, now it is just a placeholder
     # Progress = namedtuple('Progress', ['category', 'idea_name', 'note', 'complexity'])
@@ -418,62 +420,6 @@ def create_plan(request, start_add):
             plan_to_database()
             # user redirected to previous page
             return redirect(request.META.get('HTTP_REFERER'))
-
-# todo delete this function, it was used to handle the checkboxes on the building block page.
-# @login_required
-# def use_idea(request, save_note=None):
-#     """
-#     Saves or deletes ideas from an existing course plan when the user interacts with the checkboxes displayed on the
-#     building block page.
-#     """
-#
-#     # checks if user has already created a plan
-#     if not has_plan(request):
-#         return redirect(request.META.get('HTTP_REFERER'))
-#
-#     if 'current_user_plan' in request.session:
-#         current_user_plan = Plan.objects.get(pk=request.session['current_user_plan'])
-#     else:
-#
-#         return redirect(request.META.get('HTTP_REFERER'))
-#
-#
-#     current_idea = request.GET.get('idea_id')
-#     current_category = request.GET.get('current_category')
-#
-#     if request.GET.get('delete_idea'):
-#         # Delete object
-#         obj_delete = PlanCategoryOnlineIdea.objects.get_or_none(request.user, request.session['current_user_plan'],
-#                                                                 current_category, current_idea)
-#         if obj_delete:
-#             obj_delete.delete()
-#
-#
-#         # categories for which user has already selected at least one idea
-#         category_ready = category_done(current_user_plan)
-#         json_dic = {
-#             'category_ready': list(category_ready),
-#             "category_id": current_category,
-#             'plan_id': request.session['current_user_plan']
-#         }
-#         return JsonResponse(json_dic)
-#
-#
-#
-#     else:
-#
-#         save_pcoi(request, request.session['current_user_plan'], current_category, current_idea)
-#
-#     json_dic = {
-#         "category_id": current_category,
-#         'plan_id': request.session['current_user_plan']
-#     }
-#     # if user has either deleted or added an idea using the checkboxes on the blocks/category page
-#     if is_ajax(request):
-#         return JsonResponse(json_dic)
-#     # else:
-#     #     # if user has selected and idea using the buttons provided by both the overview or detail idea page.
-#     #     return redirect('show_block', request.session['current_category'], request.session['current_next_page'])
 
 
 
