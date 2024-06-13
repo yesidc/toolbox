@@ -7,6 +7,11 @@
 <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
 <link rel="stylesheet" href="{% static 'tbcore/css/toolbox_fonts.css' %}">
 <style>
+    .card-main-img{
+        width: 100%;
+        height: 500px; /* Set a fixed height for all images */
+        object-fit: cover; /* Ensure the image covers the entire area */
+    }
     .card-custom {
         display: flex;
         flex-direction: column;
@@ -65,7 +70,7 @@
             <!-- Right Card with Image -->
             <div class="col-md-6">
                 <div class="card mb-4 card-custom">
-                    <img src={% static '/tbcore/images/start_page/human_touch.jpg' %} class="card-img-top" alt="Educational Image">
+                    <img src={% static '/tbcore/images/start_page/main_image.jpg' %} class="card-main-img" alt="Educational Image">
                 </div>
             </div>
         </div>
