@@ -109,22 +109,35 @@
 
 {% block plan_name_checklist %}
 <div class="col text-center">
-    <h3 class="text-center my-0 py-md-4">Checklist: {{ current_plan.plan_name }}</h3>
-</div>
-{% endblock %}
 
-{% block building_block_idea %}
-
-<section >
     <div class="d-flex justify-content-between align-items-center mt-3">
         <div class="w-100 text-center">
-            <h1>All Notes</h1>
+            <h3 class="text-center my-0 py-md-4">All Notes: {{ current_plan.plan_name }}</h3>
         </div>
         <div>
             <a href="{% url 'checklist' %}?crate_pdf={{ True }}" class="btn btn-toolbox text-light p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
         </div>
     </div>
-</section>
+
+
+    
+</div>
+{% endblock %}
+
+{% block building_block_idea %}
+{%if user.is_anonymous%}
+
+ <section >
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <div class="w-100 text-center">
+            <h1>All Notes </h1>
+        </div>
+        <div>
+            <a href="{% url 'checklist' %}?crate_pdf={{ True }}" class="btn btn-toolbox text-light p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
+        </div>
+    </div>
+</section> 
+{%endif%}
 
 {% comment %} Not selected teaching Tips {% endcomment %}
 

@@ -129,14 +129,17 @@ function add_delete_idea_checklist(btn_id){
 
             },
             success:function (response){
-                 $('.'+ btn_id).remove()     // deletes the idea, note and delete button from the checklist page
-                if (response.delete_block){
-                    $('#'+response.pcoi_category).remove() // deletes the entire building block from the checklist.
-                }
-                if (response.session_data){
-                    window.location.reload();  // Force a full-page reload
 
-                }
+                window.location.reload();  // Force a full-page reload
+                //  $('.'+ btn_id).remove()     // deletes the idea, note and delete button from the checklist page
+                // if (response.delete_block){
+                //     $('#'+response.pcoi_category).remove() // deletes the entire building block from the checklist.
+                //     window.location.reload();  // Force a full-page reload
+                // }
+                // if (response.session_data){
+                //     window.location.reload();  // Force a full-page reload
+
+                // }
 
             }
         }

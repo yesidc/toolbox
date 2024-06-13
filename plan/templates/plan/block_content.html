@@ -31,7 +31,7 @@
 
                 <div class="p-md-2" style="background-color: rgb(71,133,255, 0.2);border-radius: 4px">
 
-                    <p class="lead my-2"><span class="mx-md-5"> Please sing in to get a checklist for course preparation.</span>
+                    <p class="lead my-2"><span class="mx-md-5"> Please sign in to save your notes. Members of UOS can use their LDAP credentials.</span>
                         <a class="btn btn-toolbox text-light button-touch"
                            href="{% url 'login' %}?category_url={{ current_category }}&next_page={{ next_page }}">
                             Sign in
@@ -133,8 +133,7 @@
             <div>
 
                 {% if user.is_authenticated %}
-                    <a href="{% url 'checklist' %}" class="btn btn-toolbox text-light m-4" aria-current="page">View
-                        checklist</a>{% endif %}
+                    <a href="{% url 'checklist' %}" class="btn btn-toolbox text-light m-4" aria-current="page">All Notes</a>{% endif %}
 
             </div>
             <div>

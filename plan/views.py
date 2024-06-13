@@ -158,7 +158,8 @@ def idea_overview_detail(request, category_name, idea_id):
             pcoi_obj.notes = note_form.cleaned_data['note_content']
             pcoi_obj.save()
         messages.add_message(request, messages.INFO, f'Teaching Tip "{OnlineIdea.objects.get(pk=idea_id).idea_name}" was added to your course plan: "{request.session["current_user_plan_name"]}"')
-        return redirect('show_block', category_name, Category.objects.get(category_url=category_name).next_page)
+        # return redirect('show_block', category_name, Category.objects.get(category_url=category_name).next_page)
+        return redirect(request.META.get('HTTP_REFERER'))
 
     # manages get request
 
