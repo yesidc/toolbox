@@ -52,7 +52,7 @@ def idea_overview_detail(request, category_name, idea_id):
     current_idea = get_object_or_404(OnlineIdea, id=idea_id)
     # if the user created a note without login, the note content is cached in the session and loaded in the note form
     note_form = NotesForm()
-
+    
     context = {
         'idea': current_idea,
         'note_form': note_form,
@@ -77,12 +77,24 @@ def idea_overview_detail(request, category_name, idea_id):
                                                               idea_id)
         # loads current note giving the user the possibility to edit it.
         if pcoi_obj:
+        
             note_form = NotesForm(initial={'note_content': pcoi_obj.notes})
+            context.update({'note_form': note_form})
     else:
         pcoi_obj = None
 
 
-
+    if not request.user.is_authenticated:
+        if 'user_progress' in request.session:
+            idea_name = OnlineIdea.objects.get(pk=idea_id).idea_name
+            category_name_session = Category.objects.get(category_url=category_name).category_name
+            coi_instance_id = CategoryOnlineIdea.objects.get(category__category_name=category_name_session, idea__idea_name=idea_name).pk
+            note_form = NotesForm(initial={'note_content': request.session['user_progress'][str(coi_instance_id)][2]})
+            context.update({'note_form': note_form})
+        
+        
+        
+        
 
     # handles all logic when user adds/updates idea or/and note from the idea_detail page
     if request.method == "POST":
@@ -121,19 +133,6 @@ def idea_overview_detail(request, category_name, idea_id):
                                                                  task_complexity))})
             
                 request.session.modified = True
-            
-            # if category_name not in request.session:
-            #     request.session[category_name] = {
-            #         'teaching_tool': [idea_id],
-            #         'note_content': [request.POST['note_content']],
-            #         'complexity': [OnlineIdea.objects.get(pk=idea_id).task_complexity]
-            #     }
-            # elif category_name in request.session:
-            #     request.session[category_name]['teaching_tool'].append(idea_id)
-            #     request.session[category_name]['note_content'].append(request.POST['note_content'])
-            #     request.session[category_name]['complexity'].append(OnlineIdea.objects.get(pk=idea_id).task_complexity)
-            
-            # request.session['note_content'] = request.POST['note_content']
             
             
 
