@@ -89,8 +89,9 @@ def idea_overview_detail(request, category_name, idea_id):
             idea_name = OnlineIdea.objects.get(pk=idea_id).idea_name
             category_name_session = Category.objects.get(category_url=category_name).category_name
             coi_instance_id = CategoryOnlineIdea.objects.get(category__category_name=category_name_session, idea__idea_name=idea_name).pk
-            note_form = NotesForm(initial={'note_content': request.session['user_progress'][str(coi_instance_id)][2]})
-            context.update({'note_form': note_form})
+            if str(coi_instance_id) in request.session['user_progress'].keys():
+                note_form = NotesForm(initial={'note_content': request.session['user_progress'][str(coi_instance_id)][2]})
+                context.update({'note_form': note_form})
         
         
         
@@ -122,7 +123,7 @@ def idea_overview_detail(request, category_name, idea_id):
              
             
             if key_category_idea_obj not in request.session['user_progress'].keys():
-                request.session['user_progress'].update({key_category_idea_obj: (Progress(category_name, idea_name, request.POST['note_content'],
+                request.session['user_progress'].update({key_category_idea_obj: (Progress(category_name_query, idea_name, request.POST['note_content'],
                                                                  task_complexity))})
                 request.session.modified = True
             

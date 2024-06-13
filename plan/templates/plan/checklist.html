@@ -1,4 +1,7 @@
- {% extends "plan/base_block.html" %}
+
+ 
+ 
+{% extends "plan/base_block.html" %}
  {% load toolbox_custom_tags %}
  
  {% block specific_css %}
@@ -111,7 +114,46 @@
 {% endblock %}
 
 {% block building_block_idea %}
-<section class="mt-5">
+
+<section >
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <div class="w-100 text-center">
+            <h1>All Notes</h1>
+        </div>
+        <div>
+            <a href="{% url 'checklist' %}?crate_pdf={{ True }}" class="btn btn-toolbox text-light p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
+        </div>
+    </div>
+</section>
+
+{% comment %} Not selected teaching Tips {% endcomment %}
+
+<section>
+    
+    <div class="row">
+        
+        
+        {% remaining_categories as category_left %}
+        {% if category_left %}
+        <p >You have not selected any teaching tips for the building blocks:
+
+            {% for c_name, c_url, c_next in category_objects %}
+            {% if c_name in category_left %}
+            <span class="badge badge-pill badge-info"><a href="{% url 'show_block' c_url c_next %}" >{{ c_name }}</a></span>
+        
+            {% endif %}
+            {% endfor %}
+
+        {% comment %} {% else %}
+        <p class="lead">Well done! You have successfully selected ideas for all building blocks.</p> {% endcomment %}
+        {% endif %}
+    </p>
+    </div>
+    
+</section>
+
+
+<section class="mt-2">
     <div class="container-fluid board-background">
         <div class="scrolling-wrapper">
             {% for category, ideas in context_summary %}
@@ -155,73 +197,74 @@
                                 name="note_content"
                                 onclick="editNote('{{ idea.1 }}')"
                                 oninput="autoResize(this.id)">{{ idea.2 }}</textarea>
-                            
-                            
-                            <div class="d-flex mt-2">
-                                {%if user.is_anonymous%}
-                                
-                                <button type="submit" class="btn btn-primary btn-sm me-2 save-note-button hidden"
-                                id="note-submit-{{ idea.1 }}" form="note-form-{{ idea.1 }}">Save</button>
-                                
-                                {%else%}
-                                
-                                <button type="submit" class="btn btn-primary btn-sm me-2 save-note-button hidden"
-                                id="note-submit-{{ idea.1 }}" onclick="saveNote('{{ idea.1 }}')">Save</button>
-                                
-                                {%endif%}
                                 
                                 
-                                
-                                
-                                <button class="btn btn-secondary btn-sm hidden"
-                                id="note-cancel-{{ idea.1 }}" onclick="cancelEdit('{{ idea.1 }}', '{{ idea.2 }}')">Cancel</button>
-                            </div>
-                        </form>
+                                <div class="d-flex mt-2">
+                                    {%if user.is_anonymous%}
+                                    
+                                    <button type="submit" class="btn btn-primary btn-sm me-2 save-note-button hidden"
+                                    id="note-submit-{{ idea.1 }}" form="note-form-{{ idea.1 }}">Save</button>
+                                    
+                                    {%else%}
+                                    
+                                    <button type="submit" class="btn btn-primary btn-sm me-2 save-note-button hidden"
+                                    id="note-submit-{{ idea.1 }}" onclick="saveNote('{{ idea.1 }}')">Save</button>
+                                    
+                                    {%endif%}
+                                    
+                                    
+                                    
+                                    
+                                    <button class="btn btn-secondary btn-sm hidden"
+                                    id="note-cancel-{{ idea.1 }}" onclick="cancelEdit('{{ idea.1 }}', '{{ idea.2 }}')">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    {#        task complexity#}
+                    
+                    
+                    <div class="mb-2">
+                        <strong>Complexity:</strong>
+                        
+                        
+                        
+                        {% task_complexity_to_int idea.3 as task_complexity %}
+                        
+                        {% if task_complexity == 'no-data' %}
+                        no-data
+                        {% else %}
+                        
+                        
+                        {% for i in task_complexity %}
+                        <i class="bi bi-star-fill"></i>
+                        {% endfor %}
+                        
+                        {% sub_task_complexity idea.3 '3' as remaining_complexity %}
+                        {% for i in remaining_complexity %}
+                        <i class="bi bi-star"></i>
+                        {% endfor %}
+                        
+                        {% endif %}
+                        
                     </div>
                 </div>
-                
-                {#        task complexity#}
-                
-                
-                <div class="mb-2">
-                    <strong>Complexity:</strong>
-                    
-                    
-                    
-                    {% task_complexity_to_int idea.3 as task_complexity %}
-                    
-                    {% if task_complexity == 'no-data' %}
-                    no-data
-                    {% else %}
-                    
-                    
-                    {% for i in task_complexity %}
-                    <i class="bi bi-star-fill"></i>
-                    {% endfor %}
-                    
-                    {% sub_task_complexity idea.3 '3' as remaining_complexity %}
-                    {% for i in remaining_complexity %}
-                    <i class="bi bi-star"></i>
-                    {% endfor %}
-                    
-                    {% endif %}
-                    
-                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
-</div>
-{% endfor %}
+    {% endfor %}
 </div>
 <div class="scroll-indicator">
     <i class="bi bi-arrow-right-circle"></i> Scroll to see more notes
 </div>
 </div> 
 </section>
-{% comment %} 
-<section class="bg-light text-dark p-md-5 p-sm-2 mb-md-2 mb-sm-1">
-    {% remaining_categories as category_left %}
+
+
+{% comment %} <section class="bg-light text-dark p-md-5 p-sm-2 mb-md-2 mb-sm-1">
+ {% remaining_categories as category_left %}
     {% if category_left %}
     <p class="lead">You have not selected any teaching tools for the building blocks:</p>
     <ul>
@@ -233,13 +276,13 @@
     </ul>
     {% else %}
     <p class="lead">Well done! You have successfully selected ideas for all building blocks.</p>
-    {% endif %}
+    {% endif %} 
     <div class="d-flex justify-content-end">
         <div>
             <a href="{% url 'checklist' %}?crate_pdf={{ True }}" class="btn btn-toolbox text-light p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
         </div>
     </div>
-</section>  {% endcomment %}
+</section>   {% endcomment %}
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -267,11 +310,6 @@
 <script src="{% static 'plan/js/keep_button_state.js' %}"></script>
 
 {% endblock %}
-
-
-
-
-
 
 
 

@@ -80,7 +80,9 @@ def remaining_categories(context):
 
     c_done = context['category_done_summary']
 
-    remaining_c = set(categories_list) - c_done
+    # remaining_c = set(categories_list) - set(c_done)
+    
+    remaining_c = [c for c in categories_list if c not in c_done]
 
     return remaining_c
 
