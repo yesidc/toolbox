@@ -220,8 +220,12 @@
                                     
                                     {%else%}
                                     
-                                    <button type="submit" class="btn btn-primary btn-sm me-2 save-note-button hidden"
-                                    id="note-submit-{{ idea.1 }}" onclick="saveNote('{{ idea.1 }}')">Save</button>
+                                    <button type="submit" 
+                                    class="btn btn-primary btn-sm me-2 save-note-button hidden"
+                                    id="note-submit-{{ idea.1 }}" 
+                                    onclick="saveNote('{{ idea.1 }}')"
+                                    form="note-form-{{ idea.1 }}"
+                                    >Save</button>
                                     
                                     {%endif%}
                                     

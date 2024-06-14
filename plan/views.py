@@ -211,9 +211,22 @@ def checklist(request):
             return redirect(request.META.get('HTTP_REFERER'))
         
         
+        if 'crate_pdf' in request.GET:
+            context.update({'category_objects': Category.objects.values_list('category_name', 'category_url',
+                                                                            'next_page')})
 
+            pdf = render_pdf('plan/checklist_pdf.html', context)
+            return HttpResponse(pdf, content_type='application/pdf')
+
+        else:
+
+            return render(request, 'plan/checklist.html', context=context)
         
-        return render(request, 'plan/checklist.html', context=context)
+        
+        
+        
+        
+        # return render(request, 'plan/checklist.html', context=context)
     
     elif request.user.is_authenticated:
    
