@@ -1,13 +1,13 @@
 
- 
- 
+
+
 {% extends "plan/base_block.html" %}
- {% load toolbox_custom_tags %}
- 
- {% block specific_css %}
- {% load static %}
- <link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
- <style>
+{% load toolbox_custom_tags %}
+
+{% block specific_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'plan/css/base_block.css' %}">
+<style>
     .board-background {
         
         background-size: cover;
@@ -109,7 +109,7 @@
 
 {% block plan_name_checklist %}
 <div class="col text-center">
-
+    
     <div class="d-flex justify-content-between align-items-center mt-3">
         <div class="w-100 text-center">
             <h3 class="text-center my-0 py-md-4">All Notes: {{ current_plan.plan_name }}</h3>
@@ -118,8 +118,8 @@
             <a href="{% url 'checklist' %}?crate_pdf={{ True }}" class="btn btn-toolbox text-light p-md-3 p-sm-2 my-md-3 my-sm-1" aria-current="page">Download</a>
         </div>
     </div>
-
-
+    
+    
     
 </div>
 {% endblock %}
@@ -127,7 +127,7 @@
 {% block building_block_idea %}
 {%if user.is_anonymous%}
 
- <section >
+<section >
     <div class="d-flex justify-content-between align-items-center mt-3">
         <div class="w-100 text-center">
             <h1>All Notes </h1>
@@ -149,18 +149,18 @@
         {% remaining_categories as category_left %}
         {% if category_left %}
         <p >You have not selected any teaching tips for the building blocks:
-
+            
             {% for c_name, c_url, c_next in category_objects %}
             {% if c_name in category_left %}
             <span class="badge badge-pill badge-info"><a href="{% url 'show_block' c_url c_next %}" >{{ c_name }}</a></span>
-        
+            
             {% endif %}
             {% endfor %}
-
-        {% comment %} {% else %}
-        <p class="lead">Well done! You have successfully selected ideas for all building blocks.</p> {% endcomment %}
-        {% endif %}
-    </p>
+            
+            {% comment %} {% else %}
+            <p class="lead">Well done! You have successfully selected ideas for all building blocks.</p> {% endcomment %}
+            {% endif %}
+        </p>
     </div>
     
 </section>
@@ -194,10 +194,13 @@
                         <div class="mb-2">
                             <h5>{{ idea.0 }}</h5>   
                         </div>
+                        
                         {#        Notes#}
+                        
                         <div class="mb-2">
                             <strong>Note:</strong>
                             <div class="edit-note-checklist" tabindex="0">
+                                
                                 <form id="note-form-{{ idea.1 }}" method="post" 
                                 action={%if user.is_anonymous%}
                                 "{% url 'update_note_session_checklist' %}?coi_id={{ idea.1 }}"
@@ -220,23 +223,24 @@
                                     
                                     {%else%}
                                     
-                                    <button type="submit" 
+                                    <button
+                                    type="submit" 
                                     class="btn btn-primary btn-sm me-2 save-note-button hidden"
                                     id="note-submit-{{ idea.1 }}" 
-                                    onclick="saveNote('{{ idea.1 }}')"
-                                    form="note-form-{{ idea.1 }}"
+                                    
                                     >Save</button>
                                     
                                     {%endif%}
                                     
-                                    
-                                    
-                                    
                                     <button class="btn btn-secondary btn-sm hidden"
                                     id="note-cancel-{{ idea.1 }}" onclick="cancelEdit('{{ idea.1 }}', '{{ idea.2 }}')">Cancel</button>
                                 </div>
-                            </form>
+                            </form> 
+                            
+                            {%endfor%}
+                            
                         </div>
+                        
                     </div>
                     
                     {#        task complexity#}
@@ -267,7 +271,7 @@
                         
                     </div>
                 </div>
-                {% endfor %}
+                
             </div>
         </div>
     </div>
@@ -281,7 +285,7 @@
 
 
 {% comment %} <section class="bg-light text-dark p-md-5 p-sm-2 mb-md-2 mb-sm-1">
- {% remaining_categories as category_left %}
+    {% remaining_categories as category_left %}
     {% if category_left %}
     <p class="lead">You have not selected any teaching tools for the building blocks:</p>
     <ul>
@@ -300,6 +304,62 @@
         </div>
     </div>
 </section>   {% endcomment %}
+
+{% if user.is_authenticated %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const getCookie = (name) => {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        };
+        
+        const csrfToken = getCookie('csrftoken');
+        
+        const forms = document.querySelectorAll('form[id^="note-form-"]');
+        forms.forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();  // Prevent the default form submission
+                const pcoi_instance_id = this.id.split('-')[2]; // Extracting the ID from form ID
+                const updatedNote = document.getElementById('note-input-' + pcoi_instance_id).value.trim();
+                
+                $.ajax({
+                    url: '/update_note_checklist/',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrfToken
+                    },
+                    data: {
+                        'note_content': updatedNote,
+                        'pcoiId': pcoi_instance_id
+                    },
+                    success: function(response) {
+                        console.log('Note updated');
+                        // Redirect
+                        window.location.href = '/checklist/';
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error: ' + error);
+                        // Redirect
+                        window.location.href = '/checklist/';
+                    }
+                });
+            });
+        });
+    });
+</script>
+{% endif %}
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
