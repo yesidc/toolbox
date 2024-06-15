@@ -33,65 +33,7 @@ adobe-garamond-pro
     background-color: #ff5722;
 }
 
-/* Style start_page.html */
-.showcase {
-    background-color: #ffffff;
-    padding: 50px 0;
-  }
-  .card-custom {
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  .card-title-custom {
-    color: #0A1F40;
-  }
-  .card-text-custom {
-    color: #333;
-  }
-  .building-blocks {
-    background-color: #f8f9fa;
-    padding: 50px 0;
-  }
-  .instructional-video {
-    background-color: #ffffff;
-    padding: 50px 0;
-  }
-  .what-we-do {
-    background-color: #e9ecef;
-    padding: 50px 0;
-  }
-  .section-title {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  .section-title h2 {
-    display: inline-block;
-    position: relative;
-    padding-bottom: 10px;
-  }
-  .section-title h2:after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 50%;
-    height: 3px;
-    background-color: #007bff;
-  }
-  .content-title {
-    color: #0A1F40;
-    border-bottom: 2px solid #0A1F40;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-  }
-  .content-text {
-    color: #333;
-  }
 
-
-  /* Style start_page.html */
 
 
 .custom-embed {
