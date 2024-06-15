@@ -205,10 +205,10 @@
     <script src="{% static 'plan/js/utils.js' %}"></script>
     <script src="{% static 'plan/js/add_delete_idea.js' %}"></script>
     
-    {% if user.is_authenticated %}
+    {% comment %} {% if user.is_authenticated %}
     <script src="{% static 'plan/js/form_alert.js' %}"></script>
     {% endif %}
-    
+     {% endcomment %}
     
     
     {% endblock %}
