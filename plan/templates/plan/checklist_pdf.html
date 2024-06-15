@@ -4,302 +4,159 @@
 <html>
 <head>
     <title>Checklist</title>
-
-
     <style>
-
-        .center-text {
-            text-align: center;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #0a53be;
+        }
+        .header img {
+            width: 150px;
+        }
+        .header h1 {
+            margin: 0;
             color: #0a53be;
-            padding-bottom: 10px;
-        }
-
-
-        table {
-            border-collapse: collapse;
-            letter-spacing: 1px;
-            font-size: 1rem;
-        }
-
-
-        .border-unique {
-            border: 1px solid rgb(190, 190, 190);
-        }
-
-
-        th {
-
-            padding: 5px 5px;
-        }
-
-        th {
-            background-color: rgb(235, 235, 235);
-        }
-
-        td {
+            flex-grow: 1;
             text-align: center;
-            padding: 1px;
-
         }
-
-        .td-note {
-            text-align: left;
+        .container {
+            padding: 20px;
+            flex-grow: 1;
         }
-
-
-        .border-internal-td {
-            border-bottom: 1px solid rgb(190, 190, 190);
+        h2, h4 {
+            color: #0a53be;
         }
-
-
-        .margin-internal-td {
-            margin-left: 15px;
-            margin-right: 3px;
-            margin-top: 14px;
-
+        .instructions {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #555;
         }
-
-
-        tr:nth-child(even) td {
-            background-color: rgb(250, 250, 250);
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
         }
-
-        tr:nth-child(odd) td {
-            background-color: rgb(245, 245, 245);
-        }
-
-        caption {
+        th, td {
+            border: 1px solid #ddd;
             padding: 10px;
+            text-align: left;
+            vertical-align: middle;
         }
-
-        .style-headings {
-            padding-top: 10px;
+        th {
+            background-color: #f8f9fa;
+            color: #333;
+            text-align: center;
         }
-        .vertical{
-            writing-mode: vertical-lr;
-            text-orientation: mixed;
+        .note {
+            font-style: italic;
         }
-
-
+        .star {
+            height: 15px;
+            width: 15px;
+        }
+        .checkbox {
+            height: 20px;
+            width: 20px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-top: 2px solid #0a53be;
+            margin-top: auto;
+        }
+        .no-tips-list ul {
+            padding: 0;
+            list-style: none;
+        }
+        .no-tips-list li {
+            margin-bottom: 5px;
+        }
+        .building-block {
+            border-top: 3px solid #0a53be;
+        }
     </style>
-
-
 </head>
 <body>
 
-{#The images used on this page were taken from https://icons8.com #}
-<section>
-    <table style="width: 50%; margin-bottom: 5px">
-        <tr>
-            <td style="text-align: left;">
-                <img src="tbcore/images/uos_logo.png" alt="" style="padding-bottom: 1px; width: 200px; height: 50px" >
+<div class="header">
+    <img src="tbcore/images/uos_logo.png" alt="University Logo">
+    <h1>Checklist{% if user.is_authenticated %}: {{ current_plan.plan_name }}{% endif %}</h1>
+</div>
 
-            </td>
-{#            <td>#}
-{#                <h1 class="center-text text-primary mb-md-4 mb-sm-2 ">Checklist: {{ current_plan.plan_name }}</h1>#}
-{#            </td>#}
-        </tr>
+<div class="container">
+    <h2>Online Course Plan To Do</h2>
+    <h2>{{ current_plan.plan_name }}</h2>
+    <p class="instructions">Check off the building blocks if you know how you want to use the teaching tip.</p>
 
-        <tr>
-            <td style="text-align: left">
-                <h2>Online Course Plan To Do</h2>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: left">
-                <h2>{{ current_plan.plan_name }}</h2>
-            </td>
-        </tr>
-
-        <tr>
-            <td style="text-align: left">
-                <p><i>Check off the building blocks if you know how you want to use the teaching tip.
-                </i></p>
-            </td>
-        </tr>
-
-    </table>
-</section>
-
-<section>
-
-</section>
-
-<section>
-
-
-    {#Summary Table#}
-
-    <table style="width: 100%;" class="table table-hover align-middle table-responsive">
+    <table>
         <thead>
-        <tr>
-
-            <th scope="col" class="style-headings">Done</th>
-            <th scope="col" class="style-headings">Building Block</th>
-            <th scope="col" class="style-headings">Idea</th>
-            <th scope="col" class="style-headings">Note</th>
-            <th scope="col" class="style-headings">Complexity</th>
-
-
-        </tr>
-        </thead>
-
-
-
-        {% for c_done, idea_ins in context_summary %}
-            <tr class="border-unique">
-
-                <td style="width: 5%">
-                    <img src="tbcore/images/checkbox.png" alt="">
-                </td>
-
-                {#                    category for which the user has chosen at least one idea#}
-                <td style="width: 15%; padding: 15px"><p class="vertical">{{ c_done }}</p></td>
-
-
-                {#     ideas #}
-
-                <td style="width: 20%; margin-top: 10px">
-                    <table style="width: 100%;" class="nested-table-checklist">
-
-                        {% for idea_name, pcoi_instance_id, pcoi_instance_note,_ in idea_ins %}
-                            <tr class="pcoi-instance-{{ pcoi_instance_id }}" style="height: 150px">
-
-
-                                <td style="padding: 7px; margin: 3px"><h3>{{ idea_name }}</h3></td>
-
-
-                            </tr>
-                        {% endfor %}
-
-
-                    </table>
-
-
-                </td>
-
-
-                {#              note#}
-
-                <td style="width: 55%">
-                    <table style="width: 100%" class="nested-table-checklist">
-                        {% for idea_name, pcoi_instance_id, pcoi_instance_note,_ in idea_ins %}
-                            <tr class="pcoi-instance-{{ pcoi_instance_id }}" style="height: 150px">
-                                <td style="width: 85%; padding: 5px"
-                                    class="margin-internal-td td-note"><p>{{ pcoi_instance_note }}</p></td>
-                            </tr>
-                        {% endfor %}
-
-                    </table>
-                </td>
-
-
-
-
-
-       {#        task complexity#}
-
-                    <td style="width: 10%">
-                        <table class="nested-table-checklist">
-                            {% for idea_name, pcoi_instance_id, _,complexity in idea_ins %}
-                                <tr class="pcoi-instance-{{ pcoi_instance_id }} nested-rows" style="height: 150px">
-                                {% task_complexity_to_int complexity as task_complexity %}
-
-                                    {% if task_complexity == 'no-data' %}
-                                {% else %}
-
-
-
-
-
-                                        {% for i in task_complexity %}
-                                        <td style="text-align: left"> <img src="tbcore/images/star_fill.png" alt="" style="height: 10px;width: 10px"></td>
-                                    {% endfor %}
-
-                                {% sub_task_complexity complexity '3' as remaining_complexity %}
-
-                                        {% for i in remaining_complexity %}
-
-                                        <td style="text-align: left"> <img src="tbcore/images/star.png" alt="" style="height: 10px;width: 10px"></td>
-
-                                    {% endfor %}
-
-
-
-
-                                {% endif %}
-
-
-
-
-
-                                </tr>
-                            {% endfor %}
-
-                        </table>
-                    </td>
-
-
-
-
-
-
-
-
-
-
-                {#                        notes#}
-                {##}
-                {#                                    <td>#}
-                {#                                        <table style="width: 100%" class="nested-table-checklist">#}
-                {#                                            {% for idea_name, pcoi_instance_id, pcoi_instance_note,_ in idea_ins %}#}
-                {#                                                <tr class="pcoi-instance-{{ pcoi_instance_id }}">#}
-                {#                                                    <td>{{ pcoi_instance_note }}</td>#}
-                {#                                                </tr>#}
-                {#                                            {% endfor %}#}
-                {##}
-                {#                                        </table>#}
-                {#                                    </td>#}
-
-
+            <tr>
+                <th style="width: 10%;">Done</th>
+                <th style="width: 15%;">Building Block</th>
+                <th style="width: 20%;">Teaching Tip</th>
+                <th style="width: 40%;">Note</th>
+                <th style="width: 15%;">Complexity</th>
             </tr>
-
-        {% endfor %}
-
-
+        </thead>
+        <tbody>
+            {% for c_done, idea_ins in context_summary %}
+            {% for idea_name, pcoi_instance_id, pcoi_instance_note, complexity in idea_ins %}
+            <tr class="pcoi-instance-{{ pcoi_instance_id }}{% if forloop.first %} building-block{% endif %}">
+                {% if forloop.first %}
+                <td style="text-align: center;" rowspan="{{ idea_ins|length }}">
+                    <img src="tbcore/images/checkbox.png" alt="Checkbox" class="checkbox">
+                </td>
+                <td rowspan="{{ idea_ins|length }}" style="vertical-align: middle;">{{ c_done }}</td>
+                {% endif %}
+                <td style="vertical-align: middle;"><h3>{{ idea_name }}</h3></td>
+                <td class="note" style="vertical-align: middle;">{{ pcoi_instance_note }}</td>
+                <td style="vertical-align: middle;">
+                    {% task_complexity_to_int complexity as task_complexity %}
+                    {% if task_complexity != 'no-data' %}
+                        {% for i in task_complexity %}
+                        <img src="tbcore/images/star_fill.png" alt="Star" class="star">
+                        {% endfor %}
+                        {% sub_task_complexity complexity '3' as remaining_complexity %}
+                        {% for i in remaining_complexity %}
+                        <img src="tbcore/images/star.png" alt="Star" class="star">
+                        {% endfor %}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        </tbody>
     </table>
 
-
-</section>
-
-
-<section>
-    {% remaining_categories as category_left %}
-    {% if category_left %}
-        <h4 class="lead" style="padding-top: 50px;">You have not selected any teaching tips from the building
-            blocks:</h4>
-
-        <ul>
-            {% for c_name, c_url,c_next in category_objects %}
+    <div class="no-tips-list">
+        {% remaining_categories as category_left %}
+        {% if category_left %}
+            <h4>You have not selected any teaching tips from the building blocks:</h4>
+            <ul>
+                {% for c_name, c_url, c_next in category_objects %}
                 {% if c_name in category_left %}
-                    <li> {{ c_name }}</li>
+                <li>{{ c_name }}</li>
                 {% endif %}
-
-            {% endfor %}
-
-        </ul>
-    {% else %}
-        <h4 class="lead" style="padding-top: 50px">Well done! you have successfully selected ideas for all building
-            blocks!</h4>
-
-    {% endif %}
-
-
-</section>
-
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h4>Well done! You have successfully selected Teaching Tips for all building blocks!</h4>
+        {% endif %}
+    </div>
+</div>
 
 </body>
 </html>
-
-
-
