@@ -43,5 +43,6 @@ The supporting documents and images used throughout the ``json5`` files are stor
 2. Update the `json` files with the new information.
    1. For example, to add the image `human_touch.png`, you can use the following code snippet (style it as desired): ``<img src=\"/static/tbcore/images/human_touch.png\" alt=\"Human Touch\" width=\"40%\" height=\"50%\" class=\"rounded mx-auto d-block\">"``
    2. To add a support document called `How_to_add_task_plugIn_to_Stud.Ip_course.pdf`, you can use the following code snippet (style it as desired): ``<a href="/static/tbcore/support_documents/How_to_add_task_plugIn_to_Stud.Ip_course.pdf" target="_blank">Tasks (reflection) Plug-In</a>``
-   3. Execute `python manage.py read_data --save_category` or `python manage.py read_data --save_idea` to save changes to the database.
+   3. Execute `python manage.py read_data --save_category`; `python manage.py read_data --save_idea` and  `python manage.py populate_db` to save changes to the database.
+
 
