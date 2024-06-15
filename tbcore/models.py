@@ -268,6 +268,9 @@ class CategoryOnlineIdea(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     idea = models.ForeignKey(OnlineIdea, on_delete=models.CASCADE, null=True,)
     
+    def __str__(self) -> str:
+        return f'{self.category.category_name} - {self.idea.idea_name}'
+    
     @staticmethod
     def populate_category_idea():
         """
