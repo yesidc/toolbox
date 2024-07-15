@@ -54,4 +54,4 @@ webencodings==0.5.1
 xhtml2pdf==0.2.8
 zipp==3.9.0
 django-auth-ldap
-
+gunicorn

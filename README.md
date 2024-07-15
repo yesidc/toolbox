@@ -45,4 +45,33 @@ The supporting documents and images used throughout the ``json5`` files are stor
    2. To add a support document called `How_to_add_task_plugIn_to_Stud.Ip_course.pdf`, you can use the following code snippet (style it as desired): ``<a href="/static/tbcore/support_documents/How_to_add_task_plugIn_to_Stud.Ip_course.pdf" target="_blank">Tasks (reflection) Plug-In</a>``
    3. Execute `python manage.py read_data --save_category`; `python manage.py read_data --save_idea` and  `python manage.py populate_db` to save changes to the database.
 
+# Docker
 
+You can develop or deploy this application using Docker.
+
+## Development
+
+1. Create a `.env.dev` file from `env.dev-example`
+   ```
+   cp .env.dev-example .env.dev
+   ```
+2. Start the ToolBox
+   ```
+   docker compose -f docker-compose.yml up
+   ```
+3. To access the Toolbox visit ` http://localhost:8000/`
+   
+
+
+## Production
+
+1. Create a `.env.prod` file from `env.prod-example`
+   ```
+   cp .env.dev-example .env.prod
+   ```
+2. Start the ToolBox
+   ```
+   docker compose -f docker-compose.prod.yml up
+   ```
+3. In the container toolbox_prod_container, make migrations and execute them. 
+4. (In the container) Do not forget to run the commands explained above (section: How to update the Support documents or images)

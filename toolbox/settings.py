@@ -22,7 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-pq*t(e@9vi%zuz$^+6@#wx(-vsrw(8_!a-w=q*ntw#0o#q(g$u'
+# SECRET_KEY = 'django-insecure-pq*t(e@9vi%zuz$^+6@#wx(-vsrw(8_!a-w=q*ntw#0o#q(g$u'
+SECRET_KEY = os.getenv('SECRET_KEY', 'default_secret_key_if_not_found')  # The second argument is optional and it's used as a fallback if the environment variable is not set.
+
+# Ensure that you have other necessary settings configured similarly
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -127,7 +131,7 @@ WSGI_APPLICATION = 'toolbox.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db'/'db.sqlite3',
     }
 }
 
