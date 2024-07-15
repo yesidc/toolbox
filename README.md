@@ -51,6 +51,7 @@ You can develop or deploy this application using Docker.
 
 ## Development
 
+
 1. Create a `.env.dev` file from `env.dev-example`
    ```
    cp .env.dev-example .env.dev
@@ -65,13 +66,14 @@ You can develop or deploy this application using Docker.
 
 ## Production
 
-1. Create a `.env.prod` file from `env.prod-example`
+1. Modify `nginx/nginx.conf` according to your specific case. 
+
+
+2. Create a `.env.prod` file from `env.prod-example`. Modify the values of `.env.prod` according to your specific case. 
    ```
    cp .env.dev-example .env.prod
    ```
-2. Start the ToolBox
+3. Start the ToolBox
    ```
    docker compose -f docker-compose.prod.yml up
    ```
-3. In the container toolbox_prod_container, make migrations and execute them. 
-4. (In the container) Do not forget to run the commands explained above (section: How to update the Support documents or images)

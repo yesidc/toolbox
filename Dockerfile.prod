@@ -28,18 +28,23 @@ RUN apt-get update && apt-get install -y \
 
 # install dependencies
 RUN pip install --upgrade pip
-COPY ./requirements.txt .
-RUN pip install -r requirements.txt
-
+COPY ./requiriments.prod.txt .
+RUN pip install -r requiriments.prod.txt
 
 # Copy the rest of the application code to the container
 COPY . /app/
 
-# Collect static files for production
-RUN python3 manage.py collectstatic --noinput
+# Make migrations, migrate, populate db and collect static files for production
+
+RUN sed -i 's/\r$//g'  /app/entrypoint.sh 
+RUN chmod +x /app/entrypoint.sh 
+
 
 # Expose the port the app runs on
 EXPOSE 8000
+
+# Set the entrypoint script
+ENTRYPOINT ["/app/entrypoint.sh"]
 
 # Start Gunicorn server for production
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "toolbox.wsgi:application"]

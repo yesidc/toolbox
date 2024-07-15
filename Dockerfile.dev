@@ -36,8 +36,18 @@ RUN pip install -r requirements.txt
 # Copy the rest of the application code to the container
 COPY . /app/
 
+# Make migrations, migrate, populate db and collect static files for production
+
+RUN sed -i 's/\r$//g'  /app/entrypoint.sh 
+RUN chmod +x /app/entrypoint.sh 
+
+
+
 # Expose the port the app runs on
 EXPOSE 8000
+
+# Set the entrypoint script
+ENTRYPOINT ["/app/entrypoint.sh"]
 
 # Start Django development server
 CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
