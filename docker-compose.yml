@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: toolbox_dev:latest
+    container_name: toolbox_dev_container
+    env_file:
+      - .env.dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - .env.dev:/app/.env.dev
+    command: >
+      /bin/sh -c "
+      python3 manage.py makemigrations &&
+      python3 manage.py migrate &&
+      python3 manage.py runserver 0.0.0.0:8000"
