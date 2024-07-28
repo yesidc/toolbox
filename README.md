@@ -23,7 +23,7 @@ These are the models implemented throughout the development of the project:
 - Plan: used to store information about user's course plans. 
 - PlanCategoryOnlineIdea: establishes ForeignKey relationships to the `Category`, `OnlineIdea` and `Plan` models. It also used to manage the user's notes.
 
-See [here](./doc/database/database_diagram.png) a database diagram. 
+
 
 ### About the json5 files. 
 
